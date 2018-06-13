@@ -1,6 +1,6 @@
 {
   "name": "nwhacks2019",
-  "description": "The website, registration, and check-in system for nwHacks 2019",
+  "description": "The frontend website, registration, and check-in system for nwHacks 2019",
   "repository": "github:nwhacks/nwhacks2019",
   "author": "nwHacks 2019",
   "license": "MIT",
@@ -11,7 +11,7 @@
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=production webpack --config webpack.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Warning: no test specified\" && exit 0",
     "lint": "eslint . --ignore-pattern public/"
   },
   "dependencies": {
