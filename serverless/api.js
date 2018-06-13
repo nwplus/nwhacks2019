@@ -2,11 +2,6 @@
 
 const utils = require('./utils');
 
-const integrations = {
-  github: require('./integrations/github'),
-  firestore: require('./integrations/firestore'),
-}
-
 /**
  * GET /example
  */
