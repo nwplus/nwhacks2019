@@ -1,0 +1,33 @@
+{
+    "name": "nwhacks2019",
+    "version": "0.1.0",
+    "description": "The backend for nwHacks 2019",
+    "author": "nwHacks2019",
+    "scripts": {
+        "start": "serverless offline start",
+        "test": "nyc ava test/**",
+        "coverage": "nyc report --reporter=text-lcov | coveralls"
+    },
+    "dependencies": {
+        "got": "8.3.1"
+    },
+    "devDependencies": {
+        "ava": "1.0.0-beta.4",
+        "coveralls": "^3.0.1",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^16.1.0",
+        "eslint-plugin-import": "^2.12.0",
+        "nock": "^9.2.6",
+        "nyc": "^11.8.0",
+        "serverless-offline": "^3.24.1"
+    },
+    "nyc": {
+        "exclude": [
+            "**/node_modules/**",
+            "**/test/**",
+            "**/coverage/**",
+            "**/demo/**"
+        ],
+        "all": true
+    }
+}
