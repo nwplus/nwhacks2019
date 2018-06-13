@@ -1,0 +1,25 @@
+service: hackpost
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment:
+    # GH_CLIENT_ID: ${file(./.env.yml):github-integration.GH_CLIENT_ID}
+    # GH_CLIENT_SECRET: ${file(./.env.yml):github-integration.GH_CLIENT_SECRET}
+
+plugins:
+  - serverless-offline
+
+functions:
+  example:
+    handler: api.example
+    events:
+      - http:
+          path: /example
+          method: get
+
+custom:
+  serverless-offline:
+    port: 8080
+
+# Place other Serverless configuration here
