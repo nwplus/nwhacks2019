@@ -1,4 +1,4 @@
-service: hackpost
+service: nwhacks2019
 
 provider:
   name: aws
