@@ -22,6 +22,7 @@
         "jest": "^23.1.0",
         "nock": "^9.3.3",
         "nyc": "^12.0.2",
+        "serverless": "^1.27.3",
         "serverless-offline": "^3.25.4"
     },
     "nyc": {
