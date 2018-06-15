@@ -14,6 +14,11 @@ test:
 	(cd ./serverless ; npm run test)
 	(cd ./web ; npm run test)
 
+.PHONY: lint
+lint:
+	(cd ./serverless ; npm run lint)
+	(cd ./web ; npm run lint)
+
 ###############################
 # Component-specific commands #
 ###############################

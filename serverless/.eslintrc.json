@@ -1,11 +1,13 @@
 {
     "env": {
-        "node": true
+        "node": true,
+        "jest": true
     },
-    "extends": "airbnb",
+    "extends": "airbnb/base",
     "rules": {
         "prefer-template": 0,
         "object-curly-newline": 0,
+        "no-tabs": 0,
         "arrow-body-style": [
             2,
             "as-needed"
