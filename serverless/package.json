@@ -5,28 +5,28 @@
     "author": "nwHacks2019",
     "scripts": {
         "start": "serverless offline start",
-        "test": "nyc ava test/**",
+        "test": "nyc jest",
         "coverage": "nyc report --reporter=text-lcov | coveralls"
     },
     "dependencies": {
         "got": "8.3.1"
     },
     "devDependencies": {
-        "ava": "1.0.0-beta.4",
         "coveralls": "^3.0.1",
         "eslint": "^4.19.1",
         "eslint-config-airbnb": "^16.1.0",
         "eslint-plugin-import": "^2.12.0",
-        "nock": "^9.2.6",
-        "nyc": "^11.8.0",
-        "serverless-offline": "^3.24.1"
+        "eslint-plugin-jsx-a11y": "^6.0.3",
+        "jest": "^23.1.0",
+        "nock": "^9.3.3",
+        "nyc": "^12.0.2",
+        "serverless-offline": "^3.25.4"
     },
     "nyc": {
         "exclude": [
             "**/node_modules/**",
-            "**/test/**",
-            "**/coverage/**",
-            "**/demo/**"
+            "**/tests/**",
+            "**/coverage/**"
         ],
         "all": true
     }
