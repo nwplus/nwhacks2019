@@ -20,6 +20,6 @@ functions:
 
 custom:
   serverless-offline:
-    port: 8080
+    port: 8000
 
 # Place other Serverless configuration here
