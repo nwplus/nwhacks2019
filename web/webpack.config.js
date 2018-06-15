@@ -6,7 +6,7 @@ const config = {
   mode: 'development',
   entry: ['babel-polyfill', './index.js'],
   output: {
-    path: path.resolve(__dirname, '../public'),
+    path: path.resolve(__dirname, '../docs'),
     filename: 'bundle.js',
   },
   devtool: 'inline-source-map',

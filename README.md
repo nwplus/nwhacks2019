@@ -32,3 +32,9 @@ $> make web
 # start server
 $> make serverless
 ```
+
+To build the web app into `docs/`
+
+```bash
+$> make build
+```
