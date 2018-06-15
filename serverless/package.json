@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "description": "The backend for nwHacks 2019",
     "author": "nwHacks2019",
+    "license": "MIT",
     "scripts": {
         "start": "serverless offline start",
         "test": "nyc jest",
@@ -10,19 +11,19 @@
         "lint": "eslint . --ignore-pattern public/"
     },
     "dependencies": {
-        "got": "8.3.1"
+        "got": "8.3.1",
+        "serverless": "1.27.3",
+        "serverless-google-cloudfunctions": "1.1.1"
     },
     "devDependencies": {
         "coveralls": "^3.0.1",
         "eslint": "^4.19.1",
-        "eslint-config-airbnb": "^16.1.0",
+        "eslint-config-airbnb-base": "^12.1.0",
         "eslint-plugin-import": "^2.12.0",
         "eslint-plugin-jest": "^21.17.0",
-        "eslint-plugin-jsx-a11y": "^6.0.3",
         "jest": "^23.1.0",
         "nock": "^9.3.3",
         "nyc": "^12.0.2",
-        "serverless": "^1.27.3",
         "serverless-offline": "^3.25.4"
     },
     "nyc": {

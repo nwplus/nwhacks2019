@@ -3,7 +3,7 @@
         "node": true,
         "jest": true
     },
-    "extends": "airbnb/base",
+    "extends": "airbnb-base",
     "rules": {
         "prefer-template": 0,
         "object-curly-newline": 0,
