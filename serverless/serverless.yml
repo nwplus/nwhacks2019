@@ -1,22 +1,24 @@
 service: nwhacks2019
 
 provider:
-  name: aws
-  runtime: nodejs8.10
+  name: google
+  runtime: nodejs
+  project: nwhacks2019
+  credentials: ${opt:credentials, '~/.gcloud/nwhacks2019.json'}
   environment:
     # GH_CLIENT_ID: ${file(./.env.yml):github-integration.GH_CLIENT_ID}
     # GH_CLIENT_SECRET: ${file(./.env.yml):github-integration.GH_CLIENT_SECRET}
 
-plugins:
-  - serverless-offline
-
 functions:
   example:
-    handler: api.example
+    handler: example
     events:
       - http:
           path: /example
           method: get
+
+plugins:
+  - serverless-google-cloudfunctions
 
 custom:
   serverless-offline:

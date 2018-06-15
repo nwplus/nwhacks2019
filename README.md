@@ -29,11 +29,11 @@ To deploy locally:
 # serve web app
 $> make web
 
-# start server
-$> make serverless
+# invoke specific serverless function
+$> serverless invoke local --function some_function
 ```
 
-To build the web app into `docs/`
+To build the web app into `docs/`:
 
 ```bash
 $> make build
