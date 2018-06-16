@@ -9,8 +9,8 @@
   "private": true,
   "proxy": "https://127.0.0.1:4303",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "test": "echo \"Warning: no test specified\" && exit 0",
     "lint": "eslint . --ignore-pattern node_modules/"
   },
@@ -21,6 +21,7 @@
     "babel-polyfill": "6.26.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
+    "cross-env": "^5.2.0",
     "css-loader": "0.28.11",
     "firebase": "5.0.4",
     "firebaseui": "3.0.0",
