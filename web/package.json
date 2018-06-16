@@ -1,6 +1,6 @@
 {
   "name": "nwhacks2019",
-  "description": "The website, registration, and check-in system for nwHacks 2019",
+  "description": "The frontend website, registration, and check-in system for nwHacks 2019",
   "repository": "github:nwhacks/nwhacks2019",
   "author": "nwHacks 2019",
   "license": "MIT",
@@ -9,10 +9,10 @@
   "private": true,
   "proxy": "https://127.0.0.1:4303",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ignore-pattern public/"
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "test": "echo \"Warning: no test specified\" && exit 0",
+    "lint": "eslint . --ignore-pattern node_modules/"
   },
   "dependencies": {
     "babel-core": "6.26.3",
@@ -21,6 +21,7 @@
     "babel-polyfill": "6.26.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
+    "cross-env": "^5.2.0",
     "css-loader": "0.28.11",
     "firebase": "5.0.4",
     "firebaseui": "3.0.0",
@@ -37,9 +38,10 @@
     "webpack-dev-server": "3.1.4"
   },
   "devDependencies": {
-    "eslint": "4.19.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.9.1"
   }
