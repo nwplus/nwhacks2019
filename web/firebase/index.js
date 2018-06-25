@@ -1,6 +1,7 @@
-import { auth, firestore } from './firebase';
+import { auth, firestore, firebase } from './firebase';
 
 export {
   auth,
   firestore,
+  firebase,
 };
