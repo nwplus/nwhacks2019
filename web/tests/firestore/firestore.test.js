@@ -1,4 +1,4 @@
-import { auth } from '../../firebase';
+import { auth } from '../firebase';
 
 /*
  This test suite needs refactoring if we do decide to pursue this further
