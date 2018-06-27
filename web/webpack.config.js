@@ -10,6 +10,9 @@ const config = {
     filename: 'bundle.js',
   },
   devtool: 'inline-source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
