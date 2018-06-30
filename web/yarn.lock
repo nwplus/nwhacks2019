@@ -3681,7 +3681,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
@@ -6315,6 +6315,14 @@ react-firebaseui@^3.0.4:
 react-is@^16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
+
+react-redux-firebase@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-2.1.6.tgz#c8ccf6f8cc5b2b520162b47c900434eeda88228a"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    lodash "^4.17.10"
+    prop-types "^15.6.1"
 
 react-redux@^5.0.7:
   version "5.0.7"

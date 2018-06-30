@@ -33,6 +33,7 @@
     "react-dom": "16.4.0",
     "react-firebaseui": "^3.0.4",
     "react-redux": "^5.0.7",
+    "react-redux-firebase": "^2.1.6",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-persist": "^5.10.0",
