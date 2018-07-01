@@ -35,6 +35,7 @@
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "redux": "4.0.0",
+    "redux-firestore": "0.5.7",
     "redux-persist": "5.10.0",
     "sass-loader": "7.0.3",
     "style-loader": "0.21.0",

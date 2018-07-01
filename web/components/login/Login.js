@@ -26,17 +26,21 @@ class Login extends React.Component {
 
     this.login = (event) => {
       event.preventDefault();
-      this.props.firebase.login({
+      const credential = {
         email: this.state.email,
-        password: this.state.password,
-      }).then(() => {
+        password: this.state.password
+      }
+
+      this.props.firebase.login(credential).then(() => {
         this.setState({ loggedIn: true });
+      }).catch((error) => {
+        console.log(error);
       });
     };
 
     this.loginView = () => (
       <form
-        onSubmit={this.login}
+        onSubmit={this.login.bind(this)}
         className="input-group">
         <input
           placeholder="Enter your email"

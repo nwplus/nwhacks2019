@@ -6,7 +6,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import Main from '../../components/Main';
 import Login from '../../components/login/Login';
 import Logout from '../../components/login/Logout';
+import AdminPanel from '../../components/admin';
 import './App.sass';
+import NotFound from './NotFound';
 
 import configureStore from '../../services/store';
 
@@ -22,6 +24,8 @@ const App = () => (
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
+          <Route path="/admin" component={AdminPanel} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     </PersistGate>
