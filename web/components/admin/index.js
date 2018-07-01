@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firebaseConnect, firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-const AdminPanel = ({ auth }) => {
-  if (auth.isLoading) {
+const AdminPanel = ({ firestore, auth }) => {
+  if (!isLoaded(auth)) {
     return (<span>Loading...</span>);
-  } else if (auth.isEmpty) {
-    return (
-      <Redirect to="/404" />
-    );
+  } else if (isEmpty(auth)) {
+    return (<Redirect to="/404" />);
+  }
+
+  const { admins } = firestore.data;
+
+  if (!isLoaded(admins)) {
+    return (<span>Loading...</span>);
+  } else if (firestore.errors.byQuery.admins) {
+    return (<Redirect to="/404" />);
   }
 
   return (
@@ -25,9 +31,16 @@ const AdminPanel = ({ auth }) => {
 
 AdminPanel.propTypes = {
   auth: PropTypes.object,
+  firestore: PropTypes.object,
 };
 
 export default compose(
   firebaseConnect(),
-  connect(({ firebase: { auth } }) => { return { auth }; })
+  firestoreConnect(['admins']),
+  connect((state) => {
+    return {
+      firestore: state.firestore,
+      auth: state.firebase.auth,
+    };
+  }),
 )(AdminPanel);

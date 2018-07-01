@@ -28,8 +28,8 @@ class Login extends React.Component {
       event.preventDefault();
       const credential = {
         email: this.state.email,
-        password: this.state.password
-      }
+        password: this.state.password,
+      };
 
       this.props.firebase.login(credential).then(() => {
         this.setState({ loggedIn: true });
@@ -40,7 +40,7 @@ class Login extends React.Component {
 
     this.loginView = () => (
       <form
-        onSubmit={this.login.bind(this)}
+        onSubmit={this.login}
         className="input-group">
         <input
           placeholder="Enter your email"
