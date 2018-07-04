@@ -2499,10 +2499,6 @@ detect-node@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
 
-dialog-polyfill@^0.4.7:
-  version "0.4.9"
-  resolved "https://registry.yarnpkg.com/dialog-polyfill/-/dialog-polyfill-0.4.9.tgz#c690b3727c3d82e0f947bd5b910b32af8a2ef57d"
-
 diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
@@ -3218,7 +3214,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-firebase@5.0.4, firebase@^5.0.0:
+firebase@5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-5.0.4.tgz#f367c80531c1a8a4ef82b6537b2a6bd92685e226"
   dependencies:
@@ -3230,19 +3226,6 @@ firebase@5.0.4, firebase@^5.0.0:
     "@firebase/messaging" "0.3.4"
     "@firebase/polyfill" "0.3.3"
     "@firebase/storage" "0.2.3"
-
-firebaseui@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-3.0.0.tgz#c3749683c6889c5e4ac0ebf8d62c112414351a3c"
-  dependencies:
-    dialog-polyfill "^0.4.7"
-    firebase "^5.0.0"
-
-firebaseui@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-3.1.0.tgz#d131b6b60bd244dbeaaa99294a4c362c2f933bd8"
-  dependencies:
-    dialog-polyfill "^0.4.7"
 
 flat-cache@^1.2.1:
   version "1.3.0"
@@ -3681,7 +3664,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
@@ -3948,7 +3931,7 @@ interpret@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
@@ -4861,6 +4844,10 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lodash-es@^4.17.5:
+  version "4.17.10"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
 
 lodash.assign@^4.2.0:
   version "4.2.0"
@@ -6302,15 +6289,28 @@ react-dom@16.4.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-firebaseui@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/react-firebaseui/-/react-firebaseui-3.0.4.tgz#faeef2cee1aa681d832ffd9d28fdf69789b2abf2"
-  dependencies:
-    firebaseui "^3.0.0"
-
 react-is@^16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
+
+react-redux-firebase@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-2.1.6.tgz#c8ccf6f8cc5b2b520162b47c900434eeda88228a"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    lodash "^4.17.10"
+    prop-types "^15.6.1"
+
+react-redux@5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
+  dependencies:
+    hoist-non-react-statics "^2.5.0"
+    invariant "^2.0.0"
+    lodash "^4.17.5"
+    lodash-es "^4.17.5"
+    loose-envify "^1.1.0"
+    prop-types "^15.6.0"
 
 react-router-dom@4.3.1:
   version "4.3.1"
@@ -6454,6 +6454,13 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.0.tgz#aa698a92b729315d22b34a0553d7e6533555cc03"
+  dependencies:
+    loose-envify "^1.1.0"
+    symbol-observable "^1.2.0"
 
 regenerate@^1.2.1:
   version "1.4.0"
@@ -7311,6 +7318,10 @@ svgo@^0.7.0:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
 
 symbol-tree@^3.2.2:
   version "3.2.2"

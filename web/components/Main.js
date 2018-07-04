@@ -1,13 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { firebaseConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-export default class Main extends React.Component {
-  render() {
+const Main = ({ auth }) => {
+  if (!auth.isLoaded) {
+    return (<span>Loading...</span>);
+  } else if (auth.isEmpty) {
     return (
       <div>
-        <p>I&apos;m a prop!</p>
+        <p>not signed in - please login</p>
+        <br />
         <Link to="/login">login</Link>
       </div>
     );
   }
-}
+
+  return (
+    <div>
+      <p>{ `Signed in as ${auth.displayName}` }</p>
+      <br />
+      <Link to="/logout">logout</Link>
+    </div>
+  );
+};
+
+Main.propTypes = {
+  auth: PropTypes.object,
+};
+
+export default compose(
+  firebaseConnect(),
+  connect(({ firebase: { auth } }) => { return { auth }; })
+)(Main);

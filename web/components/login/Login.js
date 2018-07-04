@@ -1,23 +1,89 @@
 import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { firebase, auth } from '../../firebase';
+import PropTypes from 'prop-types';
+import { firebaseConnect } from 'react-redux-firebase';
+import { Link } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: 'popup',
-  // Redirect to /signedIn after sign in is successful.
-  // Alternatively you can provide a callbacks.signInSuccess function.
-  signInSuccessUrl: '/signed_in',
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
-};
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default class Login extends React.Component {
-  render() {
-    return (
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+    this.state = {
+      email: '',
+      password: '',
+      loading: !this.props.auth.isLoaded,
+      loggedIn: !this.props.auth.isEmpty,
+    };
+
+    this.onEmailChange = (event) => {
+      this.setState({ email: event.target.value });
+    };
+
+    this.onPasswordChange = (event) => {
+      this.setState({ password: event.target.value });
+    };
+
+    this.login = (event) => {
+      event.preventDefault();
+      this.props.firebase.login({
+        email: this.state.email,
+        password: this.state.password,
+      }).then(() => {
+        this.setState({ loggedIn: true });
+      });
+    };
+
+    this.loginView = () => (
+      <form
+        onSubmit={this.login}
+        className="input-group">
+        <input
+          placeholder="Enter your email"
+          className="form-control"
+          value={this.state.email}
+          onChange={this.onEmailChange}
+        />
+        <input
+          placeholder="Enter your password"
+          className="form-control"
+          value={this.state.password}
+          onChange={this.onPasswordChange}
+        />
+        <span
+          className="input-group-btn">
+          <button type="submit" className="btn btn-secondary">Submit</button>
+        </span>
+      </form>
+    );
+
+    this.signedInView = () => (
+      <div>
+        <p>Signed in as {this.props.auth.displayName}</p>
+        <Link to="/">Go to main</Link>
+      </div>
     );
   }
+
+  render() {
+    if (this.state.loading) {
+      return (<span>Loading...</span>);
+    } else if (!this.state.loggedIn) {
+      return this.loginView();
+    }
+
+    return this.signedInView();
+  }
 }
+
+Login.propTypes = {
+  firebase: PropTypes.shape({
+    login: PropTypes.func.isRequired,
+  }),
+  auth: PropTypes.object,
+};
+
+export default compose(
+  firebaseConnect(),
+  connect(({ firebase: { auth } }) => { return { auth }; })
+)(Login);
