@@ -32,7 +32,10 @@ class Login extends React.Component {
       };
 
       this.props.firebase.login(credential).then(() => {
-        this.setState({ loggedIn: true });
+        this.setState({
+          loading: !this.props.auth.isLoaded,
+          loggedIn: !this.props.auth.isEmpty,
+        });
       }).catch((error) => {
         console.log(error);
       });
@@ -67,6 +70,13 @@ class Login extends React.Component {
         <Link to="/">Go to main</Link>
       </div>
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      loading: !nextProps.auth.isLoaded,
+      loggedIn: !nextProps.auth.isEmpty,
+    });
   }
 
   render() {
