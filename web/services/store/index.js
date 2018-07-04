@@ -42,7 +42,9 @@ export default (initialState = {}) => {
   // Initialize firebase instance
   firebase.initializeApp(config[process.env.NODE_ENV]);
   // Initialize Cloud Firestore through Firebase
-  firebase.firestore();
+  const firestore = firebase.firestore();
+  const firestoreSettings = { timestampsInSnapshots: true };
+  firestore.settings(firestoreSettings);
 
   // Add reactReduxFirebase store enhancer when making store creator
   const createStoreWithFirebase =
