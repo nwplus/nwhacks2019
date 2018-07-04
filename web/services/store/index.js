@@ -1,6 +1,11 @@
 import { createStore, combineReducers, compose } from 'redux';
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import { persistStore, persistReducer } from 'redux-persist';
+import localStorage from 'redux-persist/lib/storage';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 const prodConfig = {
   // TODO: setup production firestore project
@@ -26,25 +31,30 @@ const rrfConfig = {
   // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 };
 
+const persistConfig = {
+  key: 'root',
+  storage: localStorage,
+};
 
-// Initialize firebase instance
-firebase.initializeApp(config[process.env.NODE_ENV]);
+export default (initialState = {}) => {
+  // Initialize firebase instance
+  firebase.initializeApp(config[process.env.NODE_ENV]);
 
-// Add reactReduxFirebase enhancer when making store creator
-const createStoreWithFirebase =
+  // Add reactReduxFirebase store enhancer when making store creator
+  const createStoreWithFirebase =
   compose(reactReduxFirebase(firebase, rrfConfig))(createStore);
-  // firebase instance as first argument
 
-// Add firebase to reducers
-const rootReducer = combineReducers({
-  firebase: firebaseReducer,
-});
+  // Add firebase to reducers (uses persistReducer and hardSet)
+  const rootReducer = combineReducers({
+    firebase: persistReducer(
+      { key: 'firepersist', storage: localStorage, stateReconciler: hardSet },
+      firebaseReducer
+    ),
+  });
 
-// Create store with reducers and initial state
-const initialState = {};
-const store = createStoreWithFirebase(rootReducer, initialState);
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
+  const store = createStoreWithFirebase(persistedReducer, initialState);
+  const persistor = persistStore(store);
 
-export {
-  initialState,
-  store,
+  return { store, persistor };
 };
