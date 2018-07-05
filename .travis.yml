@@ -12,8 +12,9 @@ before_script:
   - make deps
 
 script:
-  - make lint
-  - make test
+  - make lint   # static analysis
+  - make build  # attempt to compile web app
+  - make test   # run all tests
 
 after_success:
   # only report serverless coverage for now
