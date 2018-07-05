@@ -3,13 +3,12 @@
   "description": "The frontend website, registration, and check-in system for nwHacks 2019",
   "repository": "github:nwhacks/nwhacks2019",
   "author": "nwHacks 2019",
-  "license": "MIT",
+  "license": "MIT + Apache 2.0",
   "main": "index.js",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://127.0.0.1:4303",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "test": "cross-env NODE_ENV=development jest",
     "lint": "eslint . --ignore-pattern node_modules/"
