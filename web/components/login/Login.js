@@ -9,11 +9,15 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
 
+    // Deconstruct props and state
+    const { isLoaded, isEmpty, firebase, auth } = this.props;
+    const { email, password } = this.state;
+
     this.state = {
       email: '',
       password: '',
-      loading: !this.props.auth.isLoaded,
-      loggedIn: !this.props.auth.isEmpty,
+      loading: !isLoaded,
+      loggedIn: !isEmpty,
     };
 
     this.onEmailChange = (event) => {
@@ -26,10 +30,7 @@ class Login extends React.Component {
 
     this.login = (event) => {
       event.preventDefault();
-      this.props.firebase.login({
-        email: this.state.email,
-        password: this.state.password,
-      }).then(() => {
+      firebase.login({ email, password }).then(() => {
         this.setState({ loggedIn: true });
       });
     };
@@ -41,13 +42,13 @@ class Login extends React.Component {
         <input
           placeholder="Enter your email"
           className="form-control"
-          value={this.state.email}
+          value={email}
           onChange={this.onEmailChange}
         />
         <input
           placeholder="Enter your password"
           className="form-control"
-          value={this.state.password}
+          value={password}
           onChange={this.onPasswordChange}
         />
         <span
@@ -59,18 +60,17 @@ class Login extends React.Component {
 
     this.signedInView = () => (
       <div>
-        <p>Signed in as {this.props.auth.displayName}</p>
+        <p>Signed in as {auth.displayName}</p>
         <Link to="/">Go to main</Link>
       </div>
     );
   }
 
   render() {
-    if (this.state.loading) {
-      return (<span>Loading...</span>);
-    } else if (!this.state.loggedIn) {
-      return this.loginView();
-    }
+    const { loading, loggedIn } = this.state;
+
+    if (loading) return (<span>Loading...</span>);
+    if (!loggedIn) return this.loginView();
 
     return this.signedInView();
   }
@@ -81,6 +81,8 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
   }),
   auth: PropTypes.object,
+  isLoaded: PropTypes.bool,
+  isEmpty: PropTypes.bool,
 };
 
 export default compose(

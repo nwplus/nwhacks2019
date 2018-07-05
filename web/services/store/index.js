@@ -41,8 +41,9 @@ export default (initialState = {}) => {
   firebase.initializeApp(config[process.env.NODE_ENV]);
 
   // Add reactReduxFirebase store enhancer when making store creator
-  const createStoreWithFirebase =
-  compose(reactReduxFirebase(firebase, rrfConfig))(createStore);
+  const createStoreWithFirebase = compose(
+    reactReduxFirebase(firebase, rrfConfig)
+  )(createStore);
 
   // Add firebase to reducers (uses persistReducer and hardSet)
   const rootReducer = combineReducers({

@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 const Main = ({ auth }) => {
-  if (!auth.isLoaded) {
-    return (<span>Loading...</span>);
-  } else if (auth.isEmpty) {
+  if (!auth.isLoaded) return (<span>Loading...</span>);
+
+  if (auth.isEmpty) {
     return (
       <div>
         <p>not signed in - please login</p>
