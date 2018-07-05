@@ -15,6 +15,9 @@
     "lint": "eslint . --ignore-pattern node_modules/"
   },
   "dependencies": {
+    "@firebase/app": "0.3.3",
+    "@firebase/app-types": "0.3.2",
+    "@firebase/database": "0.3.4",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.4",
     "babel-minify-webpack-plugin": "0.3.1",
