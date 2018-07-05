@@ -6,17 +6,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 const AdminPanel = ({ firestore, auth }) => {
-  if (!isLoaded(auth)) {
-    return (<span>Loading...</span>);
-  } else if (isEmpty(auth)) {
-    return (<Redirect to="/404" />);
-  }
-
   const { admins } = firestore.data;
 
-  if (!isLoaded(admins)) {
+  if (!isLoaded(auth) || !isLoaded(admins)) {
     return (<span>Loading...</span>);
-  } else if (firestore.errors.byQuery.admins) {
+  } else if (isEmpty(auth) || firestore.errors.byQuery.admins) {
     return (<Redirect to="/404" />);
   }
 
