@@ -8,10 +8,7 @@ import { connect } from 'react-redux';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-
-    // Deconstruct props and state
     const { isLoaded, isEmpty, firebase, auth } = this.props;
-    const { email, password } = this.state;
 
     this.state = {
       email: '',
@@ -28,6 +25,7 @@ class Login extends React.Component {
       this.setState({ password: event.target.value });
     };
 
+    const { email, password } = this.state;
     this.login = (event) => {
       event.preventDefault();
       firebase.login({ email, password }).then(() => {
