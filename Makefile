@@ -11,13 +11,13 @@ deps:
 
 .PHONY: test
 test:
-	(cd ./serverless ; npm run test)
-	(cd ./web ; npm run test)
+	(cd ./serverless ; yarn test)
+	(cd ./web ; yarn test)
 
 .PHONY: lint
 lint:
-	(cd ./serverless ; npm run lint)
-	(cd ./web ; npm run lint)
+	(cd ./serverless ; yarn lint)
+	(cd ./web ; yarn lint)
 
 ###############################
 # Component-specific commands #
@@ -25,12 +25,12 @@ lint:
 
 .PHONY: build
 build:
-	(cd ./web ; npm run build)
+	(cd ./web ; yarn build)
 
 .PHONY: web
 web:
-	(cd ./web ; npm start)
+	(cd ./web ; yarn start)
 
 .PHONY: serverless
 serverless:
-	(cd ./serverless ; npm start)
+	(cd ./serverless ; yarn start)
