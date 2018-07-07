@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    const { firebase, auth, auth: { isLoaded, isEmpty } } = this.props;
+    const { auth: { isLoaded, isEmpty } } = this.props;
 
     this.state = {
       email: '',
@@ -17,23 +17,26 @@ class Login extends React.Component {
       loggedIn: !isEmpty,
     };
 
-    this.onEmailChange = (event) => {
-      this.setState({ email: event.target.value });
-    };
+    this.onEmailChange = event => this.setState({ email: event.target.value });
+    this.onPasswordChange = event => this.setState({ password: event.target.value });
 
-    this.onPasswordChange = (event) => {
-      this.setState({ password: event.target.value });
-    };
+    this.login = this.login.bind(this);
+    this.loginView = this.loginView.bind(this);
+    this.signedInView = this.signedInView.bind(this);
+  }
 
+  login(event) {
+    const { firebase } = this.props;
     const { email, password } = this.state;
-    this.login = (event) => {
-      event.preventDefault();
-      firebase.login({ email, password }).then(() => {
-        this.setState({ loggedIn: true });
-      });
-    };
+    event.preventDefault();
+    firebase.login({ email, password }).then(() => {
+      this.setState({ loggedIn: true });
+    });
+  }
 
-    this.loginView = () => (
+  loginView() {
+    const { email, password } = this.state;
+    return (
       <form
         onSubmit={this.login}
         className="input-group">
@@ -55,8 +58,11 @@ class Login extends React.Component {
         </span>
       </form>
     );
+  }
 
-    this.signedInView = () => (
+  signedInView() {
+    const { auth } = this.props;
+    return (
       <div>
         <p>Signed in as {auth.displayName}</p>
         <Link to="/">Go to main</Link>
