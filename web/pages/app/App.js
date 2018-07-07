@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -25,7 +25,8 @@ const App = () => (
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/admin" component={AdminPanel} />
-          <Route path="*" component={NotFound} />
+          <Route path="/page_not_found" component={NotFound} />
+          <Route path="*" component={() => <Redirect to="/page_not_found" />} />
         </Switch>
       </BrowserRouter>
     </PersistGate>
