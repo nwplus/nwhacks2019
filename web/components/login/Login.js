@@ -26,11 +26,18 @@ class Login extends React.Component {
 
     this.login = (event) => {
       event.preventDefault();
-      this.props.firebase.login({
+      const credential = {
         email: this.state.email,
         password: this.state.password,
-      }).then(() => {
-        this.setState({ loggedIn: true });
+      };
+
+      this.props.firebase.login(credential).then(() => {
+        this.setState({
+          loading: !this.props.auth.isLoaded,
+          loggedIn: !this.props.auth.isEmpty,
+        });
+      }).catch((error) => {
+        console.log(error);
       });
     };
 
@@ -63,6 +70,13 @@ class Login extends React.Component {
         <Link to="/">Go to main</Link>
       </div>
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      loading: !nextProps.auth.isLoaded,
+      loggedIn: !nextProps.auth.isEmpty,
+    });
   }
 
   render() {
