@@ -25,12 +25,26 @@ class Login extends React.Component {
     this.signedInView = this.signedInView.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      loading: !nextProps.auth.isLoaded,
+      loggedIn: !nextProps.auth.isEmpty,
+    });
+  }
+
   login(event) {
-    const { firebase } = this.props;
+    const { firebase, auth: { isLoaded, isEmpty } } = this.props;
     const { email, password } = this.state;
+
     event.preventDefault();
-    firebase.login({ email, password }).then(() => {
-      this.setState({ loggedIn: true });
+    const credential = { email, password };
+    firebase.login(credential).then(() => {
+      this.setState({
+        loading: !isLoaded,
+        loggedIn: !isEmpty,
+      });
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
