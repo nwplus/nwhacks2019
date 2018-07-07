@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    const { isLoaded, isEmpty, firebase, auth } = this.props;
+    const { firebase, auth, auth: { isLoaded, isEmpty } } = this.props;
 
     this.state = {
       email: '',
@@ -79,8 +79,6 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
   }),
   auth: PropTypes.object,
-  isLoaded: PropTypes.bool,
-  isEmpty: PropTypes.bool,
 };
 
 export default compose(
