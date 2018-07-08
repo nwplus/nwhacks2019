@@ -16,9 +16,6 @@ class Login extends React.Component {
       loading: !isLoaded,
       loggedIn: !isEmpty,
     };
-
-    this.onEmailChange = event => this.setState({ email: event.target.value });
-    this.onPasswordChange = event => this.setState({ password: event.target.value });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,6 +24,10 @@ class Login extends React.Component {
       loggedIn: !nextProps.auth.isEmpty,
     });
   }
+
+  onEmailChange = event => this.setState({ email: event.target.value });
+
+  onPasswordChange = event => this.setState({ password: event.target.value });
 
   login = (event) => {
     const { firebase, auth: { isLoaded, isEmpty } } = this.props;
