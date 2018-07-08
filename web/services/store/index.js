@@ -47,8 +47,7 @@ export default (initialState = {}) => {
   firestore.settings(firestoreSettings);
 
   // Add reactReduxFirebase store enhancer when making store creator
-  const createStoreWithFirebase =
-  compose(
+  const createStoreWithFirebase = compose(
     reactReduxFirebase(firebase, rrfConfig),
     reduxFirestore(firebase)
   )(createStore);

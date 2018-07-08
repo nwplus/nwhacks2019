@@ -8,21 +8,26 @@ import { connect } from 'react-redux';
 class Logout extends React.Component {
   constructor(props) {
     super(props);
+    const { auth } = this.props;
+
     this.state = {
-      loading: !this.props.auth.isLoaded,
+      loading: !auth.isLoaded,
     };
   }
 
   componentDidMount() {
-    this.props.firebase.logout();
+    const { firebase } = this.props;
+    firebase.logout();
   }
 
   render() {
+    const { loading } = this.state;
+    const { auth } = this.props;
     let message = '';
 
-    if (this.state.loading) {
+    if (loading) {
       message = 'loading....';
-    } else if (this.props.auth.currentUser) {
+    } else if (auth.currentUser) {
       message = 'Something went wrong';
     } else {
       message = 'successfully logged out';

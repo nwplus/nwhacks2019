@@ -7,8 +7,9 @@ import Main from '../../components/Main';
 import Login from '../../components/login/Login';
 import Logout from '../../components/login/Logout';
 import AdminPanel from '../../components/admin';
+import NotFound from '../errors/NotFound';
+
 import './App.sass';
-import NotFound from './NotFound';
 
 import configureStore from '../../services/store';
 
