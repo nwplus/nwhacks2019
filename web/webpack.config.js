@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   mode: 'development',
@@ -12,6 +13,9 @@ const config = {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
+  },
+  node: {
+    fs: 'empty'
   },
   module: {
     rules: [
@@ -50,6 +54,9 @@ const config = {
       filename: 'index.html',
       inject: 'body',
     }),
+    new Dotenv({
+      path : '../.env'
+     })
   ],
 };
 
