@@ -16,6 +16,9 @@ const config = {
     path: path.resolve(__dirname, '../docs'),
     filename: 'bundle.js',
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     rules: [
       {
