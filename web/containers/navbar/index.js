@@ -11,8 +11,8 @@ import Navbar from '../../components/navbar';
 
 const getDisplayType = (location) => {
   const { pathname } = location;
-  const isHomePage = pathname === "/";
-  const isDashBoardPage = pathname === "/dashboard";
+  const isHomePage = pathname === '/';
+  const isDashBoardPage = pathname === '/dashboard';
 
   let displayType = DISPLAY_TYPE.ONLY_LOGO;
 
@@ -25,10 +25,10 @@ const getDisplayType = (location) => {
   return displayType;
 };
 
-const getButtonType = (signedIn) => {
+const getButtonType = (signedIn, location) => {
   const { pathname } = location;
-  const isHomePage = pathname === "/";
-  
+  const isHomePage = pathname === '/';
+
   let buttonType = BUTTON_TYPE.NONE;
 
   if (signedIn) {
@@ -42,7 +42,7 @@ const getButtonType = (signedIn) => {
   }
 
   return buttonType;
-}
+};
 
 const NavbarContainer = ({ signedIn, location }) => {
   const { pathname } = location;

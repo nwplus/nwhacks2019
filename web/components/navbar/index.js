@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
@@ -20,7 +19,7 @@ const getButton = (buttonType) => {
 };
 
 const Navbar = ({ displayType, buttonType }) => {
-  switch(displayType) {
+  switch (displayType) {
     case DISPLAY_TYPE.ONLY_LOGO:
       return (
         <nav>
