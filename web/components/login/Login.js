@@ -44,7 +44,7 @@ class Login extends React.Component {
     });
   }
 
-  loginView = () => {
+  loginView() {
     const { email, password } = this.state;
     return (
       <form
@@ -71,7 +71,7 @@ class Login extends React.Component {
     );
   }
 
-  signedInView = () => {
+  signedInView() {
     const { auth } = this.props;
     return (
       <div>
