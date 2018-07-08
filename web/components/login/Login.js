@@ -19,10 +19,6 @@ class Login extends React.Component {
 
     this.onEmailChange = event => this.setState({ email: event.target.value });
     this.onPasswordChange = event => this.setState({ password: event.target.value });
-
-    this.login = this.login.bind(this);
-    this.loginView = this.loginView.bind(this);
-    this.signedInView = this.signedInView.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +28,7 @@ class Login extends React.Component {
     });
   }
 
-  login(event) {
+  login = (event) => {
     const { firebase, auth: { isLoaded, isEmpty } } = this.props;
     const { email, password } = this.state;
 
@@ -48,7 +44,7 @@ class Login extends React.Component {
     });
   }
 
-  loginView() {
+  loginView = () => {
     const { email, password } = this.state;
     return (
       <form
@@ -74,7 +70,7 @@ class Login extends React.Component {
     );
   }
 
-  signedInView() {
+  signedInView = () => {
     const { auth } = this.props;
     return (
       <div>
