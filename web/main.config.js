@@ -1,4 +1,4 @@
-// Configuration variables for web
+// Configuration constants for web
 
 export const firebaseConfig = {
     production : {
@@ -24,8 +24,4 @@ export const rrfConfig = {
     // userProfile: 'users',
     // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 };
-  
-export const persistConfig = {
-    key: 'root',
-    storage: localStorage,
-};
+
