@@ -59,6 +59,7 @@ class Login extends React.Component {
         <input
           placeholder="Enter your password"
           className="form-control"
+          type="password"
           value={password}
           onChange={this.onPasswordChange}
         />
