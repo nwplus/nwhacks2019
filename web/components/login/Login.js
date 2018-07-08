@@ -8,46 +8,63 @@ import { connect } from 'react-redux';
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    const { auth: { isLoaded, isEmpty } } = this.props;
 
     this.state = {
       email: '',
       password: '',
-      loading: !this.props.auth.isLoaded,
-      loggedIn: !this.props.auth.isEmpty,
+      loading: !isLoaded,
+      loggedIn: !isEmpty,
     };
 
-    this.onEmailChange = (event) => {
-      this.setState({ email: event.target.value });
-    };
+    this.onEmailChange = event => this.setState({ email: event.target.value });
+    this.onPasswordChange = event => this.setState({ password: event.target.value });
 
-    this.onPasswordChange = (event) => {
-      this.setState({ password: event.target.value });
-    };
+    this.login = this.login.bind(this);
+    this.loginView = this.loginView.bind(this);
+    this.signedInView = this.signedInView.bind(this);
+  }
 
-    this.login = (event) => {
-      event.preventDefault();
-      this.props.firebase.login({
-        email: this.state.email,
-        password: this.state.password,
-      }).then(() => {
-        this.setState({ loggedIn: true });
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      loading: !nextProps.auth.isLoaded,
+      loggedIn: !nextProps.auth.isEmpty,
+    });
+  }
+
+  login(event) {
+    const { firebase, auth: { isLoaded, isEmpty } } = this.props;
+    const { email, password } = this.state;
+
+    event.preventDefault();
+    const credential = { email, password };
+    firebase.login(credential).then(() => {
+      this.setState({
+        loading: !isLoaded,
+        loggedIn: !isEmpty,
       });
-    };
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
-    this.loginView = () => (
+  loginView() {
+    const { email, password } = this.state;
+    return (
       <form
         onSubmit={this.login}
         className="input-group">
         <input
           placeholder="Enter your email"
           className="form-control"
-          value={this.state.email}
+          value={email}
           onChange={this.onEmailChange}
         />
         <input
           placeholder="Enter your password"
           className="form-control"
-          value={this.state.password}
+          type="password"
+          value={password}
           onChange={this.onPasswordChange}
         />
         <span
@@ -56,21 +73,23 @@ class Login extends React.Component {
         </span>
       </form>
     );
+  }
 
-    this.signedInView = () => (
+  signedInView() {
+    const { auth } = this.props;
+    return (
       <div>
-        <p>Signed in as {this.props.auth.displayName}</p>
+        <p>Signed in as {auth.displayName}</p>
         <Link to="/">Go to main</Link>
       </div>
     );
   }
 
   render() {
-    if (this.state.loading) {
-      return (<span>Loading...</span>);
-    } else if (!this.state.loggedIn) {
-      return this.loginView();
-    }
+    const { loading, loggedIn } = this.state;
+
+    if (loading) return (<span>Loading...</span>);
+    if (!loggedIn) return this.loginView();
 
     return this.signedInView();
   }

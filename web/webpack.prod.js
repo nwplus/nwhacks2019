@@ -1,17 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const config = require('./webpack.config');
+const plugins = require('./webpack.plugins');
 
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './index.html',
-  filename: 'index.html',
-  inject: 'body',
-});
-
-const config = {
+// Define production (build) webpack configuration here
+module.exports = {
   mode: 'production',
-  entry: ['babel-polyfill', './index.js'],
+  entry: config.entry,
   output: {
     path: path.resolve(__dirname, '../docs'),
     filename: 'bundle.js',
@@ -19,32 +13,6 @@ const config = {
   node: {
     fs: 'empty'
   },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['es2015', 'react'],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.sass/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-    ],
-  },
-  plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
-    HtmlWebpackPluginConfig,
-    new MinifyPlugin(),
-  ],
+  module: config.module,
+  plugins,
 };
-
-module.exports = config;
