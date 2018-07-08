@@ -44,7 +44,7 @@ const getButtonType = (signedIn, location) => {
   return buttonType;
 };
 
-const NavbarContainer = ({ signedIn, location }) => {
+export const NavbarContainer = ({ signedIn, location }) => {
   const { pathname } = location;
   if (pathname === '/page_not_found') return (<div />);
 

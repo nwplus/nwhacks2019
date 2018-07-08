@@ -1,19 +1,49 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
-import Navbar from '.';
 import Adapter from 'enzyme-adapter-react-16';
+
+import { NavbarContainer } from '.';
+import Navbar from '../../components/navbar';
+import { DISPLAY_TYPE } from './DisplayTypes';
+import { BUTTON_TYPE } from './ButtonTypes';
 
 beforeAll(() => {
   configure({ adapter: new Adapter() });
-})
+});
 
-test('some test man', () => {
-  const location = {
-    pathname: "/"
-  };
+describe('navbar', () => {
+  let location;
+  let signedIn;
 
-  const signedIn = false;
+  let wrapper;
+  let navbarWrapper;
 
-  const navbar = shallow(<Navbar location={location} signedIn={signedIn} />);
-  expect(0).toBe(0);
+  describe('when the location is home page', () => {
+    beforeEach(() => {
+      location = {
+        pathname: "/",
+      };
+    });
+
+    describe('when user is signed in', () => {
+      beforeEach(() => {
+        signedIn = true;
+
+        wrapper = shallow(<NavbarContainer location={location} signedIn={signedIn} />);
+        navbarWrapper = wrapper.find(Navbar);
+      });
+
+      test('NavbarContainer contains one Navbar component', () => {
+        expect(navbarWrapper).toHaveProperty('length', 1);
+      });
+
+      test('Display type of NavbarContainer is LOGO_BUTTON_AND_LINKS', () => {
+        expect(navbarWrapper.props()).toHaveProperty('displayType', DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS);
+      });
+
+      test('Button type of NavbarContainer is DASHBOARD', () => {
+        expect(navbarWrapper.props()).toHaveProperty('buttonType', BUTTON_TYPE.DASHBOARD);
+      });
+    });
+  });
 });
