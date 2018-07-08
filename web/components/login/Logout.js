@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { firebaseConnect } from 'react-redux-firebase';
+import { Redirect } from 'react-router-dom';
+import { withFirebase } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 class Logout extends React.Component {
   constructor(props) {
     super(props);
-    const { auth } = this.props;
-
-    this.state = {
-      loading: !auth.isLoaded,
-    };
   }
 
   componentDidMount() {
@@ -21,23 +16,7 @@ class Logout extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
-    const { auth } = this.props;
-    let message = '';
-
-    if (loading) {
-      message = 'loading....';
-    } else if (auth.currentUser) {
-      message = 'Something went wrong';
-    } else {
-      message = 'successfully logged out';
-    }
-
-    return (
-      <div>
-        <p>{ message }</p>
-      </div>
-    );
+    return (<Redirect to="/" />)
   }
 }
 
@@ -48,7 +27,4 @@ Logout.propTypes = {
   auth: PropTypes.object,
 };
 
-export default compose(
-  firebaseConnect(),
-  connect(({ firebase: { auth } }) => { return { auth }; })
-)(Logout);
+export default withFirebase(Logout);

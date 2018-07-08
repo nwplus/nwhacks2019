@@ -13,10 +13,28 @@ const Navbar = ({ signedIn, home }) => {
     button = (<Link to="/logout">Sign out</Link>)
   }
 
+  const right = () => {
+    if (home) return (
+      <div>
+        <div><Link to="/">Link 1</Link></div>
+        <div><Link to="/">Link 2</Link></div>
+        <div><Link to="/">Link 3</Link></div>
+        <div>{button}</div>
+      </div>
+    )
+    return (
+      <div>
+        <div>{button}</div>
+      </div>
+    )
+  };
+
   return (
     <nav>
-      <div><Link to="/">nwHacks logo</Link></div>
-      <div>{ button }</div>
+      <div>
+        <div><Link to="/">nwHacks logo</Link></div>
+      </div>
+      { right() }
     </nav>
   );
 };
