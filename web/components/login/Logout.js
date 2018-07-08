@@ -36,8 +36,6 @@ class Logout extends React.Component {
     return (
       <div>
         <p>{ message }</p>
-        <br />
-        <Link to="/">Go to main</Link>
       </div>
     );
   }

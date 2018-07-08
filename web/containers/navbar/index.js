@@ -1,26 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
-import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import { withRouter } from 'react-router-dom';
+import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import Navbar from '../../components/navbar';
 
-const NavbarContainer = ({ signedIn }) => {
+const NavbarContainer = ({ signedIn, location }) => {
+  const { pathname } = location;
+  if (pathname === '/page_not_found') return (<div />);
+
+  const isHome = pathname === '/';
   return (
-    <Navbar signedIn={signedIn}/>
+    <Navbar signedIn={signedIn} home={isHome} />
   );
 };
 
-Navbar.propTypes = {
-  isEmpty: PropTypes.bool,
+NavbarContainer.propTypes = {
+  signedIn: PropTypes.bool.isRequired,
+  location: PropTypes.object,
 };
 
-export default compose(
+export default withRouter(compose(
   firebaseConnect(),
   connect((state) => {
     const { isEmpty } = state.firebase.auth;
     return { signedIn: !isEmpty };
   }),
-)(NavbarContainer);
+)(NavbarContainer));

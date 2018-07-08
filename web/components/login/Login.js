@@ -77,7 +77,6 @@ class Login extends React.Component {
     return (
       <div>
         <p>Signed in as {auth.displayName}</p>
-        <Link to="/">Go to main</Link>
       </div>
     );
   }
