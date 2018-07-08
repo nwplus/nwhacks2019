@@ -8,6 +8,7 @@ import Login from '../../components/login/Login';
 import Logout from '../../components/login/Logout';
 import AdminPanel from '../../components/admin';
 import NotFound from '../errors/NotFound';
+import Navbar from '../../containers/navbar';
 
 import './App.sass';
 
@@ -20,6 +21,7 @@ const { store, persistor } = configureStore(initialState);
 const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
+      <Navbar />
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Main} />
