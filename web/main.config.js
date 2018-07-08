@@ -1,4 +1,5 @@
 // Configuration constants for web
+require('dotenv').config({ path : '../.env'});
 
 export const firebaseConfig = {
     production : {
