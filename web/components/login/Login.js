@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -15,6 +15,7 @@ class Login extends React.Component {
       password: '',
       loading: !isLoaded,
       loggedIn: !isEmpty,
+      error: {},
     };
   }
 
@@ -30,54 +31,46 @@ class Login extends React.Component {
   onPasswordChange = event => this.setState({ password: event.target.value });
 
   login = (event) => {
-    const { firebase, auth: { isLoaded, isEmpty } } = this.props;
+    const { firebase } = this.props;
     const { email, password } = this.state;
 
     event.preventDefault();
     const credential = { email, password };
     firebase.login(credential).then(() => {
       this.setState({
-        loading: !isLoaded,
-        loggedIn: !isEmpty,
+        error: {},
       });
     }).catch((error) => {
-      console.log(error);
+      this.setState({ error });
     });
   }
 
   loginView() {
-    const { email, password } = this.state;
-    return (
-      <form
-        onSubmit={this.login}
-        className="input-group">
-        <input
-          placeholder="Enter your email"
-          className="form-control"
-          value={email}
-          onChange={this.onEmailChange}
-        />
-        <input
-          placeholder="Enter your password"
-          className="form-control"
-          type="password"
-          value={password}
-          onChange={this.onPasswordChange}
-        />
-        <span
-          className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">Submit</button>
-        </span>
-      </form>
-    );
-  }
-
-  signedInView() {
-    const { auth } = this.props;
+    const { email, password, error: { message } } = this.state;
     return (
       <div>
-        <p>Signed in as {auth.displayName}</p>
-        <Link to="/">Go to main</Link>
+        <form
+          onSubmit={this.login}
+          className="input-group">
+          <input
+            placeholder="Enter your email"
+            className="form-control"
+            value={email}
+            onChange={this.onEmailChange}
+          />
+          <input
+            placeholder="Enter your password"
+            className="form-control"
+            type="password"
+            value={password}
+            onChange={this.onPasswordChange}
+          />
+          <span
+            className="input-group-btn">
+            <button type="submit" className="btn btn-secondary">Submit</button>
+          </span>
+        </form>
+        <p>{ message }</p>
       </div>
     );
   }
@@ -88,7 +81,7 @@ class Login extends React.Component {
     if (loading) return (<span>Loading...</span>);
     if (!loggedIn) return this.loginView();
 
-    return this.signedInView();
+    return (<Redirect to="/dashboard" />);
   }
 }
 

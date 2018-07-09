@@ -54,6 +54,8 @@
   "devDependencies": {
     "babel-jest": "23.2.0",
     "babel-preset-env": "1.7.0",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
     "eslint": "5.0.1",
     "eslint-config-airbnb": "17.0.0",
     "eslint-plugin-babel": "5.1.0",
@@ -61,7 +63,14 @@
     "eslint-plugin-jest": "21.17.0",
     "eslint-plugin-jsx-a11y": "6.1.0",
     "eslint-plugin-react": "7.10.0",
+    "identity-obj-proxy": "3.0.0",
     "jest": "23.3.0",
     "react-test-renderer": "16.4.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
   }
 }
