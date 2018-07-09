@@ -28,20 +28,23 @@ const getDisplayType = (location) => {
 const getButtonType = (signedIn, location) => {
   const { pathname } = location;
   const isHomePage = pathname === '/';
+  const isDashBoardPage = pathname === '/dashboard';
 
-  let buttonType = BUTTON_TYPE.NONE;
+  // No button on any page except home and dashboard
+  if (!isHomePage && !isDashBoardPage) return BUTTON_TYPE.NONE;
 
-  if (signedIn) {
-    if (isHomePage) {
-      buttonType = BUTTON_TYPE.DASHBOARD;
-    } else {
-      buttonType = BUTTON_TYPE.SIGN_OUT;
+  // Home page logic
+  if (isHomePage) {
+    // If signed in, link to dashboard page
+    if (signedIn) {
+      return BUTTON_TYPE.DASHBOARD;
     }
-  } else {
-    buttonType = BUTTON_TYPE.SIGN_IN;
+    // If not signed in, link to sign in page
+    return BUTTON_TYPE.SIGN_IN;
   }
 
-  return buttonType;
+  // Always return sign out button in dashboard
+  return BUTTON_TYPE.SIGN_OUT;
 };
 
 export const NavbarContainer = ({ signedIn, location }) => {
