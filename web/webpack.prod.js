@@ -10,9 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, '../docs'),
     filename: 'bundle.js',
   },
-  node: {
-    fs: 'empty'
-  },
+  node: config.node,
   module: config.module,
   plugins,
 };
