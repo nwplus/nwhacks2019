@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -72,23 +72,13 @@ class Login extends React.Component {
     );
   }
 
-  signedInView() {
-    const { auth } = this.props;
-    return (
-      <div>
-        <p>Signed in as {auth.displayName}</p>
-        <Link to="/">Go to main</Link>
-      </div>
-    );
-  }
-
   render() {
     const { loading, loggedIn } = this.state;
 
     if (loading) return (<span>Loading...</span>);
     if (!loggedIn) return this.loginView();
 
-    return this.signedInView();
+    return (<Redirect to="/dashboard" />);
   }
 }
 
