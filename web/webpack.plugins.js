@@ -15,7 +15,8 @@ module.exports = [
     // favicon: 'static/favicon.ico',
   }),
   new Dotenv({
-    path : '../.env'
+    path : '../.env',
+    systemvars: true,
   }),
   new MinifyPlugin(),
 ];
