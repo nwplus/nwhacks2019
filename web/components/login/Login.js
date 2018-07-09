@@ -15,6 +15,7 @@ class Login extends React.Component {
       password: '',
       loading: !isLoaded,
       loggedIn: !isEmpty,
+      error: {},
     };
   }
 
@@ -30,45 +31,47 @@ class Login extends React.Component {
   onPasswordChange = event => this.setState({ password: event.target.value });
 
   login = (event) => {
-    const { firebase, auth: { isLoaded, isEmpty } } = this.props;
+    const { firebase } = this.props;
     const { email, password } = this.state;
 
     event.preventDefault();
     const credential = { email, password };
     firebase.login(credential).then(() => {
       this.setState({
-        loading: !isLoaded,
-        loggedIn: !isEmpty,
+        error: {},
       });
     }).catch((error) => {
-      console.log(error);
+      this.setState({ error });
     });
   }
 
   loginView() {
-    const { email, password } = this.state;
+    const { email, password, error: { message } } = this.state;
     return (
-      <form
-        onSubmit={this.login}
-        className="input-group">
-        <input
-          placeholder="Enter your email"
-          className="form-control"
-          value={email}
-          onChange={this.onEmailChange}
-        />
-        <input
-          placeholder="Enter your password"
-          className="form-control"
-          type="password"
-          value={password}
-          onChange={this.onPasswordChange}
-        />
-        <span
-          className="input-group-btn">
-          <button type="submit" className="btn btn-secondary">Submit</button>
-        </span>
-      </form>
+      <div>
+        <form
+          onSubmit={this.login}
+          className="input-group">
+          <input
+            placeholder="Enter your email"
+            className="form-control"
+            value={email}
+            onChange={this.onEmailChange}
+          />
+          <input
+            placeholder="Enter your password"
+            className="form-control"
+            type="password"
+            value={password}
+            onChange={this.onPasswordChange}
+          />
+          <span
+            className="input-group-btn">
+            <button type="submit" className="btn btn-secondary">Submit</button>
+          </span>
+        </form>
+        <p>{ message }</p>
+      </div>
     );
   }
 
