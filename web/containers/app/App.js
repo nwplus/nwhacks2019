@@ -10,6 +10,7 @@ import AdminPanel from '../../components/admin';
 import NotFound from '../errors/NotFound';
 import Navbar from '../navbar';
 import DashBoard from '../../components/dashboard';
+import FrontEndComponent from '../frontEndComponents';
 
 import './App.sass';
 
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/logout" component={Logout} />
             <Route path="/dashboard" component={DashBoard} />
             <Route path="/admin" component={AdminPanel} />
+            <Route path="/front_end_components" component={FrontEndComponent} />
             <Route path="/page_not_found" component={NotFound} />
             <Route path="*" component={() => <Redirect to="/page_not_found" />} />
           </Switch>
