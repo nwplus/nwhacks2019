@@ -12,8 +12,6 @@ import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';
 import UIDemo from '../demo';
 
-import './App.sass';
-
 import configureStore from '../../services/store';
 
 const initialState = {};

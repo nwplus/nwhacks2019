@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './PrimaryButton.sass';
-
 const PrimaryButton = ({ text, onClick }) => (
   <button onClick={onClick} type="button" className="primary">
     { text }

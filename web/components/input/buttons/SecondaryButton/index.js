@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './SecondaryButton.sass';
-
 const SecondaryButton = ({ text, onClick }) => (
   <button onClick={onClick} type="button" className="secondary">
     { text }

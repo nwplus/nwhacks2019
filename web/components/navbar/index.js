@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
-import './Navbar.sass';
 
 const getButton = (buttonType) => {
   switch (buttonType) {
