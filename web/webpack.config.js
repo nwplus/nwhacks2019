@@ -15,6 +15,10 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
+  // Handles missing fs module
+  node: {
+    fs: 'empty',
+  },
   module: {
     rules: [
       {

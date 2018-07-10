@@ -25,6 +25,8 @@ $> cd nwhacks2019 ; make
 
 To deploy locally:
 
+First, create a file called `.env` by following the template in `.example.env`.
+
 ```bash
 # serve web app
 $> make web
