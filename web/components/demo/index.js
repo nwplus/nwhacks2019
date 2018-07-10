@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { SecondaryButton } from '../input/buttons';
+import { SecondaryButton, PrimaryButton } from '../input/buttons';
 
-const SecondaryButtonCallback = () => console.log('Secondary Button clicked!');
+const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
 
 const FrontEndComponents = () => (
   <div>
     <p>Front end components!</p>
-    <SecondaryButton text="Secondary" onClick={SecondaryButtonCallback} />
+    <br />
+    <div>
+      <PrimaryButton text="Primary" onClick={ButtonCallback} />
+      &nbsp;
+      <SecondaryButton text="Secondary" onClick={ButtonCallback} />
+    </div>
   </div>
 );
 
