@@ -43,7 +43,7 @@ module.exports = {
       },
       {
         // Package any static assets
-        test: /\.png($|\?)|\.jpg($|\?)|\.ico($|\?)|\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+        test: /\.png($|\?)|\.jpg($|\?)|\.ico($|\?)|\.otf($|\?)|\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
         loader: 'url-loader',
       },
     ],
