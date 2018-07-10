@@ -1,30 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, withRouter } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
+import { SecondaryButton } from '../frontEndComponents/button';
 import './Navbar.sass';
 
-const getButton = (buttonType) => {
-  switch (buttonType) {
-    case BUTTON_TYPE.SIGN_IN:
-      return (<Link to="/login">Sign in</Link>);
-    case BUTTON_TYPE.SIGN_OUT:
-      return (<Link to="/logout">Sign out</Link>);
-    case BUTTON_TYPE.DASHBOARD:
-      return (<Link to="/dashboard">My application</Link>);
-    default:
-      return (<div />);
-  }
-};
+const getLogo = () => (
+  <Link to="/"><img src="../../assets/logo.png" /></Link>
+);
 
-const Navbar = ({ displayType, buttonType }) => {
+const Navbar = ({ displayType, buttonType, history }) => {
+  const getButton = (buttonType) => {
+    switch (buttonType) {
+      case BUTTON_TYPE.SIGN_IN:
+        return (<Link to="/login"><SecondaryButton text="Sign in" /></Link>);
+      case BUTTON_TYPE.SIGN_OUT:
+        return (<Link to="/logout"><SecondaryButton text="Sign out" /></Link>);
+      case BUTTON_TYPE.DASHBOARD:
+        return (<Link to="/dashboard"><SecondaryButton text="My application" /></Link>);
+      default:
+        return (<div />);
+    }
+  };
+
   switch (displayType) {
     case DISPLAY_TYPE.ONLY_LOGO:
       return (
         <nav>
           <div>
-            <div><Link to="/">nwHacks logo</Link></div>
+            <div>{getLogo()}</div>
           </div>
         </nav>
       );
@@ -32,7 +36,7 @@ const Navbar = ({ displayType, buttonType }) => {
       return (
         <nav>
           <div>
-            <div><Link to="/">nwHacks logo</Link></div>
+            <div>{getLogo()}</div>
           </div>
           <div>
             <div>{getButton(buttonType)}</div>
@@ -43,7 +47,7 @@ const Navbar = ({ displayType, buttonType }) => {
       return (
         <nav>
           <div>
-            <div><Link to="/">nwHacks logo</Link></div>
+            <div>{getLogo()}</div>
           </div>
           <div>
             <div><Link to="/">Link 1</Link></div>
@@ -56,4 +60,4 @@ const Navbar = ({ displayType, buttonType }) => {
   }
 };
 
-export default Navbar;
+export default withRouter(Navbar);
