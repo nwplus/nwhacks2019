@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SecondaryButton } from './button';
+import { SecondaryButton } from '../input/buttons';
 
 const SecondaryButtonCallback = () => console.log('Secondary Button clicked!');
 
