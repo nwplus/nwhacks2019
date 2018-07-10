@@ -1,28 +1,28 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
 import { SecondaryButton } from '../frontEndComponents/button';
 import './Navbar.sass';
 
 const getLogo = () => (
-  <Link to="/"><img src="../../assets/logo.png" /></Link>
+  <Link to="/"><img alt="" src="../../assets/logo.png" /></Link>
 );
 
-const Navbar = ({ displayType, buttonType, history }) => {
-  const getButton = (buttonType) => {
-    switch (buttonType) {
-      case BUTTON_TYPE.SIGN_IN:
-        return (<Link to="/login"><SecondaryButton text="Sign in" /></Link>);
-      case BUTTON_TYPE.SIGN_OUT:
-        return (<Link to="/logout"><SecondaryButton text="Sign out" /></Link>);
-      case BUTTON_TYPE.DASHBOARD:
-        return (<Link to="/dashboard"><SecondaryButton text="My application" /></Link>);
-      default:
-        return (<div />);
-    }
-  };
+const getButton = (buttonType) => {
+  switch (buttonType) {
+    case BUTTON_TYPE.SIGN_IN:
+      return (<Link to="/login"><SecondaryButton text="Sign in" /></Link>);
+    case BUTTON_TYPE.SIGN_OUT:
+      return (<Link to="/logout"><SecondaryButton text="Sign out" /></Link>);
+    case BUTTON_TYPE.DASHBOARD:
+      return (<Link to="/dashboard"><SecondaryButton text="My application" /></Link>);
+    default:
+      return (<div />);
+  }
+};
 
+const Navbar = ({ displayType, buttonType }) => {
   switch (displayType) {
     case DISPLAY_TYPE.ONLY_LOGO:
       return (
@@ -50,9 +50,10 @@ const Navbar = ({ displayType, buttonType, history }) => {
             <div>{getLogo()}</div>
           </div>
           <div>
-            <div><Link to="/">Link 1</Link></div>
-            <div><Link to="/">Link 2</Link></div>
-            <div><Link to="/">Link 3</Link></div>
+            <div><Link to="/">About</Link></div>
+            <div><Link to="/">FAQ</Link></div>
+            <div><Link to="/">Sponsors</Link></div>
+            <div><Link to="/">2018</Link></div>
             <div>{getButton(buttonType)}</div>
           </div>
         </nav>
@@ -60,4 +61,4 @@ const Navbar = ({ displayType, buttonType, history }) => {
   }
 };
 
-export default withRouter(Navbar);
+export default Navbar;
