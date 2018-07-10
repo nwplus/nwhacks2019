@@ -17,7 +17,7 @@ module.exports = {
   },
   // Handles missing fs module
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
   module: {
     rules: [

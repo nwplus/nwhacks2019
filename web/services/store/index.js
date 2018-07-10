@@ -1,14 +1,16 @@
-import { createStore, combineReducers, compose } from 'redux';
-import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
-import { reduxFirestore, firestoreReducer } from 'redux-firestore';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+
+import { createStore, combineReducers, compose } from 'redux';
+import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
+import { reduxFirestore, firestoreReducer } from 'redux-firestore';
 import { persistStore, persistReducer } from 'redux-persist';
 import localStorage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
-import { firebaseConfig, rrfConfig } from "../../main.config";
+
+import { firebaseConfig, rrfConfig } from '../../main.config';
 
 const persistConfig = {
   key: 'root',
