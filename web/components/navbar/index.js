@@ -1,17 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
+import { SecondaryButton } from '../input/buttons';
+
+const getLogo = () => (
+  <Link to="/"><img alt="" src="../../assets/logo.png" /></Link>
+);
 
 const getButton = (buttonType) => {
   switch (buttonType) {
     case BUTTON_TYPE.SIGN_IN:
-      return (<Link to="/login">Sign in</Link>);
+      return (<Link to="/login"><SecondaryButton text="Sign in" /></Link>);
     case BUTTON_TYPE.SIGN_OUT:
-      return (<Link to="/logout">Sign out</Link>);
+      return (<Link to="/logout"><SecondaryButton text="Sign out" /></Link>);
     case BUTTON_TYPE.DASHBOARD:
-      return (<Link to="/dashboard">My application</Link>);
+      return (<Link to="/dashboard"><SecondaryButton text="My application" /></Link>);
     default:
       return (<div />);
   }
@@ -23,7 +27,7 @@ const Navbar = ({ displayType, buttonType }) => {
       return (
         <nav>
           <div>
-            <div><Link to="/">nwHacks logo</Link></div>
+            <div>{getLogo()}</div>
           </div>
         </nav>
       );
@@ -31,7 +35,7 @@ const Navbar = ({ displayType, buttonType }) => {
       return (
         <nav>
           <div>
-            <div><Link to="/">nwHacks logo</Link></div>
+            <div>{getLogo()}</div>
           </div>
           <div>
             <div>{getButton(buttonType)}</div>
@@ -42,12 +46,13 @@ const Navbar = ({ displayType, buttonType }) => {
       return (
         <nav>
           <div>
-            <div><Link to="/">nwHacks logo</Link></div>
+            <div>{getLogo()}</div>
           </div>
           <div>
-            <div><Link to="/">Link 1</Link></div>
-            <div><Link to="/">Link 2</Link></div>
-            <div><Link to="/">Link 3</Link></div>
+            <div><Link to="/">About</Link></div>
+            <div><Link to="/">FAQ</Link></div>
+            <div><Link to="/">Sponsors</Link></div>
+            <div><Link to="/">2018</Link></div>
             <div>{getButton(buttonType)}</div>
           </div>
         </nav>
