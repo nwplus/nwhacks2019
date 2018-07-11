@@ -6,12 +6,18 @@ const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button c
 
 const FrontEndComponents = () => (
   <div>
-    <p>Front end components!</p>
+    <p>Buttons</p>
     <br />
     <div>
       <PrimaryButton text="Primary" onClick={ButtonCallback} />
       &nbsp;
       <SecondaryButton text="Secondary" onClick={ButtonCallback} />
+    </div>
+    <br />
+    <div>
+      <PrimaryButton text="Primary" onClick={ButtonCallback} disabled />
+      &nbsp;
+      <SecondaryButton text="Secondary" onClick={ButtonCallback} disabled />
     </div>
   </div>
 );
