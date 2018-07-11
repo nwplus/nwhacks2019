@@ -1,12 +1,32 @@
 button.primary
-  background: $gradient-primary
+  background-image: $gradient-primary
   border: none
   color: $white
-
-  &:hover
-    background: $gradient-primary-highlight
 
   &.disabled
     pointer-events: none
     background: $gradient-primary-subdued
     opacity: 0.4
+
+  // this is a hack to allow linear-gradient transitions
+  // https://medium.com/@dave_lunny/animating-css-gradients-using-only-css-d2fd7671e759
+  background-size: 100%
+  position: relative
+  z-index: 100
+  &:before
+    background-image: $gradient-primary-highlight
+    border-radius: inherit
+    content: ''
+    display: block
+    position: absolute
+    height: 100%
+    width: 100%
+    top: 0
+    left: 0
+    z-index: -100
+    opacity: 0
+    -webkit-transition: .2s
+
+  &:hover
+    &:before
+      opacity: 1
