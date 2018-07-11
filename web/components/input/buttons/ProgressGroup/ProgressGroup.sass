@@ -1,0 +1,15 @@
+button.progress-step
+    background: $gradient-secondary
+    border: 1px solid $secondary
+    color: $secondary
+
+    border-radius: 50%
+    width: 40px
+    height: 40px
+
+    margin-right: 10px
+
+    &.active
+        color: $white
+        @include gradient-hover-animation($gradient-primary-subdued, $gradient-primary-highlight)
+
