@@ -4,8 +4,10 @@ import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
 import { SecondaryButton } from '../input/buttons';
 
+import logo from '../../assets/logo.svg';
+
 const getLogo = () => (
-  <Link to="/"><img alt="" src="../../assets/logo.png" /></Link>
+  <Link to="/"><img alt="" src={logo} /></Link>
 );
 
 const getButton = (buttonType) => {
