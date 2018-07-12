@@ -5,7 +5,8 @@ const PrimaryButton = ({ text, onClick, disabled }) => (
   <button
     onClick={onClick}
     type="button"
-    className={`primary ${disabled ? 'disabled' : ''}`}>
+    disabled={disabled}
+    className="primary">
     { text }
   </button>
 );
