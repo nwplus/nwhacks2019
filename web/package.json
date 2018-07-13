@@ -24,7 +24,8 @@
       "!**/node_modules/**",
       "!**/*.test.js",
       "!webpack.*",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/tests/**"
     ],
     "coverageReporters": ["text", "json"]
   },
