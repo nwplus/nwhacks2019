@@ -19,6 +19,13 @@ lint:
 	(cd ./serverless ; yarn lint)
 	(cd ./web ; yarn lint)
 
+.PHONY: report-coverage
+report-coverage:
+	mkdir -p .nyc_output
+	cp serverless/coverage/coverage-final.json .nyc_output/coverage-serverless.json
+	cp web/coverage/coverage-final.json .nyc_output/coverage-web.json
+	nyc report --reporter=text-lcov | coveralls
+
 ###############################
 # Component-specific commands #
 ###############################
