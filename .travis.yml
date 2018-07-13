@@ -11,7 +11,7 @@ notifications:
 before_script:
   - make deps
   - yarn global add nyc
-	- yarn global add coveralls
+  - yarn global add coveralls
 
 script:
   - make lint   # static analysis
