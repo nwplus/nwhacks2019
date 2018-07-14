@@ -1,0 +1,30 @@
+$transition-time: .2s
+
+// This is a hack to allow transitions of linear-gradient backgrounds.
+// https://medium.com/@dave_lunny/animating-css-gradients-using-only-css-d2fd7671e759
+// Use this by @include'ing it in your class with required arguments.
+// Arguments:
+//   $main        linear-gradient to use as normal background
+//   $hover       linear-gradient to transition to upon hover
+//   $transition  [optional] transition time, defaults to $transition-time
+@mixin gradient-hover-animation($main, $hover, $transition: $transition-time )
+  background-size: 100%
+  background-image: $main
+  position: relative
+  z-index: 100
+  &:before
+    border-radius: inherit
+    background-image: $hover
+    content: ''
+    display: block
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    opacity: 0
+    width: 100%
+    z-index: -100
+    -webkit-transition: $transition
+  &:hover
+     &:before
+       opacity: 1 

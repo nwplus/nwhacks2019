@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
-import { SecondaryButton } from '../frontEndComponents/button';
-import './Navbar.sass';
+import { SecondaryButton } from '../input/buttons';
 
 const getLogo = () => (
   <Link to="/"><img alt="" src="../../assets/logo.png" /></Link>

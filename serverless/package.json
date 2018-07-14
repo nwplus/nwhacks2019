@@ -6,9 +6,18 @@
     "license": "MIT",
     "scripts": {
         "start": "echo 'google cloudfunctions doesn't suppor serverless-offline, use 'serverless invoke local --function example'",
-        "test": "nyc jest",
-        "coverage": "nyc report --reporter=text-lcov | coveralls",
+        "test": "jest",
         "lint": "eslint . --ignore-pattern public/"
+    },
+    "jest": {
+        "collectCoverage": true,
+        "collectCoverageFrom" : [
+            "src/**/*.js",
+            "!**/node_modules/**",
+            "!**/*.test.js",
+            "!**/coverage/**"
+        ],
+        "coverageReporters": ["text", "json"]
     },
     "dependencies": {
         "got": "8.3.1",
@@ -24,13 +33,5 @@
         "jest": "^23.1.0",
         "nock": "^9.3.3",
         "nyc": "^12.0.2"
-    },
-    "nyc": {
-        "exclude": [
-            "**/node_modules/**",
-            "**/tests/**",
-            "**/coverage/**"
-        ],
-        "all": true
     }
 }
