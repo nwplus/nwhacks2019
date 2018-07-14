@@ -3,13 +3,18 @@ import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import Main from '../Main';
+// Containers
+import Main from '../../containers/main';
+import Navbar from '../../containers/navbar';
+
+// Components
 import Login from '../login/Login';
 import Logout from '../login/Logout';
 import AdminPanel from '../admin';
 import NotFound from '../errors/NotFound';
-import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';
+
+// Demo
 import UIDemo from '../demo';
 
 import configureStore from '../../services/store';
