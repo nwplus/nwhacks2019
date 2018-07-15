@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { TextInput } from '../../input/text';
+import { PrimaryButton } from '../../input/buttons';
 
 class Login extends React.Component {
   constructor(props) {
@@ -72,7 +73,11 @@ class Login extends React.Component {
             id="password"
           />
           <span>
-            <button type="submit" className="btn btn-secondary">Submit</button>
+            <PrimaryButton
+              type="submit"
+              text="Submit"
+              >
+            </PrimaryButton>
           </span>
         </form>
       </div>
