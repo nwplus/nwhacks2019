@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+import { TextInput } from '../../input/text';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class Login extends React.Component {
       password: '',
       loading: !isLoaded,
       loggedIn: !isEmpty,
-      error: {},
+      error: null,
     };
   }
 
@@ -46,31 +48,33 @@ class Login extends React.Component {
   }
 
   loginView() {
-    const { email, password, error: { message } } = this.state;
+    const { email, password, error } = this.state;
     return (
       <div>
         <form
           onSubmit={this.login}
           className="input-group">
-          <input
+          <TextInput
             placeholder="Enter your email"
-            className="form-control"
             value={email}
             onChange={this.onEmailChange}
+            error={error}
+            label="Email"
+            id="email"
           />
-          <input
+          <TextInput
             placeholder="Enter your password"
-            className="form-control"
-            type="password"
+            password
             value={password}
             onChange={this.onPasswordChange}
+            error={error}
+            label="Password"
+            id="password"
           />
-          <span
-            className="input-group-btn">
+          <span>
             <button type="submit" className="btn btn-secondary">Submit</button>
           </span>
         </form>
-        <p>{ message }</p>
       </div>
     );
   }
