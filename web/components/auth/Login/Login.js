@@ -51,35 +51,39 @@ class Login extends React.Component {
   loginView() {
     const { email, password, error } = this.state;
     return (
-      <div>
-        <form
-          onSubmit={this.login}
-          className="input-group">
-          <TextInput
-            placeholder="Enter your email"
-            value={email}
-            onChange={this.onEmailChange}
-            error={error}
-            label="Email"
-            id="email"
-          />
-          <TextInput
-            placeholder="Enter your password"
-            password
-            value={password}
-            onChange={this.onPasswordChange}
-            error={error}
-            label="Password"
-            id="password"
-          />
-          <span>
-            <PrimaryButton
-              type="submit"
-              text="Submit"
-              >
-            </PrimaryButton>
-          </span>
-        </form>
+      <div id="login">
+        <div>
+          <form
+            onSubmit={this.login}
+            className="input-group">
+            <label>Sign in</label>
+            <div class="card">
+              <TextInput
+                placeholder="Enter your email"
+                value={email}
+                onChange={this.onEmailChange}
+                error={error}
+                label="Email"
+                id="email"
+              />
+              <TextInput
+                placeholder="Enter your password"
+                password
+                value={password}
+                onChange={this.onPasswordChange}
+                error={error}
+                label="Password"
+                id="password"
+                showErrorMessage={true}
+              />
+              <PrimaryButton
+                type="submit"
+                text="Submit"
+                >
+              </PrimaryButton>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
