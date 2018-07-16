@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -82,6 +82,7 @@ class Login extends React.Component {
                   text="Submit"
                   >
                 </PrimaryButton>
+                <p>Don't have an account yet? <Link to="/">Apply here</Link></p>
               </div>
               <div className="card-right" />
             </div>
