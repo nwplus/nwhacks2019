@@ -57,30 +57,33 @@ class Login extends React.Component {
             onSubmit={this.login}
             className="input-group">
             <label>Sign in</label>
-            <div class="card">
-              <TextInput
-                placeholder="Enter your email"
-                value={email}
-                onChange={this.onEmailChange}
-                error={error}
-                label="Email"
-                id="email"
-              />
-              <TextInput
-                placeholder="Enter your password"
-                password
-                value={password}
-                onChange={this.onPasswordChange}
-                error={error}
-                label="Password"
-                id="password"
-                showErrorMessage={true}
-              />
-              <PrimaryButton
-                type="submit"
-                text="Submit"
-                >
-              </PrimaryButton>
+            <div className="card">
+              <div className="card-left">
+                <TextInput
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={this.onEmailChange}
+                  error={error}
+                  label="Email"
+                  id="email"
+                />
+                <TextInput
+                  placeholder="Enter your password"
+                  password
+                  value={password}
+                  onChange={this.onPasswordChange}
+                  error={error}
+                  label="Password"
+                  id="password"
+                  showErrorMessage={true}
+                />
+                <PrimaryButton
+                  type="submit"
+                  text="Submit"
+                  >
+                </PrimaryButton>
+              </div>
+              <div className="card-right" />
             </div>
           </form>
         </div>

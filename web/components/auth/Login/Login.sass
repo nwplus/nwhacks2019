@@ -12,16 +12,19 @@ div#login
     align-items: center
 
     form
-      height: 400px
+      height: 60%
+      min-height: 400px
+
+      width: 100%
+
       display: flex
       flex-direction: column
       justify-content: center
 
-      > *
+      > label
         padding-left: 44px
         padding-right: 44px
 
-      > label
         width: 100%
         display: flex
         justify-content: flex-start
@@ -37,6 +40,32 @@ div#login
         margin-bottom: 28px
 
       div.card
+        display: flex
         background-color: $white
-        padding-top: 48px
-        padding-bottom: 48px
+        overflow: hidden
+
+        /* Drop shadow */
+        box-shadow: 0px 4px 6px $shadow
+        border-radius: 4px
+
+        > *
+          width: 50%
+
+        > div.card-left
+          padding-left: 44px
+          padding-right: 44px
+          padding-top: 48px
+          padding-bottom: 48px
+
+          > div.text-input
+            &:first-of-type
+              margin-bottom: 40px
+            &:last-of-type
+              margin-bottom: 56px
+
+          > button
+            width: 100%
+
+        > div.card-right
+          /* Placeholder for future illustration
+          background: linear-gradient(180deg, #2C31AE 0%, #21258A 100%)
