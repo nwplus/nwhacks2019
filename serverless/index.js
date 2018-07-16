@@ -5,4 +5,4 @@ const exampleFunction = require('./src/example');
 // admin.initializeApp(functions.config().firebase); 
 // const database = admin.database();
 
-exports.example = exampleFunction.handler(req, res);
+exports.example = exampleFunction.handler;
