@@ -11,6 +11,7 @@
         "lint": "eslint . --ignore-pattern public/"
     },
     "dependencies": {
+        "firebase": "5.2.0",
         "got": "8.3.1",
         "serverless": "1.27.3",
         "serverless-google-cloudfunctions": "1.1.1"
