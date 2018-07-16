@@ -5,7 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { TextInput } from '../../input/text';
+import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
 
 class Login extends React.Component {
@@ -67,9 +67,8 @@ class Login extends React.Component {
                   label="Email"
                   id="email"
                 />
-                <TextInput
+                <PasswordInput
                   placeholder="Enter your password"
-                  password
                   value={password}
                   onChange={this.onPasswordChange}
                   error={error}
@@ -82,7 +81,7 @@ class Login extends React.Component {
                   text="Submit"
                   >
                 </PrimaryButton>
-                <p>Don't have an account yet? <Link to="/">Apply here</Link></p>
+                <p>Don't have an account yet?&nbsp;<Link to="/">Apply here</Link></p>
               </div>
               <div className="card-right" />
             </div>
