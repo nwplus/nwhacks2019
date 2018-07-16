@@ -74,14 +74,16 @@ class Login extends React.Component {
                   error={error}
                   label="Password"
                   id="password"
-                  showErrorMessage={true}
+                  showErrorMessage
                 />
                 <PrimaryButton
                   type="submit"
                   text="Submit"
-                  >
-                </PrimaryButton>
-                <p>Don't have an account yet?&nbsp;<Link to="/">Apply here</Link></p>
+                  />
+                <p>
+                  Don't have an account yet? &nbsp;
+                  <Link to="/">Apply here</Link>
+                </p>
               </div>
               <div className="card-right" />
             </div>
