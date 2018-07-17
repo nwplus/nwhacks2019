@@ -13,6 +13,22 @@
     "test": "cross-env NODE_ENV=development jest",
     "lint": "eslint . --ignore-pattern node_modules/"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom" : [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/*.test.js",
+      "!webpack.*",
+      "!**/coverage/**",
+      "!**/tests/**"
+    ],
+    "coverageReporters": ["text", "json"]
+  },
   "dependencies": {
     "@firebase/app": "0.3.3",
     "@firebase/app-types": "0.3.2",
@@ -66,11 +82,5 @@
     "identity-obj-proxy": "3.0.0",
     "jest": "23.3.0",
     "react-test-renderer": "16.4.1"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/__mocks__/fileMock.js",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-    }
   }
 }

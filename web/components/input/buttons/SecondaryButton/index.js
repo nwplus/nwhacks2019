@@ -5,7 +5,8 @@ const SecondaryButton = ({ text, onClick, disabled }) => (
   <button
     onClick={onClick}
     type="button"
-    className={`secondary ${disabled ? 'disabled' : ''}`}>
+    disabled={disabled}
+    className="secondary">
     { text }
   </button>
 );
