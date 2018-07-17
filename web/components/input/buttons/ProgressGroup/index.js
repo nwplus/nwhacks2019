@@ -4,20 +4,19 @@ import PropTypes from 'prop-types';
 const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
   const buttons = [];
   for (let i = 0; i < count; i += 1) {
-    const active = (i === activeIndex);
+    const isActive = (i === activeIndex);
     buttons.push(
-      <span key={i}>
-        <button
-          onClick={onClick}
-          type="button"
-          className={`
+      <button
+        key={i}
+        onClick={onClick}
+        type="button"
+        className={`
             progress-step
-            ${active ? 'active' : ''} 
+            ${isActive ? 'active' : ''} 
             ${i > lastValidIndex ? 'disabled' : ''}
           `}>
-          { i + 1 }
-        </button>
-      </span>
+        { i + 1 }
+      </button>
     );
   }
   return buttons;
