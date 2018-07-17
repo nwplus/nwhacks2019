@@ -19,6 +19,7 @@ button
   line-height: normal
   font-size: 18px
   text-align: center
+  overflow: hidden
 
   /* positioning */
   position: relative
@@ -33,3 +34,19 @@ button
 
   &:focus
     outline: none
+
+  > .ripple
+	  display: block
+    position: absolute
+	  background: $pop
+	  border-radius: 100%
+	  transform: scale(0)
+
+  &.btn-animate .ripple
+    animation: rippleAnimation 0.65s linear
+
+@keyframes rippleAnimation
+	/*scale the element to 250% to safely cover the entire link and fade it out*/
+	100% 
+    opacity: 0
+    transform: scale(2.5)

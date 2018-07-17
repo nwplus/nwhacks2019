@@ -12,6 +12,7 @@
   ],
   "rules": {
     "import/prefer-default-export": 0,
+    "no-return-assign": 0,
     "prefer-template": 0,
     "react/jsx-filename-extension": 0,
     "react/require-default-props": 0,
