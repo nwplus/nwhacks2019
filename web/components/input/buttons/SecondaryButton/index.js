@@ -2,44 +2,72 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class SecondaryButton extends React.Component {
-  onClickWrapper = (e) => {
-    const { onClick } = this.props;
-    const { node, ripple } = this;
+  constructor(props) {
+    super(props);
 
-    console.log(node);
-    console.log(ripple);
+    this.state = {
+      rippleStyle: {
+        opacity: 0,
+        transform: 'translate(-50%, -50%)',
+      },
+    };
+  }
 
-    node.classList.remove('btn-animate');
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
 
-    ripple.style.height = '0px';
-    ripple.style.width = '0px';
+  onClickWrapper = (event) => {
+    const {
+      pageX,
+      pageY,
+      currentTarget: { offsetLeft, offsetTop, offsetWidth, offsetHeight },
+    } = event;
 
-    const d = Math.max(node.offsetWidth, node.offsetHeight);
-    ripple.style.height = d + 'px';
-    ripple.style.width = d + 'px';
+    const left = pageX - offsetLeft;
+    const top = pageY - offsetTop;
+    const size = Math.max(offsetWidth, offsetHeight);
 
-    const x = e.pageX - node.offsetLeft - d / 2;
-    const y = e.pageY - node.offsetTop - d / 2;
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
+    // Create a visible ripple
+    this.setState({
+      rippleStyle: {
+        top,
+        left,
+        opacity: 0.75,
+        transform: 'translate(-50%, -50%)',
+        transition: 'initial',
+      },
+    });
 
-    node.classList.add('btn-animate');
+    // Set ripple to fade away after timeout
+    this.timer = setTimeout(() => {
+      this.setState({
+        rippleStyle: {
+          top,
+          left,
+          opacity: 0,
+          transform: `scale(${size / 9})`,
+          transition: `all ${800}ms`,
+        },
+      });
+    });
 
     // Continue
-    if (onClick) onClick(e);
+    const { onClick } = this.props;
+    if (onClick) onClick(event);
   }
 
   render() {
+    const { rippleStyle } = this.state;
     const { disabled, text } = this.props;
     return (
       <button
-        ref={node => this.node = node}
         onClick={this.onClickWrapper}
         type="button"
         disabled={disabled}
         className="secondary">
         { text }
-        <span ref={ripple => this.ripple = ripple} className="ripple" />
+        <span className="ripple" style={rippleStyle} />
       </button>
     );
   }
