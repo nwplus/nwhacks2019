@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Ripple } from '../../../animations';
+
 const PrimaryButton = ({ text, onClick, disabled }) => (
-  <button
-    onClick={onClick}
-    type="button"
-    disabled={disabled}
-    className="primary">
-    { text }
-  </button>
+  <span>
+    <Ripple disabled={disabled}>
+      <button
+        onClick={onClick}
+        type="button"
+        disabled={disabled}
+        className="primary">
+        { text }
+      </button>
+    </Ripple>
+  </span>
 );
 
 PrimaryButton.propTypes = {
