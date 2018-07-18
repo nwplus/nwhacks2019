@@ -56,7 +56,7 @@ class Login extends React.Component {
           <form
             onSubmit={this.login}
             className="input-group">
-            <label>Sign in</label>
+            <span>Sign in</span>
             <div className="card">
               <div className="card-left">
                 <TextInput
@@ -81,7 +81,7 @@ class Login extends React.Component {
                   text="Submit"
                   />
                 <p>
-                  Don't have an account yet? &nbsp;
+                  Don&apos;t have an account yet?&nbsp;
                   <Link to="/">Apply here</Link>
                 </p>
               </div>
