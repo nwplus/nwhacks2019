@@ -77,7 +77,6 @@ class Login extends React.Component {
                   showErrorMessage
                 />
                 <PrimaryButton
-                  type="submit"
                   text="Submit"
                   />
                 <p>
