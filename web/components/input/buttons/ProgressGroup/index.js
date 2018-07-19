@@ -8,7 +8,7 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
     buttons.push(
       <button
         key={i}
-        onClick={onClick}
+        onClick={e => onClick(parseInt(e.currentTarget.textContent, 10) - 1)}
         type="button"
         className={`
             progress-step
@@ -23,10 +23,18 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
 };
 
 ProgressGroup.propTypes = {
-  count: PropTypes.number.isRequired, // number of elements to create
-  onClick: PropTypes.func, // assigned to buttons based on index
-  activeIndex: PropTypes.number, // currently "clicked"
-  lastValidIndex: PropTypes.number, // all values after this will be "disabled"
+  // number of elements to create
+  count: PropTypes.number.isRequired,
+
+  // callback for clicks - the integer index of the clicked button is passed
+  // as a parameter
+  onClick: PropTypes.func,
+
+  // currently "clicked"  onClick: PropTypes.func,
+  activeIndex: PropTypes.number,
+
+  // all values after this will be "disabled"
+  lastValidIndex: PropTypes.number,
 };
 
 export default ProgressGroup;

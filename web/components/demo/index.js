@@ -12,7 +12,7 @@ class FrontEndComponents extends React.Component {
     };
   }
 
-  switchProgress = e => this.setState({ active: parseInt(e.currentTarget.textContent, 10) - 1 })
+  switchProgress = index => this.setState({ active: index })
 
   render() {
     const { active } = this.state;
