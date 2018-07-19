@@ -10,10 +10,10 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
         key={i}
         onClick={e => onClick(parseInt(e.currentTarget.textContent, 10) - 1)}
         type="button"
+        disabled={i > lastValidIndex}
         className={`
             progress-step
-            ${isActive ? 'active' : ''} 
-            ${i > lastValidIndex ? 'disabled' : ''}
+            ${isActive ? 'active' : ''}
           `}>
         { i + 1 }
       </button>
