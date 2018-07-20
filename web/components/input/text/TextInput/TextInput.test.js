@@ -35,7 +35,7 @@ describe('TextInput component', () => {
     });
 
     it('input label matches props label', () => {
-      expect(wrapper.find('label').text()).toBe('some label');
+      expect(wrapper.find('h5').text()).toBe('some label');
     });
   });
 

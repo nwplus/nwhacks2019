@@ -23,7 +23,7 @@ const TextInput = ({
 
   return (
     <div className="text-input">
-      <div>{label}</div>
+      <h5>{label}</h5>
       <label
         htmlFor={id}
         >

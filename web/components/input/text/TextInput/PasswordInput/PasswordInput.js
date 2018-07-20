@@ -21,7 +21,7 @@ const PasswordInput = ({
   return (
     <div className="text-input password-input">
       <div>
-        <span>{label}</span>
+        <h5>{label}</h5>
         <Link to="/">Forgot?</Link>
       </div>
       <label
