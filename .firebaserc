@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "nwhacks-2019"
+    "development": "nwhacks-2019-dev",
+    "production": "nwhacks-2019"
   }
 }
