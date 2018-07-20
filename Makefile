@@ -7,22 +7,22 @@ all: deps
 .PHONY: deps
 deps:
 	(cd ./web ; yarn install)
-	(cd ./serverless ; yarn install)
+	(cd ./functions ; yarn install)
 
 .PHONY: test
 test:
-	(cd ./serverless ; yarn test)
+	(cd ./functions ; yarn test)
 	(cd ./web ; yarn test)
 
 .PHONY: lint
 lint:
-	(cd ./serverless ; yarn lint)
+	(cd ./functions ; yarn lint)
 	(cd ./web ; yarn lint)
 
 .PHONY: report-coverage
 report-coverage:
 	mkdir -p .nyc_output
-	cp serverless/coverage/coverage-final.json .nyc_output/coverage-serverless.json
+	cp functions/coverage/coverage-final.json .nyc_output/coverage-functions.json
 	cp web/coverage/coverage-final.json .nyc_output/coverage-web.json
 	nyc report --reporter=text-lcov | coveralls
 
@@ -30,14 +30,32 @@ report-coverage:
 # Component-specific commands #
 ###############################
 
+# Builds front-end
 .PHONY: build
 build:
 	(cd ./web ; yarn build)
 
+# Runs web server
 .PHONY: web
 web:
 	(cd ./web ; yarn start)
 
-.PHONY: serverless
-serverless:
-	(cd ./serverless ; yarn start)
+# Deploys cloud functions to production
+.PHONY: deploy:prod
+deploy:prod:
+	(cd ./functions; yarn deploy:prod)
+
+# Deploys cloud functions to development
+.PHONY: deploy:dev
+deploy:dev:
+	(cd ./functions; yarn deploy:dev)
+
+# Emulates cloud functions as local HTTP endpoints
+.PHONY: functions
+functions:
+	(cd ./functions ; yarn serve)
+
+# Runs interactive shell for cloud functions
+.PHONY: shell
+functions:
+	(cd ./functions ; yarn start)
