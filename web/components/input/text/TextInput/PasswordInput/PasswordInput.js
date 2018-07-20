@@ -20,13 +20,13 @@ const PasswordInput = ({
 
   return (
     <div className="text-input password-input">
+      <div>
+        <span>{label}</span>
+        <Link to="/">Forgot?</Link>
+      </div>
       <label
         htmlFor={id}
         >
-        <div>
-          <span>{label}</span>
-          <Link to="/">Forgot?</Link>
-        </div>
         <input
           {...inputProps}
           type="password"

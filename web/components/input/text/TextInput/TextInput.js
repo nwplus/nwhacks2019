@@ -23,11 +23,10 @@ const TextInput = ({
 
   return (
     <div className="text-input">
+      <div>{label}</div>
       <label
         htmlFor={id}
         >
-        {label}
-        <br />
         <input
           {...inputProps}
           className={error ? 'error' : ''}
