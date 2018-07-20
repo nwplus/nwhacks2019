@@ -41,13 +41,13 @@ web:
 	(cd ./web ; yarn start)
 
 # Deploys cloud functions to production
-.PHONY: deploy:prod
-deploy:prod:
+.PHONY: deploy-prod
+deploy-prod:
 	(cd ./functions; yarn deploy:prod)
 
 # Deploys cloud functions to development
-.PHONY: deploy:dev
-deploy:dev:
+.PHONY: deploy-dev
+deploy-dev:
 	(cd ./functions; yarn deploy:dev)
 
 # Emulates cloud functions as local HTTP endpoints
@@ -57,5 +57,5 @@ functions:
 
 # Runs interactive shell for cloud functions
 .PHONY: shell
-functions:
+shell:
 	(cd ./functions ; yarn start)
