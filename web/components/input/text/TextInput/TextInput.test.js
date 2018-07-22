@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import TextInput from '.';
+import { TextInput } from '.';
 
 beforeAll(() => {
   configure({ adapter: new Adapter() });
@@ -35,47 +35,7 @@ describe('TextInput component', () => {
     });
 
     it('input label matches props label', () => {
-      expect(wrapper.find('label').text()).toBe('some label');
-    });
-  });
-
-  describe('password', () => {
-    const props = {
-      value,
-      label: 'some label',
-      id: 'some input',
-    };
-
-    describe('when password is true', () => {
-      beforeEach(() => {
-        props.password = true;
-        wrapper = getWrapper(props);
-      });
-
-      it('input has password type', () => {
-        expect(wrapper.find('input').props()).toHaveProperty('type', 'password');
-      });
-    });
-
-    describe('when password is false', () => {
-      beforeEach(() => {
-        props.password = false;
-        wrapper = getWrapper(props);
-      });
-
-      it('input does not have password type', () => {
-        expect(wrapper.find('input').props()).not.toHaveProperty('type', 'password');
-      });
-    });
-
-    describe('when password is not specified', () => {
-      beforeEach(() => {
-        wrapper = getWrapper(props);
-      });
-
-      it('input does not have password type', () => {
-        expect(wrapper.find('input').props()).not.toHaveProperty('type', 'password');
-      });
+      expect(wrapper.find('h5').text()).toBe('some label');
     });
   });
 
@@ -92,12 +52,34 @@ describe('TextInput component', () => {
         wrapper = getWrapper(props);
       });
 
-      it('input class is error', () => {
-        expect(wrapper.find('input').hasClass('error')).toBeTruthy();
+      describe('when showErrorMessage is true', () => {
+        beforeEach(() => {
+          props.showErrorMessage = true;
+          wrapper = getWrapper(props);
+        });
+
+        it('input class is error', () => {
+          expect(wrapper.find('input').hasClass('error')).toBeTruthy();
+        });
+
+        it('input contains error message', () => {
+          expect(wrapper.find('p').text()).toBe('something went horribly wrong');
+        });
       });
 
-      it('input contains error message', () => {
-        expect(wrapper.find('p').text()).toBe('something went horribly wrong');
+      describe('when showErrorMessage is false', () => {
+        beforeEach(() => {
+          props.showErrorMessage = false;
+          wrapper = getWrapper(props);
+        });
+
+        it('input class is error', () => {
+          expect(wrapper.find('input').hasClass('error')).toBeTruthy();
+        });
+
+        it('input contains error message', () => {
+          expect(wrapper.find('p')).toHaveProperty('length', 0);
+        });
       });
     });
 
