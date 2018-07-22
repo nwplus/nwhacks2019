@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const DashBoard = (props) => {
+const HackerApplication = (props) => {
   const { hackerApplication } = props;
   if (!hackerApplication.isLoaded) return (<div />);
-  if (hackerApplication.data) return (<div>you have one hacker application</div>);
-  return (<div>you didn&#39;t apply as hacker</div>);
+  if (hackerApplication.data) return (<Redirect to="/dashboard" />);
+  return (<div>o hello there pls apply</div>);
 };
 
 const mapStateToProps = (state) => {
@@ -16,8 +17,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-DashBoard.propTypes = {
+HackerApplication.propTypes = {
   hackerApplication: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps)(DashBoard);
+export default connect(mapStateToProps)(HackerApplication);

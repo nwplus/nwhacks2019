@@ -9,6 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './public'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   // sourcemaps are currently broken
   // devtool: 'inline-source-map',

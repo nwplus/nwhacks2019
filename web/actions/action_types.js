@@ -1,0 +1,5 @@
+const ACTION_TYPES = Object.freeze({
+  ADD_HACKER_APPLICATION: 'ADD_HACKER_APPLICATION',
+});
+
+export default ACTION_TYPES;

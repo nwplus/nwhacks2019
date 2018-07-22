@@ -19,7 +19,7 @@
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
     "collectCoverage": true,
-    "collectCoverageFrom" : [
+    "collectCoverageFrom": [
       "**/*.js",
       "!**/node_modules/**",
       "!**/*.test.js",
@@ -27,7 +27,10 @@
       "!**/coverage/**",
       "!**/tests/**"
     ],
-    "coverageReporters": ["text", "json"]
+    "coverageReporters": [
+      "text",
+      "json"
+    ]
   },
   "dependencies": {
     "@firebase/app": "0.3.3",
