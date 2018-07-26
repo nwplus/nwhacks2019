@@ -4,9 +4,15 @@ import PropTypes from 'prop-types';
 
 const DashBoard = (props) => {
   const { hackerApplication } = props;
-  if (!hackerApplication.isLoaded) return (<div />);
-  if (hackerApplication.data) return (<div>you have one hacker application</div>);
-  return (<div>you didn&#39;t apply as hacker</div>);
+  let content;
+
+  if (hackerApplication.data) {
+    content = 'you have one hacker application';
+  } else {
+    content = 'you didn\'t apply as hacker';
+  }
+
+  return (<div className="below-nav">{content}</div>);
 };
 
 const mapStateToProps = (state) => {
