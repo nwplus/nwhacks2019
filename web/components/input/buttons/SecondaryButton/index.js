@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SecondaryButton = ({ text, onClick, disabled }) => (
-  <button
-    onClick={onClick}
-    type="button"
-    disabled={disabled}
-    className="secondary">
-    { text }
-  </button>
-);
+import NWButton from '../templates/NWButton';
+
+const SecondaryButton = props => <NWButton type="secondary" {...props} />;
 
 SecondaryButton.propTypes = {
   text: PropTypes.string.isRequired,
