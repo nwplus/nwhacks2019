@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+
+import { TextInput, PasswordInput } from '../../input/text';
+import { PrimaryButton } from '../../input/buttons';
 
 class Login extends React.Component {
   constructor(props) {
@@ -15,7 +18,7 @@ class Login extends React.Component {
       password: '',
       loading: !isLoaded,
       loggedIn: !isEmpty,
-      error: {},
+      error: null,
     };
   }
 
@@ -46,31 +49,45 @@ class Login extends React.Component {
   }
 
   loginView() {
-    const { email, password, error: { message } } = this.state;
+    const { email, password, error } = this.state;
     return (
-      <div>
-        <form
-          onSubmit={this.login}
-          className="input-group">
-          <input
-            placeholder="Enter your email"
-            className="form-control"
-            value={email}
-            onChange={this.onEmailChange}
-          />
-          <input
-            placeholder="Enter your password"
-            className="form-control"
-            type="password"
-            value={password}
-            onChange={this.onPasswordChange}
-          />
-          <span
-            className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-        </form>
-        <p>{ message }</p>
+      <div id="login">
+        <div>
+          <form
+            onSubmit={this.login}
+            className="input-group">
+            <span>Sign in</span>
+            <div className="card">
+              <div className="card-left">
+                <TextInput
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={this.onEmailChange}
+                  error={error}
+                  label="Email"
+                  id="email"
+                />
+                <PasswordInput
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={this.onPasswordChange}
+                  error={error}
+                  label="Password"
+                  id="password"
+                  showErrorMessage
+                />
+                <PrimaryButton
+                  text="Submit"
+                  />
+                <p>
+                  Don&apos;t have an account yet?&nbsp;
+                  <Link to="/">Apply here</Link>
+                </p>
+              </div>
+              <div className="card-right" />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
