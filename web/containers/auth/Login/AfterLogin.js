@@ -4,9 +4,9 @@ import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { addHackerApplication } from '../../actions';
+import { addHackerApplication } from '../../../actions';
 
-import AfterLogin from '../../components/auth/Login/AfterLogin';
+import AfterLogin from '../../../components/auth/Login/AfterLogin';
 
 export class AfterLoginContainer extends React.Component {
   componentWillUnmount() {

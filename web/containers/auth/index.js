@@ -1,5 +1,6 @@
-import AfterLogin from './AfterLogin';
+import { AfterLogin, Login } from './Login';
 
 export {
   AfterLogin,
+  Login,
 };

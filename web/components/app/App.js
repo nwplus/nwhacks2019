@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import Main from '../Main';
-import { Login, Logout } from '../auth';
+import { Logout } from '../auth';
+import { Login } from '../../containers/auth';
 import AdminPanel from '../admin';
 import { HackerApplication } from '../application';
 import NotFound from '../errors/NotFound';
