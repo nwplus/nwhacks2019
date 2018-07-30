@@ -1,23 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const InputContext = React.createContext();
+
 const Checkbox = ({ name, value, label, checked, disabled, onChange }) => (
-  <label>
-    <input
-      type="checkbox"
-      name={name}
-      value={value}
-      defaultChecked={checked}
-      disabled={disabled}
-      onChange={onChange}
-    />
-    {label}
-  </label>
+  <InputContext.Consumer>
+    {context => (
+      <label>
+        <input
+          type="checkbox"
+          name={name || context.name}
+          value={value}
+          defaultChecked={checked}
+          disabled={disabled}
+          onChange={onChange}
+        />
+        {label}
+      </label>
+    )}
+  </InputContext.Consumer>
 );
 
 Checkbox.propTypes = {
   // name should be the same amongst checkboxes in a checkbox group
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
 
   // input value for checkbox
   value: PropTypes.string.isRequired,
@@ -35,9 +41,11 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 };
 
-const CheckboxGroup = () => {
-  
-};
+const CheckboxGroup = (props) => (
+  <InputContext.Provider value={props}>
+    <div>{props.children}</div>
+  </InputContext.Provider>
+)
 
 export {
   Checkbox,
