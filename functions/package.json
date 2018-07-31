@@ -5,14 +5,14 @@
   "author": "nwHacks2019",
   "license": "MIT",
   "scripts": {
-    "pre": "firebase login",
+    "pick:dev": "firebase login && firebase use development",
+    "pick:prod": "firebase login && firebase use production",
     "lint": "eslint .",
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
-    "start": "yarn pre && firebase use development && yarn run shell",
-    "deploy": "firebase deploy --only functions",
-    "deploy:prod": "yarn pre && firebase use production && yarn deploy",
-    "deploy:dev": "yarn pre && firebase use development && yarn deploy",
+    "serve": "yarn pick:dev && firebase serve --only functions",
+    "shell": "yarn pick:dev && firebase functions:shell",
+    "start": "yarn pick:dev && yarn run shell",
+    "deploy:dev": "yarn pick:dev && firebase deploy --only functions",
+    "deploy:prod": "yarn pick:prod && firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "dependencies": {
