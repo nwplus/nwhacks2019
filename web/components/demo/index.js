@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { SecondaryButton, PrimaryButton, ProgressGroup } from '../input/buttons';
+import { TextInput, PasswordInput } from '../input/text';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
 
@@ -9,15 +10,29 @@ class FrontEndComponents extends React.Component {
     super(props);
     this.state = {
       active: 3,
+      textValue: '',
+      password: '',
     };
   }
+
+  onTextInputChange = event => this.setState({ textValue: event.target.value });
+
+  onPasswordChange = event => this.setState({ password: event.target.value });
+
+  onBlur = e => console.log(e.target);
 
   switchProgress = index => this.setState({ active: index })
 
   render() {
+    const error = {
+      message: 'Something went wrong',
+    };
+
+    const { textValue, password } = this.state;
+
     const { active } = this.state;
     return (
-      <div>
+      <div id="demo">
         <p>Buttons</p>
         <br />
         <div>
@@ -40,6 +55,36 @@ class FrontEndComponents extends React.Component {
             lastValidIndex={7}
           />
         </div>
+        <TextInput
+          placeholder="Hint text"
+          onChange={this.onTextInputChange}
+          onBlur={this.onBlur}
+          label="Default"
+          value={textValue}
+          id="default"
+          />
+        <TextInput
+          placeholder="Hint text"
+          onBlur={this.onBlur}
+          onChange={this.onTextInputChange}
+          label="Errored"
+          value={textValue}
+          error={error}
+          id="errored"
+          />
+        <PasswordInput
+          placeholder="Hint text"
+          onChange={this.onPasswordChange}
+          label="Password"
+          value={password}
+          id="password"
+          />
+        <TextInput
+          placeholder="Hint text"
+          label="Disabled"
+          disabled
+          id="disabled"
+          />
       </div>
     );
   }
