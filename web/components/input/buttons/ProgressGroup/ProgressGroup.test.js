@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import ProgressGroup from '.';
@@ -11,7 +11,9 @@ beforeAll(() => {
 describe('ProgressGroup component', () => {
   let clicked;
   let wrapper;
-  const getWrapper = props => shallow(<ProgressGroup {...props} />);
+
+  // Deep mount children of ProgressGroup
+  const getWrapper = props => mount(<ProgressGroup {...props} />);
 
   describe('when all step are enabled', () => {
     const count = 3;
@@ -22,27 +24,25 @@ describe('ProgressGroup component', () => {
         count,
         onClick: (i) => { clicked = i; },
         activeIndex: 1,
-        lastActiveIndex: count,
+        lastValidIndex: count,
       });
     });
 
     test('all buttons should be instantiated', () => {
       for (let i = 0; i < count; i += 1) {
-        expect(wrapper.findWhere(node => node.key() === i).text())
-          .toEqual((i + 1).toString());
+        expect(wrapper.childAt(i).text()).toEqual((i + 1).toString());
       }
     });
 
     test('all buttons should be clickable', () => {
       for (let i = 0; i < count; i += 1) {
-        wrapper.findWhere(node => node.key() === i).simulate('click');
+        wrapper.childAt(i).simulate('click');
         expect(clicked).toEqual(i);
       }
     });
 
     test('active button should have class "active"', () => {
-      expect(wrapper.findWhere(node => node.key() === activeIndex).hasClass('active'))
-        .toBeTruthy();
+      expect(wrapper.childAt(activeIndex).hasClass('active')).toBeTruthy();
     });
   });
 
@@ -62,18 +62,17 @@ describe('ProgressGroup component', () => {
 
     test('all buttons should be instantiated', () => {
       for (let i = 0; i < count; i += 1) {
-        expect(wrapper.findWhere(node => node.key() === i).text())
-          .toEqual((i + 1).toString());
+        expect(wrapper.childAt(i).text()).toEqual((i + 1).toString());
       }
     });
 
     test('some buttons should not be clickable', () => {
       for (let i = 0; i < count; i += 1) {
-        wrapper.findWhere(node => node.key() === i).simulate('click');
+        wrapper.childAt(i).simulate('click');
         if (i <= lastActiveIndex) {
           expect(clicked).toEqual(i);
         } else {
-          expect(wrapper.findWhere(node => node.key() === i).props().disabled).toBeTruthy();
+          expect(wrapper.childAt(i).props().disabled).toBeTruthy();
 
           // Enzyme click simulations do not respect 'disabled' attribute.
           // See https://github.com/airbnb/enzyme/issues/386
