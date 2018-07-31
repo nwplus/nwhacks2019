@@ -24,17 +24,22 @@
   "devDependencies": {
     "coveralls": "3.0.1",
     "eslint": "5.0.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-promise": "3.6.0",
     "jest": "23.3.0"
   },
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom" : [
-        "src/**/*.js",
-        "!**/node_modules/**",
-        "!**/*.test.js",
-        "!**/coverage/**"
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**",
+      "!**/*.test.js",
+      "!**/coverage/**"
     ],
-    "coverageReporters": ["text", "json"]
+    "coverageReporters": [
+      "text",
+      "json"
+    ]
   }
 }
