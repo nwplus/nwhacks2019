@@ -42,7 +42,13 @@ describe('ProgressGroup component', () => {
     });
 
     test('active button should have class "active"', () => {
-      expect(wrapper.find('button').at(activeIndex).hasClass('active')).toBeTruthy();
+      for (let i = 0; i < count; i += 1) {
+        if (i === activeIndex) {
+          expect(wrapper.find('button').at(i).hasClass('active')).toBeTruthy();
+        } else {
+          expect(wrapper.find('button').at(i).hasClass('active')).toBeFalsy();
+        }
+      }
     });
   });
 
