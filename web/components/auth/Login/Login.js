@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
+import { AfterLogin } from '../../../containers/auth';
 
 class Login extends React.Component {
   constructor(props) {
@@ -98,7 +99,7 @@ class Login extends React.Component {
     if (loading) return (<span>Loading...</span>);
     if (!loggedIn) return this.loginView();
 
-    return (<Redirect to="/dashboard" />);
+    return (<AfterLogin />);
   }
 }
 
@@ -109,7 +110,11 @@ Login.propTypes = {
   auth: PropTypes.object,
 };
 
+const mapStateToProps = ({ firebase: { auth } }) => {
+  return { auth };
+};
+
 export default compose(
   firebaseConnect(),
-  connect(({ firebase: { auth } }) => { return { auth }; })
+  connect(mapStateToProps),
 )(Login);

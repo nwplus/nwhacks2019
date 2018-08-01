@@ -11,11 +11,9 @@ import localStorage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 import { firebaseConfig, rrfConfig } from '../../main.config';
+import Reducers from '../../reducers';
 
-const persistConfig = {
-  key: 'root',
-  storage: localStorage,
-};
+import { persistConfig } from './persist.config';
 
 export default (initialState = {}) => {
   // Initialize firebase instance
@@ -28,7 +26,7 @@ export default (initialState = {}) => {
   // Add reactReduxFirebase store enhancer when making store creator
   const createStoreWithFirebase = compose(
     reactReduxFirebase(firebase, rrfConfig),
-    reduxFirestore(firebase)
+    reduxFirestore(firebase),
   )(createStore);
 
   // Add firebase to reducers (uses persistReducer and hardSet)
@@ -38,6 +36,7 @@ export default (initialState = {}) => {
       firebaseReducer
     ),
     firestore: firestoreReducer,
+    root: Reducers,
   });
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
