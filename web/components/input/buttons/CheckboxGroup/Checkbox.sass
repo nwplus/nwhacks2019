@@ -1,5 +1,5 @@
 .checkbox
-  margin-left: 10px;
+  margin-left: 20px;
   font-family: Apercu Pro;
   font-size: 18px;
   font-weight: bold;
@@ -16,7 +16,7 @@
   user-select: none;
 
   &:hover input ~ .checkmark
-    background-color: $primary-highlight;
+    background-image: url('../assets/checkbox/hover.svg');
 
   input[type="checkbox"]
     position: absolute;
@@ -24,7 +24,7 @@
     cursor: pointer;
 
     &:checked ~ .checkmark
-      background-color: $primary;
+      background-image: url('../assets/checkbox/checked.svg')
       &:after
         display: block;
 
@@ -34,22 +34,9 @@
     left: 0;
     height: 24px;
     width: 24px;
-    border: 2px solid $grey-slate;
-    box-sizing: border-box;
-    border-radius: 4px;
+    background-image: url('../assets/checkbox/unchecked.svg')
 
     &:after
       content: "";
       position: absolute;
       display: none;
-
-    &:after
-      left: 6px;
-      top: 2px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
