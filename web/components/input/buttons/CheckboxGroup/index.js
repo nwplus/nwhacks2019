@@ -6,7 +6,7 @@ const InputContext = React.createContext();
 const Checkbox = ({ name, value, label, checked, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <label>
+      <label className="checkbox">
         <input
           type="checkbox"
           name={name || context.name}
@@ -15,7 +15,8 @@ const Checkbox = ({ name, value, label, checked, disabled, onChange }) => (
           disabled={disabled || context.disabled}
           onChange={onChange || context.onChange}
         />
-        {label}
+        <span className="checkmark"></span>
+        <span>{label}</span>
       </label>
     )}
   </InputContext.Consumer>
