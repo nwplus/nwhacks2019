@@ -30,53 +30,64 @@ describe('ProgressGroup component', () => {
 
     test('all buttons should be instantiated', () => {
       for (let i = 0; i < count; i += 1) {
-        expect(wrapper.childAt(i).text()).toEqual((i + 1).toString());
+        expect(wrapper.find('button').at(i).text()).toEqual((i + 1).toString());
       }
     });
 
     test('all buttons should be clickable', () => {
       for (let i = 0; i < count; i += 1) {
-        wrapper.childAt(i).simulate('click');
+        wrapper.find('button').at(i).simulate('click');
         expect(clicked).toEqual(i);
       }
     });
 
     test('active button should have class "active"', () => {
-      expect(wrapper.childAt(activeIndex).hasClass('active')).toBeTruthy();
+      expect(wrapper.find('button').at(activeIndex).hasClass('active')).toBeTruthy();
     });
   });
 
   describe('when some steps are disabled', () => {
-    const count = 4;
-    const lastActiveIndex = 4;
+    const count = 6;
+    const activeIndex = 1;
+    const lastValidIndex = count / 2;
 
     beforeEach(() => {
       clicked = undefined;
       wrapper = getWrapper({
         count,
         onClick: (i) => { clicked = i; },
-        activeIndex: 1,
-        lastActiveIndex: count / 2,
+        activeIndex,
+        lastValidIndex,
       });
     });
 
     test('all buttons should be instantiated', () => {
       for (let i = 0; i < count; i += 1) {
-        expect(wrapper.childAt(i).text()).toEqual((i + 1).toString());
+        expect(wrapper.find('button').at(i).text()).toEqual((i + 1).toString());
       }
     });
 
     test('some buttons should not be clickable', () => {
       for (let i = 0; i < count; i += 1) {
-        wrapper.childAt(i).simulate('click');
-        if (i <= lastActiveIndex) {
+        wrapper.find('button').at(i).simulate('click');
+        if (i <= lastValidIndex) {
           expect(clicked).toEqual(i);
         } else {
-          expect(wrapper.childAt(i).props().disabled).toBeTruthy();
+          expect(wrapper.find('button').at(i).props().disabled).toBeTruthy();
 
           // Enzyme click simulations do not respect 'disabled' attribute.
           // See https://github.com/airbnb/enzyme/issues/386
           // expect(clicked).not.toEqual(i)
+        }
+      }
+    });
+
+    test('inactive buttons should not have class "active"', () => {
+      for (let i = 0; i < count; i += 1) {
+        if (i === activeIndex) {
+          expect(wrapper.find('button').at(i).hasClass('active')).toBeTruthy();
+        } else {
+          expect(wrapper.find('button').at(i).hasClass('active')).toBeFalsy();
         }
       }
     });
