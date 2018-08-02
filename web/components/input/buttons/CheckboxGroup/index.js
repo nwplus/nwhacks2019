@@ -16,7 +16,7 @@ const Checkbox = ({ name, value, label, checked, disabled, onChange }) => (
           onChange={onChange || context.onChange}
         />
         <span className="checkmark"></span>
-        <span>{label}</span>
+        <span className="label-text">{label}</span>
       </label>
     )}
   </InputContext.Consumer>
