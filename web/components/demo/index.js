@@ -50,7 +50,7 @@ class FrontEndComponents extends React.Component {
         <br />
         <CheckboxGroup name="test_name">
           <Checkbox label="Label 1" value="value1" />
-          <Checkbox label="Label 2" value="value2" />
+          <Checkbox label="Label 2" value="value2" disabled/>
           <Checkbox label="Label 3" value="value3" name="overriden_name"/>
         </CheckboxGroup><br />
         <Checkbox label="Ungrouped Checkbox" value="value3" name="overriden_name"/>
