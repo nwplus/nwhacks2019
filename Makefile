@@ -53,6 +53,12 @@ web:
 	@echo Starting webpack-dev-server...
 	@(cd ./web ; yarn start)
 
+# Runs a simple web serve to test the build static web app
+.PHONY: serve
+serve:
+	@echo Go to http://localhost:8081 to test the built web app
+	@(cd ./docs ; python ../serve.py)
+
 # Deploys cloud functions to production
 .PHONY: deploy-prod
 deploy-prod:
