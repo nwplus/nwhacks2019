@@ -49,11 +49,12 @@ class FrontEndComponents extends React.Component {
         </div>
         <br />
         <CheckboxGroup name="test_name">
-          <Checkbox label="Label 1" value="test_value" />
-          <Checkbox label="Label 2" value="test_value" />
-          <Checkbox label="Label 3" value="test_value" name="overriden_namee"/>
-        </CheckboxGroup>
-        <br />
+          <Checkbox label="Label 1" value="value1" />
+          <Checkbox label="Label 2" value="value2" />
+          <Checkbox label="Label 3" value="value3" name="overriden_name"/>
+        </CheckboxGroup><br />
+        <Checkbox label="Ungrouped Checkbox" value="value3" name="overriden_name"/>
+        <br /><br />
         <div>
           <ProgressGroup
             count={10}
