@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -14,10 +15,10 @@ import UIDemo from '../demo';
 
 import { store, persistor } from '../../services/store/configureStore';
 
-export const App = () => (
+export const App = ({ base }) => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
+      <BrowserRouter basename={base}>
         <div>
           <Navbar />
           <Switch>
@@ -36,3 +37,7 @@ export const App = () => (
     </PersistGate>
   </Provider>
 );
+
+App.propTypes = {
+  base: PropTypes.string,
+};
