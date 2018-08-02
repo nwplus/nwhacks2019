@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PrimaryButton = ({ text, onClick, disabled }) => (
   <button
     onClick={onClick}
-    type="button"
+    type="submit"
     disabled={disabled}
     className="primary">
     { text }
