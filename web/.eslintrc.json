@@ -17,6 +17,7 @@
     "react/jsx-filename-extension": 0,
     "react/require-default-props": 0,
     "react/forbid-prop-types": 0,
+    "react/destructuring-assignment": 0,
     "react/jsx-closing-bracket-location": 0,
     "react/prefer-stateless-function": 0,
     "react/no-did-mount-set-state": 0,
@@ -46,6 +47,22 @@
         "imports": "always",
         "exports": "always",
         "functions": "never"
+      }
+    ], 
+    "react/prop-types": [
+      "enabled",
+      { 
+        "ignore": "ignore", 
+        "customValidators": "customValidator"
+      }
+    ],
+    "jsx-a11y/label-has-for": [ 
+      2, 
+      {
+        "required": 
+        {
+          "some": [ "nesting", "id" ]
+        }
       }
     ]
   }
