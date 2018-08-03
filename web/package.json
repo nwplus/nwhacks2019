@@ -10,6 +10,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --watch",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "serve": "http-server ../docs -a localhost -p 8081 -c-1",
     "test": "cross-env NODE_ENV=development jest",
     "lint": "eslint . --ignore-pattern node_modules/"
   },
@@ -82,6 +83,7 @@
     "eslint-plugin-jest": "21.17.0",
     "eslint-plugin-jsx-a11y": "6.1.0",
     "eslint-plugin-react": "7.10.0",
+    "http-server": "^0.11.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.3.0",
     "react-test-renderer": "16.4.1"
