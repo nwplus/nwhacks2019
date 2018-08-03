@@ -11,7 +11,7 @@ const Checkbox = ({ name, value, label, checked, disabled, onChange }) => (
           type="checkbox"
           name={name || context.name}
           value={value}
-          defaultChecked={checked || context.defaultChecked}
+          defaultChecked={checked || context.checked}
           disabled={disabled || context.disabled}
           onChange={onChange || context.onChange}
         />
