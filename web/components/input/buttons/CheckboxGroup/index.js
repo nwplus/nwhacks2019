@@ -51,6 +51,14 @@ const CheckboxGroup = (props) => {
   );
 };
 
+CheckboxGroup.propTypes = {
+  // can contain one or many Checkbox components
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.array,
+  ]),
+};
+
 export {
   Checkbox,
   CheckboxGroup,
