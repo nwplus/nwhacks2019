@@ -8,11 +8,9 @@ module.exports = [
   new webpack.EnvironmentPlugin(['NODE_ENV']),
   new HtmlWebpackPlugin({
     template: './index.html',
+    favicon: './assets/favicon.ico',
     filename: 'index.html',
-    inject: 'body',
-
-    // Enable this when we get a sweet sweet favicon
-    // favicon: 'static/favicon.ico',
+    inject: true,
   }),
   new Dotenv({
     path: '../.env',

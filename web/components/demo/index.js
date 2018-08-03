@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { SecondaryButton, PrimaryButton, ProgressGroup } from '../input/buttons';
-import { TextInput } from '../input/text';
+
 import { Checkbox, CheckboxGroup } from '../input/buttons/CheckboxGroup';
+import { TextInput, PasswordInput } from '../input/text';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
 
@@ -33,7 +34,7 @@ class FrontEndComponents extends React.Component {
 
     const { active } = this.state;
     return (
-      <div>
+      <div id="demo">
         <p>Buttons</p>
         <br />
         <div>
@@ -79,12 +80,10 @@ class FrontEndComponents extends React.Component {
           value={textValue}
           error={error}
           id="errored"
-        />
-        <TextInput
+          />
+        <PasswordInput
           placeholder="Hint text"
-          onBlur={this.onBlur}
           onChange={this.onPasswordChange}
-          password
           label="Password"
           value={password}
           id="password"

@@ -21,22 +21,29 @@
 ```bash
 $> git clone https://github.com/nwhacks/nwhacks2019.git
 $> cd nwhacks2019 ; make
+$> cp .example.env .env
+$> vi .env # fill out environment variables
 ```
 
-To deploy locally:
+### Web App
 
-First, create a file called `.env` by following the template in `.example.env`.
+The front-end is a React web app.
 
 ```bash
-# serve web app
-$> make web
-
-# invoke specific serverless function
-$> serverless invoke local --function some_function
+$> make web         # Serve web app using webpack-dev-server
+$> make build       # To build the web app into `./docs`
+$> make serve       # Serve built static web app
 ```
 
-To build the web app into `docs/`:
+### Functions
+
+The back-end is powered by serverless functions deployed to Firebase.
 
 ```bash
-$> make build
+$> make functions   # Deploy functions locally
+$> make shell       # Start an interactive shell for functions
+
+# Deployment
+$> make deploy-dev
+$> make deploy-prod
 ```

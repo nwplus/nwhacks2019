@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "development": "nwhacks-2019-dev",
+    "production": "nwhacks-2019"
+  }
+}
