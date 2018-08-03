@@ -50,5 +50,5 @@ const CheckboxGroup = (props) => (
 
 export {
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
 };

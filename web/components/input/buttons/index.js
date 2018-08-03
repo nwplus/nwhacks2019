@@ -8,5 +8,5 @@ export {
   SecondaryButton,
   ProgressGroup,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
 };
