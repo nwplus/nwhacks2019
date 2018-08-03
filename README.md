@@ -30,9 +30,6 @@ First, create a file called `.env` by following the template in `.example.env`.
 ```bash
 # serve web app
 $> make web
-
-# invoke specific serverless function
-$> serverless invoke local --function some_function
 ```
 
 To build the web app into `docs/`:

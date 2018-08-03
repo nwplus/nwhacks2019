@@ -8,6 +8,7 @@
     "pick:dev": "firebase login && firebase use development",
     "pick:prod": "firebase login && firebase use production",
     "lint": "eslint .",
+    "test": "exit 0",
     "serve": "yarn pick:dev && firebase serve --only functions",
     "shell": "yarn pick:dev && firebase functions:shell",
     "start": "yarn pick:dev && yarn run shell",
