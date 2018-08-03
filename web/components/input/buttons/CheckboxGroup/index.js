@@ -42,11 +42,14 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 };
 
-const CheckboxGroup = props => (
-  <InputContext.Provider value={props}>
-    <div>{props.children}</div>
-  </InputContext.Provider>
-);
+const CheckboxGroup = (props) => {
+  const { children } = props;
+  return (
+    <InputContext.Provider value={props}>
+      <div>{children}</div>
+    </InputContext.Provider>
+  );
+};
 
 export {
   Checkbox,
