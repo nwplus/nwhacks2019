@@ -48,13 +48,6 @@
         "functions": "never"
       }
     ], 
-    "react/prop-types": [
-      "enabled",
-      { 
-        "ignore": "ignore", 
-        "customValidators": "customValidator"
-      }
-    ],
     "jsx-a11y/label-has-for": [ 
       2, 
       {
