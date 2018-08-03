@@ -15,7 +15,7 @@ const Checkbox = ({ name, value, label, checked, disabled, onChange }) => (
           disabled={disabled || context.disabled}
           onChange={onChange || context.onChange}
         />
-        <span className="checkmark"></span>
+        <span className="checkmark" />
         <span className="label-text">{label}</span>
       </label>
     )}
@@ -42,11 +42,11 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 };
 
-const CheckboxGroup = (props) => (
+const CheckboxGroup = props => (
   <InputContext.Provider value={props}>
     <div>{props.children}</div>
   </InputContext.Provider>
-)
+);
 
 export {
   Checkbox,

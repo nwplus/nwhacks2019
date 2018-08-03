@@ -73,7 +73,7 @@ describe('PasswordInput component', () => {
       });
 
       it('input contains error message', () => {
-        expect(wrapper.find('p').length).toBe(0);
+        expect(wrapper.find('p')).toHaveLength(0);
       });
 
       describe('when showErrorMessage is true', () => {
