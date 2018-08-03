@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { SecondaryButton, PrimaryButton, ProgressGroup } from '../input/buttons';
+
+import { Checkbox, CheckboxGroup } from '../input/buttons/CheckboxGroup';
 import { TextInput, PasswordInput } from '../input/text';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
@@ -47,6 +49,13 @@ class FrontEndComponents extends React.Component {
           <SecondaryButton text="Secondary" onClick={ButtonCallback} disabled />
         </div>
         <br />
+        <CheckboxGroup name="test_name">
+          <Checkbox label="Label 1" value="value1" />
+          <Checkbox label="Label 2" value="value2" disabled />
+          <Checkbox label="Label 3" value="value3" name="overriden_name" />
+        </CheckboxGroup><br />
+        <Checkbox label="Ungrouped Checkbox" value="value3" name="overriden_name" />
+        <br /><br />
         <div>
           <ProgressGroup
             count={10}
@@ -62,7 +71,7 @@ class FrontEndComponents extends React.Component {
           label="Default"
           value={textValue}
           id="default"
-          />
+        />
         <TextInput
           placeholder="Hint text"
           onBlur={this.onBlur}
@@ -78,13 +87,13 @@ class FrontEndComponents extends React.Component {
           label="Password"
           value={password}
           id="password"
-          />
+        />
         <TextInput
           placeholder="Hint text"
           label="Disabled"
           disabled
           id="disabled"
-          />
+        />
       </div>
     );
   }
