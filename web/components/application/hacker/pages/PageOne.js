@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PageOne = () => (
-  <div className="hacker-application-page">
+  <div className="hacker-application-page" id="hacker-application-page-1">
     <h1>About you <span role="img" aria-label="book">📚</span></h1>
     <p>
       nwHacks is Western Canada’s largest collegiate hackathon taking place
