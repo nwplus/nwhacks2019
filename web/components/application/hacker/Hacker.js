@@ -28,13 +28,13 @@ const HackerApplication = (props) => {
         { indexToPage[activeIndex] }
         <ButtonGroup>
           <SecondaryButton
-            text="Back"
+            text={activeIndex === 0 ? "Cancel" : "Back"}
             onClick={onPageBack}
             disabled={activeIndex === 0}
             />
           <PrimaryButton
-            text="Next"
-            onClick={onPageNext}
+            text={activeIndex === count-1 ? "Submit application" : activeIndex === count-2 ? "One last step" : "Next"}
+            onClick={activeIndex !== count-1 ? onPageNext : () => console.log("submit application") }
             />
         </ButtonGroup>
       </div>
