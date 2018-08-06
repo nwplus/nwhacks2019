@@ -78,7 +78,7 @@ describe('ProgressGroup component', () => {
         wrapper.find('button').at(i).simulate('click');
         if (i <= lastValidIndex) {
           expect(clicked).toEqual(i);
-          expect(wrapper.childAt(i).props().disabled).toBeFalsy();
+          expect(wrapper.find('button').at(i).props().disabled).toBeFalsy();
         } else {
           expect(wrapper.find('button').at(i).props().disabled).toBeTruthy();
 
