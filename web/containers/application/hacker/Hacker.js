@@ -10,17 +10,19 @@ class HackerApplicationContainer extends React.Component {
     this.state = {
       activeIndex: 0,
       lastValidIndex: 0,
+      count: 4,
     };
   }
 
   render() {
     const { hackerApplication } = this.props;
-    const { activeIndex, lastValidIndex } = this.state;
+    const { activeIndex, lastValidIndex, count } = this.state;
     return (
       <HackerApplication
         hackerApplication={hackerApplication}
         activeIndex={activeIndex}
         lastValidIndex={lastValidIndex}
+        count={count}
         />
     );
   }
