@@ -2,9 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { ProgressGroup } from '../../input/buttons';
-import { SecondaryButton } from '../../input/buttons';
-import { PrimaryButton } from '../../input/buttons';
+import { ProgressGroup, SecondaryButton, PrimaryButton } from '../../input/buttons';
 
 const HackerApplication = (props) => {
   const { hackerApplication } = props;
