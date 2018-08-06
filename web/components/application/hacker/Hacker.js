@@ -9,7 +9,7 @@ const HackerApplication = (props) => {
   if (!hackerApplication.isLoaded) return (<div />);
   if (hackerApplication.data) return (<Redirect to="/dashboard" />);
 
-  const { count, activeIndex, lastValidIndex } = props;
+  const { count, activeIndex, lastValidIndex, onPageChange } = props;
   return (
     <div className="below-nav">
       <p>o hello there pls apply</p>
@@ -17,6 +17,7 @@ const HackerApplication = (props) => {
         count={count}
         activeIndex={activeIndex}
         lastValidIndex={lastValidIndex}
+        onClick={onPageChange}
         />
     </div>
   );
