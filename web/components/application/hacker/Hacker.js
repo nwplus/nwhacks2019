@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import PageOne from './pages/PageOne';
 
-import { ProgressGroup, SecondaryButton, PrimaryButton } from '../../input/buttons';
+import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
 
 const indexToPage = {
   0: (<PageOne />),
@@ -26,15 +26,17 @@ const HackerApplication = (props) => {
           onClick={onPageChange}
           />
         { indexToPage[activeIndex] }
-        <SecondaryButton
-          text="Back"
-          onClick={onPageBack}
-          disabled={activeIndex === 0}
-          />
-        <PrimaryButton
-          text="Next"
-          onClick={onPageNext}
-          />
+        <ButtonGroup>
+          <SecondaryButton
+            text="Back"
+            onClick={onPageBack}
+            disabled={activeIndex === 0}
+            />
+          <PrimaryButton
+            text="Next"
+            onClick={onPageNext}
+            />
+        </ButtonGroup>
       </div>
     </div>
   );
