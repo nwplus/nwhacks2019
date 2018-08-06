@@ -16,7 +16,7 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
       </button>
     );
   }
-  return buttons;
+  return (<div className="progress-button-group">{buttons}</div>);
 };
 
 ProgressGroup.propTypes = {
