@@ -8,7 +8,7 @@ import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../.
 
 const indexToPage = {
   0: (<PageOne />),
-}
+};
 
 const HackerApplication = (props) => {
   const { hackerApplication } = props;
