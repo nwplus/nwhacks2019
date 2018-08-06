@@ -22,6 +22,18 @@ class HackerApplicationContainer extends React.Component {
     }
   }
 
+  onPageNext = () => {
+    const { activeIndex } = this.state;
+    const nextIndex = activeIndex + 1;
+    this.onPageChange(nextIndex);
+  }
+
+  onPageBack = () => {
+    const { activeIndex } = this.state;
+    const nextIndex = activeIndex - 1;
+    this.onPageChange(nextIndex);
+  }
+
   render() {
     const { hackerApplication } = this.props;
     const { activeIndex, lastValidIndex, count } = this.state;
@@ -32,6 +44,8 @@ class HackerApplicationContainer extends React.Component {
         lastValidIndex={lastValidIndex}
         count={count}
         onPageChange={this.onPageChange}
+        onPageNext={this.onPageNext}
+        onPageBack={this.onPageBack}
         />
     );
   }
