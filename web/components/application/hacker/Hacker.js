@@ -2,7 +2,13 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import PageOne from './pages/PageOne';
+
 import { ProgressGroup, SecondaryButton, PrimaryButton } from '../../input/buttons';
+
+const indexToPage = {
+  0: (<PageOne />),
+}
 
 const HackerApplication = (props) => {
   const { hackerApplication } = props;
@@ -19,8 +25,7 @@ const HackerApplication = (props) => {
           lastValidIndex={lastValidIndex}
           onClick={onPageChange}
           />
-        <h1>About you</h1>
-        <p>nwHacks is Western Canada’s largest collegiate hackathon taking place on January 26th - 27th, 2019 at the University of British Columbia. As expected, we receive a large number of applications every year. We focus on curating a quality hackathon experience for each attendee. For a fair assessment of your application, we encourage you to put your best foot forward on this journey!⛰️</p>
+        { indexToPage[activeIndex] }
         <SecondaryButton
           text="Back"
           onClick={onPageBack}
