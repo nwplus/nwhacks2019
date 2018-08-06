@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { hackerApplication } from './application';
+import entities from './entities';
+import ui from './ui';
 
 const reducers = combineReducers({
-  hackerApplication,
+  entities,
+  ui,
 });
 
 const rootReducers = (state, action) => {

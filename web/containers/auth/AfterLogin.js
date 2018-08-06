@@ -15,7 +15,7 @@ export class AfterLoginContainer extends React.Component {
     const { storeHackerApplication } = this.props;
 
     if (isLoaded) {
-      storeHackerApplication(hackerApplication);
+      storeHackerApplication(hackerApplication.data || null);
     }
   }
 
