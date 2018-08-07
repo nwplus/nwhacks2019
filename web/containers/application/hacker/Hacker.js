@@ -5,14 +5,7 @@ import PropTypes from 'prop-types';
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from '../../../actions';
 
-class HackerApplicationContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 4,
-    };
-  }
-
+export class HackerApplicationContainer extends React.Component {
   onPageChange = (activeIndex) => {
     const { changePage, changeLastActiveIndex, lastValidIndex } = this.props;
     changePage(activeIndex);
@@ -35,13 +28,12 @@ class HackerApplicationContainer extends React.Component {
 
   render() {
     const { hackerApplication, activeIndex, lastValidIndex } = this.props;
-    const { count } = this.state;
     return (
       <HackerApplication
         hackerApplication={hackerApplication}
         activeIndex={activeIndex}
         lastValidIndex={lastValidIndex}
-        count={count}
+        count={4}
         onPageChange={this.onPageChange}
         onPageNext={this.onPageNext}
         onPageBack={this.onPageBack}
