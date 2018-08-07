@@ -1,5 +1,5 @@
 import rootReducers from '..';
-import { hackerApplication } from '.';
+import hackerApplication from './hacker';
 import ACTION_TYPES from '../../actions/action_types';
 
 describe('hacker application reducer', () => {
@@ -55,9 +55,11 @@ describe('when action type is RESET', () => {
 
     const action = { type: 'RESET' };
     expect(rootReducers(state, action)).toEqual({
-      hackerApplication: {
-        isLoaded: true,
-        data: undefined,
+      application: {
+        hacker: {
+          isLoaded: true,
+          data: undefined,
+        },
       },
     });
   });

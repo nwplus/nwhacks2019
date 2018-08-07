@@ -16,6 +16,16 @@ const HackerApplication = (props) => {
   if (hackerApplication.data) return (<Redirect to="/dashboard" />);
 
   const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext } = props;
+
+  let primaryButtonText;
+  if (activeIndex === count - 1) {
+    primaryButtonText = 'Submit application';
+  } else if (activeIndex === count - 2) {
+    primaryButtonText = 'One last step';
+  } else {
+    primaryButtonText = 'Next';
+  }
+
   return (
     <div className="below-nav" id="hacker-application">
       <div>
@@ -28,13 +38,13 @@ const HackerApplication = (props) => {
         { indexToPage[activeIndex] }
         <ButtonGroup>
           <SecondaryButton
-            text={activeIndex === 0 ? "Cancel" : "Back"}
+            text={activeIndex === 0 ? 'Cancel' : 'Back'}
             onClick={onPageBack}
             disabled={activeIndex === 0}
             />
           <PrimaryButton
-            text={activeIndex === count-1 ? "Submit application" : activeIndex === count-2 ? "One last step" : "Next"}
-            onClick={activeIndex !== count-1 ? onPageNext : () => console.log("submit application") }
+            text={primaryButtonText}
+            onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
             />
         </ButtonGroup>
       </div>
