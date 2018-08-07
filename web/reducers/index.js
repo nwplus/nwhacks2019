@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { hackerApplication } from './application';
+import application from './application';
 
 const reducers = combineReducers({
-  hackerApplication,
+  application,
 });
 
 const rootReducers = (state, action) => {

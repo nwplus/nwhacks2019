@@ -1,5 +1,9 @@
-import hackerApplication from './hacker';
 
-export {
-  hackerApplication,
-};
+import { combineReducers } from 'redux';
+import hacker from './hacker';
+
+const applicationReducers = combineReducers({
+  hacker,
+});
+
+export default applicationReducers;

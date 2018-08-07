@@ -52,7 +52,7 @@ class HackerApplicationContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { root: { hackerApplication } } = state;
+  const { root: { application: { hacker: hackerApplication } } } = state;
   return {
     hackerApplication,
   };
