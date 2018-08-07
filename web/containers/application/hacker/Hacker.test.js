@@ -20,8 +20,8 @@ describe('AfterLoginContainer', () => {
     beforeEach(() => {
       props = {
         hackerApplication: {
-          name: "John Doe",
-          school: "UBC",
+          name: 'John Doe',
+          school: 'UBC',
         },
         activeIndex: 99,
         lastValidIndex: 100,
@@ -35,8 +35,8 @@ describe('AfterLoginContainer', () => {
 
     it('passes hacker application to the component', () => {
       expect(componentProps).toHaveProperty('hackerApplication', {
-        name: "John Doe",
-        school: "UBC",
+        name: 'John Doe',
+        school: 'UBC',
       });
     });
 
@@ -54,8 +54,8 @@ describe('AfterLoginContainer', () => {
       beforeEach(() => {
         props = {
           hackerApplication: {
-            name: "John Doe",
-            school: "UBC",
+            name: 'John Doe',
+            school: 'UBC',
           },
           activeIndex: 99,
           lastValidIndex: 100,
@@ -72,7 +72,8 @@ describe('AfterLoginContainer', () => {
         });
 
         it('changePage is called with the next page', () => {
-          expect(props.changePage).toHaveBeenCalledWith(100);
+          const { changePage } = props;
+          expect(changePage).toHaveBeenCalledWith(100);
         });
       });
 
@@ -82,7 +83,8 @@ describe('AfterLoginContainer', () => {
         });
 
         it('changePage is called with the next page', () => {
-          expect(props.changePage).toHaveBeenCalledWith(98);
+          const { changePage } = props;
+          expect(changePage).toHaveBeenCalledWith(98);
         });
       });
     });
@@ -91,8 +93,8 @@ describe('AfterLoginContainer', () => {
       beforeEach(() => {
         props = {
           hackerApplication: {
-            name: "John Doe",
-            school: "UBC",
+            name: 'John Doe',
+            school: 'UBC',
           },
           activeIndex: 100,
           lastValidIndex: 100,
@@ -109,11 +111,13 @@ describe('AfterLoginContainer', () => {
         });
 
         it('changePage is called with the next page', () => {
-          expect(props.changePage).toHaveBeenCalledWith(101);
+          const { changePage } = props;
+          expect(changePage).toHaveBeenCalledWith(101);
         });
 
         it('changeLastActiveIndex is called with the next page', () => {
-          expect(props.changeLastActiveIndex).toHaveBeenCalledWith(101);
+          const { changeLastActiveIndex } = props;
+          expect(changeLastActiveIndex).toHaveBeenCalledWith(101);
         });
       });
 
@@ -123,7 +127,8 @@ describe('AfterLoginContainer', () => {
         });
 
         it('changePage is called with the next page', () => {
-          expect(props.changePage).toHaveBeenCalledWith(99);
+          const { changePage } = props;
+          expect(changePage).toHaveBeenCalledWith(99);
         });
       });
     });

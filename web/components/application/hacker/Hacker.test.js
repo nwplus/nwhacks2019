@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Redirect } from 'react-router-dom';
 
 import HackerApplication from './Hacker';
-import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
+import { ProgressGroup, SecondaryButton, PrimaryButton } from '../../input/buttons';
 
 beforeAll(() => {
   configure({ adapter: new Adapter() });
@@ -22,8 +22,8 @@ describe('Hacker component', () => {
     beforeEach(() => {
       props = {
         hackerApplication: {
-          name: "John Doe",
-          school: "UBC",
+          name: 'John Doe',
+          school: 'UBC',
         },
       };
 
@@ -84,7 +84,7 @@ describe('Hacker component', () => {
       });
 
       it('buttons beyond last valid index are disabled', () => {
-        for (let i = 0; i < props.count; i++) {
+        for (let i = 0; i < props.count; i += 1) {
           if (i <= props.lastValidIndex) {
             expect(progressGroup.find('button').at(i).props().disabled).toBeFalsy();
           } else {
@@ -96,7 +96,7 @@ describe('Hacker component', () => {
       describe('when clicking buttons', () => {
         describe('when clicking a valid button', () => {
           it('onPagechange is called with the page number', () => {
-            for (let i = 0; i <= props.lastValidIndex; i++) {
+            for (let i = 0; i <= props.lastValidIndex; i += 1) {
               progressGroup.find('button').at(i).simulate('click');
               expect(props.onPageChange).toHaveBeenCalledWith(i);
             }
@@ -107,7 +107,7 @@ describe('Hacker component', () => {
 
     describe('secondary button', () => {
       it('text matches active index', () => {
-        for (let i = 0; i < props.count; i++) {
+        for (let i = 0; i < props.count; i += 1) {
           props.activeIndex = i;
           wrapper = getWrapper();
 
@@ -121,11 +121,12 @@ describe('Hacker component', () => {
 
       describe('on click', () => {
         beforeEach(() => {
-          props.lastValidIndex = props.count-1;
+          const { count } = props;
+          props.lastValidIndex = count - 1;
         });
 
         it('calls onPageBack', () => {
-          for (let i = 1; i <= props.count; i++) {
+          for (let i = 1; i <= props.count; i += 1) {
             props.activeIndex = i;
             wrapper = getWrapper();
             wrapper.find(SecondaryButton).simulate('click');
@@ -137,7 +138,7 @@ describe('Hacker component', () => {
         });
 
         it('is disabled on first page', () => {
-          for (let i = 0; i <= props.count; i++) {
+          for (let i = 0; i <= props.count; i += 1) {
             props.activeIndex = i;
             wrapper = getWrapper();
 
@@ -153,7 +154,7 @@ describe('Hacker component', () => {
 
     describe('primary button', () => {
       it('text matches active index', () => {
-        for (let i = 0; i < props.count; i++) {
+        for (let i = 0; i < props.count; i += 1) {
           props.activeIndex = i;
           wrapper = getWrapper();
 
@@ -169,11 +170,12 @@ describe('Hacker component', () => {
 
       describe('on click', () => {
         beforeEach(() => {
-          props.lastValidIndex = props.count-1;
+          const { count } = props;
+          props.lastValidIndex = count - 1;
         });
 
         it('calls onPageNext when it is not the last page', () => {
-          for (let i = 0; i <= props.count; i++) {
+          for (let i = 0; i <= props.count; i += 1) {
             props.activeIndex = i;
             wrapper = getWrapper();
             wrapper.find(PrimaryButton).simulate('click');
