@@ -1,0 +1,46 @@
+{
+  "name": "nwhacks2019",
+  "version": "0.1.0",
+  "description": "The backend (cloud functions) for nwHacks 2019",
+  "author": "nwHacks2019",
+  "license": "MIT",
+  "scripts": {
+    "pick:dev": "firebase login && firebase use development",
+    "pick:prod": "firebase login && firebase use production",
+    "lint": "eslint .",
+    "test": "exit 0",
+    "serve": "yarn pick:dev && firebase serve --only functions",
+    "shell": "yarn pick:dev && firebase functions:shell",
+    "start": "yarn pick:dev && yarn run shell",
+    "deploy:dev": "yarn pick:dev && firebase deploy --only functions",
+    "deploy:prod": "yarn pick:prod && firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "5.12.1",
+    "firebase-functions": "1.0.3",
+    "firebase-tools": "3.19.3",
+    "nyc": "12.0.2"
+  },
+  "devDependencies": {
+    "coveralls": "3.0.1",
+    "eslint": "5.0.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-promise": "3.6.0",
+    "jest": "23.3.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**",
+      "!**/*.test.js",
+      "!**/coverage/**"
+    ],
+    "coverageReporters": [
+      "text",
+      "json"
+    ]
+  }
+}
