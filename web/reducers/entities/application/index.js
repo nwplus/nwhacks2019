@@ -1,6 +1,6 @@
 
 import { combineReducers } from 'redux';
-import hacker from './hacker';
+import hacker from './hacker/index';
 
 const applicationReducers = combineReducers({
   hacker,

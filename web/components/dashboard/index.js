@@ -6,7 +6,7 @@ const DashBoard = (props) => {
   const { application } = props;
   let content;
 
-  if (application.hacker.data) {
+  if (application.hacker) {
     content = 'you have one hacker application';
   } else {
     content = 'you didn\'t apply as hacker';
@@ -16,7 +16,7 @@ const DashBoard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { root: { application } } = state;
+  const { root: { entities: { application } } } = state;
   return {
     application,
   };

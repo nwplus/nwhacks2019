@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { HackerApplication } from '../../../components/application';
+import { changeHackerApplicationPage } from '../../../actions/application/page';
 
 class HackerApplicationContainer extends React.Component {
   constructor(props) {
@@ -15,11 +16,13 @@ class HackerApplicationContainer extends React.Component {
   }
 
   onPageChange = (activeIndex) => {
-    this.setState({ activeIndex });
-    const { lastValidIndex } = this.state;
-    if (activeIndex > lastValidIndex) {
-      this.setState({ lastValidIndex: activeIndex });
-    }
+    const { changePage } = this.props;
+    changePage(activeIndex);
+    // this.setState({ activeIndex });
+    // const { lastValidIndex } = this.state;
+    // if (activeIndex > lastValidIndex) {
+    //   this.setState({ lastValidIndex: activeIndex });
+    // }
   }
 
   onPageNext = () => {
@@ -52,14 +55,22 @@ class HackerApplicationContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { root: { application: { hacker: hackerApplication } } } = state;
+  const { root: { entities: { application: { hacker: hackerApplication } } } } = state;
   return {
     hackerApplication,
   };
 };
 
-HackerApplicationContainer.propTypes = {
-  hackerApplication: PropTypes.object.isRequired,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changePage: (page) => {
+      dispatch(changeHackerApplicationPage(page));
+    },
+  };
 };
 
-export default connect(mapStateToProps)(HackerApplicationContainer);
+HackerApplicationContainer.propTypes = {
+  hackerApplication: PropTypes.object,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);

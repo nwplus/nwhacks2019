@@ -12,8 +12,7 @@ const indexToPage = {
 
 const HackerApplication = (props) => {
   const { hackerApplication } = props;
-  if (!hackerApplication.isLoaded) return (<div />);
-  if (hackerApplication.data) return (<Redirect to="/dashboard" />);
+  if (hackerApplication) return (<Redirect to="/dashboard" />);
 
   const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext } = props;
 
@@ -53,7 +52,7 @@ const HackerApplication = (props) => {
 };
 
 HackerApplication.propTypes = {
-  hackerApplication: PropTypes.object.isRequired,
+  hackerApplication: PropTypes.object,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
   lastValidIndex: PropTypes.number,
