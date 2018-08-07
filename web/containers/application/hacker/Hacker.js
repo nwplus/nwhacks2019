@@ -3,43 +3,39 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { HackerApplication } from '../../../components/application';
-import { changeHackerApplicationPage } from '../../../actions/application/page';
+import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from '../../../actions';
 
 class HackerApplicationContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0,
-      lastValidIndex: 0,
       count: 4,
     };
   }
 
   onPageChange = (activeIndex) => {
-    const { changePage } = this.props;
+    const { changePage, changeLastActiveIndex, lastValidIndex } = this.props;
     changePage(activeIndex);
-    // this.setState({ activeIndex });
-    // const { lastValidIndex } = this.state;
-    // if (activeIndex > lastValidIndex) {
-    //   this.setState({ lastValidIndex: activeIndex });
-    // }
+    if (activeIndex > lastValidIndex) {
+      changeLastActiveIndex(activeIndex);
+    }
   }
 
   onPageNext = () => {
-    const { activeIndex } = this.state;
+    const { activeIndex } = this.props;
     const nextIndex = activeIndex + 1;
     this.onPageChange(nextIndex);
   }
 
   onPageBack = () => {
-    const { activeIndex } = this.state;
+    const { activeIndex } = this.props;
     const nextIndex = activeIndex - 1;
     this.onPageChange(nextIndex);
   }
 
   render() {
-    const { hackerApplication } = this.props;
-    const { activeIndex, lastValidIndex, count } = this.state;
+    const { hackerApplication, activeIndex, lastValidIndex } = this.props;
+    const { count } = this.state;
     return (
       <HackerApplication
         hackerApplication={hackerApplication}
@@ -55,9 +51,27 @@ class HackerApplicationContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { root: { entities: { application: { hacker: hackerApplication } } } } = state;
+  const {
+    root: {
+      entities: {
+        application: {
+          hacker: hackerApplication,
+        },
+      },
+      ui: {
+        application: {
+          hacker: {
+            activeIndex,
+            lastValidIndex,
+          },
+        },
+      },
+    },
+  } = state;
   return {
     hackerApplication,
+    activeIndex,
+    lastValidIndex,
   };
 };
 
@@ -66,11 +80,18 @@ const mapDispatchToProps = (dispatch) => {
     changePage: (page) => {
       dispatch(changeHackerApplicationPage(page));
     },
+    changeLastActiveIndex: (index) => {
+      dispatch(changeHackerApplicationLastValidIndex(index));
+    },
   };
 };
 
 HackerApplicationContainer.propTypes = {
   hackerApplication: PropTypes.object,
+  changePage: PropTypes.func.isRequired,
+  changeLastActiveIndex: PropTypes.func.isRequired,
+  activeIndex: PropTypes.number.isRequired,
+  lastValidIndex: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);

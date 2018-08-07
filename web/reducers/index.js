@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import entities from './entities';
+import ui from './ui';
 
 const reducers = combineReducers({
   entities,
+  ui,
 });
 
 const rootReducers = (state, action) => {

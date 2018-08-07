@@ -40,7 +40,7 @@ describe('AfterLoginContainer', () => {
 
         it('storeHackerApplication action is called', () => {
           expect(action.mock.calls).toHaveLength(1);
-          expect(action.mock.calls[0][0]).toEqual({ isLoaded: true, data: { a: 'b' } });
+          expect(action.mock.calls[0][0]).toEqual({ a: 'b' });
         });
       });
     });
@@ -70,7 +70,7 @@ describe('AfterLoginContainer', () => {
 
         it('storeHackerApplication action is called', () => {
           expect(action.mock.calls).toHaveLength(1);
-          expect(action.mock.calls[0][0]).toEqual({ isLoaded: true, data: undefined });
+          expect(action.mock.calls[0][0]).toEqual(null);
         });
       });
     });
