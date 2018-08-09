@@ -32,11 +32,11 @@ const Navbar = ({ displayType, buttonType }) => {
   );
   const button = getButton(buttonType);
   const links = [
-    <Link to="/">About</Link>,
-    <Link to="/">Stories</Link>,
-    <Link to="/">FAQ</Link>,
-    <Link to="/">Sponsors</Link>,
-    <Link to="/">2018</Link>,
+    <Link to="/"><b>About</b></Link>,
+    <Link to="/"><b>Stories</b></Link>,
+    <Link to="/"><b>FAQ</b></Link>,
+    <Link to="/"><b>Sponsors</b></Link>,
+    <Link to="/"><b>2018</b></Link>,
     button,
   ];
 
