@@ -1,9 +1,9 @@
 nav
   z-index: 500
-  background: $white
+  background: $transparent-white
   height: 64px
   position: fixed
-  transition: background $transition-time-long, shadow $transition-time-long
+  transition: background $transition-time-long, shadow $transition-time-long, opacity $transition-time
 
   a
     text-decoration: none
@@ -14,5 +14,8 @@ nav
     margin-top: 3px
     width: 32px
 
-  &.collapsed
+  &.transparent
     background: transparent
+
+  &.hide
+    opacity: 0

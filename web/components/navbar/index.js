@@ -28,7 +28,13 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     const { displayType, buttonType } = props;
-    this.state = { displayType, buttonType, collapsed: true };
+    this.state = {
+      displayType,
+      buttonType,
+      hidden: false,
+      transparent: true,
+      lastY: 0,
+    };
   }
 
   componentDidMount() {
@@ -40,12 +46,27 @@ class Navbar extends React.Component {
   }
 
   handleScroll = () => {
-    const top = window.pageYOffset || document.documentElement.scrollTop;
-    this.setState({ collapsed: (top < 64) });
+    // Calculate scroll direction
+    const { lastY } = this.state;
+    const scrollingDown = (window.scrollY - lastY) >= 0;
+
+    // Calculate position
+    const offset = window.pageYOffset || document.documentElement.scrollTop;
+    const atTop = offset < 96;
+
+    // Calculate transparency
+    const transparent = scrollingDown ? offset < 256 : atTop;
+
+    // Update state
+    this.setState({
+      transparent,
+      hidden: (!atTop && scrollingDown),
+      lastY: window.scrollY,
+    });
   }
 
   render() {
-    const { displayType, buttonType, collapsed } = this.state;
+    const { displayType, buttonType, hidden, transparent } = this.state;
     const button = getButton(buttonType);
     const links = [
       <Link to="/"><b>About</b></Link>,
@@ -65,7 +86,6 @@ class Navbar extends React.Component {
         linksDiv = <div className="flex ai-center">{button}</div>;
         break;
       default:
-        console.log('generating');
         linksDiv = links.map(l => (
           <div
             key={key += 1}
@@ -75,8 +95,10 @@ class Navbar extends React.Component {
         ));
     }
 
+    console.log(this.state);
+
     return (
-      <nav className={`fill-width flex ${collapsed ? 'collapsed' : 'shadow'}`}>
+      <nav className={`fill-width flex ${hidden ? 'hide' : ''} ${transparent ? 'transparent' : 'shadow'}`}>
         <div className="flex ai-center jc-start margin-sides">
           <div className="flex ai-center">{getLogo()}</div>
         </div>
