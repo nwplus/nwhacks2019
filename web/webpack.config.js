@@ -15,6 +15,7 @@ module.exports = {
   // devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
+    disableHostCheck: true,
   },
   // Handles missing fs module
   node: {
