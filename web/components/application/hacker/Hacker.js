@@ -7,7 +7,7 @@ const HackerApplication = (props) => {
   const { hackerApplication } = props;
   if (!hackerApplication.isLoaded) return (<div />);
   if (hackerApplication.data) return (<Redirect to="/dashboard" />);
-  return (<div className="below-nav">o hello there pls apply</div>);
+  return (<div className="pad-nav">o hello there pls apply</div>);
 };
 
 const mapStateToProps = (state) => {

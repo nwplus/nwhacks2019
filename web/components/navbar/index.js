@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
 import { SecondaryButton } from '../input/buttons';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 
 const getLogo = () => (
-  <Link to="/"><img alt="" src={logo} /></Link>
+  <Link to="/"><img alt="nwHacks" src={logo} /></Link>
 );
 
 const getButton = (buttonType) => {
@@ -24,42 +25,53 @@ const getButton = (buttonType) => {
 };
 
 const Navbar = ({ displayType, buttonType }) => {
+  const logoDiv = (
+    <div className="flex ai-center jc-start margin-sides">
+      <div className="flex ai-center">{getLogo()}</div>
+    </div>
+  );
+  const button = getButton(buttonType);
+  const links = [
+    <Link to="/">About</Link>,
+    <Link to="/">Stories</Link>,
+    <Link to="/">FAQ</Link>,
+    <Link to="/">Sponsors</Link>,
+    <Link to="/">2018</Link>,
+    button,
+  ];
+
+  let inner;
+  let key = 0;
   switch (displayType) {
     case DISPLAY_TYPE.ONLY_LOGO:
-      return (
-        <nav>
-          <div>
-            <div>{getLogo()}</div>
-          </div>
-        </nav>
-      );
+      inner = logoDiv;
+      break;
     case DISPLAY_TYPE.LOGO_AND_BUTTON:
-      return (
-        <nav>
-          <div>
-            <div>{getLogo()}</div>
+      inner = (
+        <React.Fragment>
+          {logoDiv}
+          <div className="flex jc-end margin-horizontal-divs fill-width">
+            <div className="flex ai-center">{button}</div>
           </div>
-          <div>
-            <div>{getButton(buttonType)}</div>
-          </div>
-        </nav>
+        </React.Fragment>
       );
+      break;
     default:
-      return (
-        <nav>
-          <div>
-            <div>{getLogo()}</div>
+      inner = (
+        <React.Fragment>
+          {logoDiv}
+          <div className="flex jc-end margin-horizontal-divs fill-width">
+            {links.map(l => <div key={key += 1} className="flex ai-center margin-sides-large">{l}</div>)}
           </div>
-          <div>
-            <div><Link to="/">About</Link></div>
-            <div><Link to="/">FAQ</Link></div>
-            <div><Link to="/">Sponsors</Link></div>
-            <div><Link to="/">2018</Link></div>
-            <div>{getButton(buttonType)}</div>
-          </div>
-        </nav>
+        </React.Fragment>
       );
   }
+  return <nav className="fill-width shadow flex">{inner}</nav>;
+};
+
+Navbar.propTypes = {
+  displayType: PropTypes.symbol,
+  buttonType: PropTypes.symbol,
 };
 
 export default Navbar;

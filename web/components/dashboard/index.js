@@ -12,7 +12,7 @@ const DashBoard = (props) => {
     content = 'you didn\'t apply as hacker';
   }
 
-  return (<div className="below-nav">{content}</div>);
+  return (<div className="pad-nav">{content}</div>);
 };
 
 const mapStateToProps = (state) => {
