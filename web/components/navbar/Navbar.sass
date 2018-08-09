@@ -1,7 +1,9 @@
 nav
+  z-index: 500
   background: $white
   height: 64px
   position: fixed
+  transition: background $transition-time-long, shadow $transition-time-long
 
   a
     text-decoration: none
@@ -11,3 +13,6 @@ nav
   img
     margin-top: 3px
     width: 32px
+
+  &.collapsed
+    background: transparent
