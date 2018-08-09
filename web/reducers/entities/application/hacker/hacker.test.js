@@ -1,14 +1,11 @@
-import rootReducers from '..';
-import { hackerApplication } from '.';
-import ACTION_TYPES from '../../actions/action_types';
+import rootReducers from '../../..';
+import hackerApplication from '.';
+import ACTION_TYPES from '../../../../actions/action_types';
 
 describe('hacker application reducer', () => {
   describe('when state is undefined', () => {
     it('returns the initial state', () => {
-      expect(hackerApplication(undefined, {})).toEqual({
-        isLoaded: true,
-        data: undefined,
-      });
+      expect(hackerApplication(undefined, {})).toEqual(null);
     });
   });
 
@@ -54,10 +51,9 @@ describe('when action type is RESET', () => {
     };
 
     const action = { type: 'RESET' };
-    expect(rootReducers(state, action)).toEqual({
-      hackerApplication: {
-        isLoaded: true,
-        data: undefined,
+    expect(rootReducers(state, action).entities).toEqual({
+      application: {
+        hacker: null,
       },
     });
   });

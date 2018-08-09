@@ -1,0 +1,27 @@
+@import ./pages/PageOne
+
+div#hacker-application
+  width: 100%
+  display: flex
+  justify-content: center
+
+  > div
+    padding-top: 56px
+    padding-bottom: 56px
+    width: 38.889em
+
+  div.progress-button-group
+    padding-bottom: 56px
+
+  div.button-group
+    padding-top: 56px
+
+@media only screen and (max-width: $mobile)
+  div#hacker-application > div
+    width: 100%
+    margin-left: 16px
+    margin-right: 16px
+
+  div.progress-button-group
+    margin-left: 8px
+    margin-right: 8px
