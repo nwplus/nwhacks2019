@@ -1,0 +1,26 @@
+/* flexbox utility classes */
+.flex
+  display: flex
+
+  /* content justification */
+  &.jc
+    &-center
+      justify-content: center
+
+    &-around
+      justify-content: space-around
+
+    &-between
+      justify-content: space-between
+      &-right-if-one
+        :only-child
+          align-self: flex-end
+          margin-left: auto
+
+  &.wrap
+    flex-wrap: wrap
+
+  /* item alignment */
+  &.ai
+    &-center
+      align-items: center
