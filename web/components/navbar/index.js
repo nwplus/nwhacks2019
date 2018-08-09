@@ -40,33 +40,32 @@ const Navbar = ({ displayType, buttonType }) => {
     button,
   ];
 
-  let inner;
+  let linksDiv;
   let key = 0;
   switch (displayType) {
     case DISPLAY_TYPE.ONLY_LOGO:
-      inner = logoDiv;
+      linksDiv = logoDiv;
       break;
     case DISPLAY_TYPE.LOGO_AND_BUTTON:
-      inner = (
-        <React.Fragment>
-          {logoDiv}
-          <div className="flex jc-end margin-horizontal-divs fill-width">
-            <div className="flex ai-center">{button}</div>
-          </div>
-        </React.Fragment>
-      );
+      linksDiv = <div className="flex ai-center">{button}</div>;
       break;
     default:
-      inner = (
-        <React.Fragment>
-          {logoDiv}
-          <div className="flex jc-end margin-horizontal-divs fill-width">
-            {links.map(l => <div key={key += 1} className="flex ai-center margin-sides-large">{l}</div>)}
-          </div>
-        </React.Fragment>
-      );
+      linksDiv = links.map(l => (
+        <div
+          key={key += 1}
+          className="flex ai-center margin-sides-large">
+          {l}
+        </div>
+      ));
   }
-  return <nav className="fill-width shadow flex">{inner}</nav>;
+  return (
+    <nav className="fill-width shadow flex">
+      {logoDiv}
+      <div className="flex jc-end margin-horizontal-divs fill-width">
+        {linksDiv}
+      </div>
+    </nav>
+  );
 };
 
 Navbar.propTypes = {
