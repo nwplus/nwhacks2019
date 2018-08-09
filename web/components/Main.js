@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Main = () => (<div>HOME PAGE</div>);
+const Main = () => (<div className="pad-nav">HOME PAGE</div>);
 
 export default Main;

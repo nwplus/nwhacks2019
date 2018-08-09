@@ -34,7 +34,7 @@ class FrontEndComponents extends React.Component {
 
     const { active } = this.state;
     return (
-      <div id="demo">
+      <div id="demo" className="pad-nav">
         <p>Buttons</p>
         <br />
         <div>
