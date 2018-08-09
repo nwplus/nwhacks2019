@@ -36,7 +36,7 @@ RadioButton.propTypes = {
   onChange: PropTypes.func,
 
   // determines if the radio button is selected
-  checked: PropTypes.bool,
+  selected: PropTypes.bool,
 
   // determines if the radio button is disabled
   disabled: PropTypes.bool,
