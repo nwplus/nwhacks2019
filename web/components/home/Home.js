@@ -1,28 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import mountains from '../../assets/mountains.svg';
+import sun from '../../assets/sun.svg';
+import skyline from '../../assets/skyline.svg';
+import panelBear from '../../assets/panel-bear.svg';
+import panelTrain from '../../assets/panel-train.svg';
 
-const getMountains = () => <img alt="Nice mountains" src={mountains} />
+const getImageDiv = (alt, src) => <div><img alt={alt} src={src} /></div>;
 
-const Home = ({ signedIn }) => {
-  if (signedIn) {
-    return (
-      <div>
-        SIGNED IN HOMEPAGE
-        {getMountains()}
-      </div>
-    );
-  }
-  return (
+const Home = () => (
+  <div className="homepage">
     <div>
-      {getMountains()}
+      <div>
+        <h1>nwHacks 2019</h1>
+      </div>
+      {getImageDiv('sun', sun)}
     </div>
-  );
-};
-
-Home.propTypes = {
-  signedIn: PropTypes.bool.isRequired,
-};
+    {getImageDiv('skyline', skyline)}
+    {getImageDiv('bear', panelBear)}
+    {getImageDiv('train', panelTrain)}
+  </div>
+);
 
 export default Home;
