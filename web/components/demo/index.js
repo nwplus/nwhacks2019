@@ -61,8 +61,7 @@ class FrontEndComponents extends React.Component {
           <RadioButton label="Label 1" value="value1" selected />
           <RadioButton label="Label 2" value="value2" disabled />
           <RadioButton label="Label 3" value="value3" />
-        </RadioGroup><br />
-        <RadioButton label="Ungrouped radio button" value="value3" name="new_radio_button_name" />
+        </RadioGroup>
         <br /><br />
         <div>
           <ProgressGroup
