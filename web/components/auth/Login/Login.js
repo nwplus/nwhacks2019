@@ -52,14 +52,14 @@ class Login extends React.Component {
   loginView() {
     const { email, password, error } = this.state;
     return (
-      <div id="login">
+      <div id="login" className="fill-height flex jc-center ai-center dir-col">
         <div>
           <form
             onSubmit={this.login}
             className="input-group">
-            <span>Sign in</span>
-            <div className="card">
-              <div className="card-left">
+            <h2 className="pad-sides">Sign in</h2>
+            <div className="card split flex">
+              <div className="pad-ends pad-sides margin-text-inputs">
                 <TextInput
                   placeholder="Enter your email"
                   value={email}
@@ -79,8 +79,9 @@ class Login extends React.Component {
                 />
                 <PrimaryButton
                   text="Submit"
+                  className="fill-width"
                   />
-                <p>
+                <p className="flex jc-center">
                   Don&apos;t have an account yet?&nbsp;
                   <Link to="/">Apply here</Link>
                 </p>
