@@ -1,3 +1,6 @@
+# IDEs, text editors
+.vscode
+
 # dev build output
 public
 
