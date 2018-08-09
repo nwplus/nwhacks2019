@@ -1,4 +1,4 @@
-.checkbox
+.radio-button
   margin-left: 20px;
   font-family: Apercu Pro;
   font-size: 18px;
@@ -13,36 +13,36 @@
   -ms-user-select: none;
   user-select: none;
 
-  &:hover input:enabled ~ .checkmark
-    background-image: url('../assets/checkbox/hover.svg');
+  &:hover input:enabled ~ .radio-img
+    background-image: url('../assets/radio/hover.svg');
 
-  input[type="checkbox"]
+  input[type="radio"]
     position: absolute;
     opacity: 0;
     cursor: pointer;
 
-    &:checked ~ .checkmark
-      background-image: url('../assets/checkbox/checked.svg');
+    &:checked ~ .radio-img
+      background-image: url('../assets/radio/selected.svg');
       &:after
         display: block;
 
     &:disabled
       cursor: not-allowed;
       opacity: 0.4;
-      &~ .checkmark
+      &~ .radio-img
         cursor: not-allowed;
         opacity: 0.4;
         &~ .label-text
           cursor: not-allowed;
           opacity: 0.4;
 
-  .checkmark
+  .radio-img
     position: absolute;
     top: 0;
     left: 0;
     height: 24px;
     width: 24px;
-    background-image: url('../assets/checkbox/unchecked.svg')
+    background-image: url('../assets/radio/unselected.svg')
 
     &:after
       content: "";
