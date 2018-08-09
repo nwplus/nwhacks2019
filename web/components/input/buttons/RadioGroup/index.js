@@ -11,7 +11,7 @@ const RadioButton = ({ name, value, label, selected, disabled, onChange }) => (
           type="radio"
           name={name || context.name}
           value={value}
-          checked={selected || context.selected}
+          defaultChecked={selected || context.selected}
           disabled={disabled || context.disabled}
           onChange={onChange || context.onChange}
         />
