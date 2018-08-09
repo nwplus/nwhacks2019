@@ -95,8 +95,6 @@ class Navbar extends React.Component {
         ));
     }
 
-    console.log(this.state);
-
     return (
       <nav className={`fill-width flex ${hidden ? 'hide' : ''} ${transparent ? 'transparent' : 'shadow'}`}>
         <div className="flex ai-center jc-start margin-sides">
