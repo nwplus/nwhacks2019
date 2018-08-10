@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
+const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, classNames }) => {
+  classNames = classNames || [];
+  classNames.push('progress-button-group');
+
   const buttons = [];
   for (let i = 0; i < count; i += 1) {
     const isActive = (i === activeIndex);
@@ -16,7 +19,7 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex }) => {
       </button>
     );
   }
-  return (<div className="progress-button-group">{buttons}</div>);
+  return (<div className={classNames.join(' ')}>{buttons}</div>);
 };
 
 ProgressGroup.propTypes = {
@@ -32,6 +35,9 @@ ProgressGroup.propTypes = {
 
   // all values after this will be "disabled"
   lastValidIndex: PropTypes.number,
+
+  // class names for styling
+  classNames: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default ProgressGroup;
