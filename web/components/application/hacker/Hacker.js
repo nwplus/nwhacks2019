@@ -26,16 +26,17 @@ const HackerApplication = (props) => {
   }
 
   return (
-    <div className="below-nav application">
-      <div>
+    <div className="below-nav application fill-width flex jc-center">
+      <div className="pad-ends-mega">
         <ProgressGroup
           count={count}
           activeIndex={activeIndex}
           lastValidIndex={lastValidIndex}
           onClick={onPageChange}
+          classNames={['pad-bottom-mega']}
           />
         { indexToPage[activeIndex] }
-        <ButtonGroup>
+        <ButtonGroup classNames={['pad-top-mega']}>
           <SecondaryButton
             text={activeIndex === 0 ? 'Cancel' : 'Back'}
             onClick={onPageBack}
