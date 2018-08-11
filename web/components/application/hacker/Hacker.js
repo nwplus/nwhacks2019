@@ -21,10 +21,15 @@ const HackerApplication = (props) => {
   const { hackerApplication } = props;
   if (!hackerApplication.isEmpty) return (<Redirect to="/dashboard" />);
 
-  const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext } = props;
+  const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext, onHackerApplicationChange } = props;
 
   const indexToPage = {
-    0: (<PageOne hackerApplication={hackerApplication} />),
+    0: (
+      <PageOne
+        hackerApplication={hackerApplication}
+        onHackerApplicationChange={onHackerApplicationChange}
+        />
+    ),
   };
 
   return (

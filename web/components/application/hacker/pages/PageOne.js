@@ -1,9 +1,11 @@
 import React from 'react';
 
 import propTypes from '../../../../prop-types';
+import { TextInput } from '../../../input/text';
 
 const PageOne = (props) => {
-  const { hackerApplication } = props;
+  const { hackerApplication, onHackerApplicationChange } = props;
+  const { firstName } = hackerApplication;
 
   return (
     <div className="hacker-application-page" id="hacker-application-page-1">
@@ -17,6 +19,15 @@ const PageOne = (props) => {
       we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
       </p>
       <div>{ hackerApplication.firstName || 'you got no name'}</div>
+      <TextInput
+        label="First Name"
+        id="first-name"
+        value={firstName}
+        onChange={(fname) => {
+          hackerApplication.firstName = fname;
+          onHackerApplicationChange(hackerApplication);
+        }}
+        />
     </div>
   );
 };

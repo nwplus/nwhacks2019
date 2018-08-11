@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from '../../../actions';
 import propTypes from '../../../prop-types';
+import { addHackerApplication } from '../../../actions';
 
 export class HackerApplicationContainer extends React.Component {
   onPageChange = (activeIndex) => {
@@ -27,6 +28,11 @@ export class HackerApplicationContainer extends React.Component {
     this.onPageChange(nextIndex);
   }
 
+  onHackerApplicationChange = (app) => {
+    const { updateApplication } = this.props;
+    updateApplication(app);
+  }
+
   render() {
     const { hackerApplication, activeIndex, lastValidIndex } = this.props;
     return (
@@ -38,6 +44,7 @@ export class HackerApplicationContainer extends React.Component {
         onPageChange={this.onPageChange}
         onPageNext={this.onPageNext}
         onPageBack={this.onPageBack}
+        onHackerApplicationChange={this.onHackerApplicationChange}
         />
     );
   }
@@ -61,8 +68,9 @@ const mapStateToProps = (state) => {
       },
     },
   } = state;
+
   return {
-    hackerApplication,
+    hackerApplication: Object.assign({}, hackerApplication),
     activeIndex,
     lastValidIndex,
   };
@@ -75,6 +83,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeLastActiveIndex: (index) => {
       dispatch(changeHackerApplicationLastValidIndex(index));
+    },
+    updateApplication: (app) => {
+      dispatch(addHackerApplication(app));
     },
   };
 };
