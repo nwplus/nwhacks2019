@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'immutability-helper';
 
 import propTypes from '../../../../prop-types';
 import { TextInput } from '../../../input/text';
@@ -23,8 +24,7 @@ const PageOne = (props) => {
         id="first-name"
         value={firstName}
         onChange={(fname) => {
-          const updatedHackerApplication = Object.assign({}, hackerApplication);
-          updatedHackerApplication.firstName = fname;
+          const updatedHackerApplication = update(hackerApplication, { $merge: { firstName: fname } });
           onHackerApplicationChange(updatedHackerApplication);
         }}
         />
