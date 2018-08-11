@@ -7,10 +7,6 @@ import { SecondaryButton } from '../input/buttons';
 
 import logo from '../../assets/logo.svg';
 
-const getLogo = () => (
-  <Link to="/"><img alt="nwHacks" src={logo} /></Link>
-);
-
 const getButton = (buttonType) => {
   switch (buttonType) {
     case BUTTON_TYPE.SIGN_IN:
@@ -98,7 +94,9 @@ class Navbar extends React.Component {
     return (
       <nav className={`fill-width flex ${hidden ? 'hide' : ''} ${transparent ? 'transparent' : 'shadow'}`}>
         <div className="flex ai-center jc-start margin-sides">
-          <div className="flex ai-center">{getLogo()}</div>
+          <div className="flex ai-center">
+            <Link to="/"><img alt="nwHacks" src={logo} /></Link>
+          </div>
         </div>
         <div className="flex jc-end margin-horizontal-divs fill-width">
           {linksDiv}
