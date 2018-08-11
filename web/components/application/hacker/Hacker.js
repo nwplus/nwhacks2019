@@ -24,7 +24,7 @@ const HackerApplication = (props) => {
   const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext } = props;
 
   const indexToPage = {
-    0: (<PageOne hackerApplication={hackerApplication}/>),
+    0: (<PageOne hackerApplication={hackerApplication} />),
   };
 
   return (

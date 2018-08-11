@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from '../../../actions';
+import propTypes from '../../../prop-types';
 
 export class HackerApplicationContainer extends React.Component {
   onPageChange = (activeIndex) => {
@@ -79,7 +80,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 HackerApplicationContainer.propTypes = {
-  hackerApplication: PropTypes.object,
+  hackerApplication: propTypes.application.hacker,
   changePage: PropTypes.func.isRequired,
   changeLastActiveIndex: PropTypes.func.isRequired,
   activeIndex: PropTypes.number.isRequired,
