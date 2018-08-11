@@ -1,6 +1,9 @@
 import { ACTION_TYPES } from '../../../../actions';
 
-const initialState = null;
+export const initialState = {
+  isEmpty: true,
+  firstName: '',
+};
 
 const hackerApplication = (state = initialState, action) => {
   switch (action.type) {

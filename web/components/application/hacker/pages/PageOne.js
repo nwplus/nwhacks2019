@@ -1,7 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const PageOne = () => (
-  <div className="hacker-application-page" id="hacker-application-page-1">
+const PageOne = (props) => {
+  const { hackerApplication } = props;
+
+  return (
+    <div className="hacker-application-page" id="hacker-application-page-1">
     <h1>About you <span role="img" aria-label="book">📚</span></h1>
     <p>
       nwHacks is Western Canada’s largest collegiate hackathon taking place
@@ -11,7 +15,13 @@ const PageOne = () => (
       For a fair assessment of your application,
       we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
     </p>
+    <div>{ hackerApplication.firstName || 'you got no name'}</div>
   </div>
-);
+  );
+}
+
+PageOne.propTypes = {
+  hackerApplication: PropTypes.object,
+};
 
 export default PageOne;

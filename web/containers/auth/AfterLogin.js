@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { addHackerApplication } from '../../actions';
+import { initialState } from '../../reducers/entities/application/hacker';
 
 import AfterLogin from '../../components/auth/Login/AfterLogin';
 
@@ -15,7 +16,7 @@ export class AfterLoginContainer extends React.Component {
     const { storeHackerApplication } = this.props;
 
     if (isLoaded) {
-      storeHackerApplication(hackerApplication.data || null);
+      storeHackerApplication(hackerApplication.data || initialState);
     }
   }
 

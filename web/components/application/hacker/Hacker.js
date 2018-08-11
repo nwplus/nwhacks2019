@@ -5,25 +5,27 @@ import PropTypes from 'prop-types';
 import PageOne from './pages/PageOne';
 
 import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
+import propTypes from '../../../prop-types';
 
-const indexToPage = {
-  0: (<PageOne />),
+const getPrimaryButtonText = (activeIndex, count) => {
+  if (activeIndex === count - 1) {
+    return 'Submit application';
+  }
+  if (activeIndex === count - 2) {
+    return 'One last step';
+  }
+  return 'Next';
 };
 
 const HackerApplication = (props) => {
   const { hackerApplication } = props;
-  if (hackerApplication) return (<Redirect to="/dashboard" />);
+  if (!hackerApplication.isEmpty) return (<Redirect to="/dashboard" />);
 
   const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext } = props;
 
-  let primaryButtonText;
-  if (activeIndex === count - 1) {
-    primaryButtonText = 'Submit application';
-  } else if (activeIndex === count - 2) {
-    primaryButtonText = 'One last step';
-  } else {
-    primaryButtonText = 'Next';
-  }
+  const indexToPage = {
+    0: (<PageOne hackerApplication={hackerApplication}/>),
+  };
 
   return (
     <div className="below-nav application fill-width flex jc-center">
@@ -43,7 +45,7 @@ const HackerApplication = (props) => {
             disabled={activeIndex === 0}
             />
           <PrimaryButton
-            text={primaryButtonText}
+            text={getPrimaryButtonText(activeIndex, count)}
             onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
             />
         </ButtonGroup>
@@ -53,7 +55,7 @@ const HackerApplication = (props) => {
 };
 
 HackerApplication.propTypes = {
-  hackerApplication: PropTypes.object,
+  hackerApplication: propTypes.application.hacker,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
   lastValidIndex: PropTypes.number,
