@@ -33,10 +33,10 @@ const HackerApplication = (props) => {
           activeIndex={activeIndex}
           lastValidIndex={lastValidIndex}
           onClick={onPageChange}
-          classNames={['pad-bottom-mega']}
+          className="pad-bottom-mega"
           />
         { indexToPage[activeIndex] }
-        <ButtonGroup classNames={['pad-top-mega']}>
+        <ButtonGroup className="pad-top-mega">
           <SecondaryButton
             text={activeIndex === 0 ? 'Cancel' : 'Back'}
             onClick={onPageBack}
