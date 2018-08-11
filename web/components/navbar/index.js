@@ -23,10 +23,7 @@ const getButton = (buttonType) => {
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    const { displayType, buttonType } = props;
     this.state = {
-      displayType,
-      buttonType,
       hidden: false,
       transparent: true,
       lastY: 0,
@@ -62,7 +59,8 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const { displayType, buttonType, hidden, transparent } = this.state;
+    const { hidden, transparent } = this.state;
+    const { displayType, buttonType } = this.props;
     const button = getButton(buttonType);
     const links = [
       <Link to="/"><b>About</b></Link>,
