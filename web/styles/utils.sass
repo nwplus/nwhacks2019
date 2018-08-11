@@ -1,0 +1,62 @@
+.fill
+  &-width
+    width: 100%
+
+  &-height
+    height: 100%
+
+.split
+  > *
+    width: 50%
+
+// padding declarations
+.pad
+  &-sides
+    padding-left: 44px
+    padding-right: 44px
+
+  &-ends
+    padding-top: 48px
+    padding-bottom: 48px
+
+// margin declarations
+.margin
+  &-text-inputs
+    > .text-input
+      &:first-of-type
+        margin-bottom: 40px
+      &:last-of-type
+        margin-bottom: 56px
+
+// flexbox utility classes
+.flex
+  display: flex
+
+  // flex-directions
+  &.dir
+    &-col
+      flex-direction: column
+
+  // justify-content
+  &.jc
+    &-center
+      justify-content: center
+
+    &-around
+      justify-content: space-around
+
+    &-between
+      justify-content: space-between
+      &-right-if-one
+        :only-child
+          align-self: flex-end
+          margin-left: auto
+
+  // flex-wrap
+  &.wrap
+    flex-wrap: wrap
+
+  // align-items
+  &.ai
+    &-center
+      align-items: center
