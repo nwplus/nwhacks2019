@@ -48,7 +48,7 @@ class Navbar extends React.Component {
     const atTop = offset < 96;
 
     // Calculate transparency
-    const transparent = scrollingDown ? offset < 256 : atTop;
+    const transparent = offset < 256;
 
     // Update state
     this.setState({
