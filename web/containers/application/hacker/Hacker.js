@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { HackerApplication } from '../../../components/application';
-import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from '../../../actions';
+import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication } from '../../../actions';
 import propTypes from '../../../prop-types';
-import { addHackerApplication } from '../../../actions';
 
 export class HackerApplicationContainer extends React.Component {
   onPageChange = (activeIndex) => {
@@ -96,6 +95,7 @@ HackerApplicationContainer.propTypes = {
   changeLastActiveIndex: PropTypes.func.isRequired,
   activeIndex: PropTypes.number.isRequired,
   lastValidIndex: PropTypes.number.isRequired,
+  updateApplication: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);

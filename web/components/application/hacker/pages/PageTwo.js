@@ -1,5 +1,6 @@
 import React from 'react';
 import update from 'immutability-helper';
+import PropTypes from 'prop-types';
 
 import propTypes from '../../../../prop-types';
 import { TextInput } from '../../../input/text';
@@ -24,7 +25,11 @@ const PageTwo = (props) => {
         id="last-name"
         value={lastName}
         onChange={(lname) => {
-          const updatedHackerApplication = update(hackerApplication, { $merge: { lastName: lname } });
+          const updatedHackerApplication = update(hackerApplication, {
+            $merge: {
+              lastName: lname,
+            },
+          });
           onHackerApplicationChange(updatedHackerApplication);
         }}
         />
@@ -34,6 +39,7 @@ const PageTwo = (props) => {
 
 PageTwo.propTypes = {
   hackerApplication: propTypes.application.hacker,
+  onHackerApplicationChange: PropTypes.func.isRequired,
 };
 
 export default PageTwo;

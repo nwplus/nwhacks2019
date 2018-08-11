@@ -64,6 +64,7 @@ const mapStateToProps = (state) => {
 AfterLoginContainer.propTypes = {
   hackerApplication: PropTypes.object.isRequired,
   storeHackerApplication: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {

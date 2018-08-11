@@ -22,7 +22,15 @@ const HackerApplication = (props) => {
   const { hackerApplication } = props;
   if (hackerApplication.isSubmitted) return (<Redirect to="/dashboard" />);
 
-  const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext, onHackerApplicationChange } = props;
+  const {
+    count,
+    activeIndex,
+    lastValidIndex,
+    onPageChange,
+    onPageBack,
+    onPageNext,
+    onHackerApplicationChange,
+  } = props;
 
   const indexToPage = {
     0: (
@@ -74,6 +82,7 @@ HackerApplication.propTypes = {
   onPageChange: PropTypes.func,
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
+  onHackerApplicationChange: PropTypes.func,
 };
 
 export default HackerApplication;
