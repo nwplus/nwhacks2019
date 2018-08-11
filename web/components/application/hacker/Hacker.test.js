@@ -22,8 +22,10 @@ describe('Hacker component', () => {
     beforeEach(() => {
       props = {
         hackerApplication: {
-          name: 'John Doe',
-          school: 'UBC',
+          firstName: 'John',
+          lastName: 'Doe',
+          isSubmitted: true,
+          onHackerApplicationChange: jest.fn(),
         },
       };
 
@@ -46,13 +48,18 @@ describe('Hacker component', () => {
 
     beforeEach(() => {
       props = {
-        hackerApplication: null,
+        hackerApplication: {
+          isSubmitted: false,
+          firstName: '',
+          lastName: '',
+        },
         count: COUNT,
         activeIndex: ACTIVE_INDEX,
         lastValidIndex: LAST_VALID_INDEX,
         onPageChange: jest.fn(),
         onPageBack: jest.fn(),
         onPageNext: jest.fn(),
+        onHackerApplicationChange: jest.fn(),
       };
 
       wrapper = getWrapper();
