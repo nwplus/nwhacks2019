@@ -18,14 +18,14 @@ const PageOne = (props) => {
       For a fair assessment of your application,
       we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
       </p>
-      <div>{ hackerApplication.firstName || 'you got no name'}</div>
       <TextInput
         label="First Name"
         id="first-name"
         value={firstName}
         onChange={(fname) => {
-          hackerApplication.firstName = fname;
-          onHackerApplicationChange(hackerApplication);
+          const updatedHackerApplication = Object.assign({}, hackerApplication);
+          updatedHackerApplication.firstName = fname;
+          onHackerApplicationChange(updatedHackerApplication);
         }}
         />
     </div>

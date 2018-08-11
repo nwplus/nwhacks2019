@@ -70,7 +70,7 @@ const mapStateToProps = (state) => {
   } = state;
 
   return {
-    hackerApplication: Object.assign({}, hackerApplication),
+    hackerApplication,
     activeIndex,
     lastValidIndex,
   };
