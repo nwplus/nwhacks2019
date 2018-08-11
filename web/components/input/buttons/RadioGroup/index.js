@@ -3,21 +3,23 @@ import PropTypes from 'prop-types';
 
 const InputContext = React.createContext({});
 
-const RadioButton = ({ name, value, label, selected, disabled, onChange }) => (
+const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <label className="radio-button">
-        <input
-          type="radio"
-          name={name || context.name}
-          value={value}
-          defaultChecked={selected || context.selected}
-          disabled={disabled || context.disabled}
-          onChange={onChange || context.onChange}
-        />
-        <span className="radio-img" />
-        <span className="label-text">{label}</span>
-      </label>
+      <div className={["radio-button", (className || context.sharedClassName)].join(' ')}>
+        <label>
+          <input
+            type="radio"
+            name={name || context.name}
+            value={value}
+            defaultChecked={selected || context.selected}
+            disabled={disabled || context.disabled}
+            onChange={onChange || context.onChange}
+          />
+          <span className="radio-img" />
+          <span className="label-text">{label}</span>
+        </label>
+      </div>
     )}
   </InputContext.Consumer>
 );
@@ -25,28 +27,25 @@ const RadioButton = ({ name, value, label, selected, disabled, onChange }) => (
 RadioButton.propTypes = {
   // name should be the same amongst radio buttons in a radio group
   name: PropTypes.string,
-
   // input value for the radio button
   value: PropTypes.string.isRequired,
-
   // label text for the radio button
   label: PropTypes.string.isRequired,
-
-  // onChange functional
-  onChange: PropTypes.func,
-
+  // extra CSS classes to apply to the radio button
+  className: PropTypes.string,
   // determines if the radio button is selected
   selected: PropTypes.bool,
-
   // determines if the radio button is disabled
   disabled: PropTypes.bool,
+  // onChange functional
+  onChange: PropTypes.func,
 };
 
 const RadioGroup = (props) => {
-  const { children } = props;
+  const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
-      <div>{children}</div>
+      <div className={className}>{children}</div>
     </InputContext.Provider>
   );
 };
@@ -57,6 +56,10 @@ RadioGroup.propTypes = {
     PropTypes.element,
     PropTypes.array,
   ]),
+  // extra CSS class names for the container (not applied to children)
+  className: PropTypes.string,
+  // extra CSS class names passed down to all children (not applied to container)
+  sharedClassName: PropTypes.string,
 };
 
 export {
