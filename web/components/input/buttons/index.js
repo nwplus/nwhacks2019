@@ -3,6 +3,7 @@ import SecondaryButton from './SecondaryButton';
 import ProgressGroup from './ProgressGroup';
 import { Checkbox, CheckboxGroup } from './CheckboxGroup';
 import { RadioButton, RadioGroup } from './RadioGroup';
+import ButtonGroup from './ButtonGroup';
 
 export {
   PrimaryButton,
@@ -12,4 +13,5 @@ export {
   CheckboxGroup,
   RadioButton,
   RadioGroup,
+  ButtonGroup,
 };

@@ -1,24 +1,65 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const HackerApplication = (props) => {
-  const { hackerApplication } = props;
-  if (!hackerApplication.isLoaded) return (<div />);
-  if (hackerApplication.data) return (<Redirect to="/dashboard" />);
-  return (<div className="below-nav">o hello there pls apply</div>);
+import PageOne from './pages/PageOne';
+
+import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
+
+const indexToPage = {
+  0: (<PageOne />),
 };
 
-const mapStateToProps = (state) => {
-  const { root: { hackerApplication } } = state;
-  return {
-    hackerApplication,
-  };
+const HackerApplication = (props) => {
+  const { hackerApplication } = props;
+  if (hackerApplication) return (<Redirect to="/dashboard" />);
+
+  const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext } = props;
+
+  let primaryButtonText;
+  if (activeIndex === count - 1) {
+    primaryButtonText = 'Submit application';
+  } else if (activeIndex === count - 2) {
+    primaryButtonText = 'One last step';
+  } else {
+    primaryButtonText = 'Next';
+  }
+
+  return (
+    <div className="below-nav application fill-width flex jc-center">
+      <div className="pad-ends-mega">
+        <ProgressGroup
+          count={count}
+          activeIndex={activeIndex}
+          lastValidIndex={lastValidIndex}
+          onClick={onPageChange}
+          className="pad-bottom-mega"
+          />
+        { indexToPage[activeIndex] }
+        <ButtonGroup className="pad-top-mega">
+          <SecondaryButton
+            text={activeIndex === 0 ? 'Cancel' : 'Back'}
+            onClick={onPageBack}
+            disabled={activeIndex === 0}
+            />
+          <PrimaryButton
+            text={primaryButtonText}
+            onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
+            />
+        </ButtonGroup>
+      </div>
+    </div>
+  );
 };
 
 HackerApplication.propTypes = {
-  hackerApplication: PropTypes.object.isRequired,
+  hackerApplication: PropTypes.object,
+  count: PropTypes.number,
+  activeIndex: PropTypes.number,
+  lastValidIndex: PropTypes.number,
+  onPageChange: PropTypes.func,
+  onPageBack: PropTypes.func,
+  onPageNext: PropTypes.func,
 };
 
-export default connect(mapStateToProps)(HackerApplication);
+export default HackerApplication;

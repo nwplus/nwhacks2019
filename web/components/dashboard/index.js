@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const DashBoard = (props) => {
-  const { hackerApplication } = props;
+  const { application } = props;
   let content;
 
-  if (hackerApplication.data) {
+  if (application.hacker) {
     content = 'you have one hacker application';
   } else {
     content = 'you didn\'t apply as hacker';
@@ -16,14 +16,14 @@ const DashBoard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { root: { hackerApplication } } = state;
+  const { root: { entities: { application } } } = state;
   return {
-    hackerApplication,
+    application,
   };
 };
 
 DashBoard.propTypes = {
-  hackerApplication: PropTypes.object.isRequired,
+  application: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(DashBoard);

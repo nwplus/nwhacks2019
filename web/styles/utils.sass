@@ -11,16 +11,38 @@
 
 // padding declarations
 .pad
-  &-sides
-    padding-left: 44px
-    padding-right: 44px
+  // sides
+  &-left, &-sides
+    &-xxl
+      padding-left: $spacing-xxl
+  &-right, &-sides
+    &-xxl
+      padding-right: $spacing-xxl
 
-  &-ends
-    padding-top: 48px
-    padding-bottom: 48px
+  // ends
+  &-top, &-ends
+    &-xxl
+      padding-top: $spacing-xxl
+    &-mega
+      padding-top: $spacing-mega
+  &-bottom, &-ends
+    &-xxl
+      padding-bottom: $spacing-xxl
+    &-mega
+      padding-bottom: $spacing-mega
 
 // margin declarations
 .margin
+  &-left, &-sides
+    &-xs
+      padding-left: $spacing-xs
+    &-m
+      padding-left: $spacing-s
+  &-right, &-sides
+    &-s
+      padding-right: $spacing-xs
+    &-m
+      padding-right: $spacing-s
   &-text-inputs
     > .text-input
       &:first-of-type

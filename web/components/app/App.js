@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import Main from '../Main';
 import { Login, Logout } from '../auth';
 import AdminPanel from '../admin';
-import { HackerApplication } from '../application';
+import { HackerApplication } from '../../containers/application';
 import NotFound from '../errors/NotFound';
 import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';

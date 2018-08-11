@@ -1,9 +1,6 @@
-import { ACTION_TYPES } from '../../actions';
+import { ACTION_TYPES } from '../../../../actions';
 
-const initialState = {
-  isLoaded: true,
-  data: undefined,
-};
+const initialState = null;
 
 const hackerApplication = (state = initialState, action) => {
   switch (action.type) {

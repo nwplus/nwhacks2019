@@ -1,0 +1,15 @@
+@import ./pages/PageOne
+
+div.application
+  > div
+    width: 38.889em
+
+@media only screen and (max-width: $mobile)
+  div.application > div
+    width: 100%
+    margin-left: $spacing-s
+    margin-right: $spacing-s
+
+  div.progress-button-group
+    margin-left: $spacing-xs
+    margin-right: $spacing-xs
