@@ -27,8 +27,8 @@ describe('Navbar component', () => {
         wrapper = getWrapper();
       });
 
-      test('there are six Links', () => {
-        expect(wrapper.find(Link)).toHaveProperty('length', 6);
+      test('there are seven Links', () => {
+        expect(wrapper.find(Link)).toHaveProperty('length', 7);
       });
 
       test('the first link is to home page', () => {
@@ -50,8 +50,8 @@ describe('Navbar component', () => {
         wrapper = getWrapper();
       });
 
-      test('there are six Links', () => {
-        expect(wrapper.find(Link)).toHaveProperty('length', 6);
+      test('there are seven Links', () => {
+        expect(wrapper.find(Link)).toHaveProperty('length', 7);
       });
 
       test('the first link is to home page', () => {
