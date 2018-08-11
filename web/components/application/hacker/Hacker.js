@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import PageOne from './pages/PageOne';
+import PageTwo from './pages/PageTwo';
 
 import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
 import propTypes from '../../../prop-types';
@@ -19,13 +20,19 @@ const getPrimaryButtonText = (activeIndex, count) => {
 
 const HackerApplication = (props) => {
   const { hackerApplication } = props;
-  if (!hackerApplication.isEmpty) return (<Redirect to="/dashboard" />);
+  if (hackerApplication.isSubmitted) return (<Redirect to="/dashboard" />);
 
   const { count, activeIndex, lastValidIndex, onPageChange, onPageBack, onPageNext, onHackerApplicationChange } = props;
 
   const indexToPage = {
     0: (
       <PageOne
+        hackerApplication={hackerApplication}
+        onHackerApplicationChange={onHackerApplicationChange}
+        />
+    ),
+    1: (
+      <PageTwo
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
         />

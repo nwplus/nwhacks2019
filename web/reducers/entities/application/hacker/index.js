@@ -1,8 +1,9 @@
 import { ACTION_TYPES } from '../../../../actions';
 
 export const initialState = {
-  isEmpty: true,
+  isSubmitted: false,
   firstName: '',
+  lastName: '',
 };
 
 const hackerApplication = (state = initialState, action) => {

@@ -14,7 +14,7 @@ const PasswordInput = ({
   const inputProps = {
     id,
     placeholder,
-    onChange,
+    onChange: (e) => onChange(e.target.value),
     value,
   };
 

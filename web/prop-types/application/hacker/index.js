@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default PropTypes.shape({
-  isEmpty: PropTypes.bool.isRequired,
+  isSubmitted: PropTypes.bool.isRequired,
   firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
 });

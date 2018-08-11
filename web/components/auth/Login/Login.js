@@ -30,9 +30,9 @@ class Login extends React.Component {
     });
   }
 
-  onEmailChange = event => this.setState({ email: event.target.value });
+  onEmailChange = email => this.setState({ email });
 
-  onPasswordChange = event => this.setState({ password: event.target.value });
+  onPasswordChange = password => this.setState({ password });
 
   login = (event) => {
     const { firebase } = this.props;
