@@ -40,12 +40,16 @@ describe('Hacker component', () => {
       <HackerApplication {...props} />
     );
 
+    const COUNT = 10;
+    const ACTIVE_INDEX = 8;
+    const LAST_VALID_INDEX = 9;
+
     beforeEach(() => {
       props = {
         hackerApplication: null,
-        count: 10,
-        activeIndex: 8,
-        lastValidIndex: 9,
+        count: COUNT,
+        activeIndex: ACTIVE_INDEX,
+        lastValidIndex: LAST_VALID_INDEX,
         onPageChange: jest.fn(),
         onPageBack: jest.fn(),
         onPageNext: jest.fn(),
@@ -72,15 +76,15 @@ describe('Hacker component', () => {
       });
 
       it('has correct count', () => {
-        expect(progressGroupProps).toHaveProperty('count', 10);
+        expect(progressGroupProps).toHaveProperty('count', COUNT);
       });
 
       it('has correct active index', () => {
-        expect(progressGroupProps).toHaveProperty('activeIndex', 8);
+        expect(progressGroupProps).toHaveProperty('activeIndex', ACTIVE_INDEX);
       });
 
       it('has correct last valid index', () => {
-        expect(progressGroupProps).toHaveProperty('lastValidIndex', 9);
+        expect(progressGroupProps).toHaveProperty('lastValidIndex', LAST_VALID_INDEX);
       });
 
       it('buttons beyond last valid index are disabled', () => {
