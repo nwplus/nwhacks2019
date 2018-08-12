@@ -6,7 +6,7 @@ import PageOne from './pages/PageOne';
 import PageTwo from './pages/PageTwo';
 
 import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
-import propTypes from '../../../prop-types';
+import propTypesTemplates from '../../../prop-types-templates';
 
 const getPrimaryButtonText = (activeIndex, count) => {
   if (activeIndex === count - 1) {
@@ -75,7 +75,7 @@ const HackerApplication = (props) => {
 };
 
 HackerApplication.propTypes = {
-  hackerApplication: propTypes.application.hacker,
+  hackerApplication: propTypesTemplates.application.hacker,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
   lastValidIndex: PropTypes.number,
