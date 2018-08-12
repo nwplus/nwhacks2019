@@ -46,7 +46,7 @@ const RadioGroup = (props) => {
   const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={concatClassName('radio-group', className)}>{children}</div>
+      <div className={concatClassName('flex wrap', className)}>{children}</div>
     </InputContext.Provider>
   );
 };
@@ -63,7 +63,6 @@ RadioGroup.propTypes = {
 
       // see RadioButton.propTypes
       name,
-      value,
       selected,
       disabled,
       onChange,

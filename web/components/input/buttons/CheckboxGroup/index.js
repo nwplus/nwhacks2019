@@ -46,7 +46,7 @@ const CheckboxGroup = (props) => {
   const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={concatClassName('checkbox-group', className)}>{children}</div>
+      <div className={concatClassName('flex wrap', className)}>{children}</div>
     </InputContext.Provider>
   );
 };
@@ -63,7 +63,6 @@ CheckboxGroup.propTypes = {
 
       // see Checkbox.propTypes
       name,
-      value,
       defaultChecked,
       disabled,
       onChange,
