@@ -8,7 +8,7 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
   <InputContext.Consumer>
     {context => (
       <div className={concatClassName('checkbox margin-bottom-s margin-left-s', (className || context.sharedClassName))}>
-        <label>
+        <label className="clickable">
           <input
             type="checkbox"
             name={name || context.name}

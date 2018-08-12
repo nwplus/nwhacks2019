@@ -8,7 +8,6 @@
   input[type="checkbox"]
     position: absolute
     opacity: 0
-    cursor: pointer
 
     &:checked ~ .checkmark
       background-image: url('../assets/checkbox/checked.svg')
@@ -16,13 +15,11 @@
         display: block
 
     &:disabled
-      cursor: not-allowed
+      @extend .unclickable
       &~ .checkmark
-        cursor: not-allowed
-        opacity: 0.4
+        @extend .unclickable, .opaque-semi
         &~ .label-text
-          cursor: not-allowed
-          opacity: 0.4
+          @extend .unclickable, .opaque-semi
 
   .checkmark
     position: absolute
@@ -31,7 +28,6 @@
     height: 24px
     width: 24px
     background-image: url('../assets/checkbox/unchecked.svg')
-    cursor: pointer
 
     &:after
       content: ""
@@ -39,5 +35,4 @@
       display: none
   
   .label-text
-    cursor: pointer
     white-space: nowrap

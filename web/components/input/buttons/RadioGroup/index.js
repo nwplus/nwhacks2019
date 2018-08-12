@@ -8,7 +8,7 @@ const RadioButton = ({ name, value, label, className, selected, disabled, onChan
   <InputContext.Consumer>
     {context => (
       <div className={concatClassName('radio-button margin-bottom-s margin-left-s', (className || context.sharedClassName))}>
-        <label>
+        <label className="clickable">
           <input
             type="radio"
             name={name || context.name}
