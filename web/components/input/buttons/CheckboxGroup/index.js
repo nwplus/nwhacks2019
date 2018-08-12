@@ -17,7 +17,7 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
             disabled={disabled || context.disabled}
             onChange={onChange || context.onChange}
           />
-          <span className="checkmark" />
+          <span className="checkmark size-icon" />
           <span className="label-text margin-left-l">{label}</span>
         </label>
       </div>
