@@ -1,32 +1,17 @@
 .radio-button
-  @extend .user-select-none
-
   &:hover input:enabled ~ .radio-img
     background-image: url('../assets/radio/hover.svg')
 
   input[type="radio"]
-    position: absolute
-    opacity: 0
-
     &:checked ~ .radio-img
       background-image: url('../assets/radio/selected.svg')
-      &:after
-        display: block
 
     &:disabled
       @extend .unclickable
       &~ .radio-img
-        @extend .unclickable, .opaque-semi
+        @extend .unclickable, .opacity-40
         &~ .label-text
-          @extend .unclickable, .opaque-semi
+          @extend .unclickable, .opacity-40
 
   .radio-img
     background-image: url('../assets/radio/unselected.svg')
-
-    &:after
-      content: ""
-      position: absolute
-      display: none
-  
-  .label-text
-    white-space: nowrap

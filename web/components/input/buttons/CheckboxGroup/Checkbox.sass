@@ -1,32 +1,17 @@
 .checkbox
-  @extend .user-select-none
-
   &:hover input:enabled ~ .checkmark
     background-image: url('../assets/checkbox/hover.svg')
 
   input[type="checkbox"]
-    position: absolute
-    opacity: 0
-
     &:checked ~ .checkmark
       background-image: url('../assets/checkbox/checked.svg')
-      &:after
-        display: block
 
     &:disabled
       @extend .unclickable
       &~ .checkmark
-        @extend .unclickable, .opaque-semi
+        @extend .unclickable, .opacity-40
         &~ .label-text
-          @extend .unclickable, .opaque-semi
+          @extend .unclickable, .opacity-40
 
   .checkmark
     background-image: url('../assets/checkbox/unchecked.svg')
-
-    &:after
-      content: ""
-      position: absolute
-      display: none
-  
-  .label-text
-    white-space: nowrap
