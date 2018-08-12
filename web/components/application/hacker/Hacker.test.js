@@ -236,7 +236,6 @@ describe('Hacker component', () => {
           });
 
           it('calls onHackerApplicationChange when input changes', () => {
-            console.log(textInput.html());
             textInput.simulate('change');
             const { onHackerApplicationChange } = props;
             expect(onHackerApplicationChange).toHaveBeenCalled();
@@ -276,7 +275,6 @@ describe('Hacker component', () => {
           });
 
           it('calls onHackerApplicationChange when input changes', () => {
-            console.log(textInput.html());
             textInput.simulate('change');
             const { onHackerApplicationChange } = props;
             expect(onHackerApplicationChange).toHaveBeenCalled();

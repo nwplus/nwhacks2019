@@ -2,11 +2,12 @@ import React from 'react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 
-import propTypes from '../../../../prop-types';
+import propTypesTemplates from '../../../../prop-types-templates';
 import { TextInput } from '../../../input/text';
 
 // TODO: Update design for page two
-// For now, just copy pasted design from page one, since we're only concerned about functionality at the moment
+// For now, just copy pasted design from page one,
+// since we're only concerned about functionality at the moment
 const PageTwo = (props) => {
   const { hackerApplication, onHackerApplicationChange } = props;
   const { lastName } = hackerApplication;
@@ -40,7 +41,7 @@ const PageTwo = (props) => {
 };
 
 PageTwo.propTypes = {
-  hackerApplication: propTypes.application.hacker,
+  hackerApplication: propTypesTemplates.application.hacker,
   onHackerApplicationChange: PropTypes.func.isRequired,
 };
 

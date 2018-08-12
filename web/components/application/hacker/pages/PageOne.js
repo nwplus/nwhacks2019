@@ -2,7 +2,7 @@ import React from 'react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 
-import propTypes from '../../../../prop-types';
+import propTypesTemplates from '../../../../prop-types-templates';
 import { TextInput } from '../../../input/text';
 
 const PageOne = (props) => {
@@ -38,7 +38,7 @@ const PageOne = (props) => {
 };
 
 PageOne.propTypes = {
-  hackerApplication: propTypes.application.hacker,
+  hackerApplication: propTypesTemplates.application.hacker,
   onHackerApplicationChange: PropTypes.func.isRequired,
 };
 
