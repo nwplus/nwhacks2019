@@ -45,7 +45,7 @@ const RadioGroup = (props) => {
   const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={className}>{children}</div>
+      <div className={`radio-group ${className}`}>{children}</div>
     </InputContext.Provider>
   );
 };
