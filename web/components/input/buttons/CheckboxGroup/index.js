@@ -63,7 +63,6 @@ CheckboxGroup.propTypes = {
 
       // see Checkbox.propTypes
       name,
-      value,
       defaultChecked,
       disabled,
       onChange,
