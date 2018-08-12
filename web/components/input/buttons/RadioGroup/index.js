@@ -7,7 +7,7 @@ const InputContext = React.createContext({});
 const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={concatClassName("radio-button", (className || context.sharedClassName))}>
+      <div className={concatClassName('radio-button', (className || context.sharedClassName))}>
         <label>
           <input
             type="radio"
@@ -43,10 +43,10 @@ RadioButton.propTypes = {
 };
 
 const RadioGroup = (props) => {
-  const { children, className } = props;
+  const { children, className, sharedClassName } = props;
   return (
     <InputContext.Provider value={props}>
-    <div className={concatClassName("radio-group", className)}>{children}</div>
+      <div className={concatClassName('radio-group', className)}>{children}</div>
     </InputContext.Provider>
   );
 };

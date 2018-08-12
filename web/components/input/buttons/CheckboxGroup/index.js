@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { concatClassName } from '../../utils';
+import { concatClassName } from '../../../utils';
 
 const InputContext = React.createContext({});
 
 const Checkbox = ({ name, value, label, className, checked, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={concatClassName("checkbox", (className || context.sharedClassName))}>
+      <div className={concatClassName('checkbox', (className || context.sharedClassName))}>
         <label>
           <input
             type="checkbox"
@@ -46,7 +46,7 @@ const CheckboxGroup = (props) => {
   const { children, className, sharedClassName } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={concatClassName("checkbox-group", className)}>{children}</div>
+      <div className={concatClassName('checkbox-group', className)}>{children}</div>
     </InputContext.Provider>
   );
 };
