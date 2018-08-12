@@ -44,6 +44,7 @@ Checkbox.propTypes = {
 
 const CheckboxGroup = (props) => {
   const { children, className, sharedClassName } = props;
+  props.sharedClassName = sharedClassName;
   return (
     <InputContext.Provider value={props}>
       <div className={concatClassName('checkbox-group', className)}>{children}</div>
