@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import propTypes from '../../../../prop-types';
 import { TextInput } from '../../../input/text';
 
+// TODO: Update design for page two
+// For now, just copy pasted design from page one, since we're only concerned about functionality at the moment
 const PageTwo = (props) => {
   const { hackerApplication, onHackerApplicationChange } = props;
   const { lastName } = hackerApplication;
