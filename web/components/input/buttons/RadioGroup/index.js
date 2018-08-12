@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import concatClassName from '../../../utils';
 
 const InputContext = React.createContext({});
 
 const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={["radio-button", (className || context.sharedClassName)].join(' ')}>
+      <div className={concatClassName("radio-button", (className || context.sharedClassName))}>
         <label>
           <input
             type="radio"
@@ -45,7 +46,7 @@ const RadioGroup = (props) => {
   const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={`radio-group ${className}`}>{children}</div>
+    <div className={concatClassName("radio-group", className)}>{children}</div>
     </InputContext.Provider>
   );
 };
