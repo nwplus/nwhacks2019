@@ -43,7 +43,7 @@ Checkbox.propTypes = {
 };
 
 const CheckboxGroup = (props) => {
-  const { children, className, sharedClassName } = props;
+  const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
       <div className={concatClassName('checkbox-group', className)}>{children}</div>
@@ -59,8 +59,18 @@ CheckboxGroup.propTypes = {
   ]),
   // extra CSS class names for the container (not applied to children)
   className: PropTypes.string,
-  // extra CSS class names passed down to all children (not applied to container)
-  sharedClassName: PropTypes.string,
+  /* Additional optional parameters implicitly passed down to children
+      
+      // see Checkbox.propTypes
+      name, 
+      value, 
+      defaultChecked, 
+      disabled,
+      onChange,
+
+      // passed down to all children (but not applied to container)
+      sharedClassName: PropTypes.string,
+  */
 };
 
 export {
