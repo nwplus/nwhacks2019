@@ -7,7 +7,7 @@ const InputContext = React.createContext({});
 const Checkbox = ({ name, value, label, className, checked, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={concatClassName('checkbox', (className || context.sharedClassName))}>
+      <div className={concatClassName('checkbox margin-bottom-s margin-left-s', (className || context.sharedClassName))}>
         <label>
           <input
             type="checkbox"
@@ -18,7 +18,7 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
             onChange={onChange || context.onChange}
           />
           <span className="checkmark" />
-          <span className="label-text">{label}</span>
+          <span className="label-text margin-left-l">{label}</span>
         </label>
       </div>
     )}

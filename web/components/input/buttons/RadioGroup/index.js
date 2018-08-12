@@ -7,7 +7,7 @@ const InputContext = React.createContext({});
 const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={concatClassName('radio-button', (className || context.sharedClassName))}>
+      <div className={concatClassName('radio-button margin-bottom-s margin-left-s', (className || context.sharedClassName))}>
         <label>
           <input
             type="radio"
@@ -18,7 +18,7 @@ const RadioButton = ({ name, value, label, className, selected, disabled, onChan
             onChange={onChange || context.onChange}
           />
           <span className="radio-img" />
-          <span className="label-text">{label}</span>
+          <span className="label-text margin-left-l">{label}</span>
         </label>
       </div>
     )}
