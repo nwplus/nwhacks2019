@@ -1,7 +1,5 @@
 // contains helper functions shared by component library
 
-const concatClassName = (baseClassName, extraClassName = undefined) => {
-  return extraClassName ? [baseClassName, extraClassName].join(" ") : baseClassName;
-}
+const concatClassName = (baseClassName, extraClassName = undefined) => (extraClassName ? [baseClassName, extraClassName].join(' ') : baseClassName);
 
-export { concatClassName }
+export { concatClassName };
