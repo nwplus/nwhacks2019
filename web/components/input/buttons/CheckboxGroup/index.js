@@ -60,11 +60,11 @@ CheckboxGroup.propTypes = {
   // extra CSS class names for the container (not applied to children)
   className: PropTypes.string,
   /* Additional optional parameters implicitly passed down to children
-      
+
       // see Checkbox.propTypes
-      name, 
-      value, 
-      defaultChecked, 
+      name,
+      value,
+      defaultChecked,
       disabled,
       onChange,
 
