@@ -45,7 +45,7 @@ const CheckboxGroup = (props) => {
   const { children, className, sharedClassName } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={`${className}`}>{children}</div>
+      <div className={`checkbox-group ${className}`}>{children}</div>
     </InputContext.Provider>
   );
 };
