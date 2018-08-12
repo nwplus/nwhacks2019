@@ -44,7 +44,6 @@ RadioButton.propTypes = {
 
 const RadioGroup = (props) => {
   const { children, className, sharedClassName } = props;
-  props.sharedClassName = sharedClassName;
   return (
     <InputContext.Provider value={props}>
       <div className={concatClassName('radio-group', className)}>{children}</div>
