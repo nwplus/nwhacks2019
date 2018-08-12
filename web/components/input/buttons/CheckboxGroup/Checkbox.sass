@@ -1,49 +1,49 @@
 .checkbox-group
-  @extend .flex, .wrap;
+  @extend .flex, .wrap
 
 .checkbox
-  @extend .user-select-none;
-  margin-left: 20px;
-  position: relative;
-  margin-bottom: $spacing-s;
+  @extend .user-select-none
+  margin-left: 20px
+  position: relative
+  margin-bottom: $spacing-s
 
   &:hover input:enabled ~ .checkmark
-    background-image: url('../assets/checkbox/hover.svg');
+    background-image: url('../assets/checkbox/hover.svg')
 
   input[type="checkbox"]
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+    position: absolute
+    opacity: 0
+    cursor: pointer
 
     &:checked ~ .checkmark
-      background-image: url('../assets/checkbox/checked.svg');
+      background-image: url('../assets/checkbox/checked.svg')
       &:after
-        display: block;
+        display: block
 
     &:disabled
-      cursor: not-allowed;
+      cursor: not-allowed
       &~ .checkmark
-        cursor: not-allowed;
-        opacity: 0.4;
+        cursor: not-allowed
+        opacity: 0.4
         &~ .label-text
-          cursor: not-allowed;
-          opacity: 0.4;
+          cursor: not-allowed
+          opacity: 0.4
 
   .checkmark
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 24px;
-    width: 24px;
+    position: absolute
+    top: 0
+    left: 0
+    height: 24px
+    width: 24px
     background-image: url('../assets/checkbox/unchecked.svg')
-    cursor: pointer;
+    cursor: pointer
 
     &:after
-      content: "";
-      position: absolute;
-      display: none;
+      content: ""
+      position: absolute
+      display: none
   
   .label-text
-    cursor: pointer;
-    padding-left: 34px;
-    white-space: nowrap;
+    cursor: pointer
+    padding-left: 34px
+    white-space: nowrap
