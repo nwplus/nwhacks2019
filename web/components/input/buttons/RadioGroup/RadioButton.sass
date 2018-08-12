@@ -1,6 +1,5 @@
 .radio-button
   @extend .user-select-none
-  position: relative
 
   &:hover input:enabled ~ .radio-img
     background-image: url('../assets/radio/hover.svg')
@@ -22,9 +21,6 @@
           @extend .unclickable, .opaque-semi
 
   .radio-img
-    position: absolute
-    top: 0
-    left: 0
     background-image: url('../assets/radio/unselected.svg')
 
     &:after

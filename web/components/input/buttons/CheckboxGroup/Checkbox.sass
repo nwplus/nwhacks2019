@@ -1,6 +1,5 @@
 .checkbox
   @extend .user-select-none
-  position: relative
 
   &:hover input:enabled ~ .checkmark
     background-image: url('../assets/checkbox/hover.svg')
@@ -22,9 +21,6 @@
           @extend .unclickable, .opaque-semi
 
   .checkmark
-    position: absolute
-    top: 0
-    left: 0
     background-image: url('../assets/checkbox/unchecked.svg')
 
     &:after

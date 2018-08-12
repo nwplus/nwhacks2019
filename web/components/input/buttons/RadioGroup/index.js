@@ -17,7 +17,7 @@ const RadioButton = ({ name, value, label, className, selected, disabled, onChan
             disabled={disabled || context.disabled}
             onChange={onChange || context.onChange}
           />
-          <span className="radio-img size-icon" />
+          <span className="radio-img size-icon pos-abs" />
           <span className="label-text margin-left-l">{label}</span>
         </label>
       </div>
