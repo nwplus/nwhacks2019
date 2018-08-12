@@ -1,18 +1,8 @@
 .radio-button
+  @extend .user-select-none;
   margin-left: 20px;
-  display: inline-block;
-  font-family: Apercu Pro;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 23px;
-  color: $primary;
   position: relative;
-  margin-bottom: 8px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  margin-bottom: $spacing-xs;
 
   &:hover input:enabled ~ .radio-img
     background-image: url('../assets/radio/hover.svg');
@@ -43,6 +33,7 @@
     height: 24px;
     width: 24px;
     background-image: url('../assets/radio/unselected.svg')
+    cursor: pointer;
 
     &:after
       content: "";
@@ -50,5 +41,6 @@
       display: none;
   
   .label-text
+    cursor: pointer;
     padding-left: 34px;
     white-space: nowrap;
