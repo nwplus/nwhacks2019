@@ -64,7 +64,7 @@ RadioGroup.propTypes = {
       // see RadioButton.propTypes
       name,
       value,
-      defaultChecked,
+      selected,
       disabled,
       onChange,
 
