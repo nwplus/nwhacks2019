@@ -202,5 +202,87 @@ describe('Hacker component', () => {
         });
       });
     });
+
+    describe('pages', () => {
+      describe('when active index is 0', () => {
+        beforeEach(() => {
+          props = {
+            hackerApplication: {
+              isSubmitted: false,
+              firstName: '',
+              lastName: '',
+            },
+            count: COUNT,
+            activeIndex: 0,
+            lastValidIndex: LAST_VALID_INDEX,
+            onPageChange: jest.fn(),
+            onPageBack: jest.fn(),
+            onPageNext: jest.fn(),
+            onHackerApplicationChange: jest.fn(),
+          };
+
+          wrapper = getWrapper();
+        });
+
+        it('page one is rendered', () => {
+          expect(wrapper.find('div#hacker-application-page-1')).toHaveLength(1);
+        });
+
+        describe('text input', () => {
+          let textInput;
+
+          beforeEach(() => {
+            textInput = wrapper.find('input');
+          });
+
+          it('calls onHackerApplicationChange when input changes', () => {
+            console.log(textInput.html());
+            textInput.simulate('change');
+            const { onHackerApplicationChange } = props;
+            expect(onHackerApplicationChange).toHaveBeenCalled();
+          });
+        });
+      });
+
+      describe('when active index is 1', () => {
+        beforeEach(() => {
+          props = {
+            hackerApplication: {
+              isSubmitted: false,
+              firstName: '',
+              lastName: '',
+            },
+            count: COUNT,
+            activeIndex: 1,
+            lastValidIndex: LAST_VALID_INDEX,
+            onPageChange: jest.fn(),
+            onPageBack: jest.fn(),
+            onPageNext: jest.fn(),
+            onHackerApplicationChange: jest.fn(),
+          };
+
+          wrapper = getWrapper();
+        });
+
+        it('page two is rendered', () => {
+          expect(wrapper.find('div#hacker-application-page-2')).toHaveLength(1);
+        });
+
+        describe('text input', () => {
+          let textInput;
+
+          beforeEach(() => {
+            textInput = wrapper.find('input');
+          });
+
+          it('calls onHackerApplicationChange when input changes', () => {
+            console.log(textInput.html());
+            textInput.simulate('change');
+            const { onHackerApplicationChange } = props;
+            expect(onHackerApplicationChange).toHaveBeenCalled();
+          });
+        });
+      });
+    });
   });
 });

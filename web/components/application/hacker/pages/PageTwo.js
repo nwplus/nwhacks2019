@@ -10,7 +10,7 @@ const PageTwo = (props) => {
   const { lastName } = hackerApplication;
 
   return (
-    <div className="hacker-application-page" id="hacker-application-page-1">
+    <div className="hacker-application-page" id="hacker-application-page-2">
       <h1>About you <span role="img" aria-label="book">📚</span></h1>
       <p>
       nwHacks is Western Canada’s largest collegiate hackathon taking place
