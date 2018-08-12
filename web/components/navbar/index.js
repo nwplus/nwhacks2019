@@ -20,6 +20,8 @@ const getButton = (buttonType) => {
   }
 };
 
+const NAVBAR_HEIGHT = 96;
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -45,10 +47,11 @@ class Navbar extends React.Component {
 
     // Calculate position
     const offset = window.pageYOffset || document.documentElement.scrollTop;
-    const atTop = offset < 96;
+    const atTop = offset < NAVBAR_HEIGHT;
 
-    // Calculate transparency
-    const transparent = offset < 256;
+    // Calculate transparency - turn navbar transparent if some distance under
+    // the navbar
+    const transparent = offset < (NAVBAR_HEIGHT * 3);
 
     // Update state
     this.setState({
