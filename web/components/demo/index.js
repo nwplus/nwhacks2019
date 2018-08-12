@@ -54,15 +54,14 @@ class FrontEndComponents extends React.Component {
           <Checkbox label="Label 1" value="value1" />
           <Checkbox label="Label 2" value="value2" disabled />
           <Checkbox label="Label 3" value="value3" name="new_checkbox_name_1" />
-        </CheckboxGroup><br />
+        </CheckboxGroup>
         <Checkbox label="Ungrouped Checkbox" value="value3" name="new_checkbox_name_2" />
-        <br /><br />
         <RadioGroup name="test_radio_group" className="dir-col">
           <RadioButton label="Label 1" value="value1" selected />
           <RadioButton label="Label 2" value="value2" disabled />
           <RadioButton label="Label 3" value="value3" />
         </RadioGroup>
-        <br /><br />
+        <br />
         <div>
           <ProgressGroup
             count={10}
