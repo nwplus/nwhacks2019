@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { concatClassName } from '../../../utils';
 
 const InputContext = React.createContext({});
 
 const Checkbox = ({ name, value, label, className, checked, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={concatClassName('checkbox user-select-none margin-bottom-s margin-left-s', (className || context.sharedClassName))}>
+      <div className={`checkbox user-select-none margin-bottom-s margin-left-s ${className}`}>
         <label className="clickable">
           <input
             type="checkbox"
@@ -47,7 +46,7 @@ const CheckboxGroup = (props) => {
   const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={concatClassName('flex wrap', className)}>{children}</div>
+      <div className={`flex wrap ${className}`}>{children}</div>
     </InputContext.Provider>
   );
 };
@@ -68,8 +67,6 @@ CheckboxGroup.propTypes = {
       disabled,
       onChange,
 
-      // passed down to all children (but not applied to container)
-      sharedClassName: PropTypes.string,
   */
 };
 
