@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className }) => {
+const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className = '' }) => {
   const buttons = [];
   for (let i = 0; i < count; i += 1) {
     const isActive = (i === activeIndex);
@@ -34,7 +34,7 @@ ProgressGroup.propTypes = {
   lastValidIndex: PropTypes.number,
 
   // class name for styling
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
 };
 
 export default ProgressGroup;
