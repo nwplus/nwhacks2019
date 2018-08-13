@@ -59,7 +59,7 @@ class Login extends React.Component {
             className="input-group">
             <h2 className="pad-sides-xxl">Sign in</h2>
             <div className="card split flex">
-              <div className="pad-ends-xxl pad-sides-xxl margin-text-inputs">
+              <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
                 <TextInput
                   placeholder="Enter your email"
                   value={email}
