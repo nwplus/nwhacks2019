@@ -42,6 +42,10 @@ Checkbox.propTypes = {
   onChange: PropTypes.func,
 };
 
+Checkbox.defaultProps = {
+  className: '',
+};
+
 const CheckboxGroup = (props) => {
   const { children, className } = props;
   return (
@@ -68,6 +72,10 @@ CheckboxGroup.propTypes = {
       onChange,
 
   */
+};
+
+CheckboxGroup.defaultProps = {
+  className: '',
 };
 
 export {

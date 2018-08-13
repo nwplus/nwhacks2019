@@ -42,6 +42,10 @@ RadioButton.propTypes = {
   onChange: PropTypes.func,
 };
 
+RadioButton.defaultProps = {
+  className: '',
+};
+
 const RadioGroup = (props) => {
   const { children, className } = props;
   return (
@@ -68,6 +72,10 @@ RadioGroup.propTypes = {
       onChange,
 
   */
+};
+
+RadioGroup.defaultProps = {
+  className: '',
 };
 
 export {
