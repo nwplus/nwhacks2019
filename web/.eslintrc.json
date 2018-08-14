@@ -11,6 +11,7 @@
     "jest"
   ],
   "rules": {
+    "no-return-assign": 0,
     "no-param-reassign": 0,
     "import/prefer-default-export": 0,
     "prefer-template": 0,

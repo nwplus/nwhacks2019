@@ -33,6 +33,7 @@
 
 // margin declarations
 .margin
+<<<<<<< HEAD
   &-left, &-sides
     &-xs
       margin-left: $spacing-xs
@@ -69,6 +70,18 @@
       margin-bottom: $spacing-m
     &-l
       margin-bottom: $spacing-l
+=======
+  &-sides
+    margin-left: 24px
+    margin-right: 24px
+    &-large
+      margin-left: 36px
+      margin-right: 36px
+
+  &-ends
+    margin-top: 12px
+    margin-bottom: 12px
+>>>>>>> 22303c8... Redesign navbar css, update logo
 
   &-text-inputs
     > .text-input
@@ -77,9 +90,20 @@
       &:last-of-type
         margin-bottom: 56px
 
+  &-horizontal
+    &-divs
+      > div
+        &:first-of-type
+          margin-left: 24px
+        &:last-of-type
+          margin-right: 24px
+
 // flexbox utility classes
 .flex
   display: flex
+
+  &-inline
+    display: inline-flex
 
   // flex-directions
   &.dir
@@ -88,6 +112,12 @@
 
   // justify-content
   &.jc
+    &-start
+      justify-content: flex-start
+
+    &-end
+      justify-content: flex-end
+
     &-center
       justify-content: center
 
