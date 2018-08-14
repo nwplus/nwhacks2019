@@ -19,6 +19,10 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className 
   return (<div className={`progress-button-group ${className}`}>{buttons}</div>);
 };
 
+ProgressGroup.defaultProps = {
+  className: '',
+};
+
 ProgressGroup.propTypes = {
   // number of elements to create
   count: PropTypes.number.isRequired,

@@ -11,6 +11,10 @@ const PrimaryButton = ({ text, onClick, disabled, className }) => (
   </button>
 );
 
+PrimaryButton.defaultProps = {
+  className: '',
+};
+
 PrimaryButton.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
