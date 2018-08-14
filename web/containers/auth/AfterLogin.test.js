@@ -16,14 +16,13 @@ describe('AfterLoginContainer', () => {
 
   describe('when hacker application is loaded', () => {
     describe('when data is not undefined', () => {
-      const action = jest.fn();
-
       beforeEach(() => {
         const hackerApplication = { isLoaded: true, data: { a: 'b' } };
 
         props = {
           hackerApplication,
-          storeHackerApplication: action,
+          storeHackerApplication: jest.fn(),
+          resetState: jest.fn(),
         };
 
         wrapper = getWrapper();
@@ -39,21 +38,26 @@ describe('AfterLoginContainer', () => {
         });
 
         it('storeHackerApplication action is called', () => {
-          expect(action.mock.calls).toHaveLength(1);
-          expect(action.mock.calls[0][0]).toEqual({ a: 'b' });
+          const { storeHackerApplication } = props;
+          expect(storeHackerApplication.mock.calls).toHaveLength(1);
+          expect(storeHackerApplication.mock.calls[0][0]).toEqual({ a: 'b' });
+        });
+
+        it('resets state', () => {
+          const { resetState } = props;
+          expect(resetState).toHaveBeenCalled();
         });
       });
     });
 
     describe('when data is undefined', () => {
-      const action = jest.fn();
+      const hackerApplication = { isLoaded: true, data: undefined };
 
       beforeEach(() => {
-        const hackerApplication = { isLoaded: true, data: undefined };
-
         props = {
           hackerApplication,
-          storeHackerApplication: action,
+          storeHackerApplication: jest.fn(),
+          resetState: jest.fn(),
         };
 
         wrapper = getWrapper();
@@ -68,23 +72,27 @@ describe('AfterLoginContainer', () => {
           wrapper.unmount();
         });
 
-        it('storeHackerApplication action is called', () => {
-          expect(action.mock.calls).toHaveLength(1);
-          expect(action.mock.calls[0][0]).toEqual(null);
+        it('storeHackerApplication action is not called', () => {
+          const { storeHackerApplication } = props;
+          expect(storeHackerApplication).not.toHaveBeenCalled();
+        });
+
+        it('resets state', () => {
+          const { resetState } = props;
+          expect(resetState).toHaveBeenCalled();
         });
       });
     });
   });
 
   describe('when hacker application is not loaded', () => {
-    const action = jest.fn();
-
     beforeEach(() => {
       const hackerApplication = { isLoaded: false, data: undefined };
 
       props = {
         hackerApplication,
-        storeHackerApplication: action,
+        storeHackerApplication: jest.fn(),
+        resetState: jest.fn(),
       };
 
       wrapper = getWrapper();
@@ -100,7 +108,13 @@ describe('AfterLoginContainer', () => {
       });
 
       it('storeHackerApplication action is not called', () => {
-        expect(action.mock.calls).toHaveLength(0);
+        const { storeHackerApplication } = props;
+        expect(storeHackerApplication).not.toHaveBeenCalled();
+      });
+
+      it('does not reset state', () => {
+        const { resetState } = props;
+        expect(resetState).not.toHaveBeenCalled();
       });
     });
   });

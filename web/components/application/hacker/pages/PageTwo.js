@@ -5,12 +5,15 @@ import PropTypes from 'prop-types';
 import propTypesTemplates from '../../../../prop-types-templates';
 import { TextInput } from '../../../input/text';
 
-const PageOne = (props) => {
+// TODO: Update design for page two
+// For now, just copy pasted design from page one,
+// since we're only concerned about functionality at the moment
+const PageTwo = (props) => {
   const { hackerApplication, onHackerApplicationChange } = props;
-  const { firstName } = hackerApplication;
+  const { lastName } = hackerApplication;
 
   return (
-    <div className="hacker-application-page" id="hacker-application-page-1">
+    <div className="hacker-application-page" id="hacker-application-page-2">
       <h1>About you <span role="img" aria-label="book">📚</span></h1>
       <p>
       nwHacks is Western Canada’s largest collegiate hackathon taking place
@@ -21,13 +24,13 @@ const PageOne = (props) => {
       we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
       </p>
       <TextInput
-        label="First Name"
-        id="first-name"
-        value={firstName}
-        onChange={(fname) => {
+        label="Last Name"
+        id="last-name"
+        value={lastName}
+        onChange={(lname) => {
           const updatedHackerApplication = update(hackerApplication, {
             $merge: {
-              firstName: fname,
+              lastName: lname,
             },
           });
           onHackerApplicationChange(updatedHackerApplication);
@@ -37,9 +40,9 @@ const PageOne = (props) => {
   );
 };
 
-PageOne.propTypes = {
+PageTwo.propTypes = {
   hackerApplication: propTypesTemplates.application.hacker,
   onHackerApplicationChange: PropTypes.func.isRequired,
 };
 
-export default PageOne;
+export default PageTwo;

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { HackerApplication } from '../../../components/application';
-import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from '../../../actions';
+import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication } from '../../../actions';
+import propTypesTemplates from '../../../prop-types-templates';
 
 export class HackerApplicationContainer extends React.Component {
   onPageChange = (activeIndex) => {
@@ -26,6 +27,11 @@ export class HackerApplicationContainer extends React.Component {
     this.onPageChange(nextIndex);
   }
 
+  onHackerApplicationChange = (app) => {
+    const { updateApplication } = this.props;
+    updateApplication(app);
+  }
+
   render() {
     const { hackerApplication, activeIndex, lastValidIndex } = this.props;
     return (
@@ -37,6 +43,7 @@ export class HackerApplicationContainer extends React.Component {
         onPageChange={this.onPageChange}
         onPageNext={this.onPageNext}
         onPageBack={this.onPageBack}
+        onHackerApplicationChange={this.onHackerApplicationChange}
         />
     );
   }
@@ -60,6 +67,7 @@ const mapStateToProps = (state) => {
       },
     },
   } = state;
+
   return {
     hackerApplication,
     activeIndex,
@@ -75,15 +83,19 @@ const mapDispatchToProps = (dispatch) => {
     changeLastActiveIndex: (index) => {
       dispatch(changeHackerApplicationLastValidIndex(index));
     },
+    updateApplication: (app) => {
+      dispatch(addHackerApplication(app));
+    },
   };
 };
 
 HackerApplicationContainer.propTypes = {
-  hackerApplication: PropTypes.object,
+  hackerApplication: propTypesTemplates.application.hacker,
   changePage: PropTypes.func.isRequired,
   changeLastActiveIndex: PropTypes.func.isRequired,
   activeIndex: PropTypes.number.isRequired,
   lastValidIndex: PropTypes.number.isRequired,
+  updateApplication: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);
