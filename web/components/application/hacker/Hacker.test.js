@@ -14,7 +14,31 @@ describe('Hacker component', () => {
   let props;
   let wrapper;
 
-  describe('when hacker application exists', () => {
+  describe('when hacker application is cancelled', () => {
+    const getWrapper = () => shallow(
+      <HackerApplication {...props} />
+    );
+
+    beforeEach(() => {
+      props = {
+        hackerApplication: {
+          firstName: 'John',
+          lastName: 'Doe',
+          isSubmitted: false,
+          onHackerApplicationChange: jest.fn(),
+        },
+        cancelled: true,
+      };
+
+      wrapper = getWrapper();
+    });
+
+    it('redirects to home page', () => {
+      expect(wrapper.find(Redirect).props()).toHaveProperty('to', '/');
+    });
+  });
+
+  describe('when hacker application is already submitted', () => {
     const getWrapper = () => shallow(
       <HackerApplication {...props} />
     );
@@ -27,17 +51,18 @@ describe('Hacker component', () => {
           isSubmitted: true,
           onHackerApplicationChange: jest.fn(),
         },
+        cancelled: false,
       };
 
       wrapper = getWrapper();
     });
 
-    it('redirects', () => {
+    it('redirects to dashboard', () => {
       expect(wrapper.find(Redirect).props()).toHaveProperty('to', '/dashboard');
     });
   });
 
-  describe('when hacker application does not exist', () => {
+  describe('when hacker application has not been submitted', () => {
     const getWrapper = () => mount(
       <HackerApplication {...props} />
     );
@@ -60,6 +85,8 @@ describe('Hacker component', () => {
         onPageBack: jest.fn(),
         onPageNext: jest.fn(),
         onHackerApplicationChange: jest.fn(),
+        cancelHackerApplication: jest.fn(),
+        cancelled: false,
       };
 
       wrapper = getWrapper();
@@ -148,16 +175,13 @@ describe('Hacker component', () => {
           }
         });
 
-        it('is disabled on first page', () => {
+        it('calls cancelHackerApplication on click', () => {
           for (let i = 0; i <= props.count; i += 1) {
             props.activeIndex = i;
             wrapper = getWrapper();
 
-            if (i === 0) {
-              expect(wrapper.find(SecondaryButton).props().disabled).toBeTruthy();
-            } else {
-              expect(wrapper.find(SecondaryButton).props().disabled).toBeFalsy();
-            }
+            wrapper.find(SecondaryButton).simulate('click');
+            expect(props.cancelHackerApplication).toHaveBeenCalled();
           }
         });
       });
@@ -219,6 +243,7 @@ describe('Hacker component', () => {
             onPageBack: jest.fn(),
             onPageNext: jest.fn(),
             onHackerApplicationChange: jest.fn(),
+            cancelled: false,
           };
 
           wrapper = getWrapper();
@@ -258,6 +283,7 @@ describe('Hacker component', () => {
             onPageBack: jest.fn(),
             onPageNext: jest.fn(),
             onHackerApplicationChange: jest.fn(),
+            cancelled: false,
           };
 
           wrapper = getWrapper();

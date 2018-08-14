@@ -21,7 +21,7 @@ const getPrimaryButtonText = (activeIndex, count) => {
 const HackerApplication = (props) => {
   const { hackerApplication, cancelled } = props;
   if (hackerApplication.isSubmitted) return (<Redirect to="/dashboard" />);
-  if (cancelled)  return (<Redirect to="/" />);
+  if (cancelled) return (<Redirect to="/" />);
 
   const {
     count,

@@ -3,12 +3,6 @@ import { combineReducers } from 'redux';
 import application from './application';
 import { ACTION_TYPES } from '../../actions';
 
-// const uiReducers = combineReducers({
-//   application,
-// });
-
-// export default uiReducers;
-
 const uiReducers = combineReducers({
   application,
 });

@@ -115,6 +115,7 @@ HackerApplicationContainer.propTypes = {
   activeIndex: PropTypes.number.isRequired,
   lastValidIndex: PropTypes.number.isRequired,
   updateApplication: PropTypes.func.isRequired,
+  cancelApplication: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);

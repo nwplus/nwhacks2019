@@ -66,3 +66,28 @@ describe('when action type is RESET', () => {
     });
   });
 });
+
+describe('when action type is CANCEL_HACKER_APPLICATION', () => {
+  it('resets hackerApplication to default state', () => {
+    const state = {
+      hackerApplication: {
+        isLoaded: true,
+        data: {
+          name: 'John Doe',
+          school: 'UBC',
+        },
+      },
+    };
+
+    const action = { type: ACTION_TYPES.CANCEL_HACKER_APPLICATION };
+    expect(rootReducers(state, action).entities).toEqual({
+      application: {
+        hacker: {
+          firstName: '',
+          lastName: '',
+          isSubmitted: false,
+        },
+      },
+    });
+  });
+});
