@@ -163,25 +163,21 @@ describe('Hacker component', () => {
           props.lastValidIndex = count - 1;
         });
 
-        it('calls onPageBack', () => {
-          for (let i = 1; i <= props.count; i += 1) {
-            props.activeIndex = i;
-            wrapper = getWrapper();
-            wrapper.find(SecondaryButton).simulate('click');
-
-            expect(props.onPageBack).toHaveBeenCalled();
-
-            props.onPageNext.mockClear();
-          }
-        });
-
-        it('calls cancelHackerApplication on click', () => {
+        it('calls corresponding callback function on click', () => {
           for (let i = 0; i <= props.count; i += 1) {
             props.activeIndex = i;
             wrapper = getWrapper();
 
             wrapper.find(SecondaryButton).simulate('click');
-            expect(props.cancelHackerApplication).toHaveBeenCalled();
+
+            if (i === 0) {
+              expect(props.cancelHackerApplication).toHaveBeenCalled();
+            } else {
+              expect(props.onPageBack).toHaveBeenCalled();
+            }
+
+            props.onPageBack.mockClear();
+            props.cancelHackerApplication.mockClear();
           }
         });
       });
