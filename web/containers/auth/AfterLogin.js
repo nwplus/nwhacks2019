@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { addHackerApplication } from '../../actions';
-
 import AfterLogin from '../../components/auth/Login/AfterLogin';
+import purgeStore from '../../services/store/purge';
 
 export class AfterLoginContainer extends React.Component {
   componentWillUnmount() {
@@ -15,8 +15,20 @@ export class AfterLoginContainer extends React.Component {
     const { storeHackerApplication } = this.props;
 
     if (isLoaded) {
-      storeHackerApplication(hackerApplication.data || null);
+      // purge store and state after logging in - blank slate
+      this.purge();
+
+      // populate store with user's hacker application
+      if (hackerApplication.data) {
+        storeHackerApplication(hackerApplication.data);
+      }
     }
+  }
+
+  purge = () => {
+    const { resetState } = this.props;
+    resetState();
+    purgeStore();
   }
 
   render() {
@@ -52,12 +64,16 @@ const mapStateToProps = (state) => {
 AfterLoginContainer.propTypes = {
   hackerApplication: PropTypes.object.isRequired,
   storeHackerApplication: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     storeHackerApplication: (application) => {
       dispatch(addHackerApplication(application));
+    },
+    resetState: () => {
+      dispatch({ type: 'RESET' });
     },
   };
 };

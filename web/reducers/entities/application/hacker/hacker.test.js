@@ -5,7 +5,11 @@ import ACTION_TYPES from '../../../../actions/action_types';
 describe('hacker application reducer', () => {
   describe('when state is undefined', () => {
     it('returns the initial state', () => {
-      expect(hackerApplication(undefined, {})).toEqual(null);
+      expect(hackerApplication(undefined, {})).toEqual({
+        firstName: '',
+        lastName: '',
+        isSubmitted: false,
+      });
     });
   });
 
@@ -53,7 +57,11 @@ describe('when action type is RESET', () => {
     const action = { type: 'RESET' };
     expect(rootReducers(state, action).entities).toEqual({
       application: {
-        hacker: null,
+        hacker: {
+          firstName: '',
+          lastName: '',
+          isSubmitted: false,
+        },
       },
     });
   });
