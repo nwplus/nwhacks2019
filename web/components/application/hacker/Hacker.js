@@ -49,6 +49,12 @@ const HackerApplication = (props) => {
     ),
   };
 
+  const alertThenCancel = () => {
+    if (window.confirm('Are you sure you want to cancel?')) {
+      cancelHackerApplication();
+    }
+  };
+
   return (
     <div className="below-nav application fill-width flex jc-center">
       <div className="pad-ends-mega">
@@ -63,7 +69,7 @@ const HackerApplication = (props) => {
         <ButtonGroup className="pad-top-mega">
           <SecondaryButton
             text={activeIndex === 0 ? 'Cancel' : 'Back'}
-            onClick={activeIndex === 0 ? cancelHackerApplication : onPageBack}
+            onClick={activeIndex === 0 ? alertThenCancel : onPageBack}
             />
           <PrimaryButton
             text={getPrimaryButtonText(activeIndex, count)}
