@@ -50,3 +50,22 @@ describe('when action type is RESET', () => {
     expect(activeIndex).toEqual(0);
   });
 });
+
+describe('when action type is CANCEL_HACKER_APPLICATION', () => {
+  it('resets hackerApplication to default state', () => {
+    const state = {
+      ui: {
+        application: {
+          hacker: {
+            activeIndex: 3982,
+          },
+        },
+      },
+    };
+
+    const action = { type: ACTION_TYPES.CANCEL_HACKER_APPLICATION };
+    const resetState = rootReducers(state, action);
+    const { ui: { application: { hacker: { activeIndex } } } } = resetState;
+    expect(activeIndex).toEqual(0);
+  });
+});

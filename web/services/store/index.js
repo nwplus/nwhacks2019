@@ -36,7 +36,10 @@ export default (initialState = {}) => {
       firebaseReducer
     ),
     firestore: firestoreReducer,
-    root: Reducers,
+    root: persistReducer(
+      { key: 'app', storage: localStorage, stateReconciler: hardSet },
+      Reducers
+    ),
   });
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
