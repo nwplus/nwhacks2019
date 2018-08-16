@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import PageOne from './pages/PageOne';
 import PageTwo from './pages/PageTwo';
+import SignUp from './pages/SignUp';
 
 import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
 import propTypesTemplates from '../../../prop-types-templates';
@@ -32,6 +33,8 @@ const HackerApplication = (props) => {
     onPageNext,
     onHackerApplicationChange,
     cancelHackerApplication,
+    isNextButtonEnabled,
+    updateNextButtonState,
   } = props;
 
   const indexToPage = {
@@ -39,12 +42,21 @@ const HackerApplication = (props) => {
       <PageOne
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
+        updateNextButtonState={updateNextButtonState}
         />
     ),
     1: (
       <PageTwo
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
+        updateNextButtonState={updateNextButtonState}
+        />
+    ),
+    2: (
+      <SignUp
+        hackerApplication={hackerApplication}
+        onHackerApplicationChange={onHackerApplicationChange}
+        updateNextButtonState={updateNextButtonState}
         />
     ),
   };
@@ -72,6 +84,7 @@ const HackerApplication = (props) => {
             onClick={activeIndex === 0 ? alertThenCancel : onPageBack}
             />
           <PrimaryButton
+            disabled={!isNextButtonEnabled}
             text={getPrimaryButtonText(activeIndex, count)}
             onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
             />
@@ -92,6 +105,8 @@ HackerApplication.propTypes = {
   onHackerApplicationChange: PropTypes.func,
   cancelHackerApplication: PropTypes.func.isRequired,
   cancelled: PropTypes.bool.isRequired,
+  isNextButtonEnabled: PropTypes.bool.isRequired,
+  updateNextButtonState: PropTypes.func.isRequired,
 };
 
 export default HackerApplication;

@@ -57,6 +57,7 @@
           "some": [ "nesting", "id" ]
         }
       }
-    ]
+    ],
+    "jsx-a11y/click-events-have-key-events": 0
   }
 }

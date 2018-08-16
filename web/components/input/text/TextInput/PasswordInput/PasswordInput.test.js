@@ -68,22 +68,75 @@ describe('PasswordInput component', () => {
         wrapper = getWrapper(props);
       });
 
-      it('input class is error', () => {
-        expect(wrapper.find('input').hasClass('error')).toBeTruthy();
-      });
-
-      it('input contains error message', () => {
-        expect(wrapper.find('p')).toHaveLength(0);
-      });
-
       describe('when showErrorMessage is true', () => {
         beforeEach(() => {
           props.showErrorMessage = true;
-          wrapper = getWrapper(props);
         });
 
-        it('input contains error message', () => {
-          expect(wrapper.find('p').text()).toBe('something went horribly wrong');
+        describe('when showError is true', () => {
+          beforeEach(() => {
+            props.showError = true;
+            wrapper = getWrapper(props);
+          });
+
+          it('input contains error message', () => {
+            expect(wrapper.find('p').text()).toBe('something went horribly wrong');
+          });
+
+          it('input class contains error', () => {
+            expect(wrapper.find('input').hasClass('error')).toBeTruthy();
+          });
+        });
+
+        describe('when showError is false', () => {
+          beforeEach(() => {
+            props.showError = false;
+            wrapper = getWrapper(props);
+          });
+
+          it('input contains error message', () => {
+            expect(wrapper.find('p').text()).toBe('something went horribly wrong');
+          });
+
+          it('input class does not error', () => {
+            expect(wrapper.find('input').hasClass('error')).toBeFalsy();
+          });
+        });
+
+        describe('when showErrorMessage is false', () => {
+          beforeEach(() => {
+            props.showErrorMessage = false;
+          });
+
+          describe('when showError is true', () => {
+            beforeEach(() => {
+              props.showError = true;
+              wrapper = getWrapper(props);
+            });
+
+            it('input does not contain error message', () => {
+              expect(wrapper.find('p')).toHaveLength(0);
+            });
+
+            it('input class contains error', () => {
+              expect(wrapper.find('input').hasClass('error')).toBeTruthy();
+            });
+          });
+
+          describe('when showError is false', () => {
+            beforeEach(() => {
+              props.showError = false;
+              wrapper = getWrapper(props);
+            });
+
+            it('input does not contain error message', () => {
+              expect(wrapper.find('p')).toHaveLength(0);
+            });
+
+            it('input class does not contain error', () => {
+              expect(wrapper.find('input').hasClass('error')).toBeFalsy();
+            });
+          });
         });
       });
     });

@@ -67,6 +67,7 @@ class Login extends React.Component {
                   label="Password"
                   id="password"
                   showErrorMessage
+                  showForgot
                 />
                 <PrimaryButton
                   text="Submit"
