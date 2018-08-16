@@ -57,7 +57,7 @@ class Login extends React.Component {
           <form
             onSubmit={this.login}
             className="input-group">
-            <h2 className="pad-sides-xxl">Sign in</h2>
+            <h3 className="pad-sides-xxl margin-botom-m">Sign in</h3>
             <div className="card split flex">
               <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
                 <TextInput
