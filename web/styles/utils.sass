@@ -1,0 +1,99 @@
+//////////////////////////
+// WIDTH/HEIGHT CLASSES //
+//////////////////////////
+
+.fill
+  &-width
+    width: 100%
+
+  &-height
+    height: 100%
+
+.split
+  > *
+    width: 50%
+
+//////////////////////////
+//   FLEXBOX CLASSES    //
+//////////////////////////
+
+.flex
+  display: flex
+
+  &-inline
+    display: inline-flex
+
+  // flex-directions
+  &.dir
+    &-col
+      flex-direction: column
+
+  // justify-content
+  &.jc
+    &-start
+      justify-content: flex-start
+
+    &-end
+      justify-content: flex-end
+
+    &-center
+      justify-content: center
+
+    &-around
+      justify-content: space-around
+
+    &-between
+      justify-content: space-between
+      &-right-if-one
+        :only-child
+          align-self: flex-end
+          margin-left: auto
+
+  // flex-wrap
+  &.wrap
+    flex-wrap: wrap
+
+  // align-items
+  &.ai
+    &-center
+      align-items: center
+
+// display declarations
+.display
+  &-none
+    display: none
+
+// position declarations
+.pos
+  &-abs
+    position: absolute
+
+// opacity declarations
+.opacity
+  &-0
+    opacity: 0
+  &-20
+    opacity: 0.2
+  &-40
+    opacity: 0.4
+  &-60
+    opacity: 0.6
+
+// white-space declarations    
+.white-space
+  &-nowrap
+    white-space: nowrap
+
+// cursor declarations
+.clickable
+  cursor: pointer
+.unclickable
+  cursor: not-allowed
+
+// CSS Basic User Interface helper classes
+.user-select
+  &-none
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none

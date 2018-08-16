@@ -3,6 +3,7 @@ import React from 'react';
 import { SecondaryButton, PrimaryButton, ProgressGroup } from '../input/buttons';
 
 import { Checkbox, CheckboxGroup } from '../input/buttons/CheckboxGroup';
+import { RadioButton, RadioGroup } from '../input/buttons/RadioGroup';
 import { TextInput, PasswordInput } from '../input/text';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
@@ -34,7 +35,7 @@ class FrontEndComponents extends React.Component {
 
     const { active } = this.state;
     return (
-      <div id="demo">
+      <div id="demo" className="pad-nav">
         <p>Buttons</p>
         <br />
         <div>
@@ -49,13 +50,18 @@ class FrontEndComponents extends React.Component {
           <SecondaryButton text="Secondary" onClick={ButtonCallback} disabled />
         </div>
         <br />
-        <CheckboxGroup name="test_name">
+        <CheckboxGroup name="test_checkbox_group">
           <Checkbox label="Label 1" value="value1" />
           <Checkbox label="Label 2" value="value2" disabled />
-          <Checkbox label="Label 3" value="value3" name="overriden_name" />
-        </CheckboxGroup><br />
-        <Checkbox label="Ungrouped Checkbox" value="value3" name="overriden_name" />
-        <br /><br />
+          <Checkbox label="Label 3" value="value3" name="new_checkbox_name_1" />
+        </CheckboxGroup>
+        <Checkbox label="Ungrouped Checkbox" value="value3" name="new_checkbox_name_2" />
+        <RadioGroup name="test_radio_group" className="dir-col">
+          <RadioButton label="Label 1" value="value1" selected />
+          <RadioButton label="Label 2" value="value2" disabled />
+          <RadioButton label="Label 3" value="value3" />
+        </RadioGroup>
+        <br />
         <div>
           <ProgressGroup
             count={10}
@@ -80,7 +86,7 @@ class FrontEndComponents extends React.Component {
           value={textValue}
           error={error}
           id="errored"
-          />
+        />
         <PasswordInput
           placeholder="Hint text"
           onChange={this.onPasswordChange}

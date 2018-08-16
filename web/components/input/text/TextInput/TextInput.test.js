@@ -142,7 +142,7 @@ describe('TextInput component', () => {
   describe('onChange', () => {
     let newValue = '';
     const event = { target: { value: 'another text' } };
-    const onChange = (e) => { newValue = e.target.value; };
+    const onChange = (e) => { newValue = e; };
     const props = {
       label: 'some label',
       id: 'some input',

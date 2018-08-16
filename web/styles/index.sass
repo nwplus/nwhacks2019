@@ -1,17 +1,30 @@
-/* core */
+/////////////////////////
+//   ALL STYLESHEETS   //
+/////////////////////////
+  
+// core
+@import ./spacing
+@import ./sizes
 @import ./colors
 @import ./typography
 @import ./animations
-@import ./sizes
+@import ./utils
+@import ./breakpoints
+@import ./decoration
 
-/* components */
+// components
 @import ../components/index
 
-/* containers */
+// containers
 @import ../containers/index
 
+/////////////////////////
+//      DEFAULTS       //
+/////////////////////////
+
+// Remove from here once definitions are set up
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+h1, h3, h4, h5, h6, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -27,7 +40,6 @@ time, mark, audio, video
   margin: 0
   padding: 0
   border: 0
-  font: inherit
   vertical-align: baseline
 
 html
@@ -37,7 +49,6 @@ html
 body
   height: 100%
   width: 100%
-  font-family: 'Merriweather', serif
 
 #app
   height: 100%

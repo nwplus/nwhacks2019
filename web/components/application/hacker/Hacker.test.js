@@ -22,8 +22,10 @@ describe('Hacker component', () => {
     beforeEach(() => {
       props = {
         hackerApplication: {
-          name: 'John Doe',
-          school: 'UBC',
+          firstName: 'John',
+          lastName: 'Doe',
+          isSubmitted: true,
+          onHackerApplicationChange: jest.fn(),
         },
       };
 
@@ -40,15 +42,24 @@ describe('Hacker component', () => {
       <HackerApplication {...props} />
     );
 
+    const COUNT = 10;
+    const ACTIVE_INDEX = 8;
+    const LAST_VALID_INDEX = 9;
+
     beforeEach(() => {
       props = {
-        hackerApplication: null,
-        count: 10,
-        activeIndex: 8,
-        lastValidIndex: 9,
+        hackerApplication: {
+          isSubmitted: false,
+          firstName: '',
+          lastName: '',
+        },
+        count: COUNT,
+        activeIndex: ACTIVE_INDEX,
+        lastValidIndex: LAST_VALID_INDEX,
         onPageChange: jest.fn(),
         onPageBack: jest.fn(),
         onPageNext: jest.fn(),
+        onHackerApplicationChange: jest.fn(),
       };
 
       wrapper = getWrapper();
@@ -72,15 +83,15 @@ describe('Hacker component', () => {
       });
 
       it('has correct count', () => {
-        expect(progressGroupProps).toHaveProperty('count', 10);
+        expect(progressGroupProps).toHaveProperty('count', COUNT);
       });
 
       it('has correct active index', () => {
-        expect(progressGroupProps).toHaveProperty('activeIndex', 8);
+        expect(progressGroupProps).toHaveProperty('activeIndex', ACTIVE_INDEX);
       });
 
       it('has correct last valid index', () => {
-        expect(progressGroupProps).toHaveProperty('lastValidIndex', 9);
+        expect(progressGroupProps).toHaveProperty('lastValidIndex', LAST_VALID_INDEX);
       });
 
       it('buttons beyond last valid index are disabled', () => {
@@ -188,6 +199,86 @@ describe('Hacker component', () => {
 
             props.onPageNext.mockClear();
           }
+        });
+      });
+    });
+
+    describe('pages', () => {
+      describe('when active index is 0', () => {
+        beforeEach(() => {
+          props = {
+            hackerApplication: {
+              isSubmitted: false,
+              firstName: '',
+              lastName: '',
+            },
+            count: COUNT,
+            activeIndex: 0,
+            lastValidIndex: LAST_VALID_INDEX,
+            onPageChange: jest.fn(),
+            onPageBack: jest.fn(),
+            onPageNext: jest.fn(),
+            onHackerApplicationChange: jest.fn(),
+          };
+
+          wrapper = getWrapper();
+        });
+
+        it('page one is rendered', () => {
+          expect(wrapper.find('div#hacker-application-page-1')).toHaveLength(1);
+        });
+
+        describe('text input', () => {
+          let textInput;
+
+          beforeEach(() => {
+            textInput = wrapper.find('input');
+          });
+
+          it('calls onHackerApplicationChange when input changes', () => {
+            textInput.simulate('change');
+            const { onHackerApplicationChange } = props;
+            expect(onHackerApplicationChange).toHaveBeenCalled();
+          });
+        });
+      });
+
+      describe('when active index is 1', () => {
+        beforeEach(() => {
+          props = {
+            hackerApplication: {
+              isSubmitted: false,
+              firstName: '',
+              lastName: '',
+            },
+            count: COUNT,
+            activeIndex: 1,
+            lastValidIndex: LAST_VALID_INDEX,
+            onPageChange: jest.fn(),
+            onPageBack: jest.fn(),
+            onPageNext: jest.fn(),
+            onHackerApplicationChange: jest.fn(),
+          };
+
+          wrapper = getWrapper();
+        });
+
+        it('page two is rendered', () => {
+          expect(wrapper.find('div#hacker-application-page-2')).toHaveLength(1);
+        });
+
+        describe('text input', () => {
+          let textInput;
+
+          beforeEach(() => {
+            textInput = wrapper.find('input');
+          });
+
+          it('calls onHackerApplicationChange when input changes', () => {
+            textInput.simulate('change');
+            const { onHackerApplicationChange } = props;
+            expect(onHackerApplicationChange).toHaveBeenCalled();
+          });
         });
       });
     });

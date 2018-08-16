@@ -6,13 +6,13 @@ const DashBoard = (props) => {
   const { application } = props;
   let content;
 
-  if (application.hacker) {
+  if (application.hacker.isSubmitted) {
     content = 'you have one hacker application';
   } else {
     content = 'you didn\'t apply as hacker';
   }
 
-  return (<div className="below-nav">{content}</div>);
+  return (<div className="pad-nav">{content}</div>);
 };
 
 const mapStateToProps = (state) => {

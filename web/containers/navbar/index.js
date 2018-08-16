@@ -16,6 +16,9 @@ const getDisplayType = (location) => {
 
   let displayType = DISPLAY_TYPE.ONLY_LOGO;
 
+  // For demo only - todo: remove
+  if (pathname === '/ui_demo') return DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
+
   if (isHomePage) {
     displayType = DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
   } else if (isDashBoardPage) {

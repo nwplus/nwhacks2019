@@ -15,7 +15,7 @@ const TextInput = ({
   const inputProps = {
     id,
     placeholder,
-    onChange,
+    onChange: e => onChange(e.target.value),
     onBlur,
     value,
     disabled,

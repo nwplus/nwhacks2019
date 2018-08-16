@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 
 const InputContext = React.createContext({});
 
-const Checkbox = ({ name, value, label, className, checked, disabled, onChange }) => (
+const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
     {context => (
-      <div className={`checkbox user-select-none margin-bottom-s margin-left-s ${className}`}>
+      <div className={`radio-button user-select-none margin-bottom-s margin-left-s ${className}`}>
         <label className="clickable">
           <input
-            type="checkbox"
+            type="radio"
             name={name || context.name}
             className="pos-abs opacity-0"
             value={value}
-            defaultChecked={checked || context.checked}
+            defaultChecked={selected || context.selected}
             disabled={disabled || context.disabled}
             onChange={onChange || context.onChange}
           />
-          <span className="checkmark size-icon pos-abs" />
+          <span className="radio-img size-icon pos-abs" />
           <span className="label-text margin-left-l white-space-nowrap">{label}</span>
         </label>
       </div>
@@ -25,28 +25,28 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
   </InputContext.Consumer>
 );
 
-Checkbox.propTypes = {
-  // name should be the same amongst checkboxes in a checkbox group
+RadioButton.propTypes = {
+  // name should be the same amongst radio buttons in a radio group
   name: PropTypes.string,
-  // input value for checkbox
+  // input value for the radio button
   value: PropTypes.string.isRequired,
-  // label text for checkbox
+  // label text for the radio button
   label: PropTypes.string.isRequired,
-  // extra CSS classes to apply to the checkbox
+  // extra CSS classes to apply to the radio button
   className: PropTypes.string,
-  // determines if checkbox is selected
-  checked: PropTypes.bool,
-  // determines if checkbox is disabled
+  // determines if the radio button is selected
+  selected: PropTypes.bool,
+  // determines if the radio button is disabled
   disabled: PropTypes.bool,
   // onChange functional
   onChange: PropTypes.func,
 };
 
-Checkbox.defaultProps = {
+RadioButton.defaultProps = {
   className: '',
 };
 
-const CheckboxGroup = (props) => {
+const RadioGroup = (props) => {
   const { children, className } = props;
   return (
     <InputContext.Provider value={props}>
@@ -55,8 +55,8 @@ const CheckboxGroup = (props) => {
   );
 };
 
-CheckboxGroup.propTypes = {
-  // can contain one or many Checkbox components
+RadioGroup.propTypes = {
+  // can contain one or many RadioButton components
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
@@ -65,20 +65,20 @@ CheckboxGroup.propTypes = {
   className: PropTypes.string,
   /* Additional optional parameters implicitly passed down to children
 
-      // see Checkbox.propTypes
+      // see RadioButton.propTypes
       name,
-      defaultChecked,
+      selected,
       disabled,
       onChange,
 
   */
 };
 
-CheckboxGroup.defaultProps = {
+RadioGroup.defaultProps = {
   className: '',
 };
 
 export {
-  Checkbox,
-  CheckboxGroup,
+  RadioButton,
+  RadioGroup,
 };

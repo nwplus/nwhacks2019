@@ -99,4 +99,48 @@ describe('ProgressGroup component', () => {
       }
     });
   });
+
+  describe('className', () => {
+    const count = 6;
+    const activeIndex = 1;
+    const lastValidIndex = count / 2;
+
+    describe('when className is undefined', () => {
+      beforeEach(() => {
+        clicked = undefined;
+        wrapper = getWrapper({
+          count,
+          onClick: (i) => { clicked = i; },
+          activeIndex,
+          lastValidIndex,
+        });
+      });
+
+      it('className defaults to progress-button-group', () => {
+        expect(wrapper.find('div').hasClass('progress-button-group')).toBeTruthy();
+      });
+    });
+
+    describe('when className is defined', () => {
+      beforeEach(() => {
+        clicked = undefined;
+        wrapper = getWrapper({
+          count,
+          onClick: (i) => { clicked = i; },
+          activeIndex,
+          lastValidIndex,
+          className: 'dope-styling-class another-dope-styling-class',
+        });
+      });
+
+      it('className has the default class name progress-button-group', () => {
+        expect(wrapper.find('div').hasClass('progress-button-group')).toBeTruthy();
+      });
+
+      it('className also has the props class name', () => {
+        expect(wrapper.find('div').hasClass('dope-styling-class')).toBeTruthy();
+        expect(wrapper.find('div').hasClass('another-dope-styling-class')).toBeTruthy();
+      });
+    });
+  });
 });

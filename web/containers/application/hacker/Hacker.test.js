@@ -20,13 +20,15 @@ describe('AfterLoginContainer', () => {
     beforeEach(() => {
       props = {
         hackerApplication: {
-          name: 'John Doe',
-          school: 'UBC',
+          isSubmitted: false,
+          firstName: 'John',
+          lastName: 'Doe',
         },
         activeIndex: 99,
         lastValidIndex: 100,
         changePage: jest.fn(),
         changeLastActiveIndex: jest.fn(),
+        updateApplication: jest.fn(),
       };
 
       wrapper = getWrapper();
@@ -35,8 +37,9 @@ describe('AfterLoginContainer', () => {
 
     it('passes hacker application to the component', () => {
       expect(componentProps).toHaveProperty('hackerApplication', {
-        name: 'John Doe',
-        school: 'UBC',
+        isSubmitted: false,
+        firstName: 'John',
+        lastName: 'Doe',
       });
     });
 
@@ -54,35 +57,31 @@ describe('AfterLoginContainer', () => {
       beforeEach(() => {
         props = {
           hackerApplication: {
-            name: 'John Doe',
-            school: 'UBC',
+            isSubmitted: false,
+            firstName: 'John',
+            lastName: 'Doe',
           },
           activeIndex: 99,
           lastValidIndex: 100,
           changePage: jest.fn(),
           changeLastActiveIndex: jest.fn(),
+          updateApplication: jest.fn(),
         };
 
         wrapper = getWrapper();
       });
 
       describe('onPageNext', () => {
-        beforeEach(() => {
-          wrapper.instance().onPageNext();
-        });
-
         it('changePage is called with the next page', () => {
+          wrapper.instance().onPageNext();
           const { changePage } = props;
           expect(changePage).toHaveBeenCalledWith(100);
         });
       });
 
       describe('onPageBack', () => {
-        beforeEach(() => {
-          wrapper.instance().onPageBack();
-        });
-
         it('changePage is called with the next page', () => {
+          wrapper.instance().onPageBack();
           const { changePage } = props;
           expect(changePage).toHaveBeenCalledWith(98);
         });
@@ -93,44 +92,68 @@ describe('AfterLoginContainer', () => {
       beforeEach(() => {
         props = {
           hackerApplication: {
-            name: 'John Doe',
-            school: 'UBC',
+            isSubmitted: false,
+            firstName: 'John',
+            lastName: 'Doe',
           },
           activeIndex: 100,
           lastValidIndex: 100,
           changePage: jest.fn(),
           changeLastActiveIndex: jest.fn(),
+          updateApplication: jest.fn(),
         };
 
         wrapper = getWrapper();
       });
 
       describe('onPageNext', () => {
-        beforeEach(() => {
-          wrapper.instance().onPageNext();
-        });
-
         it('changePage is called with the next page', () => {
+          wrapper.instance().onPageNext();
           const { changePage } = props;
           expect(changePage).toHaveBeenCalledWith(101);
         });
 
         it('changeLastActiveIndex is called with the next page', () => {
+          wrapper.instance().onPageNext();
           const { changeLastActiveIndex } = props;
           expect(changeLastActiveIndex).toHaveBeenCalledWith(101);
         });
       });
-
-      describe('onPageBack', () => {
-        beforeEach(() => {
-          wrapper.instance().onPageBack();
-        });
-
-        it('changePage is called with the next page', () => {
-          const { changePage } = props;
-          expect(changePage).toHaveBeenCalledWith(99);
-        });
+      it('changePage is called with the next page', () => {
+        wrapper.instance().onPageBack();
+        const { changePage } = props;
+        expect(changePage).toHaveBeenCalledWith(99);
       });
+    });
+  });
+
+  describe('when updating hacker application', () => {
+    beforeEach(() => {
+      props = {
+        hackerApplication: {
+          isSubmitted: false,
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        activeIndex: 99,
+        lastValidIndex: 100,
+        changePage: jest.fn(),
+        changeLastActiveIndex: jest.fn(),
+        updateApplication: jest.fn(),
+      };
+
+      wrapper = getWrapper();
+    });
+
+    it('calls updateApplication', () => {
+      const newApp = {
+        isSubmitted: false,
+        firstName: 'Jake',
+        lastName: 'Smith',
+      };
+      wrapper.instance().onHackerApplicationChange(newApp);
+      const { updateApplication } = props;
+      expect(updateApplication).toHaveBeenCalledWith(newApp);
     });
   });
 });
