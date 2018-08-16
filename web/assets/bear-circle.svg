@@ -1,0 +1,43 @@
+<svg width="250" height="253" viewBox="0 0 250 253" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="250" height="252.299" fill="black" fill-opacity="0"/>
+<rect width="250" height="250" fill="black" fill-opacity="0"/>
+<circle cx="125" cy="125" r="125" fill="url(#paint0_linear)"/>
+<rect width="250" height="250" fill="black" fill-opacity="0"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="250" height="250">
+<circle cx="125" cy="125" r="125" fill="url(#paint1_linear)"/>
+</mask>
+<g mask="url(#mask0)">
+<rect width="170" height="179" fill="black" fill-opacity="0" transform="translate(40 109)"/>
+<rect width="31.2836" height="41.9173" rx="15.6418" transform="matrix(0.643258 -0.765649 0.766439 0.642316 40 132.952)" fill="#6D5B93"/>
+<rect width="31.2836" height="41.9173" rx="15.6418" transform="matrix(-0.643258 -0.765649 -0.766439 0.642316 210 132.952)" fill="#6D5B93"/>
+<rect x="53.2623" y="109.831" width="145.687" height="178.17" rx="72.8435" fill="#6D5B93"/>
+<ellipse cx="20.1941" cy="15.0677" rx="20.1941" ry="15.0677" transform="matrix(0.173176 -0.984891 0.984732 0.174077 76.2164 181.237)" fill="#5E4B88"/>
+<ellipse cx="20.1941" cy="15.0677" rx="20.1941" ry="15.0677" transform="matrix(-0.173176 -0.984891 -0.984732 0.174077 172.896 181.237)" fill="#5E4B88"/>
+<ellipse cx="97.2482" cy="158.369" rx="4.81376" ry="4.7953" fill="#1E0E47"/>
+<ellipse cx="153.739" cy="158.369" rx="4.81376" ry="4.7953" fill="#1E0E47"/>
+<rect width="56.4909" height="58.5414" fill="black" fill-opacity="0" transform="translate(97.736 155.221)"/>
+<path d="M97.736 183.467C97.736 167.867 110.382 155.221 125.981 155.221C141.581 155.221 154.227 167.867 154.227 183.467V188.973C154.227 202.664 143.128 213.763 129.437 213.763H122.525C108.835 213.763 97.736 202.664 97.736 188.973V183.467Z" fill="#B49BE7"/>
+<rect width="26.7588" height="17.9729" fill="black" fill-opacity="0" transform="translate(112.728 168.917)"/>
+<path d="M112.728 183.496C114.014 184.627 118.61 186.89 126.71 186.89C134.81 186.89 138.603 184.627 139.487 183.496" stroke="#1E0E47" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="114.576" y="168.917" width="23.2547" height="11.189" rx="5.59451" fill="#1E0E47"/>
+<line x1="126.969" y1="179.678" x2="126.969" y2="186.89" stroke="#1E0E47" stroke-width="3"/>
+<rect x="98.538" y="155.33" width="1.60377" height="2.39765" rx="0.801887" fill="white"/>
+<rect x="154.67" y="155.33" width="1.60377" height="2.39765" rx="0.801887" fill="white"/>
+</g>
+<rect width="55.3983" height="49.2992" fill="black" fill-opacity="0" transform="translate(217.365 201) scale(-1 1)"/>
+<path d="M163.365 231.684C163.566 236.53 165.717 241.552 169 242L180.5 237.5L188 209.5C188 209.5 162.896 220.394 163.365 231.684Z" fill="#5E4B88"/>
+<path d="M183.812 211.263C195.013 204.796 205.586 207.925 210.069 215.689C214.551 223.453 206.158 233.658 197.391 239.716C183.55 249.281 174.807 242.505 171.647 237.031C167.164 229.267 172.61 217.73 183.812 211.263Z" fill="#6D5B93"/>
+<rect width="55.4008" height="49.2992" fill="black" fill-opacity="0" transform="translate(38 203)"/>
+<path d="M92 233.684C91.7989 238.53 89.7833 243.552 86.5 244L74.5 240L67.3647 211.5C67.3647 211.5 92.4687 222.394 92 233.684Z" fill="#5E4B88"/>
+<path d="M71.5529 213.263C60.3515 206.796 49.7787 209.925 45.2961 217.689C40.8135 225.453 49.2069 235.658 57.9738 241.716C71.8151 251.281 80.5579 244.505 83.7182 239.031C88.2008 231.267 82.7543 219.73 71.5529 213.263Z" fill="#6D5B93"/>
+<defs>
+<linearGradient id="paint0_linear" x1="125" y1="0" x2="125" y2="250" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#EDFFFC"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="125" y1="0" x2="125" y2="250" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#EDFFFC"/>
+</linearGradient>
+</defs>
+</svg>

@@ -5,11 +5,15 @@ import { TextInput } from '../input/text';
 import { PrimaryButton } from '../input/buttons';
 
 import sun from '../../assets/sun.svg';
+
 import skyline from '../../assets/skyline.svg';
+
 import panelBear from '../../assets/panel-bear.svg';
 import panelTrain from '../../assets/panel-train.svg';
 
-const getImageDiv = (alt, src) => <div><img alt={alt} src={src} /></div>;
+import bearCircle from '../../assets/bear-circle.svg';
+
+const getImageDiv = (alt, src) => <img alt={alt} src={src} />;
 
 const Home = () => (
   <div className="homepage overflow-hidden">
@@ -40,9 +44,11 @@ const Home = () => (
         {getImageDiv('sun', sun)}
       </div>
     </div>
+
     <div className="fill-width margin-bottom-neg-super">
       {getImageDiv('skyline', skyline)}
     </div>
+
     <div className="flex jc-between ai-center pad-sides-ultra pad-bottom-giga">
       <div>
         <h2>This is nwHacks 2019</h2>
@@ -59,6 +65,7 @@ const Home = () => (
         {getImageDiv('bear', panelBear)}
       </div>
     </div>
+
     <div className="flex jc-between ai-center pad-sides-ultra pad-bottom-giga">
       <div className="pad-right-giga">
         {getImageDiv('train', panelTrain)}
@@ -82,7 +89,13 @@ const Home = () => (
         </p>
       </div>
     </div>
-  </div>
+
+    <div className="flex jc-center dir-col pad-ends-super">
+      {getImageDiv('cute-bear', bearCircle)}
+      <p className="primary flex jc-center">
+        Stay tuned for sponsor updates!
+      </p>
+    </div>
 );
 
 export default Home;
