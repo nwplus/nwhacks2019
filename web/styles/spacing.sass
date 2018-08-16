@@ -11,6 +11,8 @@ $spacing-xl: 40px;
 $spacing-xxl: 48px;
 $spacing-mega: 56px;
 $spacing-giga: 64px;
+$spacing-super: 96px;
+$spacing-ultra: 152px;
 $navbar: $spacing-giga
 
 /////////////////////////
@@ -26,9 +28,17 @@ $navbar: $spacing-giga
   &-left, &-sides
     &-xxl
       padding-left: $spacing-xxl
+    &-giga
+      padding-left: $spacing-giga
+    &-ultra
+      padding-left: $spacing-ultra
   &-right, &-sides
     &-xxl
       padding-right: $spacing-xxl
+    &-giga
+      padding-right: $spacing-giga
+    &-ultra
+      padding-right: $spacing-ultra
 
   // ends
   &-top, &-ends
@@ -36,11 +46,19 @@ $navbar: $spacing-giga
       padding-top: $spacing-xxl
     &-mega
       padding-top: $spacing-mega
+    &-giga
+      padding-top: $spacing-giga
+    &-ultra
+      padding-top: $spacing-ultra
   &-bottom, &-ends
     &-xxl
       padding-bottom: $spacing-xxl
     &-mega
       padding-bottom: $spacing-mega
+    &-giga
+      padding-bottom: $spacing-giga
+    &-ultra
+      padding-top: $spacing-ultra
 
 .margin
   &-left, &-sides
@@ -71,6 +89,9 @@ $navbar: $spacing-giga
     &-l
       margin-top: $spacing-l
   &-bottom, &-ends
+    &-neg
+      &-super
+        margin-bottom: -$spacing-super
     &-xs
       margin-bottom: $spacing-xs
     &-s
