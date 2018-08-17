@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SecondaryButton = ({ text, onClick, disabled }) => (
+const SecondaryButton = ({ text, onClick, disabled, isSubmit, className }) => (
   <button
     onClick={onClick}
     type={isSubmit ? "submit" : "button"}
