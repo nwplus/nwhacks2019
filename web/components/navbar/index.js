@@ -86,7 +86,7 @@ class Navbar extends React.Component {
         navbarRight = navbarRightElements.map(l => (
           <div
             key={key += 1}
-            className="flex ai-center margin-sides-l">
+            className="flex ai-center margin-sides-l scale-margin-sides-tablet scale-hide-phablet">
             {l}
           </div>
         ));
