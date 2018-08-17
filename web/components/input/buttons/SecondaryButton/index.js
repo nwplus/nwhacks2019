@@ -6,8 +6,9 @@ const SecondaryButton = ({ text, onClick, disabled }) => (
     onClick={onClick}
     type="button"
     disabled={disabled}
-    className="secondary">
-    { text }
+    className="secondary"
+    form={name}>
+    {text}
   </button>
 );
 
@@ -15,6 +16,7 @@ SecondaryButton.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  name: PropTypes.name,
 };
 
 export default SecondaryButton;

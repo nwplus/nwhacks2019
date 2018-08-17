@@ -6,7 +6,8 @@ const PrimaryButton = ({ text, onClick, disabled, className }) => (
     onClick={onClick}
     type="submit"
     disabled={disabled}
-    className={`primary ${className}`}>
+    className={`primary ${className}`}
+    form={name}>
     { text }
   </button>
 );
@@ -20,6 +21,7 @@ PrimaryButton.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   className: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default PrimaryButton;
