@@ -15,11 +15,15 @@ import bearCircle from '../../assets/bear-circle.svg';
 
 const getImageDiv = (alt, src) => <img alt={alt} src={src} />;
 
+const rowStyle = `
+  flex jc-between ai-center dir-row
+  pad-sides-ultra pad-bottom-giga scale-pad-sides-tablet`;
+
 const Home = () => (
   <div className="homepage overflow-hidden">
-    <div className="flex jc-between ai-center pad-top-ultra pad-sides-ultra">
+    <div className="flex jc-between ai-center pad-top-ultra pad-sides-ultra scale-pad-sides-tablet">
       <div>
-        <h1>nwHacks 2019</h1>
+        <h1 className="scale-h1-tablet">nwHacks 2019</h1>
         <p className="primary">
           Western Canada&apos;s largest hackathon<br />
           January 26-27, 2019 @ the University of British Columbia
@@ -45,11 +49,11 @@ const Home = () => (
       </div>
     </div>
 
-    <div className="fill-width margin-bottom-neg-super">
+    <div className="homepage-skyline fill-width">
       {getImageDiv('skyline', skyline)}
     </div>
 
-    <div className="flex jc-between ai-center pad-sides-ultra pad-bottom-giga">
+    <div className={`${rowStyle} scale-row-desktop`}>
       <div>
         <h2>This is nwHacks 2019</h2>
         <p>
@@ -61,13 +65,13 @@ const Home = () => (
           the west coast the best coast.
         </p>
       </div>
-      <div className="pad-left-giga">
+      <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop scale-jc-center">
         {getImageDiv('bear', panelBear)}
       </div>
     </div>
 
-    <div className="flex jc-between ai-center pad-sides-ultra pad-bottom-giga">
-      <div className="pad-right-giga">
+    <div className={`${rowStyle} scale-row-desktop-rev`}>
+      <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop scale-jc-center">
         {getImageDiv('train', panelTrain)}
       </div>
       <div>
