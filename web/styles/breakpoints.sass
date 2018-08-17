@@ -40,4 +40,9 @@ $mobile: 480px;
   &-h1
     &-tablet
       @media screen and (max-width: $tablet)
-        font-size: 40px
+        font-size: 40px !important
+
+  &-hide
+    &-phablet
+      @media screen and (max-width: $phablet)
+        display: none !important

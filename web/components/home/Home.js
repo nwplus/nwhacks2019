@@ -21,7 +21,7 @@ const rowStyle = `
 
 const Home = () => (
   <div className="homepage overflow-hidden">
-    <div className="flex jc-between ai-center pad-top-ultra pad-sides-ultra scale-pad-sides-tablet">
+    <div className="flex jc-between ai-center pad-top-ultra pad-sides-ultra scale-pad-sides-tablet homepage-scale-top">
       <div>
         <h1 className="scale-h1-tablet">nwHacks 2019</h1>
         <p className="primary">
@@ -44,7 +44,7 @@ const Home = () => (
           </Link>
         </p>
       </div>
-      <div className="pad-sides-xxl">
+      <div className="pad-sides-xxl scale-hide-phablet">
         {getImageDiv('sun', sun)}
       </div>
     </div>
