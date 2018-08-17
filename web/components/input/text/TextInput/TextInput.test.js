@@ -19,7 +19,7 @@ describe('TextInput component', () => {
       value,
       placeholder: 'some placeholder',
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
     };
 
     beforeEach(() => {
@@ -43,7 +43,7 @@ describe('TextInput component', () => {
     const props = {
       value,
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
     };
 
     describe('when there is an error', () => {
@@ -103,7 +103,7 @@ describe('TextInput component', () => {
     const props = {
       value,
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
     };
 
     describe('when the input is disabled', () => {
@@ -145,7 +145,7 @@ describe('TextInput component', () => {
     const onChange = (e) => { newValue = e; };
     const props = {
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
       onChange,
     };
 
@@ -165,7 +165,7 @@ describe('TextInput component', () => {
     const props = {
       label: 'some label',
       onBlur,
-      id: 'some input',
+      name: 'some name',
     };
 
     beforeEach(() => {
