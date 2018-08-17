@@ -100,6 +100,7 @@ const Home = () => (
         Stay tuned for sponsor updates!
       </p>
     </div>
+  </div>
 );
 
 export default Home;
