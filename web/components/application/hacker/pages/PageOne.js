@@ -8,9 +8,10 @@ import { TextInput } from '../../../input/text';
 const PageOne = (props) => {
   const { hackerApplication, onHackerApplicationChange } = props;
   const { firstName } = hackerApplication;
+  const formName = "hacker-application";
 
   return (
-    <div className="hacker-application-page" id="hacker-application-page-1">
+    <form className="hacker-application-page" id="hacker-application-page-1" name={formName}>
       <h1>About you <span role="img" aria-label="book">📚</span></h1>
       <p>
       nwHacks is Western Canada’s largest collegiate hackathon taking place
@@ -22,7 +23,7 @@ const PageOne = (props) => {
       </p>
       <TextInput
         label="First Name"
-        id="first-name"
+        name={formName}
         value={firstName}
         onChange={(fname) => {
           const updatedHackerApplication = update(hackerApplication, {
@@ -33,7 +34,7 @@ const PageOne = (props) => {
           onHackerApplicationChange(updatedHackerApplication);
         }}
         />
-    </div>
+    </form>
   );
 };
 

@@ -56,7 +56,8 @@ class Login extends React.Component {
         <div>
           <form
             onSubmit={this.login}
-            className="input-group">
+            className="input-group"
+            name="login-form">
             <h2 className="pad-sides-xxl">Sign in</h2>
             <div className="card split flex">
               <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
@@ -66,7 +67,7 @@ class Login extends React.Component {
                   onChange={this.onEmailChange}
                   error={error}
                   label="Email"
-                  id="email"
+                  name="login-form"
                 />
                 <PasswordInput
                   placeholder="Enter your password"
@@ -74,12 +75,13 @@ class Login extends React.Component {
                   onChange={this.onPasswordChange}
                   error={error}
                   label="Password"
-                  id="password"
+                  name="login-form"
                   showErrorMessage
                 />
                 <PrimaryButton
                   text="Submit"
                   className="fill-width"
+                  name="login-form"
                   />
                 <p className="flex jc-center">
                   Don&apos;t have an account yet?&nbsp;

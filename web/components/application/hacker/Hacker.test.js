@@ -246,7 +246,7 @@ describe('Hacker component', () => {
         });
 
         it('page one is rendered', () => {
-          expect(wrapper.find('div#hacker-application-page-1')).toHaveLength(1);
+          expect(wrapper.find('form#hacker-application-page-1')).toHaveLength(1);
         });
 
         describe('text input', () => {
@@ -286,7 +286,7 @@ describe('Hacker component', () => {
         });
 
         it('page two is rendered', () => {
-          expect(wrapper.find('div#hacker-application-page-2')).toHaveLength(1);
+          expect(wrapper.find('form#hacker-application-page-2')).toHaveLength(1);
         });
 
         describe('text input', () => {
