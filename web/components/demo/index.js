@@ -76,7 +76,7 @@ class FrontEndComponents extends React.Component {
           onBlur={this.onBlur}
           label="Default"
           value={textValue}
-          id="default"
+          name="some_form"
         />
         <TextInput
           placeholder="Hint text"
@@ -85,20 +85,20 @@ class FrontEndComponents extends React.Component {
           label="Errored"
           value={textValue}
           error={error}
-          id="errored"
+          name="some_form"
         />
         <PasswordInput
           placeholder="Hint text"
           onChange={this.onPasswordChange}
           label="Password"
           value={password}
-          id="password"
+          name="some_form"
         />
         <TextInput
           placeholder="Hint text"
           label="Disabled"
           disabled
-          id="disabled"
+          name="some_form"
         />
       </div>
     );

@@ -9,10 +9,10 @@ const PasswordInput = ({
   placeholder,
   value,
   showErrorMessage,
-  id,
+  name,
 }) => {
   const inputProps = {
-    id,
+    name,
     placeholder,
     onChange: e => onChange(e.target.value),
     value,
@@ -24,9 +24,7 @@ const PasswordInput = ({
         <h5>{label}</h5>
         <Link to="/">Forgot?</Link>
       </div>
-      <label
-        htmlFor={id}
-        >
+      <label>
         <input
           {...inputProps}
           type="password"
@@ -44,7 +42,7 @@ PasswordInput.propTypes = {
   error: PropTypes.object,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   showErrorMessage: PropTypes.bool,
 };
 
