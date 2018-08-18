@@ -101,7 +101,7 @@ const Home = () => (
 
     <div className="flex jc-center dir-col pad-ends-super">
       {getImageDiv('cute-bear', bearCircle)}
-      <p className="primary flex jc-center">
+      <p className="primary flex jc-center text-center">
         Stay tuned for sponsor updates!
       </p>
     </div>
