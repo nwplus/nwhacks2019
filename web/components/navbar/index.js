@@ -94,12 +94,12 @@ class Navbar extends React.Component {
 
     return (
       <nav className={`fill-width flex ${hidden ? 'hide' : ''} ${transparent ? 'transparent' : 'shadow'}`}>
-        <div className="flex ai-center jc-start margin-sides-l">
+        <div className="flex ai-center jc-start margin-sides-l scale-margin-sides-tablet">
           <div className="flex ai-center">
             <Link to="/"><img alt="nwHacks" src={logo} /></Link>
           </div>
         </div>
-        <div className="flex jc-end margin-horizontal-divs fill-width">
+        <div className="flex jc-end fill-width">
           {navbarRight}
         </div>
       </nav>
