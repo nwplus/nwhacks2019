@@ -44,7 +44,7 @@ const Home = () => (
           </Link>
         </p>
       </div>
-      <div className="pad-sides-xxl scale-hide-phablet">
+      <div className="pad-sides-xxl scale-hide-laptop">
         {getImageDiv('sun', sun)}
       </div>
     </div>

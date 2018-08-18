@@ -50,6 +50,9 @@ $mobile: 480px;
         font-size: 40px !important
 
   &-hide
+    &-laptop
+      @media screen and (max-width: $laptop)
+        display: none !important
     &-phablet
       @media screen and (max-width: $phablet)
         display: none !important
