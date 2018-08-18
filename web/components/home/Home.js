@@ -13,7 +13,12 @@ import panelTrain from '../../assets/panel-train.svg';
 
 import bearCircle from '../../assets/bear-circle.svg';
 
-const getImageDiv = (alt, src) => <img alt={alt} src={src} />;
+const getImageDiv = (alt, src, scale) => (
+  <img
+    className={scale ? 'scale-width-phablet' : ''}
+    alt={alt}
+    src={src} />
+);
 
 const rowStyle = `
   flex jc-between ai-center dir-row
@@ -65,14 +70,14 @@ const Home = () => (
           the west coast the best coast.
         </p>
       </div>
-      <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop scale-jc-center">
-        {getImageDiv('bear', panelBear)}
+      <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none scale-jc-center">
+        {getImageDiv('bear', panelBear, true)}
       </div>
     </div>
 
     <div className={`${rowStyle} scale-row-desktop-rev`}>
-      <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop scale-jc-center">
-        {getImageDiv('train', panelTrain)}
+      <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none scale-jc-center">
+        {getImageDiv('train', panelTrain, true)}
       </div>
       <div>
         <h2>Why nwHacks?</h2>

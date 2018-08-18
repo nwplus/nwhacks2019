@@ -27,6 +27,10 @@ $mobile: 480px;
         @media screen and (max-width: $desktop)
           padding-right: $spacing-s !important
           padding-left: $spacing-s !important
+        &-none
+          @media screen and (max-width: $tablet)
+            padding-right: 0 !important
+            padding-left: 0 !important
       &-tablet
         @media screen and (max-width: $tablet)
           padding-right: $spacing-s !important
@@ -56,3 +60,8 @@ $mobile: 480px;
     &-phablet
       @media screen and (max-width: $phablet)
         display: none !important
+
+  &-width
+    &-phablet
+      @media screen and (max-width: $phablet)
+        width: 100% !important
