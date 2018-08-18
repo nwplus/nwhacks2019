@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SecondaryButton = ({ text, onClick, disabled, className }) => (
+const SecondaryButton = ({ text, onClick, disabled, className, name, type }) => (
   <button
     onClick={onClick}
-    type={name ? "submit" : "button"}
+    type={type ? type : (name ? "submit" : "button")}
     disabled={disabled}
     className={`secondary ${className}`}
     form={name}>
@@ -22,6 +22,7 @@ SecondaryButton.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   name: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default SecondaryButton;
