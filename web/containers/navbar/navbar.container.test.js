@@ -35,7 +35,8 @@ describe('Navbar container', () => {
 
   describe('when feature flags are not loaded', () => {
     beforeEach(() => {
-      props.featureFlags.isLoaded = false;
+      const { featureFlags } = props;
+      featureFlags.isLoaded = false;
 
       wrapper = getWrapper();
     });
@@ -47,12 +48,14 @@ describe('Navbar container', () => {
 
   describe('when feature flags are loaded', () => {
     beforeEach(() => {
-      props.featureFlags.isLoaded = true;
+      const { featureFlags } = props;
+      featureFlags.isLoaded = true;
     });
 
     describe('when application feature flag is enabled', () => {
       beforeEach(() => {
-        props.featureFlags.data.application.enabled = true;
+        const { featureFlags } = props;
+        featureFlags.data.application.enabled = true;
       });
 
       describe('when the location is home page', () => {
@@ -187,12 +190,14 @@ describe('Navbar container', () => {
 
     describe('when application feature flag is disabled', () => {
       beforeEach(() => {
-        props.featureFlags.data.application.enabled = false;
+        const { featureFlags } = props;
+        featureFlags.data.application.enabled = false;
       });
 
       describe('when the location is home page', () => {
         beforeEach(() => {
-          props.location.pathname = '/';
+          const { location } = props;
+          location.pathname = '/';
           wrapper = getWrapper();
           navbarWrapper = wrapper.find(Navbar);
         });
@@ -208,7 +213,8 @@ describe('Navbar container', () => {
 
       describe('when the location is not home page', () => {
         beforeEach(() => {
-          props.location.pathname = '/random_page';
+          const { location } = props;
+          location.pathname = '/random_page';
           wrapper = getWrapper();
           navbarWrapper = wrapper.find(Navbar);
         });

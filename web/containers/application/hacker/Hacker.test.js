@@ -37,7 +37,8 @@ describe('HackerContainer', () => {
 
   describe('when feature flag is not loaded', () => {
     beforeEach(() => {
-      props.featureFlags.isLoaded = false;
+      const { featureFlags } = props;
+      featureFlags.isLoaded = false;
 
       wrapper = getWrapper();
     });
@@ -49,12 +50,14 @@ describe('HackerContainer', () => {
 
   describe('when feature flag is loaded', () => {
     beforeEach(() => {
-      props.featureFlags.isLoaded = true;
+      const { featureFlags } = props;
+      featureFlags.isLoaded = true;
     });
 
     describe('when application feature flag is enabled', () => {
       beforeEach(() => {
-        props.featureFlags.data.application.enabled = true;
+        const { featureFlags } = props;
+        featureFlags.data.application.enabled = true;
       });
 
       describe('with given props', () => {
