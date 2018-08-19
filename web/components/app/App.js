@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { connect } from 'react-redux';
 
 import Main from '../Main';
 import { Login, Logout } from '../auth';
@@ -13,11 +12,17 @@ import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';
 import UIDemo from '../demo';
 
-import { store, persistor } from '../../services/store/configureStore';
+import { toggleApplication } from '../../actions/featureFlag';
 
-export const App = ({ base }) => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+class App extends React.Component {
+  componentWillMount() {
+    toggleApplication(true);
+  }
+
+  render() {
+    const { base } = this.props;
+
+    return (
       <BrowserRouter basename={base}>
         <div>
           <Navbar />
@@ -34,9 +39,19 @@ export const App = ({ base }) => (
           </Switch>
         </div>
       </BrowserRouter>
-    </PersistGate>
-  </Provider>
-);
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleApplication: (enabled) => {
+      dispatch(toggleApplication(enabled));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
 
 App.propTypes = {
   base: PropTypes.string,
