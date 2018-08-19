@@ -2,14 +2,14 @@
   background: $gradient-purple
 
   &-email-registration
-    @media screen and (max-width: 300px)
+    @media screen and (max-width: $mobile-s)
       flex-direction: column !important
       > button.primary
         width: 100%
 
     > .text-input
       width: 100%
-      max-width: 300px
+      max-width: $mobile-s
 
   &-skyline
     margin-bottom: -$spacing-super
