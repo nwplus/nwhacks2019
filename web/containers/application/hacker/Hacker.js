@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
 import propTypesTemplates from '../../../prop-types-templates';
+import { constructFirestoreObject } from '../../../services/firestore';
 
 export class HackerApplicationContainer extends React.Component {
   constructor(props) {
@@ -46,8 +48,22 @@ export class HackerApplicationContainer extends React.Component {
   }
 
   render() {
-    const { hackerApplication, activeIndex, lastValidIndex } = this.props;
+    const {
+      hackerApplication,
+      activeIndex,
+      lastValidIndex,
+      featureFlags: {
+        isLoaded: isFeatureFlagsLoaded,
+        data: featureFlagsData,
+      }
+    } = this.props;
     const { cancelled } = this.state;
+
+    if (!isFeatureFlagsLoaded)  return null;
+
+    const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
+    if (!isApplicationEnabled)  return (<Redirect to="page_not_found" />);
+
     return (
       <HackerApplication
         hackerApplication={hackerApplication}
@@ -82,12 +98,16 @@ const mapStateToProps = (state) => {
         },
       },
     },
+    firestore,
   } = state;
+
+  const featureFlags = constructFirestoreObject(firestore, 'feature_flags');
 
   return {
     hackerApplication,
     activeIndex,
     lastValidIndex,
+    featureFlags,
   };
 };
 
