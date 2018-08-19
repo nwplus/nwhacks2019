@@ -10,7 +10,7 @@ beforeAll(() => {
 });
 
 describe('HackerContainer', () => {
-  let props = {
+  const props = {
     hackerApplication: {
       isSubmitted: false,
       firstName: 'John',

@@ -91,8 +91,7 @@ class Navbar extends React.Component {
         ));
         break;
       default:
-        const navbarRightElements = linkElements.concat([button]);
-        navbarRight = navbarRightElements.map(l => (
+        navbarRight = linkElements.concat([button]).map(l => (
           <div
             key={key += 1}
             className="flex ai-center margin-sides-l">

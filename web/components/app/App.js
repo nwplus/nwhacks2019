@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import Main from '../Main';
@@ -13,8 +12,6 @@ import NotFound from '../errors/NotFound';
 import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';
 import UIDemo from '../demo';
-
-import { toggleApplication } from '../../actions/featureFlag';
 
 class App extends React.Component {
   render() {
@@ -47,5 +44,4 @@ export default compose(
 
 App.propTypes = {
   base: PropTypes.string,
-  toggleApplicationFeatureFlag: PropTypes.func,
 };
