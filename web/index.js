@@ -11,7 +11,7 @@ import { store, persistor } from './services/store/configureStore';
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-     <App base={process.env.PUBLIC_URL || ''} />
+      <App base={process.env.PUBLIC_URL || ''} />
     </PersistGate>
   </Provider>,
   document.getElementById('app')

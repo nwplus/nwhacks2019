@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
+import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import Main from '../Main';
 import { Login, Logout } from '../auth';
@@ -15,9 +17,26 @@ import UIDemo from '../demo';
 import { toggleApplication } from '../../actions/featureFlag';
 
 class App extends React.Component {
-  componentWillMount() {
-    toggleApplication(true);
-  }
+  // componentWillMount() {
+  //   const { toggleApplicationFeatureFlag } = this.props;
+  //   toggleApplicationFeatureFlag(true);
+  // }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   const { featureFlags, toggleApplicationFeatureFlag } = nextProps;
+  //   const { isLoaded } = featureFlags;
+
+  //   if (isLoaded) {
+  //     toggleApplicationFeatureFlag(featureFlags.data.application.enabled);
+  //     return true;
+  //     // populate store with user's hacker application
+  //     // if (hackerApplication.data) {
+  //     //   storeHackerApplication(hackerApplication.data);
+  //     // }
+  //   }
+
+  //   return false;
+  // }
 
   render() {
     const { base } = this.props;
@@ -43,16 +62,49 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  const {
+    firestore: {
+      data: {
+        featureFlags,
+      },
+      status: {
+        requesting,
+      },
+    },
+  } = state;
+
+  const data = featureFlags;
+
+  return {
+    featureFlags: {
+      isLoaded: !requesting[`feature_flags`],
+      data,
+    },
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleApplication: (enabled) => {
+    toggleApplicationFeatureFlag: (enabled) => {
       dispatch(toggleApplication(enabled));
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default compose(
+  firestoreConnect((props) => {
+    return [
+      {
+        collection: 'feature_flags',
+        storeAs: 'featureFlags',
+      },
+    ];
+  }),
+  connect(mapStateToProps, mapDispatchToProps),
+)(App);
 
 App.propTypes = {
   base: PropTypes.string,
+  toggleApplicationFeatureFlag: PropTypes.func,
 };
