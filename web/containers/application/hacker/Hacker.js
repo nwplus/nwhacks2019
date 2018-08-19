@@ -55,14 +55,14 @@ export class HackerApplicationContainer extends React.Component {
       featureFlags: {
         isLoaded: isFeatureFlagsLoaded,
         data: featureFlagsData,
-      }
+      },
     } = this.props;
     const { cancelled } = this.state;
 
-    if (!isFeatureFlagsLoaded)  return null;
+    if (!isFeatureFlagsLoaded) return null;
 
     const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
-    if (!isApplicationEnabled)  return (<Redirect to="page_not_found" />);
+    if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
 
     return (
       <HackerApplication

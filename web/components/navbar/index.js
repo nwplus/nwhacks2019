@@ -91,7 +91,7 @@ class Navbar extends React.Component {
         ));
         break;
       default:
-        const navbarRightElements = linkElements.concat([ button ]);
+        const navbarRightElements = linkElements.concat([button]);
         navbarRight = navbarRightElements.map(l => (
           <div
             key={key += 1}

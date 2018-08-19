@@ -2,7 +2,7 @@ export const constructFirestoreObject = (firestore, key) => {
   const {
     status: {
       requested,
-    }
+    },
   } = firestore;
 
   const isLoaded = requested[key];
@@ -17,5 +17,5 @@ export const constructFirestoreObject = (firestore, key) => {
   return {
     isLoaded,
     data: body,
-  }
-}
+  };
+};
