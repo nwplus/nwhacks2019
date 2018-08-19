@@ -70,7 +70,8 @@ export const NavbarContainer = ({ signedIn, location, featureFlags }) => {
 
 NavbarContainer.propTypes = {
   signedIn: PropTypes.bool.isRequired,
-  location: PropTypes.object,
+  location: PropTypes.object.isRequired,
+  featureFlags: PropTypes.object.isRequired,
 };
 
 export default withRouter(compose(
