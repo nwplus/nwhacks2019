@@ -21,13 +21,6 @@ class Login extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      loading: !nextProps.auth.isLoaded,
-      loggedIn: !nextProps.auth.isEmpty,
-    });
-  }
-
   onEmailChange = email => this.setState({ email });
 
   onPasswordChange = password => this.setState({ password });
@@ -96,11 +89,11 @@ class Login extends React.Component {
     const {
       auth: {
         isLoaded: isAuthLoaded,
-        isEmpty: needLogin
+        isEmpty: needLogin,
       },
       featureFlags: {
         isLoaded: isFeatureFlagsLoaded,
-      }
+      },
     } = this.props;
 
     if (!isAuthLoaded || !isFeatureFlagsLoaded) return (<span>Loading...</span>);
@@ -109,10 +102,10 @@ class Login extends React.Component {
       featureFlags: {
         data: {
           application: {
-            enabled: isApplicationEnabled
-          }
-        }
-      }
+            enabled: isApplicationEnabled,
+          },
+        },
+      },
     } = this.props;
 
     if (!isApplicationEnabled) return (<Redirect to="/page_not_found" />);
@@ -127,6 +120,7 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
   }),
   auth: PropTypes.object,
+  featureFlags: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ firebase: { auth }, firestore }) => {

@@ -5,8 +5,6 @@ export const constructFirestoreObject = (firestore, key) => {
 
   let body;
   if (isLoaded) {
-    const { data } = firestore;
-
     body = data[key];
   }
 
