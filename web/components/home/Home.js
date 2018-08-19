@@ -70,13 +70,13 @@ const Home = () => (
           the west coast the best coast.
         </p>
       </div>
-      <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none scale-jc-center">
+      <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none">
         {getImageDiv('bear', panelBear, true)}
       </div>
     </div>
 
     <div className={`${rowStyle} scale-row-desktop-rev`}>
-      <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none scale-jc-center">
+      <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
         {getImageDiv('train', panelTrain, true)}
       </div>
       <div>
