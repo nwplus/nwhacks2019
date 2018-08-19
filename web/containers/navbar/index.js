@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import { DISPLAY_TYPE } from './DisplayTypes';
 import { BUTTON_TYPE } from './ButtonTypes';
 import Navbar from '../../components/navbar';
+import { constructFirestoreObject } from '../../services/firestore';
 
 const getDisplayType = (location, featureFlags) => {
   const { pathname } = location;
@@ -76,35 +77,13 @@ export default withRouter(compose(
   firebaseConnect(),
   connect((state) => {
     const { isEmpty } = state.firebase.auth;
-    const {
-      firestore: {
-        status: {
-          requested: {
-            feature_flags: isFeatureFlagLoaded,
-          }
-        }
-      }
-    } = state;
 
-    let featureFlags;
-    if (isFeatureFlagLoaded) {
-      const {
-        firestore: {
-          data: {
-            feature_flags,
-          },
-        },
-      } = state;
-
-      featureFlags = feature_flags;
-    }
+    const { firestore } = state;
+    const featureFlags = constructFirestoreObject(firestore, 'feature_flags');
 
     return {
       signedIn: !isEmpty,
-      featureFlags: {
-        isLoaded: isFeatureFlagLoaded,
-        data: featureFlags,
-      },
+      featureFlags,
     };
   }),
 )(NavbarContainer));
