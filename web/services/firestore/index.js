@@ -1,11 +1,7 @@
 export const constructFirestoreObject = (firestore, key) => {
-  const {
-    status: {
-      requested,
-    },
-  } = firestore;
+  const { data } = firestore;
 
-  const isLoaded = requested[key];
+  const isLoaded = !!data[key];
 
   let body;
   if (isLoaded) {
