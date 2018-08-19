@@ -17,27 +17,6 @@ import UIDemo from '../demo';
 import { toggleApplication } from '../../actions/featureFlag';
 
 class App extends React.Component {
-  // componentWillMount() {
-  //   const { toggleApplicationFeatureFlag } = this.props;
-  //   toggleApplicationFeatureFlag(true);
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const { featureFlags, toggleApplicationFeatureFlag } = nextProps;
-  //   const { isLoaded } = featureFlags;
-
-  //   if (isLoaded) {
-  //     toggleApplicationFeatureFlag(featureFlags.data.application.enabled);
-  //     return true;
-  //     // populate store with user's hacker application
-  //     // if (hackerApplication.data) {
-  //     //   storeHackerApplication(hackerApplication.data);
-  //     // }
-  //   }
-
-  //   return false;
-  // }
-
   render() {
     const { base } = this.props;
 
@@ -62,46 +41,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const {
-    firestore: {
-      data: {
-        featureFlags,
-      },
-      status: {
-        requesting,
-      },
-    },
-  } = state;
-
-  const data = featureFlags;
-
-  return {
-    featureFlags: {
-      isLoaded: !requesting[`feature_flags`],
-      data,
-    },
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleApplicationFeatureFlag: (enabled) => {
-      dispatch(toggleApplication(enabled));
-    },
-  };
-};
-
 export default compose(
-  firestoreConnect((props) => {
-    return [
-      {
-        collection: 'feature_flags',
-        storeAs: 'featureFlags',
-      },
-    ];
-  }),
-  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(['feature_flags']),
 )(App);
 
 App.propTypes = {
