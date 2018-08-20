@@ -35,6 +35,10 @@ describe('AfterLoginContainer', () => {
       componentProps = wrapper.find(HackerApplication).props();
     });
 
+    it('initial state includes property cancelled as false', () => {
+      expect(wrapper.state('cancelled')).toBeFalsy();
+    });
+
     it('passes hacker application to the component', () => {
       expect(componentProps).toHaveProperty('hackerApplication', {
         isSubmitted: false,
@@ -154,6 +158,34 @@ describe('AfterLoginContainer', () => {
       wrapper.instance().onHackerApplicationChange(newApp);
       const { updateApplication } = props;
       expect(updateApplication).toHaveBeenCalledWith(newApp);
+    });
+  });
+
+  describe('when cancelling hacker application', () => {
+    beforeEach(() => {
+      props = {
+        hackerApplication: {
+          isSubmitted: false,
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        activeIndex: 99,
+        lastValidIndex: 100,
+        changePage: jest.fn(),
+        changeLastActiveIndex: jest.fn(),
+        updateApplication: jest.fn(),
+        cancelApplication: jest.fn(),
+      };
+
+      wrapper = getWrapper();
+    });
+
+    it('calls updateApplication', () => {
+      expect(wrapper.state('cancelled')).toBeFalsy();
+      wrapper.instance().cancel();
+      const { cancelApplication } = props;
+      expect(cancelApplication).toHaveBeenCalled();
+      expect(wrapper.state('cancelled')).toBeTruthy();
     });
   });
 });

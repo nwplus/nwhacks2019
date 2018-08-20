@@ -50,17 +50,12 @@ const getButtonType = (signedIn, location) => {
   return BUTTON_TYPE.SIGN_OUT;
 };
 
-export const NavbarContainer = ({ signedIn, location }) => {
-  const { pathname } = location;
-  if (pathname === '/page_not_found') return (<div />);
-
-  return (
-    <Navbar
-      displayType={getDisplayType(location)}
-      buttonType={getButtonType(signedIn, location)}
+export const NavbarContainer = ({ signedIn, location }) => (
+  <Navbar
+    displayType={getDisplayType(location)}
+    buttonType={getButtonType(signedIn, location)}
       />
-  );
-};
+);
 
 NavbarContainer.propTypes = {
   signedIn: PropTypes.bool.isRequired,

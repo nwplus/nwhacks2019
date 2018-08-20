@@ -19,8 +19,9 @@ const getPrimaryButtonText = (activeIndex, count) => {
 };
 
 const HackerApplication = (props) => {
-  const { hackerApplication } = props;
+  const { hackerApplication, cancelled } = props;
   if (hackerApplication.isSubmitted) return (<Redirect to="/dashboard" />);
+  if (cancelled) return (<Redirect to="/" />);
 
   const {
     count,
@@ -30,6 +31,7 @@ const HackerApplication = (props) => {
     onPageBack,
     onPageNext,
     onHackerApplicationChange,
+    cancelHackerApplication,
   } = props;
 
   const indexToPage = {
@@ -47,6 +49,12 @@ const HackerApplication = (props) => {
     ),
   };
 
+  const alertThenCancel = () => {
+    if (window.confirm('Are you sure you want to cancel?')) {
+      cancelHackerApplication();
+    }
+  };
+
   return (
     <div className="below-nav application fill-width flex jc-center">
       <div className="pad-ends-mega">
@@ -61,8 +69,7 @@ const HackerApplication = (props) => {
         <ButtonGroup className="pad-top-mega">
           <SecondaryButton
             text={activeIndex === 0 ? 'Cancel' : 'Back'}
-            onClick={onPageBack}
-            disabled={activeIndex === 0}
+            onClick={activeIndex === 0 ? alertThenCancel : onPageBack}
             />
           <PrimaryButton
             text={getPrimaryButtonText(activeIndex, count)}
@@ -83,6 +90,8 @@ HackerApplication.propTypes = {
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
   onHackerApplicationChange: PropTypes.func,
+  cancelHackerApplication: PropTypes.func.isRequired,
+  cancelled: PropTypes.bool.isRequired,
 };
 
 export default HackerApplication;
