@@ -65,13 +65,12 @@ class Navbar extends React.Component {
     const { hidden, transparent } = this.state;
     const { displayType, buttonType } = this.props;
     const button = getButton(buttonType);
-    const navbarRightElements = [
+    const linkElements = [
       <Link to="/"><b>About</b></Link>,
       <Link to="/"><b>Stories</b></Link>,
       <Link to="/"><b>FAQ</b></Link>,
       <Link to="/"><b>Sponsors</b></Link>,
       <Link to="/"><b>2018</b></Link>,
-      button,
     ];
 
     let navbarRight;
@@ -82,8 +81,17 @@ class Navbar extends React.Component {
       case DISPLAY_TYPE.LOGO_AND_BUTTON:
         navbarRight = <div className="flex ai-center">{button}</div>;
         break;
+      case DISPLAY_TYPE.LOGO_AND_LINKS:
+        navbarRight = linkElements.map(l => (
+          <div
+            key={key += 1}
+            className="flex ai-center margin-sides-l">
+            {l}
+          </div>
+        ));
+        break;
       default:
-        navbarRight = navbarRightElements.map(l => (
+        navbarRight = linkElements.concat([button]).map(l => (
           <div
             key={key += 1}
             className="flex ai-center margin-sides-l">

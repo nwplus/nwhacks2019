@@ -8,11 +8,13 @@ import { compose } from 'redux';
 import { DISPLAY_TYPE } from './DisplayTypes';
 import { BUTTON_TYPE } from './ButtonTypes';
 import Navbar from '../../components/navbar';
+import { getFromFirestore } from '../../services/firestore';
 
-const getDisplayType = (location) => {
+const getDisplayType = (location, featureFlags) => {
   const { pathname } = location;
   const isHomePage = pathname === '/';
   const isDashBoardPage = pathname === '/dashboard';
+  const { application: { enabled: isApplicationEnabled } } = featureFlags;
 
   let displayType = DISPLAY_TYPE.ONLY_LOGO;
 
@@ -20,7 +22,11 @@ const getDisplayType = (location) => {
   if (pathname === '/ui_demo') return DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
 
   if (isHomePage) {
-    displayType = DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
+    if (isApplicationEnabled) {
+      displayType = DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
+    } else {
+      displayType = DISPLAY_TYPE.LOGO_AND_LINKS;
+    }
   } else if (isDashBoardPage) {
     displayType = DISPLAY_TYPE.LOGO_AND_BUTTON;
   }
@@ -50,22 +56,35 @@ const getButtonType = (signedIn, location) => {
   return BUTTON_TYPE.SIGN_OUT;
 };
 
-export const NavbarContainer = ({ signedIn, location }) => (
-  <Navbar
-    displayType={getDisplayType(location)}
-    buttonType={getButtonType(signedIn, location)}
+export const NavbarContainer = ({ signedIn, location, featureFlags }) => {
+  const { isLoaded: isFeatureFlagLoaded, data: featureFlagsData } = featureFlags;
+  if (!isFeatureFlagLoaded) return null;
+
+  return (
+    <Navbar
+      displayType={getDisplayType(location, featureFlagsData)}
+      buttonType={getButtonType(signedIn, location)}
       />
-);
+  );
+};
 
 NavbarContainer.propTypes = {
   signedIn: PropTypes.bool.isRequired,
-  location: PropTypes.object,
+  location: PropTypes.object.isRequired,
+  featureFlags: PropTypes.object.isRequired,
 };
 
 export default withRouter(compose(
   firebaseConnect(),
   connect((state) => {
     const { isEmpty } = state.firebase.auth;
-    return { signedIn: !isEmpty };
+
+    const { firestore } = state;
+    const featureFlags = getFromFirestore(firestore, 'feature_flags');
+
+    return {
+      signedIn: !isEmpty,
+      featureFlags,
+    };
   }),
 )(NavbarContainer));

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 import Main from '../Main';
 import { Login, Logout } from '../auth';
@@ -13,11 +13,11 @@ import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';
 import UIDemo from '../demo';
 
-import { store, persistor } from '../../services/store/configureStore';
+class App extends React.Component {
+  render() {
+    const { base } = this.props;
 
-export const App = ({ base }) => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    return (
       <BrowserRouter basename={base}>
         <div>
           <Navbar />
@@ -34,9 +34,13 @@ export const App = ({ base }) => (
           </Switch>
         </div>
       </BrowserRouter>
-    </PersistGate>
-  </Provider>
-);
+    );
+  }
+}
+
+export default compose(
+  firestoreConnect(['feature_flags']),
+)(App);
 
 App.propTypes = {
   base: PropTypes.string,
