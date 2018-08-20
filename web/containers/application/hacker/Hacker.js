@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
 import propTypesTemplates from '../../../prop-types-templates';
-import { constructFirestoreObject } from '../../../services/firestore';
+import { getFromFirestore } from '../../../services/firestore';
 
 export class HackerApplicationContainer extends React.Component {
   constructor(props) {
@@ -101,7 +101,7 @@ const mapStateToProps = (state) => {
     firestore,
   } = state;
 
-  const featureFlags = constructFirestoreObject(firestore, 'feature_flags');
+  const featureFlags = getFromFirestore(firestore, 'feature_flags');
 
   return {
     hackerApplication,

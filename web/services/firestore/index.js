@@ -1,4 +1,4 @@
-export const constructFirestoreObject = (firestore, key) => {
+export const getFromFirestore = (firestore, key) => {
   const { data } = firestore;
 
   const isLoaded = !!data[key];

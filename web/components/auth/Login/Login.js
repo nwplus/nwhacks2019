@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
 import { AfterLogin } from '../../../containers/auth';
-import { constructFirestoreObject } from '../../../services/firestore';
+import { getFromFirestore } from '../../../services/firestore';
 
 class Login extends React.Component {
   constructor(props) {
@@ -124,7 +124,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = ({ firebase: { auth }, firestore }) => {
-  const featureFlags = constructFirestoreObject(firestore, 'feature_flags');
+  const featureFlags = getFromFirestore(firestore, 'feature_flags');
   return { auth, featureFlags };
 };
 

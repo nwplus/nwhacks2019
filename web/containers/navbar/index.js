@@ -8,7 +8,7 @@ import { compose } from 'redux';
 import { DISPLAY_TYPE } from './DisplayTypes';
 import { BUTTON_TYPE } from './ButtonTypes';
 import Navbar from '../../components/navbar';
-import { constructFirestoreObject } from '../../services/firestore';
+import { getFromFirestore } from '../../services/firestore';
 
 const getDisplayType = (location, featureFlags) => {
   const { pathname } = location;
@@ -80,7 +80,7 @@ export default withRouter(compose(
     const { isEmpty } = state.firebase.auth;
 
     const { firestore } = state;
-    const featureFlags = constructFirestoreObject(firestore, 'feature_flags');
+    const featureFlags = getFromFirestore(firestore, 'feature_flags');
 
     return {
       signedIn: !isEmpty,
