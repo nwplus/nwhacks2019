@@ -38,7 +38,8 @@ const Home = () => (
         </p>
         <div className="homepage-email-registration flex ai-end">
           <TextInput
-            placeholder="hacker@email.com" />
+            placeholder="hacker@email.com"
+            onChange={() => {}} />
           &nbsp;
           <PrimaryButton
             text="Submit" />
