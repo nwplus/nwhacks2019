@@ -21,7 +21,7 @@ const getImageDiv = (alt, src, scale) => (
 );
 
 const rowStyle = `
-  flex jc-between ai-center dir-row
+  split flex jc-between ai-center dir-row
   pad-sides-ultra pad-bottom-giga scale-pad-sides-tablet`;
 
 const Home = () => (
@@ -60,7 +60,7 @@ const Home = () => (
     </div>
 
     <div className={`${rowStyle} scale-row-desktop`}>
-      <div>
+      <div className="scale-width-desktop">
         <h2>This is nwHacks 2019</h2>
         <p>
           Come make things and break things, and then make them cooler. You&apos;ll
@@ -71,16 +71,20 @@ const Home = () => (
           the west coast the best coast.
         </p>
       </div>
-      <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none">
-        {getImageDiv('bear', panelBear, true)}
+      <div className="scale-width-desktop flex jc-center">
+        <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none">
+          {getImageDiv('bear', panelBear, true)}
+        </div>
       </div>
     </div>
 
     <div className={`${rowStyle} scale-row-desktop-rev`}>
-      <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
-        {getImageDiv('train', panelTrain, true)}
+      <div className="scale-width-desktop flex jc-center">
+        <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
+          {getImageDiv('train', panelTrain, true)}
+        </div>
       </div>
-      <div>
+      <div className="scale-width-desktop">
         <h2>Why nwHacks?</h2>
         <p>
           Vancouver is more than its breathtaking scenery, coastal lifestyle,
