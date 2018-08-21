@@ -22,11 +22,11 @@ const getImageDiv = (alt, src, scale) => (
 
 const rowStyle = `
   split flex jc-between ai-center dir-row
-  pad-sides-ultra pad-bottom-giga scale-pad-sides-tablet`;
+  pad-sides-peta pad-bottom-giga scale-pad-sides-tablet`;
 
 const Home = () => (
   <div className="homepage overflow-hidden">
-    <div className="flex jc-between ai-center pad-top-ultra pad-sides-ultra scale-pad-sides-tablet homepage-scale-top">
+    <div className="flex jc-between ai-center pad-top-peta pad-sides-peta scale-pad-sides-tablet homepage-scale-top">
       <div>
         <h1 className="scale-h1-tablet">nwHacks 2019</h1>
         <p className="primary">
@@ -104,7 +104,7 @@ const Home = () => (
       </div>
     </div>
 
-    <div className="flex jc-center dir-col pad-ends-super">
+    <div className="flex jc-center dir-col pad-ends-tera">
       {getImageDiv('cute-bear', bearCircle)}
       <p className="primary flex jc-center text-center">
         Stay tuned for sponsor updates!
