@@ -1,33 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
 import { AfterLogin } from '../../../containers/auth';
+import { getFromFirestore } from '../../../services/firestore';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    const { auth: { isLoaded, isEmpty } } = this.props;
 
     this.state = {
       email: '',
       password: '',
-      loading: !isLoaded,
-      loggedIn: !isEmpty,
       error: null,
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      loading: !nextProps.auth.isLoaded,
-      loggedIn: !nextProps.auth.isEmpty,
-    });
   }
 
   onEmailChange = email => this.setState({ email });
@@ -95,10 +86,30 @@ class Login extends React.Component {
   }
 
   render() {
-    const { loading, loggedIn } = this.state;
+    const {
+      auth: {
+        isLoaded: isAuthLoaded,
+        isEmpty: needLogin,
+      },
+      featureFlags: {
+        isLoaded: isFeatureFlagsLoaded,
+      },
+    } = this.props;
 
-    if (loading) return (<span>Loading...</span>);
-    if (!loggedIn) return this.loginView();
+    if (!isAuthLoaded || !isFeatureFlagsLoaded) return (<span>Loading...</span>);
+
+    const {
+      featureFlags: {
+        data: {
+          application: {
+            enabled: isApplicationEnabled,
+          },
+        },
+      },
+    } = this.props;
+
+    if (!isApplicationEnabled) return (<Redirect to="/page_not_found" />);
+    if (needLogin) return this.loginView();
 
     return (<AfterLogin />);
   }
@@ -109,10 +120,12 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
   }),
   auth: PropTypes.object,
+  featureFlags: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ firebase: { auth } }) => {
-  return { auth };
+const mapStateToProps = ({ firebase: { auth }, firestore }) => {
+  const featureFlags = getFromFirestore(firestore, 'feature_flags');
+  return { auth, featureFlags };
 };
 
 export default compose(

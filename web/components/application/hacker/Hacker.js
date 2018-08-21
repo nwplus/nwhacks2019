@@ -56,7 +56,7 @@ const HackerApplication = (props) => {
   };
 
   return (
-    <div className="below-nav application fill-width flex jc-center">
+    <div className="pad-nav application fill-width flex jc-center">
       <div className="pad-ends-mega">
         <ProgressGroup
           count={count}

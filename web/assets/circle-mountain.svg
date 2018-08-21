@@ -1,0 +1,25 @@
+<svg width="257" height="257" viewBox="0 0 257 257" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="257" height="257" fill="black" fill-opacity="0"/>
+<rect width="257" height="257" fill="black" fill-opacity="0"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="257" height="257">
+<circle cx="128.5" cy="128.5" r="128.5" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask0)">
+<circle cx="128.5" cy="128.5" r="128.5" fill="#FFA183"/>
+<rect width="284" height="245" fill="black" fill-opacity="0" transform="translate(-9 27.9998)"/>
+<rect width="284" height="245" fill="black" fill-opacity="0" transform="translate(-9 27.9998)"/>
+<path d="M132 28.5159L275 273H-9L132 28.5159Z" fill="url(#paint0_linear)"/>
+<path d="M114.067 84.9409L93.5 94.9998L131.782 27.9998L172 96.7056L149.018 84.9409L131.782 99.9998L114.067 84.9409Z" fill="white"/>
+</g>
+<ellipse cx="101.231" cy="133" rx="6.23077" ry="6" fill="#707A80"/>
+<ellipse cx="168.231" cy="133" rx="6.23077" ry="6" fill="#707A80"/>
+<path d="M136.108 149C127.935 149 123.297 143.667 122 141H149C148.108 143.667 144.281 149 136.108 149Z" fill="#707A80" stroke="#707A80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="100.606" cy="147" rx="11.6055" ry="6" fill="#EE5F5F" style="mix-blend-mode:hard-light"/>
+<ellipse cx="172.605" cy="147" rx="11.6055" ry="6" fill="#EE5F5F" style="mix-blend-mode:hard-light"/>
+<defs>
+<linearGradient id="paint0_linear" x1="123" y1="59.9998" x2="63.9494" y2="352.069" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F4F8FF"/>
+<stop offset="1" stop-color="#2FC1FF"/>
+</linearGradient>
+</defs>
+</svg>
