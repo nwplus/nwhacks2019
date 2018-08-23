@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
+import { SECTION } from '../home/Sections';
 import { SecondaryButton } from '../input/buttons';
 
 import logo from '../../assets/logo.svg';
@@ -67,11 +68,11 @@ class Navbar extends React.Component {
     const { displayType, buttonType } = this.props;
     const button = getButton(buttonType);
     const linkElements = [
-      <Link to="/"><b>About</b></Link>,
-      <Link to="/"><b>Stories</b></Link>,
-      <Link to="/"><b>FAQ</b></Link>,
-      <Link to="/"><b>Sponsors</b></Link>,
-      <Link to="/"><b>2018</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.ABOUT }}><b>About</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.STORIES }}><b>Stories</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.FAQ }}><b>FAQ</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.SPONSORS }}><b>Sponsors</b></Link>,
+      <a href="http://nwhacks.github.io/nwhacks2018_static"><b>2018</b></a>,
     ];
 
     let navbarRight;
@@ -90,7 +91,7 @@ class Navbar extends React.Component {
             {l}
           </div>
         ));
-        navbarRight.push(<div className={LINK_CLASS}>{button}</div>);
+        navbarRight.push(<div key={key += 1} className={LINK_CLASS}>{button}</div>);
         break;
       default:
         navbarRight = linkElements.concat([button]).map(l => (
