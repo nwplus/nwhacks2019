@@ -21,6 +21,7 @@ const getButton = (buttonType) => {
 };
 
 const NAVBAR_HEIGHT = 96;
+const LINK_CLASS = 'flex ai-center margin-sides-l scale-margin-sides-tablet';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -79,22 +80,23 @@ class Navbar extends React.Component {
       case DISPLAY_TYPE.ONLY_LOGO:
         break;
       case DISPLAY_TYPE.LOGO_AND_BUTTON:
-        navbarRight = <div className="flex ai-center">{button}</div>;
+        navbarRight = <div className={LINK_CLASS}>{button}</div>;
         break;
       case DISPLAY_TYPE.LOGO_AND_LINKS:
         navbarRight = linkElements.map(l => (
           <div
             key={key += 1}
-            className="flex ai-center margin-sides-l">
+            className={`${LINK_CLASS} scale-hide-phablet`}>
             {l}
           </div>
         ));
+        navbarRight.push(<div className={LINK_CLASS}>{button}</div>);
         break;
       default:
         navbarRight = linkElements.concat([button]).map(l => (
           <div
             key={key += 1}
-            className="flex ai-center margin-sides-l scale-margin-sides-tablet scale-hide-phablet">
+            className={`${LINK_CLASS} scale-hide-phablet`}>
             {l}
           </div>
         ));
