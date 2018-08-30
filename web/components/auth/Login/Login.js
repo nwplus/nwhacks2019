@@ -1,33 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { firebaseConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
 import { AfterLogin } from '../../../containers/auth';
+import { getFromFirestore } from '../../../services/firestore';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    const { auth: { isLoaded, isEmpty } } = this.props;
 
     this.state = {
       email: '',
       password: '',
-      loading: !isLoaded,
-      loggedIn: !isEmpty,
       error: null,
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      loading: !nextProps.auth.isLoaded,
-      loggedIn: !nextProps.auth.isEmpty,
-    });
   }
 
   onEmailChange = email => this.setState({ email });
@@ -58,7 +49,7 @@ class Login extends React.Component {
             onSubmit={this.login}
             className="input-group"
             name="login-form">
-            <h2 className="pad-sides-xxl">Sign in</h2>
+            <h3 className="pad-sides-xxl margin-bottom-m">Sign in</h3>
             <div className="card split flex">
               <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
                 <TextInput
@@ -67,7 +58,7 @@ class Login extends React.Component {
                   onChange={this.onEmailChange}
                   error={error}
                   label="Email"
-                  name="login-form"
+                  name="email"
                 />
                 <PasswordInput
                   placeholder="Enter your password"
@@ -75,14 +66,15 @@ class Login extends React.Component {
                   onChange={this.onPasswordChange}
                   error={error}
                   label="Password"
-                  name="login-form"
+                  name="password"
                   showErrorMessage
+                  showForgot
                 />
                 <PrimaryButton
                   text="Submit"
                   type="submit"
                   className="fill-width"
-                  />
+                />
                 <p className="flex jc-center">
                   Don&apos;t have an account yet?&nbsp;
                   <Link to="/">Apply here</Link>
@@ -97,10 +89,30 @@ class Login extends React.Component {
   }
 
   render() {
-    const { loading, loggedIn } = this.state;
+    const {
+      auth: {
+        isLoaded: isAuthLoaded,
+        isEmpty: needLogin,
+      },
+      featureFlags: {
+        isLoaded: isFeatureFlagsLoaded,
+      },
+    } = this.props;
 
-    if (loading) return (<span>Loading...</span>);
-    if (!loggedIn) return this.loginView();
+    if (!isAuthLoaded || !isFeatureFlagsLoaded) return (<span>Loading...</span>);
+
+    const {
+      featureFlags: {
+        data: {
+          application: {
+            enabled: isApplicationEnabled,
+          },
+        },
+      },
+    } = this.props;
+
+    if (!isApplicationEnabled) return (<Redirect to="/page_not_found" />);
+    if (needLogin) return this.loginView();
 
     return (<AfterLogin />);
   }
@@ -111,10 +123,12 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
   }),
   auth: PropTypes.object,
+  featureFlags: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ firebase: { auth } }) => {
-  return { auth };
+const mapStateToProps = ({ firebase: { auth }, firestore }) => {
+  const featureFlags = getFromFirestore(firestore, 'feature_flags');
+  return { auth, featureFlags };
 };
 
 export default compose(

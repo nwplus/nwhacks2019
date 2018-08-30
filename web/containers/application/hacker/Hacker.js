@@ -1,22 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
 import propTypesTemplates from '../../../prop-types-templates';
+import { getFromFirestore } from '../../../services/firestore';
 
 export class HackerApplicationContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cancelled: false,
+      isNextButtonEnabled: false,
     };
   }
 
   onPageChange = (activeIndex) => {
     const { changePage, changeLastActiveIndex, lastValidIndex } = this.props;
     changePage(activeIndex);
+    this.setState({ isNextButtonEnabled: false });
     if (activeIndex > lastValidIndex) {
       changeLastActiveIndex(activeIndex);
     }
@@ -45,21 +49,61 @@ export class HackerApplicationContainer extends React.Component {
     cancelApplication();
   }
 
+  updateNextButtonState = (enabled) => {
+    if (enabled) {
+      this.enableNextButton();
+    } else {
+      this.disableNextButton();
+    }
+  }
+
+  enableNextButton = () => {
+    const { isNextButtonEnabled } = this.state;
+
+    if (!isNextButtonEnabled) {
+      this.setState({ isNextButtonEnabled: true });
+    }
+  }
+
+  disableNextButton = () => {
+    const { isNextButtonEnabled } = this.state;
+
+    if (isNextButtonEnabled) {
+      this.setState({ isNextButtonEnabled: false });
+    }
+  }
+
   render() {
-    const { hackerApplication, activeIndex, lastValidIndex } = this.props;
-    const { cancelled } = this.state;
+    const {
+      hackerApplication,
+      activeIndex,
+      lastValidIndex,
+      featureFlags: {
+        isLoaded: isFeatureFlagsLoaded,
+        data: featureFlagsData,
+      },
+    } = this.props;
+    const { cancelled, isNextButtonEnabled } = this.state;
+
+    if (!isFeatureFlagsLoaded) return null;
+
+    const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
+    if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
+
     return (
       <HackerApplication
         hackerApplication={hackerApplication}
         activeIndex={activeIndex}
         lastValidIndex={lastValidIndex}
-        count={4}
+        count={3}
         onPageChange={this.onPageChange}
         onPageNext={this.onPageNext}
         onPageBack={this.onPageBack}
         onHackerApplicationChange={this.onHackerApplicationChange}
         cancelHackerApplication={this.cancel}
         cancelled={cancelled}
+        isNextButtonEnabled={isNextButtonEnabled}
+        updateNextButtonState={this.updateNextButtonState}
         />
     );
   }
@@ -82,12 +126,16 @@ const mapStateToProps = (state) => {
         },
       },
     },
+    firestore,
   } = state;
+
+  const featureFlags = getFromFirestore(firestore, 'feature_flags');
 
   return {
     hackerApplication,
     activeIndex,
     lastValidIndex,
+    featureFlags,
   };
 };
 
@@ -116,6 +164,7 @@ HackerApplicationContainer.propTypes = {
   lastValidIndex: PropTypes.number.isRequired,
   updateApplication: PropTypes.func.isRequired,
   cancelApplication: PropTypes.func.isRequired,
+  featureFlags: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);

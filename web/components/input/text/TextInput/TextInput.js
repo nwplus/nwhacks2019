@@ -11,6 +11,9 @@ const TextInput = ({
   disabled,
   showErrorMessage,
   name,
+  className,
+  sideLinkText,
+  sideLinkOnClick,
 }) => {
   const inputProps = {
     name,
@@ -22,21 +25,33 @@ const TextInput = ({
   };
 
   return (
-    <div className="text-input">
+    <div className={`text-input ${className}`}>
       <h5>{label}</h5>
       <label>
         <input
           {...inputProps}
           className={error ? 'error' : ''}
           />
+        { sideLinkText
+          ? (
+            <span className="margin-left-s">
+              <a className="underline" onClick={sideLinkOnClick}>{sideLinkText}</a>
+            </span>
+          )
+          : null }
         { (error && showErrorMessage) ? (<p>{error.message}</p>) : (<div />) }
       </label>
     </div>
   );
 };
 
+TextInput.defaultProps = {
+  className: '',
+  sideLinkOnClick: () => {},
+};
+
 TextInput.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   error: PropTypes.object,
@@ -45,6 +60,9 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
   showErrorMessage: PropTypes.bool,
+  className: PropTypes.string,
+  sideLinkText: PropTypes.string,
+  sideLinkOnClick: PropTypes.func,
 };
 
 export default TextInput;
