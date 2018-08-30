@@ -66,7 +66,6 @@ class Home extends React.Component {
             <div className="homepage-email-registration flex ai-end">
               <TextInput
                 id="email-registration"
-                label="email-registration"
                 placeholder="hacker@email.com"
                 onChange={() => {}} />
               <PrimaryButton
