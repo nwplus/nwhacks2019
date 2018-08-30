@@ -95,12 +95,18 @@ class Navbar extends React.Component {
         ));
         break;
       default:
-        navbarRight = linkElements.concat([button]).map(l => (
+        navbarRight = linkElements.map(l => (
           <div
             key={key += 1}
-            // don't scale-hide if last element (button)
-            className={`${LINK_CLASS} ${key !== linkElements.length - 1 ? 'scale-hide-phablet' : ''}`}>
+            className={`${LINK_CLASS} scale-hide-phablet`}>
             {l}
+          </div>
+        ));
+        navbarRight.push((
+          <div
+            key={key += 1}
+            className={LINK_CLASS}>
+            {button}
           </div>
         ));
     }
