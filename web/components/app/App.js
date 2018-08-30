@@ -4,13 +4,18 @@ import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
-import Main from '../Main';
+// Containers
+import Main from '../../containers/main';
+import Navbar from '../../containers/navbar';
+
+// Components
 import { Login, Logout } from '../auth';
 import AdminPanel from '../admin';
 import { HackerApplication } from '../../containers/application';
 import NotFound from '../errors/NotFound';
-import Navbar from '../../containers/navbar';
 import DashBoard from '../dashboard';
+
+// Demo
 import UIDemo from '../demo';
 
 class App extends React.Component {

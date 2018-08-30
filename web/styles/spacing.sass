@@ -2,6 +2,8 @@
 // SPACING DEFINITIONS //
 /////////////////////////
 
+// Refer to https://en.m.wikipedia.org/wiki/Metric_prefix
+
 $spacing-xxs: 4px;
 $spacing-xs: 8px;
 $spacing-s: 16px;
@@ -11,6 +13,8 @@ $spacing-xl: 40px;
 $spacing-xxl: 48px;
 $spacing-mega: 56px;
 $spacing-giga: 64px;
+$spacing-tera: 96px;
+$spacing-peta: 152px;
 $navbar: $spacing-giga
 
 /////////////////////////
@@ -26,25 +30,49 @@ $navbar: $spacing-giga
   &-left, &-sides
     &-xxl
       padding-left: $spacing-xxl
+    &-giga
+      padding-left: $spacing-giga
+    &-peta
+      padding-left: $spacing-peta
   &-right, &-sides
     &-xxl
       padding-right: $spacing-xxl
+    &-giga
+      padding-right: $spacing-giga
+    &-peta
+      padding-right: $spacing-peta
 
   // ends
   &-top, &-ends
     &-s
       padding-top: $spacing-s
+    &-l
+      padding-top: $spacing-l
     &-xxl
       padding-top: $spacing-xxl
     &-mega
       padding-top: $spacing-mega
+    &-giga
+      padding-top: $spacing-giga
+    &-tera
+      padding-top: $spacing-tera
+    &-peta
+      padding-top: $spacing-peta
   &-bottom, &-ends
     &-s
       padding-bottom: $spacing-s
+    &-l
+      padding-bottom: $spacing-l
     &-xxl
       padding-bottom: $spacing-xxl
     &-mega
       padding-bottom: $spacing-mega
+    &-giga
+      padding-bottom: $spacing-giga
+    &-tera
+      padding-bottom: $spacing-tera
+    &-peta
+      padding-bottom: $spacing-peta
 
 .margin
   &-left, &-sides
@@ -92,12 +120,3 @@ $navbar: $spacing-giga
           margin-bottom: $spacing-xl
         &:last-of-type
           margin-bottom: $spacing-mega
-
-  // repeating horizontal elements
-  &-horizontal
-    &-divs
-      > div
-        &:first-of-type
-          margin-left: $spacing-m
-        &:last-of-type
-          margin-right: $spacing-m

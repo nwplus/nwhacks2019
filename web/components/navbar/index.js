@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
 import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
+import { SECTION } from '../home/Sections';
 import { SecondaryButton } from '../input/buttons';
 
 import logo from '../../assets/logo.svg';
@@ -21,6 +22,7 @@ const getButton = (buttonType) => {
 };
 
 const NAVBAR_HEIGHT = 96;
+const LINK_CLASS = 'flex ai-center margin-sides-l scale-margin-sides-tablet';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -66,11 +68,13 @@ class Navbar extends React.Component {
     const { displayType, buttonType } = this.props;
     const button = getButton(buttonType);
     const linkElements = [
-      <Link to="/"><b>About</b></Link>,
-      <Link to="/"><b>Stories</b></Link>,
-      <Link to="/"><b>FAQ</b></Link>,
-      <Link to="/"><b>Sponsors</b></Link>,
-      <Link to="/"><b>2018</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.ABOUT }}><b>About</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.STORIES }}><b>Stories</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.FAQ }}><b>FAQ</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.SPONSORS }}><b>Sponsors</b></Link>,
+      <a href="http://nwhacks.github.io/nwhacks2018_static" target="_blank" rel="noopener noreferrer">
+        <b>2018</b>
+      </a>,
     ];
 
     let navbarRight;
@@ -79,35 +83,42 @@ class Navbar extends React.Component {
       case DISPLAY_TYPE.ONLY_LOGO:
         break;
       case DISPLAY_TYPE.LOGO_AND_BUTTON:
-        navbarRight = <div className="flex ai-center">{button}</div>;
+        navbarRight = <div className={LINK_CLASS}>{button}</div>;
         break;
       case DISPLAY_TYPE.LOGO_AND_LINKS:
         navbarRight = linkElements.map(l => (
           <div
             key={key += 1}
-            className="flex ai-center margin-sides-l">
+            className={`${LINK_CLASS} scale-hide-phablet`}>
             {l}
           </div>
         ));
         break;
       default:
-        navbarRight = linkElements.concat([button]).map(l => (
+        navbarRight = linkElements.map(l => (
           <div
             key={key += 1}
-            className="flex ai-center margin-sides-l">
+            className={`${LINK_CLASS} scale-hide-phablet`}>
             {l}
+          </div>
+        ));
+        navbarRight.push((
+          <div
+            key={key += 1}
+            className={LINK_CLASS}>
+            {button}
           </div>
         ));
     }
 
     return (
       <nav className={`fill-width flex ${hidden ? 'hide' : ''} ${transparent ? 'transparent' : 'shadow'}`}>
-        <div className="flex ai-center jc-start margin-sides-l">
+        <div className="flex ai-center jc-start margin-sides-l scale-margin-sides-tablet">
           <div className="flex ai-center">
             <Link to="/"><img alt="nwHacks" src={logo} /></Link>
           </div>
         </div>
-        <div className="flex jc-end margin-horizontal-divs fill-width">
+        <div className="flex jc-end fill-width">
           {navbarRight}
         </div>
       </nav>

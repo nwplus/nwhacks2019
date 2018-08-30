@@ -1,9 +1,71 @@
 /////////////////////////
 //     BREAKPOINTS     //
 /////////////////////////
+  
+$desktop:  1300px
+$laptop:   1080px
+$tablet:    900px
+$phablet:   760px
+$mobile:    480px
+$mobile-s:  320px
 
-$desktop: 1300px;
-$laptop: 1080px;
-$tablet: 900px;
-$phablet: 760px;
-$mobile: 480px;
+//////////////////////////
+//   SCALING CLASSES    //
+//////////////////////////
+
+.scale
+  &-row
+    &-desktop
+      @media screen and (max-width: $desktop)
+        flex-direction: column !important
+      &-rev
+        @media screen and (max-width: $desktop)
+          flex-direction: column-reverse !important
+
+  &-pad
+    &-sides
+      &-desktop
+        @media screen and (max-width: $desktop)
+          padding-right: $spacing-s !important
+          padding-left: $spacing-s !important
+        &-none
+          @media screen and (max-width: $tablet)
+            padding-right: 0 !important
+            padding-left: 0 !important
+      &-tablet
+        @media screen and (max-width: $tablet)
+          padding-right: $spacing-s !important
+          padding-left: $spacing-s !important
+
+  &-margin
+    &-sides
+      &-tablet
+        @media screen and (max-width: $tablet)
+          margin-right: $spacing-s !important
+          margin-left: $spacing-s !important
+
+  &-jc
+    &-desktop
+      @media screen and (max-width: $desktop)
+        justify-content: center !important
+
+  &-h1
+    &-tablet
+      @media screen and (max-width: $tablet)
+        font-size: 40px !important
+
+  &-hide
+    &-laptop
+      @media screen and (max-width: $laptop)
+        display: none !important
+    &-phablet
+      @media screen and (max-width: $phablet)
+        display: none !important
+
+  &-width
+    &-phablet
+      @media screen and (max-width: $phablet)
+        width: 100% !important
+    &-desktop
+      @media screen and (max-width: $desktop)
+        width: 100% !important

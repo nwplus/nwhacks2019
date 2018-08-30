@@ -27,6 +27,7 @@ describe('Hacker component', () => {
           isSubmitted: false,
           onHackerApplicationChange: jest.fn(),
         },
+        cancelHackerApplication: jest.fn(),
         cancelled: true,
       };
 
@@ -51,6 +52,7 @@ describe('Hacker component', () => {
           isSubmitted: true,
           onHackerApplicationChange: jest.fn(),
         },
+        cancelHackerApplication: jest.fn(),
         cancelled: false,
       };
 
@@ -239,6 +241,7 @@ describe('Hacker component', () => {
             onPageBack: jest.fn(),
             onPageNext: jest.fn(),
             onHackerApplicationChange: jest.fn(),
+            cancelHackerApplication: jest.fn(),
             cancelled: false,
           };
 
@@ -279,6 +282,7 @@ describe('Hacker component', () => {
             onPageBack: jest.fn(),
             onPageNext: jest.fn(),
             onHackerApplicationChange: jest.fn(),
+            cancelHackerApplication: jest.fn(),
             cancelled: false,
           };
 

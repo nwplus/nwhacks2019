@@ -38,7 +38,7 @@ const TextInput = ({
 };
 
 TextInput.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   error: PropTypes.object,
