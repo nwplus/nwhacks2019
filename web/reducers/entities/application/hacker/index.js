@@ -4,6 +4,7 @@ export const initialState = {
   isSubmitted: false,
   firstName: '',
   lastName: '',
+  email: '',
 };
 
 const hackerApplication = (state = initialState, action) => {

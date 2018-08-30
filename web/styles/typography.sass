@@ -74,8 +74,10 @@ a
   &:visited
     color: $primary
 
-  &:hover
-    color: $secondary-highlight
+  @media (hover:hover)
+    &:hover
+      color: $secondary-highlight
+      cursor: pointer
 
 label
   font-family: Apercu Pro
@@ -87,3 +89,6 @@ label
 .text-align
   &-center
     text-align: center
+
+.underline
+  text-decoration: underline

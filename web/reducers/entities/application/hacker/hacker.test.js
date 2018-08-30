@@ -8,6 +8,7 @@ describe('hacker application reducer', () => {
       expect(hackerApplication(undefined, {})).toEqual({
         firstName: '',
         lastName: '',
+        email: '',
         isSubmitted: false,
       });
     });
@@ -60,6 +61,7 @@ describe('when action type is RESET', () => {
         hacker: {
           firstName: '',
           lastName: '',
+          email: '',
           isSubmitted: false,
         },
       },
@@ -85,6 +87,7 @@ describe('when action type is CANCEL_HACKER_APPLICATION', () => {
         hacker: {
           firstName: '',
           lastName: '',
+          email: '',
           isSubmitted: false,
         },
       },

@@ -27,8 +27,9 @@ button
     pointer-events: none
     opacity: 0.4
 
-  &:hover
-    box-shadow: 0px 4px 6px $shadow
+  @media (hover:hover)
+    &:hover
+      box-shadow: 0px 4px 6px $shadow
 
   &:focus
     outline: none

@@ -39,7 +39,10 @@ div.text-input
 
       &:disabled
         cursor: not-allowed
-        border-color: $grey-slate
+
+    &:disabled
+      border-color: $grey-light
+      color: $grey-light
 
     &:focus
       outline: none
@@ -53,3 +56,11 @@ div.text-input
     margin-bottom: -18px
     font-size: 14px
     color: $error
+
+
+@media only screen and (max-width: $mobile)
+  div.text-input
+    span
+      display: block
+      margin-top: $spacing-xs
+      margin-left: 0px

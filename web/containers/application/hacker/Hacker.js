@@ -13,12 +13,14 @@ export class HackerApplicationContainer extends React.Component {
     super(props);
     this.state = {
       cancelled: false,
+      isNextButtonEnabled: false,
     };
   }
 
   onPageChange = (activeIndex) => {
     const { changePage, changeLastActiveIndex, lastValidIndex } = this.props;
     changePage(activeIndex);
+    this.setState({ isNextButtonEnabled: false });
     if (activeIndex > lastValidIndex) {
       changeLastActiveIndex(activeIndex);
     }
@@ -47,6 +49,30 @@ export class HackerApplicationContainer extends React.Component {
     cancelApplication();
   }
 
+  updateNextButtonState = (enabled) => {
+    if (enabled) {
+      this.enableNextButton();
+    } else {
+      this.disableNextButton();
+    }
+  }
+
+  enableNextButton = () => {
+    const { isNextButtonEnabled } = this.state;
+
+    if (!isNextButtonEnabled) {
+      this.setState({ isNextButtonEnabled: true });
+    }
+  }
+
+  disableNextButton = () => {
+    const { isNextButtonEnabled } = this.state;
+
+    if (isNextButtonEnabled) {
+      this.setState({ isNextButtonEnabled: false });
+    }
+  }
+
   render() {
     const {
       hackerApplication,
@@ -57,7 +83,7 @@ export class HackerApplicationContainer extends React.Component {
         data: featureFlagsData,
       },
     } = this.props;
-    const { cancelled } = this.state;
+    const { cancelled, isNextButtonEnabled } = this.state;
 
     if (!isFeatureFlagsLoaded) return null;
 
@@ -69,13 +95,15 @@ export class HackerApplicationContainer extends React.Component {
         hackerApplication={hackerApplication}
         activeIndex={activeIndex}
         lastValidIndex={lastValidIndex}
-        count={4}
+        count={3}
         onPageChange={this.onPageChange}
         onPageNext={this.onPageNext}
         onPageBack={this.onPageBack}
         onHackerApplicationChange={this.onHackerApplicationChange}
         cancelHackerApplication={this.cancel}
         cancelled={cancelled}
+        isNextButtonEnabled={isNextButtonEnabled}
+        updateNextButtonState={this.updateNextButtonState}
         />
     );
   }
