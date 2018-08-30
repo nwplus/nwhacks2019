@@ -72,7 +72,9 @@ class Navbar extends React.Component {
       <Link to={{ pathname: '/', hash: SECTION.STORIES }}><b>Stories</b></Link>,
       <Link to={{ pathname: '/', hash: SECTION.FAQ }}><b>FAQ</b></Link>,
       <Link to={{ pathname: '/', hash: SECTION.SPONSORS }}><b>Sponsors</b></Link>,
-      <a href="http://nwhacks.github.io/nwhacks2018_static"><b>2018</b></a>,
+      <a href="http://nwhacks.github.io/nwhacks2018_static" target="_blank" rel="noopener noreferrer">
+        <b>2018</b>
+      </a>,
     ];
 
     let navbarRight;
