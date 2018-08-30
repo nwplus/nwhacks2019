@@ -9,7 +9,7 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className 
       <button
         key={i}
         onClick={e => onClick(parseInt(e.currentTarget.textContent, 10) - 1)}
-        type='button'
+        type="button"
         disabled={i > lastValidIndex}
         className={`progress-step ${isActive ? 'active' : ''}`}>
         { i + 1 }

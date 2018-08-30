@@ -11,7 +11,7 @@ import { TextInput } from '../../../input/text';
 const PageTwo = (props) => {
   const { hackerApplication, onHackerApplicationChange } = props;
   const { lastName } = hackerApplication;
-  const formName = "hacker-application";
+  const formName = 'hacker-application';
 
   return (
     <form className="hacker-application-page" id="hacker-application-page-2" name={formName}>

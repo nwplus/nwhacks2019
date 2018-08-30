@@ -8,7 +8,7 @@ import { TextInput } from '../../../input/text';
 const PageOne = (props) => {
   const { hackerApplication, onHackerApplicationChange } = props;
   const { firstName } = hackerApplication;
-  const formName = "hacker-application";
+  const formName = 'hacker-application';
 
   return (
     <form className="hacker-application-page" id="hacker-application-page-1" name={formName}>
