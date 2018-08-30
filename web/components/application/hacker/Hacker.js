@@ -73,7 +73,6 @@ const HackerApplication = (props) => {
             />
           <PrimaryButton
             text={getPrimaryButtonText(activeIndex, count)}
-            name="hacker-application"
             onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
             />
         </ButtonGroup>

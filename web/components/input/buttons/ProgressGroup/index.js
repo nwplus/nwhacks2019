@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className, name }) => {
+const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className }) => {
   const buttons = [];
   for (let i = 0; i < count; i += 1) {
     const isActive = (i === activeIndex);
@@ -9,10 +9,9 @@ const ProgressGroup = ({ count, onClick, activeIndex, lastValidIndex, className,
       <button
         key={i}
         onClick={e => onClick(parseInt(e.currentTarget.textContent, 10) - 1)}
-        type={name ? "submit" : "button"}
+        type='button'
         disabled={i > lastValidIndex}
-        className={`progress-step ${isActive ? 'active' : ''}`}
-        form={name}>
+        className={`progress-step ${isActive ? 'active' : ''}`}>
         { i + 1 }
       </button>
     );
@@ -40,9 +39,6 @@ ProgressGroup.propTypes = {
 
   // class name for styling
   className: PropTypes.string,
-
-  // optional form name
-  name: PropTypes.string,
 };
 
 export default ProgressGroup;

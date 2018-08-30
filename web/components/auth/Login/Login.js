@@ -80,8 +80,8 @@ class Login extends React.Component {
                 />
                 <PrimaryButton
                   text="Submit"
+                  type="submit"
                   className="fill-width"
-                  name="login-form"
                   />
                 <p className="flex jc-center">
                   Don&apos;t have an account yet?&nbsp;

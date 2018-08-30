@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PrimaryButton = ({ text, onClick, disabled, className, name, type }) => (
+const PrimaryButton = ({ text, onClick, disabled, className, type }) => (
   <button
     onClick={onClick}
-    type={type ? type : (name ? "submit" : "button")}
+    type={type}
     disabled={disabled}
-    className={`primary ${className}`}
-    form={name}>
+    className={`primary ${className}`}>
     { text }
   </button>
 );
 
 PrimaryButton.defaultProps = {
   className: '',
+  type: 'button',
 };
 
 PrimaryButton.propTypes = {
@@ -21,7 +21,6 @@ PrimaryButton.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   className: PropTypes.string,
-  name: PropTypes.string,
   type: PropTypes.string,
 };
 
