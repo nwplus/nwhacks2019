@@ -93,7 +93,6 @@ class Navbar extends React.Component {
             {l}
           </div>
         ));
-        navbarRight.push(<div key={key += 1} className={LINK_CLASS}>{button}</div>);
         break;
       default:
         navbarRight = linkElements.concat([button]).map(l => (
