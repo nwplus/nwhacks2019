@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import HackerApplication from '../../../components/application/hacker/Hacker';
 import { HackerApplicationContainer } from './Hacker';
+import { initialState as hackerApplicationInitialState } from '../../../reducers/entities/application/hacker';
 
 beforeAll(() => {
   configure({ adapter: new Adapter() });
@@ -35,6 +36,17 @@ describe('HackerContainer', () => {
   let wrapper;
   const getWrapper = () => shallow(<HackerApplicationContainer {...props} />);
 
+  describe('when hacker application is undefined', () => {
+    beforeEach(() => {
+      props.hackerApplication = undefined;
+      wrapper = getWrapper();
+    });
+
+    it('hacker application defaults to initial state', () => {
+      expect(wrapper.props()).toHaveProperty('hackerApplication', hackerApplicationInitialState);
+    });
+  });
+
   describe('when feature flag is not loaded', () => {
     beforeEach(() => {
       const { featureFlags } = props;
@@ -58,6 +70,11 @@ describe('HackerContainer', () => {
       beforeEach(() => {
         const { featureFlags } = props;
         featureFlags.data.application.enabled = true;
+        props.hackerApplication = {
+          isSubmitted: false,
+          firstName: 'John',
+          lastName: 'Doe',
+        };
       });
 
       describe('with given props', () => {
