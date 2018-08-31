@@ -19,7 +19,7 @@ describe('PasswordInput component', () => {
       value,
       placeholder: 'some placeholder',
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
     };
 
     beforeEach(() => {
@@ -43,7 +43,7 @@ describe('PasswordInput component', () => {
     const props = {
       value,
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
     };
 
     beforeEach(() => {
@@ -59,7 +59,7 @@ describe('PasswordInput component', () => {
     const props = {
       value,
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
     };
 
     describe('when there is an error', () => {
@@ -163,7 +163,7 @@ describe('PasswordInput component', () => {
     const onChange = (e) => { newValue = e; };
     const props = {
       label: 'some label',
-      id: 'some input',
+      name: 'some name',
       onChange,
     };
 

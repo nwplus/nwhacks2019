@@ -39,7 +39,7 @@ class PageTwo extends React.Component {
         </p>
         <TextInput
           label="Email"
-          id="hacker-application-email"
+          name="hacker-application-email"
           value={email}
           onChange={(emailInput) => {
             const updatedHackerApplication = update(hackerApplication, {

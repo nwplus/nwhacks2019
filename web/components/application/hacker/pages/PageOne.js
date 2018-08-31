@@ -36,7 +36,7 @@ class PageOne extends React.Component {
         </p>
         <TextInput
           label="First Name"
-          id="first-name"
+          name="first-name"
           value={firstName}
           onChange={(fname) => {
             const updatedHackerApplication = update(hackerApplication, {

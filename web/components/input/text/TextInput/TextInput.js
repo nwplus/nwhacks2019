@@ -10,13 +10,13 @@ const TextInput = ({
   value,
   disabled,
   showErrorMessage,
-  id,
+  name,
   className,
   sideLinkText,
   sideLinkOnClick,
 }) => {
   const inputProps = {
-    id,
+    name,
     placeholder,
     onChange: e => onChange(e.target.value),
     onBlur,
@@ -27,9 +27,7 @@ const TextInput = ({
   return (
     <div className={`text-input ${className}`}>
       <h5>{label}</h5>
-      <label
-        htmlFor={id}
-        >
+      <label>
         <input
           {...inputProps}
           className={error ? 'error' : ''}
@@ -60,7 +58,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,
-  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   showErrorMessage: PropTypes.bool,
   className: PropTypes.string,
   sideLinkText: PropTypes.string,

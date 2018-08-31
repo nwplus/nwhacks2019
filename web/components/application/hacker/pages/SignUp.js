@@ -92,7 +92,7 @@ class SignUp extends React.Component {
           label="Email"
           onChange={this.onEmailChange}
           value={email}
-          id="signup-email"
+          name="signup-email"
           disabled={isEmailDisabled}
           sideLinkText={isEmailDisabled ? 'Edit email' : 'Save email'}
           sideLinkOnClick={this.onSideLinkClick}
@@ -102,7 +102,7 @@ class SignUp extends React.Component {
           label="Password"
           onChange={this.onPasswordChange}
           value={password}
-          id="signup-password"
+          name="signup-password"
           placeholder="Create a password"
           showErrorMessage={false}
           showError={showError}
@@ -113,7 +113,7 @@ class SignUp extends React.Component {
           label="Password"
           onChange={this.onPasswordConfirmationChange}
           value={passwordConfirmation}
-          id="signup-password-confirmation"
+          name="signup-password-confirmation"
           placeholder="Re-enter your password"
           onBlur={this.onPasswordConfirmationBlur}
           showErrorMessage={showError}
