@@ -21,7 +21,7 @@ const getImageDiv = (alt, src, scale) => (
 );
 
 const ROW_STYLE = `
-  split flex jc-between ai-center dir-row container-width
+  flex jc-between ai-center dir-row container-width
   pad-sides-peta pad-bottom-giga scale-pad-sides-tablet`;
 
 class Home extends React.Component {
@@ -92,7 +92,7 @@ class Home extends React.Component {
 
         <div
           ref={node => this.aboutDiv = node}
-          className={`${ROW_STYLE} scale-row-desktop`}>
+          className={`${ROW_STYLE} split scale-row-desktop`}>
           <div className="scale-width-desktop">
             <h2>This is nwHacks 2019</h2>
             <p>
@@ -111,7 +111,7 @@ class Home extends React.Component {
           </div>
         </div>
 
-        <div className={`${ROW_STYLE} scale-row-desktop-rev`}>
+        <div className={`${ROW_STYLE} split scale-row-desktop-rev`}>
           <div className="scale-width-desktop flex jc-center">
             <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
               {getImageDiv('train', panelTrain, true)}
@@ -135,6 +135,10 @@ class Home extends React.Component {
               minds for an epic two day event.
             </p>
           </div>
+        </div>
+
+        <div className={`${ROW_STYLE}`}>
+          <h2 className="fill-width">Hacker stories</h2>
         </div>
 
         <div className="flex jc-center dir-col pad-ends-tera">
