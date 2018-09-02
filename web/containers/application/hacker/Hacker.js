@@ -7,6 +7,7 @@ import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
 import propTypesTemplates from '../../../prop-types-templates';
 import { getFromFirestore } from '../../../services/firestore';
+import { initialState as hackerApplicationInitialState } from '../../../reducers/entities/application/hacker';
 
 export class HackerApplicationContainer extends React.Component {
   constructor(props) {
@@ -154,6 +155,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: ACTION_TYPES.CANCEL_HACKER_APPLICATION });
     },
   };
+};
+
+HackerApplicationContainer.defaultProps = {
+  hackerApplication: hackerApplicationInitialState,
 };
 
 HackerApplicationContainer.propTypes = {
