@@ -13,16 +13,16 @@ import panelTrain from '../../assets/panel-train.svg';
 
 import bearCircle from '../../assets/bear-circle.svg';
 
-const getImageDiv = (alt, src, scale) => (
+import spencerBg from '../../assets/stories/spencer-bg.svg';
+
+const getImage = (alt, src, className = '') => (
   <img
-    className={scale ? 'scale-width-phablet' : ''}
+    className={className}
     alt={alt}
     src={src} />
 );
 
-const ROW_STYLE = `
-  flex jc-between ai-center dir-row container-width
-  pad-sides-peta pad-bottom-giga scale-pad-sides-tablet`;
+const ROW_STYLE = `pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width`;
 
 class Home extends React.Component {
   componentDidMount() {
@@ -82,17 +82,17 @@ class Home extends React.Component {
             </p>
           </div>
           <div className="pad-sides-xxl scale-hide-laptop">
-            {getImageDiv('sun', sun)}
+            {getImage('sun', sun)}
           </div>
         </div>
 
         <div className="homepage-skyline fill-width">
-          {getImageDiv('skyline', skyline)}
+          {getImage('skyline', skyline)}
         </div>
 
         <div
           ref={node => this.aboutDiv = node}
-          className={`${ROW_STYLE} split scale-row-desktop`}>
+          className={`${ROW_STYLE} flex jc-between ai-center dir-row split scale-row-desktop`}>
           <div className="scale-width-desktop">
             <h2>This is nwHacks 2019</h2>
             <p>
@@ -106,15 +106,15 @@ class Home extends React.Component {
           </div>
           <div className="scale-width-desktop flex jc-center">
             <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none">
-              {getImageDiv('bear', panelBear, true)}
+              {getImage('bear', panelBear, 'scale-width-phablet')}
             </div>
           </div>
         </div>
 
-        <div className={`${ROW_STYLE} split scale-row-desktop-rev`}>
+        <div className={`${ROW_STYLE} flex jc-between ai-center dir-row split scale-row-desktop-rev`}>
           <div className="scale-width-desktop flex jc-center">
             <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
-              {getImageDiv('train', panelTrain, true)}
+              {getImage('train', panelTrain, 'scale-width-phablet')}
             </div>
           </div>
           <div className="scale-width-desktop">
@@ -138,11 +138,22 @@ class Home extends React.Component {
         </div>
 
         <div className={`${ROW_STYLE}`}>
-          <h2 className="fill-width">Hacker stories</h2>
+          <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
+          <div className="flex jc-between row-stories">
+            <div>
+              {getImage('spencer-bg', spencerBg)}
+            </div>
+            <div>
+              {getImage('spencer-bg', spencerBg)}
+            </div>
+            <div>
+              {getImage('spencer-bg', spencerBg)}
+            </div>
+          </div>
         </div>
 
         <div className="flex jc-center dir-col pad-ends-tera">
-          {getImageDiv('cute-bear', bearCircle)}
+          {getImage('cute-bear', bearCircle)}
           <p className="primary flex jc-center text-center">
             Stay tuned for sponsor updates!
           </p>
