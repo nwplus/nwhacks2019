@@ -5,7 +5,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 // Containers
-import Main from '../../containers/main';
+import Home from '../home/Home';
 import Navbar from '../../containers/navbar';
 
 // Components
@@ -27,7 +27,7 @@ class App extends React.Component {
         <div>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Main} />
+            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/application/hacker" component={HackerApplication} />
