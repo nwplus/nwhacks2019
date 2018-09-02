@@ -21,7 +21,7 @@ const getImageDiv = (alt, src, scale) => (
 );
 
 const ROW_STYLE = `
-  split flex jc-between ai-center dir-row
+  split flex jc-between ai-center dir-row container-width
   pad-sides-peta pad-bottom-giga scale-pad-sides-tablet`;
 
 class Home extends React.Component {
@@ -51,9 +51,9 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="homepage overflow-hidden">
+      <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
         <div
-          className="flex jc-between ai-center pad-top-peta pad-sides-peta scale-pad-sides-tablet homepage-scale-top">
+          className="flex jc-between ai-center pad-top-peta pad-sides-peta scale-pad-sides-tablet homepage-scale-top container-width">
           <div>
             <h1 className="scale-h1-tablet">nwHacks 2019</h1>
             <p className="primary">
