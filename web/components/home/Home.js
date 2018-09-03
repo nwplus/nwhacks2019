@@ -18,6 +18,8 @@ import spencerBg from '../../assets/stories/spencer-bg.svg';
 import spencer from '../../assets/stories/spencer.svg';
 import oliviaBg from '../../assets/stories/olivia-bg.svg';
 import olivia from '../../assets/stories/olivia.svg';
+import avinashBg from '../../assets/stories/avinash-bg.svg';
+import avinash from '../../assets/stories/avinash.svg';
 
 const getImage = (alt, src, className = '') => (
   <img
@@ -42,13 +44,26 @@ const userToText = Object.freeze({
   ),
   olivia: (
     <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
-      <h5>Olivia, <a href="https://devpost.com/software/maplemesh" target="_blank" rel="noopener noreferrer">Rapid Response</a></h5>
+      <h5>Olivia, <a href="https://devpost.com/software/rapid-response-sa4pi1" target="_blank" rel="noopener noreferrer">Rapid Response</a></h5>
       <p>
         nwHacks was one of the most welcoming and inspiring hackathons I’ve ever attended.
          I showed up without a team nor an idea,
           and I left with close new friends and an app that solved a real problem.
            The community at nwHacks was like no other,
            and I feel so fortunate to have been a small part of it.
+      </p>
+    </div>
+  ),
+  avinash: (
+    <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
+      <h5>Avinash, <a href="https://devpost.com/software/talky" target="_blank" rel="noopener noreferrer">Talky</a></h5>
+      <p>
+      Attending nwHacks 2018 was one of the best decisions I made.
+      The coolest things I saw was the use of NFC chips
+      in our check-in tags that were used to access food and more.
+      It felt like something out of movie
+      and it was an innovative idea that I&apos;ve never seen at another hackathon.
+      Building Talky was an absolute blast and I can&apos;t wait to attend next year!
       </p>
     </div>
   ),
@@ -196,15 +211,15 @@ class Home extends React.Component {
             </div>
             <div className="scale-width-tablet fill-height">
               <div className="fill-height">
-                {getImage('spencer-bg', spencerBg, 'fill-width')}
+                {getImage('avinash-bg', avinashBg, 'fill-width')}
                 <div className="fill-width fill-height overlay">
-                  {getImage('spencer', spencer, 'fill-width fill-height')}
+                  {getImage('avinash', avinash, 'fill-width fill-height')}
                 </div>
                 <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
-                  {userToText.spencer}
+                  {userToText.avinash}
                 </div>
               </div>
-              <div className="scale-show-desktop">{userToText.spencer}</div>
+              <div className="scale-show-desktop">{userToText.avinash}</div>
             </div>
           </div>
         </div>
