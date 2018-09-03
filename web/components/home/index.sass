@@ -27,12 +27,14 @@
     > div
       width: 30%
       position: relative
-      @media screen and (max-width: $tablet)
-        width: 100%
-      > img
-        width: 100%
-        &:last-of-type
-          left: 0
-          position: absolute
-          padding-left: 5%
-          padding-top: 5%
+
+      > a
+        left: 0
+        position: absolute
+        margin-left: 5%
+        margin-top: 5%
+
+        @media (hover:hover)
+          &:hover
+            opacity: 0
+

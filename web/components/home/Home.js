@@ -141,9 +141,9 @@ class Home extends React.Component {
         <div className={`${ROW_STYLE}`}>
           <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
           <div className="flex jc-between row-stories scale-row-tablet">
-            <div>
-              {getImage('spencer-bg', spencerBg)}
-              {getImage('spencer', spencer, 'stories-img')}
+            <div className="scale-width-tablet">
+              {getImage('spencer-bg', spencerBg, 'fill-width')}
+              <a className="fill-width">{getImage('spencer', spencer, 'fill-width')}</a>
               <div className="margin-top-m margin-bottom-xxl scale-show-laptop">
                 <h5>Spencer, <a href='https://devpost.com/software/maplemesh' target='_blank'>MapleMesh</a></h5>
                 <p>
@@ -152,13 +152,13 @@ class Home extends React.Component {
                 </p>
               </div>
             </div>
-            <div>
-              {getImage('spencer-bg', spencerBg)}
-              {getImage('spencer', spencer, 'stories-img')}
+            <div className="scale-width-tablet">
+              {getImage('spencer-bg', spencerBg, 'fill-width')}
+              <a className="fill-width">{getImage('spencer', spencer, 'fill-width')}</a>
             </div>
-            <div>
-              {getImage('spencer-bg', spencerBg)}
-              {getImage('spencer', spencer, 'stories-img')}
+            <div className="scale-width-tablet">
+              {getImage('spencer-bg', spencerBg, 'fill-width')}
+              <a className="fill-width">{getImage('spencer', spencer, 'fill-width')}</a>
             </div>
           </div>
         </div>
