@@ -187,7 +187,7 @@ class Home extends React.Component {
           <div className="flex jc-between row-stories scale-row-tablet">
             <div className="scale-width-tablet fill-height">
               <div className="fill-height">
-                {getImage('spencer-bg', spencerBg, 'fill-width')}
+                {getImage('spencer-bg', spencerBg, 'fill-width pad-right-s')}
                 <div className="fill-width fill-height overlay">
                   {getImage('spencer', spencer, 'fill-width fill-height')}
                 </div>
@@ -199,7 +199,7 @@ class Home extends React.Component {
             </div>
             <div className="scale-width-tablet fill-height">
               <div className="fill-height">
-                {getImage('olivia-bg', oliviaBg, 'fill-width')}
+                {getImage('olivia-bg', oliviaBg, 'fill-width pad-right-s')}
                 <div className="fill-width fill-height overlay">
                   {getImage('olivia', olivia, 'fill-width fill-height')}
                 </div>
@@ -211,7 +211,7 @@ class Home extends React.Component {
             </div>
             <div className="scale-width-tablet fill-height">
               <div className="fill-height">
-                {getImage('avinash-bg', avinashBg, 'fill-width')}
+                {getImage('avinash-bg', avinashBg, 'fill-width pad-right-s')}
                 <div className="fill-width fill-height overlay">
                   {getImage('avinash', avinash, 'fill-width fill-height')}
                 </div>
