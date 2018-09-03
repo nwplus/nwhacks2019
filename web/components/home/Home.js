@@ -27,7 +27,7 @@ const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet contain
 
 const userToText = Object.freeze({
   spencer: (
-    <div className="margin-top-l margin-bottom-xxl">
+    <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
       <h5>Spencer, <a href="https://devpost.com/software/maplemesh" target="_blank" rel="noopener noreferrer">MapleMesh</a></h5>
       <p>
         I was able to come to nwHacks by myself and
@@ -155,27 +155,41 @@ class Home extends React.Component {
         <div className={`${ROW_STYLE}`}>
           <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
           <div className="flex jc-between row-stories scale-row-tablet">
-            <div className="scale-width-tablet">
-              {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <div className="fill-width overlay">
-                {getImage('spencer', spencer, 'fill-width')}
-              </div>
-              <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
-                {userToText.spencer}
+            <div className="scale-width-tablet fill-height">
+              <div className="fill-height">
+                {getImage('spencer-bg', spencerBg, 'fill-width')}
+                <div className="fill-width fill-height overlay">
+                  {getImage('spencer', spencer, 'fill-width fill-height')}
+                </div>
+                <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
+                  {userToText.spencer}
+                </div>
               </div>
               <div className="scale-show-desktop">{userToText.spencer}</div>
             </div>
-            <div className="scale-width-tablet">
-              {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <a className="fill-width hover-hide overlay">
-                {getImage('spencer', spencer, 'fill-width')}
-              </a>
+            <div className="scale-width-tablet fill-height">
+              <div className="fill-height">
+                {getImage('spencer-bg', spencerBg, 'fill-width')}
+                <div className="fill-width fill-height overlay">
+                  {getImage('spencer', spencer, 'fill-width fill-height')}
+                </div>
+                <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
+                  {userToText.spencer}
+                </div>
+              </div>
+              <div className="scale-show-desktop">{userToText.spencer}</div>
             </div>
-            <div className="scale-width-tablet">
-              {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <a className="fill-width hover-hide overlay">
-                {getImage('spencer', spencer, 'fill-width')}
-              </a>
+            <div className="scale-width-tablet fill-height">
+              <div className="fill-height">
+                {getImage('spencer-bg', spencerBg, 'fill-width')}
+                <div className="fill-width fill-height overlay">
+                  {getImage('spencer', spencer, 'fill-width fill-height')}
+                </div>
+                <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
+                  {userToText.spencer}
+                </div>
+              </div>
+              <div className="scale-show-desktop">{userToText.spencer}</div>
             </div>
           </div>
         </div>
