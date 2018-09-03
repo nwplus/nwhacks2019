@@ -23,29 +23,15 @@ const getImage = (alt, src, className = '') => (
     src={src} />
 );
 
-const ROW_STYLE = `pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width`;
+const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rowStoriesHeight: 0,
-    };
-  }
-
   componentDidMount() {
     this.jumpToHash();
-    this.setHeightOfStoryDiv();
   }
 
   componentDidUpdate() {
     this.jumpToHash();
-  }
-
-  setHeightOfStoryDiv() {
-    this.setState({
-      rowStoriesHeight: document.getElementsByClassName('stories-img')[0].offsetHeight,
-    });
   }
 
   jumpToHash = () => {
@@ -154,7 +140,7 @@ class Home extends React.Component {
 
         <div className={`${ROW_STYLE}`}>
           <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
-          <div className="flex jc-between row-stories" style={{ height: this.state.rowStoriesHeight }}>
+          <div className="flex jc-between row-stories scale-row-tablet">
             <div>
               {getImage('spencer-bg', spencerBg)}
               {getImage('spencer', spencer, 'stories-img')}
@@ -165,7 +151,7 @@ class Home extends React.Component {
             </div>
             <div>
               {getImage('spencer-bg', spencerBg)}
-              {getImage('spencer', spencer, 'stories-img' )}
+              {getImage('spencer', spencer, 'stories-img')}
             </div>
           </div>
         </div>

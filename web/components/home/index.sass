@@ -26,9 +26,13 @@
   .row-stories
     > div
       width: 30%
+      position: relative
+      @media screen and (max-width: $tablet)
+        width: 100%
       > img
-        width: 20%
-        position: absolute
+        width: 100%
         &:last-of-type
-          padding-left: 12px
-          padding-top: 12px
+          left: 0
+          position: absolute
+          padding-left: 5%
+          padding-top: 5%

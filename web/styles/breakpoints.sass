@@ -1,7 +1,7 @@
 /////////////////////////
 //     BREAKPOINTS     //
 /////////////////////////
-  
+
 $desktop:  1300px
 $laptop:   1080px
 $tablet:    900px
@@ -21,6 +21,9 @@ $mobile-s:  320px
       &-rev
         @media screen and (max-width: $desktop)
           flex-direction: column-reverse !important
+    &-tablet
+      @media screen and (max-width: $tablet)
+        flex-direction: column !important
 
   &-pad
     &-sides
