@@ -13,8 +13,11 @@ import panelTrain from '../../assets/panel-train.svg';
 
 import bearCircle from '../../assets/bear-circle.svg';
 
+// stories assets import
 import spencerBg from '../../assets/stories/spencer-bg.svg';
 import spencer from '../../assets/stories/spencer.svg';
+import oliviaBg from '../../assets/stories/olivia-bg.svg';
+import olivia from '../../assets/stories/olivia.svg';
 
 const getImage = (alt, src, className = '') => (
   <img
@@ -34,6 +37,18 @@ const userToText = Object.freeze({
          leave with many friends I am still connected with.
         It was such a fun experience because of the great
          energy that the nwHacks organizers put into it.
+      </p>
+    </div>
+  ),
+  olivia: (
+    <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
+      <h5>Olivia, <a href="https://devpost.com/software/maplemesh" target="_blank" rel="noopener noreferrer">Rapid Response</a></h5>
+      <p>
+        nwHacks was one of the most welcoming and inspiring hackathons I’ve ever attended.
+         I showed up without a team nor an idea,
+          and I left with close new friends and an app that solved a real problem.
+           The community at nwHacks was like no other,
+           and I feel so fortunate to have been a small part of it.
       </p>
     </div>
   ),
@@ -169,15 +184,15 @@ class Home extends React.Component {
             </div>
             <div className="scale-width-tablet fill-height">
               <div className="fill-height">
-                {getImage('spencer-bg', spencerBg, 'fill-width')}
+                {getImage('olivia-bg', oliviaBg, 'fill-width')}
                 <div className="fill-width fill-height overlay">
-                  {getImage('spencer', spencer, 'fill-width fill-height')}
+                  {getImage('olivia', olivia, 'fill-width fill-height')}
                 </div>
                 <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
-                  {userToText.spencer}
+                  {userToText.olivia}
                 </div>
               </div>
-              <div className="scale-show-desktop">{userToText.spencer}</div>
+              <div className="scale-show-desktop">{userToText.olivia}</div>
             </div>
             <div className="scale-width-tablet fill-height">
               <div className="fill-height">
