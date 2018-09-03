@@ -25,6 +25,20 @@ const getImage = (alt, src, className = '') => (
 
 const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
 
+const userToText = Object.freeze({
+  spencer: (
+    <div className="margin-top-l margin-bottom-xxl">
+      <h5>Spencer, <a href="https://devpost.com/software/maplemesh" target="_blank" rel="noopener noreferrer">MapleMesh</a></h5>
+      <p>
+        I was able to come to nwHacks by myself and
+         leave with many friends I am still connected with.
+        It was such a fun experience because of the great
+         energy that the nwHacks organizers put into it.
+      </p>
+    </div>
+  ),
+});
+
 class Home extends React.Component {
   componentDidMount() {
     this.jumpToHash();
@@ -143,22 +157,25 @@ class Home extends React.Component {
           <div className="flex jc-between row-stories scale-row-tablet">
             <div className="scale-width-tablet">
               {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <a className="fill-width">{getImage('spencer', spencer, 'fill-width')}</a>
-              <div className="margin-top-m margin-bottom-xxl scale-show-laptop">
-                <h5>Spencer, <a href='https://devpost.com/software/maplemesh' target='_blank'>MapleMesh</a></h5>
-                <p>
-                  I was able to come to nwHacks by myself and leave with many friends I am still connected with.
-                  It was such a fun experience because of the great energy that the nwHacks organizers put into it.
-                </p>
+              <a className="fill-width overlay">
+                {getImage('spencer', spencer, 'fill-width')}
+              </a>
+              <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
+                {userToText.spencer}
               </div>
+              <div className="scale-show-desktop">{userToText.spencer}</div>
             </div>
             <div className="scale-width-tablet">
               {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <a className="fill-width">{getImage('spencer', spencer, 'fill-width')}</a>
+              <a className="fill-width hover-hide overlay">
+                {getImage('spencer', spencer, 'fill-width')}
+              </a>
             </div>
             <div className="scale-width-tablet">
               {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <a className="fill-width">{getImage('spencer', spencer, 'fill-width')}</a>
+              <a className="fill-width hover-hide overlay">
+                {getImage('spencer', spencer, 'fill-width')}
+              </a>
             </div>
           </div>
         </div>
