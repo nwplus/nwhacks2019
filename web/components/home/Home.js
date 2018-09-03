@@ -157,9 +157,9 @@ class Home extends React.Component {
           <div className="flex jc-between row-stories scale-row-tablet">
             <div className="scale-width-tablet">
               {getImage('spencer-bg', spencerBg, 'fill-width')}
-              <a className="fill-width overlay">
+              <div className="fill-width overlay">
                 {getImage('spencer', spencer, 'fill-width')}
-              </a>
+              </div>
               <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
                 {userToText.spencer}
               </div>
