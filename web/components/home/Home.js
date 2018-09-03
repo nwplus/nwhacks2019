@@ -30,9 +30,9 @@ const getImage = (alt, src, className = '') => (
 
 const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
 
-const userToText = Object.freeze({
+const userToText = {
   spencer: (
-    <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
+    <div>
       <h5>Spencer, <a href="https://devpost.com/software/maplemesh" target="_blank" rel="noopener noreferrer">MapleMesh</a></h5>
       <p>
         I was able to come to nwHacks by myself and
@@ -43,7 +43,7 @@ const userToText = Object.freeze({
     </div>
   ),
   olivia: (
-    <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
+    <div>
       <h5>Olivia, <a href="https://devpost.com/software/rapid-response-sa4pi1" target="_blank" rel="noopener noreferrer">Rapid Response</a></h5>
       <p>
         nwHacks was one of the most welcoming and inspiring hackathons I’ve ever attended.
@@ -55,7 +55,7 @@ const userToText = Object.freeze({
     </div>
   ),
   avinash: (
-    <div className="pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">
+    <div>
       <h5>Avinash, <a href="https://devpost.com/software/talky" target="_blank" rel="noopener noreferrer">Talky</a></h5>
       <p>
       Attending nwHacks 2018 was one of the best decisions I made.
@@ -67,7 +67,19 @@ const userToText = Object.freeze({
       </p>
     </div>
   ),
-});
+};
+
+const userToBg = {
+  spencer: spencerBg,
+  olivia: oliviaBg,
+  avinash: avinashBg,
+};
+
+const userToImg = {
+  spencer,
+  olivia,
+  avinash,
+};
 
 class Home extends React.Component {
   componentDidMount() {
@@ -185,42 +197,20 @@ class Home extends React.Component {
         <div className={`${ROW_STYLE}`}>
           <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
           <div className="flex jc-between row-stories scale-row-tablet">
-            <div className="scale-width-tablet fill-height">
-              <div className="fill-height">
-                {getImage('spencer-bg', spencerBg, 'fill-width pad-right-s')}
-                <div className="fill-width fill-height overlay">
-                  {getImage('spencer', spencer, 'fill-width fill-height')}
+            {
+              ['spencer', 'olivia', 'avinash'].map(person => (
+                <div className="scale-width-tablet fill-height" key={`${person}`}>
+                  <div className="relative overflow-hidden">
+                    {getImage(`${person}-bg`, userToBg[person], 'fill-width pad-right-s')}
+                    {getImage(`${person}`, userToImg[person], 'fill-width overlay')}
+                    <div className="overlay scale-hide-full-screen scale-hover-disable-full-screen hover-show fill-width fill-height">
+                      <div className="pad-top-l pad-bottom-xxl pad-sides-m hover-description flex dir-col jc-center fill-height">{userToText[person]}</div>
+                    </div>
+                  </div>
+                  <div className="scale-show-full-screen pad-top-l pad-bottom-xxl flex dir-col jc-center fill-height">{userToText[person]}</div>
                 </div>
-                <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
-                  {userToText.spencer}
-                </div>
-              </div>
-              <div className="scale-show-desktop">{userToText.spencer}</div>
-            </div>
-            <div className="scale-width-tablet fill-height">
-              <div className="fill-height">
-                {getImage('olivia-bg', oliviaBg, 'fill-width pad-right-s')}
-                <div className="fill-width fill-height overlay">
-                  {getImage('olivia', olivia, 'fill-width fill-height')}
-                </div>
-                <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
-                  {userToText.olivia}
-                </div>
-              </div>
-              <div className="scale-show-desktop">{userToText.olivia}</div>
-            </div>
-            <div className="scale-width-tablet fill-height">
-              <div className="fill-height">
-                {getImage('avinash-bg', avinashBg, 'fill-width pad-right-s')}
-                <div className="fill-width fill-height overlay">
-                  {getImage('avinash', avinash, 'fill-width fill-height')}
-                </div>
-                <div className="fill-width overlay hover-description pad-sides-m scale-hide-desktop scale-hover-disable-desktop hover-show fill-height">
-                  {userToText.avinash}
-                </div>
-              </div>
-              <div className="scale-show-desktop">{userToText.avinash}</div>
-            </div>
+              ))
+            }
           </div>
         </div>
 

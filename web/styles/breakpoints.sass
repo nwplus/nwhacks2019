@@ -2,6 +2,7 @@
 //     BREAKPOINTS     //
 /////////////////////////
 
+$full-screen:    1900px
 $desktop:  1300px
 $laptop:   1080px
 $tablet:    900px
@@ -58,8 +59,8 @@ $mobile-s:  320px
         font-size: 40px !important
 
   &-hide
-    &-desktop
-      @media screen and (max-width: $desktop)
+    &-full-screen
+      @media screen and (max-width: $full-screen)
         display: none !important
     &-laptop
       @media screen and (max-width: $laptop)
@@ -69,6 +70,9 @@ $mobile-s:  320px
         display: none !important
 
   &-show
+    &-full-screen
+      @media screen and (min-width: $full-screen)
+        display: none !important
     &-desktop
       @media screen and (min-width: $desktop)
         display: none !important
@@ -89,9 +93,9 @@ $mobile-s:  320px
 
   &-hover
     &-disable
-      &-desktop
+      &-full-screen
         &:hover
           @media (hover:hover)
-            @media screen and (max-width: $desktop)
+            @media screen and (max-width: $full-screen)
               cursor: default !important
               opacity: 100 !important
