@@ -144,6 +144,13 @@ class Home extends React.Component {
             <div>
               {getImage('spencer-bg', spencerBg)}
               {getImage('spencer', spencer, 'stories-img')}
+              <div className="margin-top-m margin-bottom-xxl scale-show-laptop">
+                <h5>Spencer, <a href='https://devpost.com/software/maplemesh' target='_blank'>MapleMesh</a></h5>
+                <p>
+                  I was able to come to nwHacks by myself and leave with many friends I am still connected with.
+                  It was such a fun experience because of the great energy that the nwHacks organizers put into it.
+                </p>
+              </div>
             </div>
             <div>
               {getImage('spencer-bg', spencerBg)}
