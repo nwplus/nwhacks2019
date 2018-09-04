@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SECTION } from './Sections';
+import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
 import { PrimaryButton } from '../input/buttons';
 
@@ -63,18 +63,22 @@ class Home extends React.Component {
             <p className="secondary">
               Get notified when registration opens!
             </p>
-            <div className="homepage-email-registration flex ai-end">
+            <form
+              className="homepage-email-registration flex ai-end"
+              action={EXTERNAL.MAILCHIMP_FORM}
+              method="post">
               <TextInput
-                name="email-registration"
+                name="EMAIL"
                 placeholder="hacker@email.com"
-                onChange={() => {}} />
+                onChange={() => { }} />
               <PrimaryButton
-                text="Submit" />
-            </div>
+                text="Submit"
+                type="submit" />
+            </form>
             <p className="secondary">
-              <Link to="/">
+              <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>
                 Interested in sponsoring?
-              </Link>
+              </a>
             </p>
           </div>
           <div className="pad-sides-xxl scale-hide-laptop">
