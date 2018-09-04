@@ -8,7 +8,6 @@ module.exports = [
   new webpack.EnvironmentPlugin(['NODE_ENV']),
   new HtmlWebpackPlugin({
     template: './index.html',
-    favicon: './assets/favicon.ico',
     filename: 'index.html',
     inject: true,
   }),
