@@ -6,27 +6,21 @@ import { auth } from '../firebase';
  for refactoring.
  */
 
+let user;
+
+beforeAll(() => auth.createUserWithEmailAndPassword('user@example.com', '12345678').then((userCredential) => {
+  console.log('user successfully created!');
+  ({ user } = userCredential);
+}).catch((error) => {
+  console.err('failed to create user: ', error);
+}));
+
 test('basic test', () => {
-  auth.createUserWithEmailAndPassword('user@example.com', '12345678').then((user) => {
-    expect(user.email).toBe('user@example.com');
-  }).catch((error) => {
-    fail();
-  });
+  expect(user.email).toBe('user@example.com');
 });
 
-// beforeAll(() => auth.createUserWithEmailAndPassword('user@example.com', '12345678').then((userCredential) => {
-//   console.log('user successfully created!');
-//   ({ user } = userCredential);
-// }).catch((error) => {
-//   console.err('failed to create user: ', error);
-// }));
-
-// test('basic test', () => {
-//   expect(user.email).toBe('user@example.com');
-// });
-
-// afterAll(() => user.delete().then(() => {
-//   console.log('user successfully deleted!');
-// }).catch((error) => {
-//   console.err('failed to delete user: ', error);
-// }));
+afterAll(() => user.delete().then(() => {
+  console.log('user successfully deleted!');
+}).catch((error) => {
+  console.err('failed to delete user: ', error);
+}));
