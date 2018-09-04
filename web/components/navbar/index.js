@@ -69,6 +69,7 @@ class Navbar extends React.Component {
     const button = getButton(buttonType);
     const linkElements = [
       <Link to={{ pathname: '/', hash: SECTION.ABOUT }}><b>About</b></Link>,
+      <Link to={{ pathname: '/', hash: SECTION.STORIES }}><b>Stories</b></Link>,
       <a href="http://nwhacks.github.io/nwhacks2018_static" target="_blank" rel="noopener noreferrer">
         <b>2018</b>
       </a>,
