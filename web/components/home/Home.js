@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SECTION } from './Sections';
+import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
 import { PrimaryButton } from '../input/buttons';
 
@@ -72,9 +72,9 @@ class Home extends React.Component {
                 text="Submit" />
             </div>
             <p className="secondary">
-              <Link to="/">
+              <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>
                 Interested in sponsoring?
-              </Link>
+              </a>
             </p>
           </div>
           <div className="pad-sides-xxl scale-hide-laptop">
