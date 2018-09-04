@@ -32,7 +32,9 @@
       "text",
       "json"
     ],
-    "setupFiles": [ "<rootDir>/tests/setup.js" ]
+    "setupFiles": [
+      "<rootDir>/tests/setup.js"
+    ]
   },
   "dependencies": {
     "@firebase/app": "0.3.3",

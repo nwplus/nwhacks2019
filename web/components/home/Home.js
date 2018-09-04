@@ -13,16 +13,73 @@ import panelTrain from '../../assets/panel-train.svg';
 
 import bearCircle from '../../assets/bear-circle.svg';
 
-const getImageDiv = (alt, src, scale) => (
+// stories assets import
+import spencerBg from '../../assets/stories/spencer-bg.svg';
+import spencer from '../../assets/stories/spencer.svg';
+import oliviaBg from '../../assets/stories/olivia-bg.svg';
+import olivia from '../../assets/stories/olivia.svg';
+import avinashBg from '../../assets/stories/avinash-bg.svg';
+import avinash from '../../assets/stories/avinash.svg';
+
+const getImage = (alt, src, className = '') => (
   <img
-    className={scale ? 'scale-width-phablet' : ''}
+    className={className}
     alt={alt}
     src={src} />
 );
 
-const ROW_STYLE = `
-  split flex jc-between ai-center dir-row container-width
-  pad-sides-peta pad-bottom-giga scale-pad-sides-tablet`;
+const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
+
+const userToText = {
+  spencer: (
+    <div>
+      <h5>Spencer, <a href="https://devpost.com/software/maplemesh" target="_blank" rel="noopener noreferrer">MapleMesh</a></h5>
+      <p>
+        I was able to come to nwHacks by myself and
+         leave with many friends I am still connected with.
+        It was such a fun experience because of the great
+         energy that the nwHacks organizers put into it.
+      </p>
+    </div>
+  ),
+  olivia: (
+    <div>
+      <h5>Olivia, <a href="https://devpost.com/software/rapid-response-sa4pi1" target="_blank" rel="noopener noreferrer">Rapid Response</a></h5>
+      <p>
+        nwHacks was one of the most welcoming and inspiring hackathons I’ve ever attended.
+         I showed up without a team nor an idea,
+          and I left with close new friends and an app that solved a real problem.
+           The community at nwHacks was like no other,
+           and I feel so fortunate to have been a small part of it.
+      </p>
+    </div>
+  ),
+  avinash: (
+    <div>
+      <h5>Avinash, <a href="https://devpost.com/software/talky" target="_blank" rel="noopener noreferrer">Talky</a></h5>
+      <p>
+      Attending nwHacks 2018 was one of the best decisions I made.
+      The coolest things I saw was the use of NFC chips
+      in our check-in tags that were used to access food and more.
+      It felt like something out of movie
+      and it was an innovative idea that I&apos;ve never seen at another hackathon.
+      Building Talky was an absolute blast and I can&apos;t wait to attend next year!
+      </p>
+    </div>
+  ),
+};
+
+const userToBg = {
+  spencer: spencerBg,
+  olivia: oliviaBg,
+  avinash: avinashBg,
+};
+
+const userToImg = {
+  spencer,
+  olivia,
+  avinash,
+};
 
 class Home extends React.Component {
   componentDidMount() {
@@ -40,6 +97,7 @@ class Home extends React.Component {
         this.aboutDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.STORIES:
+        this.storiesDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.FAQ:
         break;
@@ -82,17 +140,17 @@ class Home extends React.Component {
             </p>
           </div>
           <div className="pad-sides-xxl scale-hide-laptop">
-            {getImageDiv('sun', sun)}
+            {getImage('sun', sun)}
           </div>
         </div>
 
         <div className="homepage-skyline fill-width">
-          {getImageDiv('skyline', skyline)}
+          {getImage('skyline', skyline)}
         </div>
 
         <div
           ref={node => this.aboutDiv = node}
-          className={`${ROW_STYLE} scale-row-desktop`}>
+          className={`${ROW_STYLE} flex jc-between ai-center dir-row split scale-row-desktop`}>
           <div className="scale-width-desktop">
             <h2>This is nwHacks 2019</h2>
             <p>
@@ -106,15 +164,15 @@ class Home extends React.Component {
           </div>
           <div className="scale-width-desktop flex jc-center">
             <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none">
-              {getImageDiv('bear', panelBear, true)}
+              {getImage('bear', panelBear, 'scale-width-phablet')}
             </div>
           </div>
         </div>
 
-        <div className={`${ROW_STYLE} scale-row-desktop-rev`}>
+        <div className={`${ROW_STYLE} flex jc-between ai-center dir-row split scale-row-desktop-rev`}>
           <div className="scale-width-desktop flex jc-center">
             <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
-              {getImageDiv('train', panelTrain, true)}
+              {getImage('train', panelTrain, 'scale-width-phablet')}
             </div>
           </div>
           <div className="scale-width-desktop">
@@ -137,8 +195,31 @@ class Home extends React.Component {
           </div>
         </div>
 
+        <div
+          ref={node => this.storiesDiv = node}
+          className={`${ROW_STYLE}`}
+          >
+          <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
+          <div className="flex jc-between row-stories scale-row-tablet">
+            {
+              ['spencer', 'olivia', 'avinash'].map(person => (
+                <div className="scale-width-tablet fill-height" key={`${person}`}>
+                  <div className="relative overflow-hidden">
+                    {getImage(`${person}-bg`, userToBg[person], 'fill-width pad-right-s')}
+                    {getImage(`${person}`, userToImg[person], 'fill-width overlay')}
+                    <div className="overlay scale-hide-full-screen scale-hover-disable-full-screen hover-show fill-width fill-height">
+                      <div className="pad-top-l pad-bottom-xxl pad-sides-m hover-description flex dir-col jc-center fill-height">{userToText[person]}</div>
+                    </div>
+                  </div>
+                  <div className="scale-show-full-screen pad-top-m pad-bottom-xxl flex dir-col jc-center fill-height">{userToText[person]}</div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
         <div className="flex jc-center dir-col pad-ends-tera">
-          {getImageDiv('cute-bear', bearCircle)}
+          {getImage('cute-bear', bearCircle)}
           <p className="primary flex jc-center text-center">
             Stay tuned for sponsor updates!
           </p>
