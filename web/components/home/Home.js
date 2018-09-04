@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { SECTION } from './Sections';
 import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
