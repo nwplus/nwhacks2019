@@ -69,3 +69,9 @@ typings/
 
 # next.js build output
 .next
+
+# MacOS DS_Store
+.DS_Store
+
+# nodenv
+.node-version
