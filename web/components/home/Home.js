@@ -97,6 +97,7 @@ class Home extends React.Component {
         this.aboutDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.STORIES:
+        this.storiesDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.FAQ:
         break;
@@ -194,7 +195,10 @@ class Home extends React.Component {
           </div>
         </div>
 
-        <div className={`${ROW_STYLE}`}>
+        <div
+          ref={node => this.storiesDiv = node}
+          className={`${ROW_STYLE}`}
+          >
           <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
           <div className="flex jc-between row-stories scale-row-tablet">
             {
