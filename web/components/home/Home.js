@@ -65,7 +65,7 @@ class Home extends React.Component {
             </p>
             <form
               className="homepage-email-registration flex ai-end"
-              action="https://nwplus.us19.list-manage.com/subscribe/post?u=aeda897a675b0237ff77ec8ff&id=da9eff71cc"
+              action={EXTERNAL.MAILCHIMP_FORM}
               method="post">
               <TextInput
                 name="EMAIL"
