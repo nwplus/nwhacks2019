@@ -9,8 +9,8 @@
       alt="Build Status" />
   </a>
 
-  <a href="https://coveralls.io/github/nwhacks/nwhacks2019">
-    <img src="https://coveralls.io/repos/github/nwhacks/nwhacks2019/badge.svg?branch=master">
+  <a href="https://codecov.io/gh/nwhacks/nwhacks2019">
+    <img src="https://codecov.io/gh/nwhacks/nwhacks2019/branch/master/graph/badge.svg" />
   </a>
 </p>
 

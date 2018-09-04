@@ -33,9 +33,10 @@ lint:
 .PHONY: report-coverage
 report-coverage:
 	mkdir -p .nyc_output
-	cp functions/coverage/coverage-final.json .nyc_output/coverage-functions.json
+	# todo: enable this once function tests are added
+	# cp functions/coverage/coverage-final.json .nyc_output/coverage-functions.json
 	cp web/coverage/coverage-final.json .nyc_output/coverage-web.json
-	nyc report --reporter=text-lcov | coveralls
+	nyc report --reporter=text-lcov > coverage.lcov && codecov
 
 ###############################
 # Component-specific commands #
