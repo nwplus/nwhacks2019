@@ -1,7 +1,8 @@
 /////////////////////////
 //     BREAKPOINTS     //
 /////////////////////////
-  
+
+$full-screen:    1900px
 $desktop:  1300px
 $laptop:   1080px
 $tablet:    900px
@@ -21,6 +22,9 @@ $mobile-s:  320px
       &-rev
         @media screen and (max-width: $desktop)
           flex-direction: column-reverse !important
+    &-tablet
+      @media screen and (max-width: $tablet)
+        flex-direction: column !important
 
   &-pad
     &-sides
@@ -55,6 +59,9 @@ $mobile-s:  320px
         font-size: 40px !important
 
   &-hide
+    &-full-screen
+      @media screen and (max-width: $full-screen)
+        display: none !important
     &-laptop
       @media screen and (max-width: $laptop)
         display: none !important
@@ -62,10 +69,33 @@ $mobile-s:  320px
       @media screen and (max-width: $phablet)
         display: none !important
 
+  &-show
+    &-full-screen
+      @media screen and (min-width: $full-screen)
+        display: none !important
+    &-desktop
+      @media screen and (min-width: $desktop)
+        display: none !important
+    &-laptop
+      @media screen and (min-width: $laptop)
+        display: none !important
+
   &-width
+    &-tablet
+      @media screen and (max-width: $tablet)
+        width: 100% !important
     &-phablet
       @media screen and (max-width: $phablet)
         width: 100% !important
     &-desktop
       @media screen and (max-width: $desktop)
         width: 100% !important
+
+  &-hover
+    &-disable
+      &-full-screen
+        &:hover
+          @media (hover:hover)
+            @media screen and (max-width: $full-screen)
+              cursor: default !important
+              opacity: 100 !important
