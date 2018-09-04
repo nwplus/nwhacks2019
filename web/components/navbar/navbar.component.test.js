@@ -28,7 +28,7 @@ describe('Navbar component', () => {
       });
 
       test('there are some links', () => {
-        expect(wrapper.find(Link).length).toBeGreaterThan(5);
+        expect(wrapper.find(Link).length).toBeGreaterThan(2);
       });
 
       test('the first link is to home page', () => {
@@ -51,7 +51,7 @@ describe('Navbar component', () => {
       });
 
       test('there are some links', () => {
-        expect(wrapper.find(Link).length).toBeGreaterThan(5);
+        expect(wrapper.find(Link).length).toBeGreaterThan(2);
       });
 
       test('the first link is to home page', () => {
