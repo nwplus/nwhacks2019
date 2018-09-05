@@ -5,23 +5,23 @@ import arrow from '../../../assets/arrow.svg';
 class ShowHideTextView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isToggleOn: true };
+    this.state = { showDropDown: false };
     this.handleClick = () => {
-      const { isToggleOn } = this.state;
-      this.setState({ isToggleOn: !isToggleOn });
+      const { showDropDown } = this.state;
+      this.setState({ showDropDown: !showDropDown });
     };
   }
 
   render() {
     const { label, dropDownText, className } = this.props;
-    const { isToggleOn } = this.state;
+    const { showDropDown } = this.state;
     return (
       <div className={`show-hide card secondary-outline ${className}`}>
         <div className="pad-sides-s pad-ends-s user-select-none clickable flex jc-between" onClick={this.handleClick}>
           <p className="show-hide-outer-text margin-ends-s margin-right-s clickable">{label}</p>
           <img className="margin-ends-s flex-no-shrink" src={arrow} alt="arrow" />
         </div>
-        <p className={`show-hide-inner-text margin-sides-s margin-bottom-s ${isToggleOn ? 'display-none' : ''}`}>
+        <p className={`show-hide-inner-text margin-sides-s margin-bottom-s ${showDropDown ? '' : 'display-none'}`}>
           {dropDownText}
         </p>
       </div>
