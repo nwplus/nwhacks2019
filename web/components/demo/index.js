@@ -5,7 +5,7 @@ import { SecondaryButton, PrimaryButton, ProgressGroup } from '../input/buttons'
 import { Checkbox, CheckboxGroup } from '../input/buttons/CheckboxGroup';
 import { RadioButton, RadioGroup } from '../input/buttons/RadioGroup';
 import { TextInput, PasswordInput } from '../input/text';
-import { ShowHideTextView } from '../view'
+import { ShowHideTextView } from '../view';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
 
@@ -101,12 +101,12 @@ class FrontEndComponents extends React.Component {
           disabled
           name="some_disabled_text_input"
         />
-        <br/>
+        <br />
         <p>Show/Hide Component</p>
-        <br/>
-        <ShowHideTextView outerText="Don't click me" innerText="Wow I can't believe you actually did that"/>
-        <br/>
-        <ShowHideTextView outerText="Here's one with a whole lot of text so that you can see what this looks like with more than one line of text" innerText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"/>
+        <br />
+        <ShowHideTextView outerText="Don't click me" innerText="Wow I can't believe you actually did that" />
+        <br />
+        <ShowHideTextView outerText="Here's one with a whole lot of text so that you can see what this looks like with more than one line of text" innerText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" />
       </div>
     );
   }
