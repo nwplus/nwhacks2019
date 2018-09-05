@@ -26,7 +26,7 @@ class ShowHideTextView extends React.Component {
           <p className="show-hide-outer-text margin-ends-s margin-right-s clickable">{label}</p>
           <img className="margin-ends-s flex-no-shrink" src={arrow} alt="arrow" />
         </div>
-        <p className={`show-hide-inner-text margin-sides-s margin-bottom-s ${isToggleOn}`}>
+        <p className={`show-hide-inner-text margin-sides-s margin-bottom-s ${isToggleOn ? 'display-none' : ''}`}>
           {dropDownText}
         </p>
       </div>
