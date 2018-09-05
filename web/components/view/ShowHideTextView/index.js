@@ -6,15 +6,10 @@ class ShowHideTextView extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isToggleOn: true };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState((state) => {
-      return {
-        isToggleOn: !state.isToggleOn,
-      };
-    });
+    this.handleClick = () => {
+      const { isToggleOn } = this.state;
+      this.setState({ isToggleOn: !isToggleOn });
+    };
   }
 
   render() {
@@ -44,7 +39,7 @@ ShowHideTextView.propTypes = {
 
   // the text revealed when the component is clicked
   dropDownText: PropTypes.string.isRequired,
-  
+
   // optional extra className
   className: PropTypes.string,
 };
