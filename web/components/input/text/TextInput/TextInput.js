@@ -14,11 +14,14 @@ const TextInput = ({
   className,
   sideLinkText,
   sideLinkOnClick,
+  maxCharNumber,
 }) => {
   const inputProps = {
     name,
     placeholder,
-    onChange: e => onChange(e.target.value),
+    onChange: (e) => {
+      onChange(e.target.value)
+    },
     onBlur,
     value,
     disabled,
@@ -31,6 +34,7 @@ const TextInput = ({
         <input
           {...inputProps}
           className={error ? 'error' : ''}
+          maxLength={maxCharNumber}
           />
         { sideLinkText
           ? (
@@ -48,6 +52,7 @@ const TextInput = ({
 TextInput.defaultProps = {
   className: '',
   sideLinkOnClick: () => {},
+  maxCharNumber: 100,
 };
 
 TextInput.propTypes = {
@@ -63,6 +68,7 @@ TextInput.propTypes = {
   className: PropTypes.string,
   sideLinkText: PropTypes.string,
   sideLinkOnClick: PropTypes.func,
+  maxCharNumber: PropTypes.number,
 };
 
 export default TextInput;
