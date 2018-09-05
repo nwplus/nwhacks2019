@@ -1,0 +1,39 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import arrow from '../../../assets/arrow.svg';
+
+class ShowHideTextView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      <div className="show-hide card secondary-outline">
+        <div className="pad-sides-s pad-ends-s user-select-none clickable flex jc-between" onClick={this.handleClick}>
+          <p className="show-hide-outer-text margin-ends-s margin-right-s">{this.props.outerText}</p>
+          <img className="margin-ends-s flex-no-shrink" src={arrow} alt="arrow"/>
+        </div>
+        <p className={`show-hide-inner-text margin-sides-s margin-bottom-s ${this.state.isToggleOn ? 'display-none' : ''}`}>
+          {this.props.innerText}
+        </p>
+      </div>
+    );
+  }
+}
+
+ShowHideTextView.propTypes = {
+  outerText: PropTypes.string.isRequired,
+  innerText: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+export default ShowHideTextView;
