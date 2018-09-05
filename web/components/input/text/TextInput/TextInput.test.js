@@ -30,7 +30,7 @@ describe('TextInput component', () => {
     it('maxLength matches maxCharNumber', () => {
       expect(wrapper.find('input').props()).toHaveProperty('maxLength', 3);
     });
-  })
+  });
 
   describe('text', () => {
     const props = {
