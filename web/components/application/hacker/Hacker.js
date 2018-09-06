@@ -36,7 +36,10 @@ const HackerApplication = (props) => {
     isNextButtonEnabled,
     updateNextButtonState,
     submitApplication,
+    onPasswordChange,
   } = props;
+
+  let signUpComponent;
 
   const indexToPage = {
     0: (
@@ -55,9 +58,11 @@ const HackerApplication = (props) => {
     ),
     2: (
       <SignUp
+        ref={node => signUpComponent = node}
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
         updateNextButtonState={updateNextButtonState}
+        onPasswordChange={onPasswordChange}
         />
     ),
   };
@@ -67,6 +72,13 @@ const HackerApplication = (props) => {
       cancelHackerApplication();
     }
   };
+
+  const submitApplicationWrapper = () => {
+    const { email } = hackerApplication;
+    const { password } = signUpComponent.state;
+    const userCredentials = { email, password }
+    submitApplication(userCredentials);
+  }
 
   return (
     <div className="pad-nav application fill-width flex jc-center">
@@ -87,7 +99,7 @@ const HackerApplication = (props) => {
           <PrimaryButton
             disabled={!isNextButtonEnabled}
             text={getPrimaryButtonText(activeIndex, count)}
-            onClick={activeIndex !== count - 1 ? onPageNext : submitApplication}
+            onClick={activeIndex !== count - 1 ? onPageNext : submitApplicationWrapper}
             />
         </ButtonGroup>
       </div>
@@ -108,7 +120,8 @@ HackerApplication.propTypes = {
   cancelled: PropTypes.bool.isRequired,
   isNextButtonEnabled: PropTypes.bool.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
-  submitApplication: PropTypes.func.isRequired
+  submitApplication: PropTypes.func.isRequired,
+  onPasswordChange: PropTypes.func.isRequired,
 };
 
 export default HackerApplication;

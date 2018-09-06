@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { withFirebase } from 'react-redux-firebase';
 
 import { HackerApplication } from '../../../components/application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
@@ -44,6 +45,8 @@ export class HackerApplicationContainer extends React.Component {
     updateApplication(app);
   }
 
+  onPasswordChange = password => this.setState({ password });
+
   cancel = () => {
     const { cancelApplication } = this.props;
     this.setState({ cancelled: true });
@@ -74,8 +77,19 @@ export class HackerApplicationContainer extends React.Component {
     }
   }
 
-  submitApplication = () => {
-    console.log("application submitted");
+  submitApplication = (userCredentials) => {
+    const { firebase } = this.props;
+    this.signUp(firebase, userCredentials);
+  }
+
+  signUp(firebase, userCredentials) {
+    const auth = firebase.auth();
+    const { email, password } = userCredentials;
+    auth.createUserWithEmailAndPassword(email, password).then(() => {
+      console.log('user successfully created!');
+    }).catch((error) => {
+      console.err('failed to create user: ', error);
+    });
   }
 
   render() {
@@ -110,6 +124,7 @@ export class HackerApplicationContainer extends React.Component {
         isNextButtonEnabled={isNextButtonEnabled}
         updateNextButtonState={this.updateNextButtonState}
         submitApplication={this.submitApplication}
+        onPasswordChange={this.onPasswordChange}
         />
     );
   }
@@ -177,4 +192,4 @@ HackerApplicationContainer.propTypes = {
   featureFlags: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HackerApplicationContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withFirebase(HackerApplicationContainer));
