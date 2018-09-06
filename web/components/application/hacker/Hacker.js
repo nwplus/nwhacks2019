@@ -35,6 +35,7 @@ const HackerApplication = (props) => {
     cancelHackerApplication,
     isNextButtonEnabled,
     updateNextButtonState,
+    submitApplication,
   } = props;
 
   const indexToPage = {
@@ -86,7 +87,7 @@ const HackerApplication = (props) => {
           <PrimaryButton
             disabled={!isNextButtonEnabled}
             text={getPrimaryButtonText(activeIndex, count)}
-            onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
+            onClick={activeIndex !== count - 1 ? onPageNext : submitApplication}
             />
         </ButtonGroup>
       </div>
@@ -107,6 +108,7 @@ HackerApplication.propTypes = {
   cancelled: PropTypes.bool.isRequired,
   isNextButtonEnabled: PropTypes.bool.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
+  submitApplication: PropTypes.func.isRequired
 };
 
 export default HackerApplication;

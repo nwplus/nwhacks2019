@@ -74,6 +74,10 @@ export class HackerApplicationContainer extends React.Component {
     }
   }
 
+  submitApplication = () => {
+    console.log("application submitted");
+  }
+
   render() {
     const {
       hackerApplication,
@@ -105,6 +109,7 @@ export class HackerApplicationContainer extends React.Component {
         cancelled={cancelled}
         isNextButtonEnabled={isNextButtonEnabled}
         updateNextButtonState={this.updateNextButtonState}
+        submitApplication={this.submitApplication}
         />
     );
   }
