@@ -6,11 +6,12 @@ class ShowHideTextView extends React.Component {
   constructor(props) {
     super(props);
     this.state = { showDropDown: false };
-    this.handleClick = () => {
-      const { showDropDown } = this.state;
-      this.setState({ showDropDown: !showDropDown });
-    };
   }
+
+  handleClick = () => {
+    const { showDropDown } = this.state;
+    this.setState({ showDropDown: !showDropDown });
+  };
 
   render() {
     const { label, dropDownText, className } = this.props;
