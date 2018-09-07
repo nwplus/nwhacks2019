@@ -50,7 +50,7 @@ const TextInput = ({
 TextInput.defaultProps = {
   className: '',
   sideLinkOnClick: () => {},
-  maxCharNumber: 100,
+  maxCharNumber: 256,
 };
 
 TextInput.propTypes = {
