@@ -47,7 +47,7 @@ PasswordInput.defaultProps = {
   showError: true,
   showErrorMessage: true,
   className: '',
-  maxCharNumber: 100,
+  maxCharNumber: 256,
 };
 
 PasswordInput.propTypes = {
