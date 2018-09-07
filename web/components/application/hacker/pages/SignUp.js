@@ -98,6 +98,7 @@ class SignUp extends React.Component {
       onPageNext,
       isNextButtonEnabled,
       cancelHackerApplication,
+      submitApplication,
     } = this.props;
 
     const error = this.getError();
@@ -154,7 +155,9 @@ class SignUp extends React.Component {
             <PrimaryButton
               disabled={!isNextButtonEnabled}
               text={getPrimaryButtonText(activeIndex, count)}
-              onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
+              onClick={activeIndex !== count - 1 ? onPageNext : () => {
+                submitApplication({ email, password });
+              }}
               />
           </ButtonGroup>
         </div>

@@ -24,6 +24,7 @@ const HackerApplication = (props) => {
     cancelHackerApplication,
     isNextButtonEnabled,
     updateNextButtonState,
+    submitApplication,
   } = props;
 
   const indexToPage = {
@@ -70,6 +71,7 @@ const HackerApplication = (props) => {
         isNextButtonEnabled={isNextButtonEnabled}
         cancelHackerApplication={cancelHackerApplication}
         activeIndex={activeIndex}
+        submitApplication={submitApplication}
         />
     ),
   };
@@ -90,6 +92,7 @@ HackerApplication.propTypes = {
   cancelled: PropTypes.bool.isRequired,
   isNextButtonEnabled: PropTypes.bool.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
+  submitApplication: PropTypes.func.isRequired,
 };
 
 export default HackerApplication;
