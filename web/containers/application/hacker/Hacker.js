@@ -44,6 +44,12 @@ export class HackerApplicationContainer extends React.Component {
     updateApplication(app);
   }
 
+  alertThenCancel = () => {
+    if (window.confirm('Are you sure you want to cancel?')) {
+      this.cancel();
+    }
+  };
+
   cancel = () => {
     const { cancelApplication } = this.props;
     this.setState({ cancelled: true });
@@ -101,7 +107,7 @@ export class HackerApplicationContainer extends React.Component {
         onPageNext={this.onPageNext}
         onPageBack={this.onPageBack}
         onHackerApplicationChange={this.onHackerApplicationChange}
-        cancelHackerApplication={this.cancel}
+        cancelHackerApplication={this.alertThenCancel}
         cancelled={cancelled}
         isNextButtonEnabled={isNextButtonEnabled}
         updateNextButtonState={this.updateNextButtonState}
