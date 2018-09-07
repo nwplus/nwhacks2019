@@ -9,4 +9,4 @@ RUN yarn install --production --silent
 COPY web .
 
 EXPOSE 8080
-ENTRYPOINT [ "yarn", "start", "--host", "0.0.0.0" ]
+ENTRYPOINT [ "yarn", "start:simple", "--host", "0.0.0.0" ]
