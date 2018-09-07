@@ -8,6 +8,13 @@ import { TextInput } from '../../../input/text';
 import { getPrimaryButtonText } from './utils';
 
 class PageOne extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNextButtonEnabled: false,
+    };
+  }
+
   componentWillMount() {
     const { hackerApplication: { firstName } } = this.props;
 
@@ -15,10 +22,8 @@ class PageOne extends React.Component {
   }
 
   updateNextButtonState = (firstName) => {
-    const { updateNextButtonState } = this.props;
-
-    const enabled = firstName.length > 0;
-    updateNextButtonState(enabled);
+    const isNextButtonEnabled = firstName.length > 0;
+    this.setState({ isNextButtonEnabled });
   }
 
   render() {
@@ -31,10 +36,10 @@ class PageOne extends React.Component {
       onPageChange,
       onPageBack,
       onPageNext,
-      isNextButtonEnabled,
       cancelHackerApplication,
     } = this.props;
     const { firstName } = hackerApplication;
+    const { isNextButtonEnabled } = this.state;
 
     return (
       <div className="pad-nav application fill-width flex jc-center">
@@ -91,7 +96,6 @@ class PageOne extends React.Component {
 PageOne.propTypes = {
   hackerApplication: propTypesTemplates.application.hacker,
   onHackerApplicationChange: PropTypes.func.isRequired,
-  updateNextButtonState: PropTypes.func.isRequired,
 };
 
 export default PageOne;

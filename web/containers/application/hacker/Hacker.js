@@ -56,30 +56,6 @@ export class HackerApplicationContainer extends React.Component {
     cancelApplication();
   }
 
-  updateNextButtonState = (enabled) => {
-    if (enabled) {
-      this.enableNextButton();
-    } else {
-      this.disableNextButton();
-    }
-  }
-
-  enableNextButton = () => {
-    const { isNextButtonEnabled } = this.state;
-
-    if (!isNextButtonEnabled) {
-      this.setState({ isNextButtonEnabled: true });
-    }
-  }
-
-  disableNextButton = () => {
-    const { isNextButtonEnabled } = this.state;
-
-    if (isNextButtonEnabled) {
-      this.setState({ isNextButtonEnabled: false });
-    }
-  }
-
   render() {
     const {
       hackerApplication,
@@ -90,7 +66,7 @@ export class HackerApplicationContainer extends React.Component {
         data: featureFlagsData,
       },
     } = this.props;
-    const { cancelled, isNextButtonEnabled } = this.state;
+    const { cancelled } = this.state;
 
     if (!isFeatureFlagsLoaded) return null;
 
@@ -109,8 +85,6 @@ export class HackerApplicationContainer extends React.Component {
         onHackerApplicationChange={this.onHackerApplicationChange}
         cancelHackerApplication={this.alertThenCancel}
         cancelled={cancelled}
-        isNextButtonEnabled={isNextButtonEnabled}
-        updateNextButtonState={this.updateNextButtonState}
         />
     );
   }

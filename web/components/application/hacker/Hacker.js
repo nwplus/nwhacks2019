@@ -31,13 +31,11 @@ const HackerApplication = (props) => {
       <PageOne
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
-        updateNextButtonState={updateNextButtonState}
         count={count}
         lastValidIndex={lastValidIndex}
         onPageChange={onPageChange}
         onPageBack={onPageBack}
         onPageNext={onPageNext}
-        isNextButtonEnabled={isNextButtonEnabled}
         cancelHackerApplication={cancelHackerApplication}
         activeIndex={activeIndex}
         />
@@ -46,13 +44,11 @@ const HackerApplication = (props) => {
       <PageTwo
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
-        updateNextButtonState={updateNextButtonState}
         count={count}
         lastValidIndex={lastValidIndex}
         onPageChange={onPageChange}
         onPageBack={onPageBack}
         onPageNext={onPageNext}
-        isNextButtonEnabled={isNextButtonEnabled}
         cancelHackerApplication={cancelHackerApplication}
         activeIndex={activeIndex}
         />
@@ -61,13 +57,11 @@ const HackerApplication = (props) => {
       <SignUp
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
-        updateNextButtonState={updateNextButtonState}
         count={count}
         lastValidIndex={lastValidIndex}
         onPageChange={onPageChange}
         onPageBack={onPageBack}
         onPageNext={onPageNext}
-        isNextButtonEnabled={isNextButtonEnabled}
         cancelHackerApplication={cancelHackerApplication}
         activeIndex={activeIndex}
         />
@@ -88,8 +82,6 @@ HackerApplication.propTypes = {
   onHackerApplicationChange: PropTypes.func,
   cancelHackerApplication: PropTypes.func.isRequired,
   cancelled: PropTypes.bool.isRequired,
-  isNextButtonEnabled: PropTypes.bool.isRequired,
-  updateNextButtonState: PropTypes.func.isRequired,
 };
 
 export default HackerApplication;

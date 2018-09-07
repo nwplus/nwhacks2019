@@ -11,6 +11,13 @@ import { getPrimaryButtonText } from './utils';
 // For now, just copy pasted design from page one,
 // since we're only concerned about functionality at the moment
 class PageTwo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNextButtonEnabled: false,
+    };
+  }
+
   componentWillMount() {
     const { hackerApplication: { email } } = this.props;
 
@@ -18,10 +25,8 @@ class PageTwo extends React.Component {
   }
 
   updateNextButtonState = (email) => {
-    const { updateNextButtonState } = this.props;
-
-    const enabled = email.length > 0;
-    updateNextButtonState(enabled);
+    const isNextButtonEnabled = email.length > 0;
+    this.setState({ isNextButtonEnabled });
   }
 
   render() {
@@ -34,10 +39,10 @@ class PageTwo extends React.Component {
       onPageChange,
       onPageBack,
       onPageNext,
-      isNextButtonEnabled,
       cancelHackerApplication,
     } = this.props;
     const { email } = hackerApplication;
+    const { isNextButtonEnabled } = this.state;
 
     return (
       <div className="pad-nav application fill-width flex jc-center">
@@ -94,7 +99,6 @@ class PageTwo extends React.Component {
 PageTwo.propTypes = {
   hackerApplication: propTypesTemplates.application.hacker,
   onHackerApplicationChange: PropTypes.func.isRequired,
-  updateNextButtonState: PropTypes.func.isRequired,
 };
 
 export default PageTwo;
