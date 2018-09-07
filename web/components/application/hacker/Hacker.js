@@ -6,18 +6,7 @@ import PageOne from './pages/PageOne';
 import PageTwo from './pages/PageTwo';
 import SignUp from './pages/SignUp';
 
-import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../input/buttons';
 import propTypesTemplates from '../../../prop-types-templates';
-
-const getPrimaryButtonText = (activeIndex, count) => {
-  if (activeIndex === count - 1) {
-    return 'Submit application';
-  }
-  if (activeIndex === count - 2) {
-    return 'One last step';
-  }
-  return 'Next';
-};
 
 const HackerApplication = (props) => {
   const { hackerApplication, cancelled } = props;
@@ -43,6 +32,14 @@ const HackerApplication = (props) => {
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
         updateNextButtonState={updateNextButtonState}
+        count={count}
+        lastValidIndex={lastValidIndex}
+        onPageChange={onPageChange}
+        onPageBack={onPageBack}
+        onPageNext={onPageNext}
+        isNextButtonEnabled={isNextButtonEnabled}
+        cancelHackerApplication={cancelHackerApplication}
+        activeIndex={activeIndex}
         />
     ),
     1: (
@@ -50,6 +47,14 @@ const HackerApplication = (props) => {
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
         updateNextButtonState={updateNextButtonState}
+        count={count}
+        lastValidIndex={lastValidIndex}
+        onPageChange={onPageChange}
+        onPageBack={onPageBack}
+        onPageNext={onPageNext}
+        isNextButtonEnabled={isNextButtonEnabled}
+        cancelHackerApplication={cancelHackerApplication}
+        activeIndex={activeIndex}
         />
     ),
     2: (
@@ -57,41 +62,19 @@ const HackerApplication = (props) => {
         hackerApplication={hackerApplication}
         onHackerApplicationChange={onHackerApplicationChange}
         updateNextButtonState={updateNextButtonState}
+        count={count}
+        lastValidIndex={lastValidIndex}
+        onPageChange={onPageChange}
+        onPageBack={onPageBack}
+        onPageNext={onPageNext}
+        isNextButtonEnabled={isNextButtonEnabled}
+        cancelHackerApplication={cancelHackerApplication}
+        activeIndex={activeIndex}
         />
     ),
   };
 
-  const alertThenCancel = () => {
-    if (window.confirm('Are you sure you want to cancel?')) {
-      cancelHackerApplication();
-    }
-  };
-
-  return (
-    <div className="pad-nav application fill-width flex jc-center">
-      <div className="pad-ends-mega">
-        <ProgressGroup
-          count={count}
-          activeIndex={activeIndex}
-          lastValidIndex={lastValidIndex}
-          onClick={onPageChange}
-          className="pad-bottom-mega"
-          />
-        { indexToPage[activeIndex] }
-        <ButtonGroup className="pad-top-mega">
-          <SecondaryButton
-            text={activeIndex === 0 ? 'Cancel' : 'Back'}
-            onClick={activeIndex === 0 ? alertThenCancel : onPageBack}
-            />
-          <PrimaryButton
-            disabled={!isNextButtonEnabled}
-            text={getPrimaryButtonText(activeIndex, count)}
-            onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
-            />
-        </ButtonGroup>
-      </div>
-    </div>
-  );
+  return (indexToPage[activeIndex]);
 };
 
 HackerApplication.propTypes = {

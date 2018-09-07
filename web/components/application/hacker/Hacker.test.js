@@ -11,9 +11,9 @@ beforeAll(() => {
 });
 
 describe('Hacker component', () => {
-  const COUNT = 10;
-  const ACTIVE_INDEX = 8;
-  const LAST_VALID_INDEX = 9;
+  const COUNT = 3;
+  const ACTIVE_INDEX = 1;
+  const LAST_VALID_INDEX = 2;
 
   const props = {
     hackerApplication: {
@@ -151,13 +151,8 @@ describe('Hacker component', () => {
         });
 
         describe('on click', () => {
-          beforeEach(() => {
-            const { count } = props;
-            props.lastValidIndex = count - 1;
-          });
-
           it('calls corresponding callback function on click', () => {
-            for (let i = 0; i <= props.count; i += 1) {
+            for (let i = 0; i < props.count; i += 1) {
               props.activeIndex = i;
               wrapper = getWrapper();
 
@@ -204,7 +199,7 @@ describe('Hacker component', () => {
             });
 
             it('calls onPageNext when it is not the last page', () => {
-              for (let i = 0; i <= props.count; i += 1) {
+              for (let i = 0; i < props.count; i += 1) {
                 props.activeIndex = i;
                 wrapper = getWrapper();
                 wrapper.find(PrimaryButton).simulate('click');
@@ -226,7 +221,7 @@ describe('Hacker component', () => {
             });
 
             it('does not call onPageNext', () => {
-              for (let i = 0; i <= props.count; i += 1) {
+              for (let i = 0; i < props.count; i += 1) {
                 props.activeIndex = i;
                 wrapper = getWrapper();
                 wrapper.find(PrimaryButton).simulate('click');
