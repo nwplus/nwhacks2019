@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { TextInput, PasswordInput } from '../../../input/text';
 import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../../input/buttons';
 import propTypesTemplates from '../../../../prop-types-templates';
+import { getPrimaryButtonText } from './utils';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -100,16 +101,6 @@ class SignUp extends React.Component {
     } = this.props;
 
     const error = this.getError();
-
-    const getPrimaryButtonText = (activeIndex, count) => {
-      if (activeIndex === count - 1) {
-        return 'Submit application';
-      }
-      if (activeIndex === count - 2) {
-        return 'One last step';
-      }
-      return 'Next';
-    };
 
     return (
       <div className="pad-nav application fill-width flex jc-center">

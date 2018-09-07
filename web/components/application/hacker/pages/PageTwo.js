@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import propTypesTemplates from '../../../../prop-types-templates';
 import { ProgressGroup, SecondaryButton, PrimaryButton, ButtonGroup } from '../../../input/buttons';
 import { TextInput } from '../../../input/text';
+import { getPrimaryButtonText } from './utils';
 
 // TODO: Update design for page two
 // For now, just copy pasted design from page one,
@@ -37,16 +38,6 @@ class PageTwo extends React.Component {
       cancelHackerApplication,
     } = this.props;
     const { email } = hackerApplication;
-
-    const getPrimaryButtonText = (activeIndex, count) => {
-      if (activeIndex === count - 1) {
-        return 'Submit application';
-      }
-      if (activeIndex === count - 2) {
-        return 'One last step';
-      }
-      return 'Next';
-    };
 
     return (
       <div className="pad-nav application fill-width flex jc-center">
