@@ -15,11 +15,11 @@ import bearCircle from '../../assets/bear-circle.svg';
 
 // stories assets import
 import spencerBg from '../../assets/stories/spencer-bg.svg';
-import spencer from '../../assets/stories/spencer.svg';
+import spencer from '../../assets/stories/spencer.png';
 import oliviaBg from '../../assets/stories/olivia-bg.svg';
-import olivia from '../../assets/stories/olivia.svg';
+import olivia from '../../assets/stories/olivia.png';
 import avinashBg from '../../assets/stories/avinash-bg.svg';
-import avinash from '../../assets/stories/avinash.svg';
+import avinash from '../../assets/stories/avinash.png';
 
 const getImage = (alt, src, className = '') => (
   <img
