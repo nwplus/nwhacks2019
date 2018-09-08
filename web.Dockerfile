@@ -8,5 +8,7 @@ WORKDIR web
 RUN yarn install --production --silent
 COPY web .
 
+RUN yarn build
+
 EXPOSE 8080
-ENTRYPOINT [ "yarn", "start:simple", "--host", "0.0.0.0" ]
+ENTRYPOINT [ "yarn", "serve:public" ]
