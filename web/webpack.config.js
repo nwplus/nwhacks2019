@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const plugins = require('./webpack.plugins');
 
 // Define webpack development settings here
@@ -59,5 +60,6 @@ module.exports = {
       // suppress react devtools console warning
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
     }),
+    new BundleAnalyzerPlugin(),
   ]),
 };
