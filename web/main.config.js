@@ -1,6 +1,3 @@
-// Configuration constants for web
-require('dotenv').config({ path: '../.env' });
-
 export const firebaseConfig = {
   production: {
     apiKey: 'AIzaSyCBkQHeikIsiYZ2yOHiqH_mGJKDWMDU500',

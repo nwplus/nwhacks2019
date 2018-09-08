@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const Dotenv = require('dotenv-webpack');
+
 const plugins = require('./webpack.plugins');
 
 // Define webpack development settings here
@@ -56,6 +58,10 @@ module.exports = {
     ],
   },
   plugins: plugins.concat([
+    new Dotenv({
+      path: '../.env',
+      systemvars: true,
+    }),
     new webpack.DefinePlugin({
       // suppress react devtools console warning
       __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
