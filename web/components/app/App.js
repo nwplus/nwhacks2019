@@ -3,20 +3,31 @@ import PropTypes from 'prop-types';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { asyncComponent } from '../wrapper';
 
 // Containers
-import Home from '../home/Home';
-import Navbar from '../../containers/navbar';
+const Home = asyncComponent(() => import('../home/Home'));
+const Navbar = asyncComponent(() => import('../../containers/navbar'));
 
 // Components
-import { Login, Logout } from '../auth';
-import AdminPanel from '../admin';
-import { HackerApplication } from '../../containers/application';
-import NotFound from '../errors/NotFound';
-import DashBoard from '../dashboard';
+const Login = asyncComponent(async () => {
+  const auth = await import('../auth');
+  return auth.Login;
+});
+const Logout = asyncComponent(async () => {
+  const auth = await import('../auth');
+  return auth.Logout;
+});
+const HackerApplication = asyncComponent(async () => {
+  const application = await import('../../containers/application');
+  return application.HackerApplication;
+});
+const AdminPanel = asyncComponent(() => import('../admin'));
+const NotFound = asyncComponent(() => import('../errors/NotFound'));
+const DashBoard = asyncComponent(() => import('../dashboard'));
 
 // Demo
-import UIDemo from '../demo';
+const UIDemo = asyncComponent(() => import('../demo'));
 
 class App extends React.Component {
   render() {
