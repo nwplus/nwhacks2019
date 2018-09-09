@@ -1,14 +1,11 @@
 FROM node:carbon
 
 COPY .env .env
-COPY web/package.json web/package.json
-COPY web/yarn.lock web/yarn.lock
+COPY docs docs
 
-WORKDIR web
-RUN yarn install --production --silent
-COPY web .
+RUN yarn global add http-server
 
-RUN yarn build:dev
+RUN echo "source ./.env ; export NODE_ENV=development ; http-server ./docs -a 0.0.0.0 -p 8080 -c-1" > entry.sh
 
 EXPOSE 8080
-ENTRYPOINT [ "yarn", "serve:public" ]
+ENTRYPOINT [ "bash", "entry.sh" ] 

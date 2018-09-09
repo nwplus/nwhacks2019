@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+const firebase = {
   production: {
     apiKey: 'AIzaSyCBkQHeikIsiYZ2yOHiqH_mGJKDWMDU500',
     authDomain: 'nwhacks-2019.firebaseapp.com',
@@ -16,6 +16,8 @@ export const firebaseConfig = {
     messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   },
 };
+
+export const firebaseConfig = firebase[process.env.FIREBASE || 'production'];
 
 // react-redux-firebase config
 export const rrfConfig = {

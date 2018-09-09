@@ -17,7 +17,7 @@ import { persistConfig } from './persist.config';
 
 export default (initialState = {}) => {
   // Initialize firebase instance
-  firebase.initializeApp(firebaseConfig[process.env.NODE_ENV]);
+  firebase.initializeApp(firebaseConfig);
   // Initialize Cloud Firestore through Firebase
   const firestore = firebase.firestore();
   const firestoreSettings = { timestampsInSnapshots: true };
