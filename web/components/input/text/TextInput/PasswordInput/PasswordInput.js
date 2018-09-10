@@ -14,6 +14,7 @@ const PasswordInput = ({
   showForgot,
   showError,
   className,
+  maxCharNumber,
 }) => {
   const inputProps = {
     name,
@@ -32,6 +33,7 @@ const PasswordInput = ({
       <label>
         <input
           {...inputProps}
+          maxLength={maxCharNumber}
           type="password"
           className={(error && showError) ? 'error' : ''}
           />
@@ -45,6 +47,7 @@ PasswordInput.defaultProps = {
   showError: true,
   showErrorMessage: true,
   className: '',
+  maxCharNumber: 256,
 };
 
 PasswordInput.propTypes = {
@@ -59,6 +62,7 @@ PasswordInput.propTypes = {
   showErrorMessage: PropTypes.bool,
   showForgot: PropTypes.bool,
   className: PropTypes.string,
+  maxCharNumber: PropTypes.number,
 };
 
 export default PasswordInput;
