@@ -1,0 +1,15 @@
+.show-hide
+  > div
+    padding-top: 0px
+    padding-bottom: 0px
+  &-arrow
+    flex-shrink: 0 // for firefox
+    @include transition(0.2s)
+  &-label
+    @extend label
+    line-height: 18px
+  &-drop-down-text
+    margin-top: 0px
+    margin-right: 18px
+.flip-vertical
+  @include transition(0.2s)
