@@ -38,3 +38,21 @@ $transition-time-long: 1.5s
     &:hover
       &:before
         opacity: 1
+
+@mixin transition($transition)
+  transition: $transition
+  -webkit-transition: $transition
+  -moz-transition: $transition
+  -ms-transition: $transition
+  -o-transition: $transition
+
+@mixin transform($transform)
+  transform: $transform
+  -webkit-transform: $transform
+  -moz-transform: $transform
+  -o-transform: $transform
+  -ms-transform: $transform
+
+.flip
+  &-vertical
+    @include transform(scaleY(-1))
