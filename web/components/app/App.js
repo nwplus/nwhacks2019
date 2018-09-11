@@ -10,18 +10,9 @@ const Home = asyncComponent(() => import('../home/Home'));
 const Navbar = asyncComponent(() => import('../../containers/navbar'));
 
 // Components
-const Login = asyncComponent(async () => {
-  const auth = await import('../auth');
-  return auth.Login;
-});
-const Logout = asyncComponent(async () => {
-  const auth = await import('../auth');
-  return auth.Logout;
-});
-const HackerApplication = asyncComponent(async () => {
-  const application = await import('../../containers/application');
-  return application.HackerApplication;
-});
+const Login = asyncComponent(() => import('../auth'), 'Login');
+const Logout = asyncComponent(() => import('../auth'), 'Logout');
+const HackerApplication = asyncComponent(() => import('../../containers/application'), 'HackerApplication');
 const AdminPanel = asyncComponent(() => import('../admin'));
 const NotFound = asyncComponent(() => import('../errors/NotFound'));
 const DashBoard = asyncComponent(() => import('../dashboard'));
