@@ -37,12 +37,14 @@ ShowHideTextView.defaultProps = {
   className: '',
 };
 
+const stringOrElement = PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+
 ShowHideTextView.propTypes = {
   // the label text for the component
-  label: PropTypes.string.isRequired,
+  label: stringOrElement.isRequired,
 
   // the text revealed when the component is clicked
-  dropDownText: PropTypes.string.isRequired,
+  dropDownText: stringOrElement.isRequired,
 
   // optional extra className
   className: PropTypes.string,
