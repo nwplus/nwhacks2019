@@ -240,19 +240,19 @@ class Home extends React.Component {
         </div>
 
         <div ref={node => this.faqDiv = node} className={`${ROW_STYLE}`}>
-          <h2 className="fill-width margin-bottom-l">Frequently asked questions</h2>
-          <div className="flex jc-between faq scale-row-desktop">
+          <h2 className="fill-width margin-bottom-m">Frequently asked questions</h2>
+          <div className="flex jc-start faq scale-row-desktop">
             <div className="flex jc-between dir-row margin-right-s">
-              <div className="scale-width-desktop fill-height fill-width" key={`${"general"}`}>
+              <div className="scale-width-desktop fill-width" key={`${"general"}`}>
                 <div className="relative overflow-hidden">
                   {getFaqSection("general")}
                 </div>
               </div>
             </div>
-            <div className="flex jc-between dir-col margin-left-s">
+            <div className="flex jc-start dir-col margin-left-s">
               {
                 ['teams_and_projects', 'logistics'].map(section => (
-                  <div className="scale-width-desktop fill-height fill-width" key={`${section}`}>
+                  <div className="scale-width-desktop jc-start fill-width" key={`${section}`}>
                     <div className="relative overflow-hidden">
                       {getFaqSection(section)}
                     </div>
@@ -261,7 +261,7 @@ class Home extends React.Component {
               }
             </div>
           </div>
-          <p className="fill-min-width">Still have questions? Feel free to email us at <a href="hello@nwplus.io">hello@nwplus.io</a> or shoot us a message on <a href="https://facebook.com/nwhacks">Facebook</a>.</p>
+          <p className="fill-min-width margin-top-xs">Still have questions? Feel free to email us at <a href="mailto:hello@nwplus.io">hello@nwplus.io</a> or shoot us a message on <a href="https://facebook.com/nwhacks">Facebook</a>.</p>
         </div>
 
         <div className="flex jc-center dir-col pad-ends-tera">
