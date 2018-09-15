@@ -41,14 +41,14 @@
                 switch (newWorker.state) {
                   case 'installed':
                     if (navigator.serviceWorker.controller) {
-                      console.log('New website version available, reload to update.')
+                      console.log('New website version available, reload to update.');
                     }
                     break;
                   case 'redundant':
-                    console.log('The new service worker was redundant.')
-                    break
+                    console.log('The new service worker was redundant.');
+                    break;
                   default:
-                    break
+                    break;
                 }
               }
             }

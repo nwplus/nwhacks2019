@@ -1,19 +1,17 @@
-var CACHE_NAME = 'nw-cache'
-var CACHED_ROUTES = ['/']
+const CACHE_NAME = 'nw-cache';
+const CACHED_ROUTES = [
+  '/',
+];
 
-self.addEventListener('install', function (e) {
+this.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(CACHED_ROUTES);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(CACHED_ROUTES))
   );
 });
 
 // Offline-first
-self.addEventListener('fetch', function (event) {
+this.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(function (response) {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });
