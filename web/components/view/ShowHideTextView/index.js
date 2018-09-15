@@ -37,7 +37,7 @@ ShowHideTextView.defaultProps = {
   className: '',
 };
 
-const stringOrElement = PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+const stringOrElement = PropTypes.oneOfType([PropTypes.string, PropTypes.element]);
 
 ShowHideTextView.propTypes = {
   // the label text for the component

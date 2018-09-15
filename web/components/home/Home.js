@@ -1,10 +1,10 @@
 import React from 'react';
 import { SECTION } from './Sections';
-import { QUESTIONS } from './Questions'
+import { QUESTIONS } from './Questions';
 import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
 import { PrimaryButton } from '../input/buttons';
-import { ShowHideTextView } from '../view'
+import { ShowHideTextView } from '../view';
 
 import sun from '../../assets/sun.svg';
 
@@ -30,11 +30,11 @@ const getImage = (alt, src, className = '') => (
     src={src} />
 );
 
-const getFaqSection = (section) => (
+const getFaqSection = section => (
   <div>
-    <h3>{QUESTIONS[section]["title"]}</h3>
+    <h3>{QUESTIONS[section].title}</h3>
     {
-      QUESTIONS[section]["questions"].map(question => {
+      QUESTIONS[section].questions.map((question) => {
         const labelText = Object.keys(question)[0];
         const dropDownText = question[labelText];
         return (
@@ -43,11 +43,11 @@ const getFaqSection = (section) => (
             dropDownText={dropDownText}
             key={labelText}
             className="margin-ends-s fill-width" />
-        )
+        );
       })
     }
   </div>
-)
+);
 
 const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
 
@@ -243,9 +243,9 @@ class Home extends React.Component {
           <h2 className="fill-width margin-bottom-m">Frequently asked questions</h2>
           <div className="flex jc-start faq scale-row-desktop">
             <div className="flex jc-between dir-row margin-right-s">
-              <div className="scale-width-desktop fill-width" key={`${"general"}`}>
+              <div className="scale-width-desktop fill-width" key={`${'general'}`}>
                 <div className="relative overflow-hidden">
-                  {getFaqSection("general")}
+                  {getFaqSection('general')}
                 </div>
               </div>
             </div>
