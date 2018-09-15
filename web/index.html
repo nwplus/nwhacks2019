@@ -36,7 +36,7 @@
           .register('sw.js', { scope: '/' })
           .then(function (registration) {
             registration.onupdatefound = function () {
-              const newWorker = registration.installing;
+              var newWorker = registration.installing;
               newWorker.onstatechange = function () {
                 switch (newWorker.state) {
                   case 'installed':
