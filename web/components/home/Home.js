@@ -261,7 +261,7 @@ class Home extends React.Component {
               }
             </div>
           </div>
-          <p className="fill-min-width margin-top-xs">Still have questions? Feel free to email us at <a href="mailto:hello@nwplus.io">hello@nwplus.io</a> or shoot us a message on <a href="https://facebook.com/nwhacks">Facebook</a>.</p>
+          <p className="fill-min-width margin-top-s">Still have questions? Feel free to email us at <a href="mailto:hello@nwplus.io">hello@nwplus.io</a> or shoot us a message on <a href="https://facebook.com/nwhacks">Facebook</a>.</p>
         </div>
 
         <div className="flex jc-center dir-col pad-ends-tera">
