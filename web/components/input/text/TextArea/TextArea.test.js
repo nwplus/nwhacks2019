@@ -23,16 +23,16 @@ describe('TextArea component', () => {
     beforeEach(() => {
       wrapper = getWrapper(props);
     });
-    
+
     it('textarea placeholder matches props placeholder', () => {
       expect(wrapper.find('textarea').props()).toHaveProperty('placeholder', 'some placeholder');
     });
-    
+
     it('textarea label matches props label', () => {
       expect(wrapper.find('h5').text()).toBe('some label');
     });
 
-    describe('word count', () => {  
+    describe('word count', () => {
       describe('showWordCount flag', () => {
         it('word count is not visible', () => {
           props.showWordCount = false;
@@ -60,10 +60,10 @@ describe('TextArea component', () => {
       });
 
       it('exceeded', () => {
-        const event = { target: { value: "This is more than five words." } };
-        wrapper.find('textarea').simulate("change", event)
+        const event = { target: { value: 'This is more than five words.' } };
+        wrapper.find('textarea').simulate('change', event);
         expect(wrapper.find('textarea').hasClass('error')).toBeTruthy();
-      });      
+      });
     });
   });
 });

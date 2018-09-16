@@ -101,7 +101,7 @@ class FrontEndComponents extends React.Component {
           disabled
           name="some_disabled_text_input"
         />
-        <br/>
+        <br />
         <TextArea
           label="Enter some long answer"
           name="some_text_area"

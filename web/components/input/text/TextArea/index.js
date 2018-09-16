@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 class TextArea extends React.Component {
   constructor(props) {
     super(props);
+    const { maxWordCount } = this.props;
     this.state = {
       currentCharCount: 0,
       currentWordCount: 0,
-      maxWordCount: this.props.maxWordCount,
+      maxWordCount,
     };
   }
 
@@ -19,8 +20,8 @@ class TextArea extends React.Component {
   onTextChange = (text) => {
     const charCount = text.length;
     let wordCount = 0;
-    if (text.trim().length != 0) {
-      wordCount = text.trim().replace(`/\s+gi\b`, ' ').split(' ').length;
+    if (text.trim().length !== 0) {
+      wordCount = text.trim().replace(/\s+gi\b/, ' ').split(' ').length;
     }
     this.setState({
       currentCharCount: charCount,
@@ -36,7 +37,7 @@ class TextArea extends React.Component {
     return (
       <div className={`text-area ${className}`}>
         <h5>{label}</h5>
-        <label>
+        <div>
           <textarea
             placeholder={placeholder}
             onChange={e => this.onTextChange(e.target.value)}
@@ -46,10 +47,10 @@ class TextArea extends React.Component {
             className={`pad-sides-s pad-ends-s flex jc-between ${wordCountExceeded ? 'error' : ''}`}
             maxLength={wordCountExceeded ? (currentCharCount) : undefined}
           />
-        </label>
-        {wordCountExceeded ?
-          (<p className="error">Sorry! It looks like your answer is more than {maxWordCount} words.</p>) :
-          (<p>{showWordCount ? `You have ${numWordsAvailable} words left.` : ""}</p>)}
+        </div>
+        {wordCountExceeded
+          ? (<p className="error">Sorry! It looks like your answer is more than {maxWordCount} words.</p>)
+          : (<p>{showWordCount ? `You have ${numWordsAvailable} words left.` : ''}</p>)}
       </div>
     );
   }
