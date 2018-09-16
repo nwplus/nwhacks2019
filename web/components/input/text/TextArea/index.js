@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class TextArea extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       currentCharCount: 0,
       currentWordCount: 0,
       maxWordCount: this.props.maxWordCount,
@@ -15,21 +15,21 @@ class TextArea extends React.Component {
   //   const { showDropDown } = this.state;
   //   this.setState({ showDropDown: !showDropDown });
   // };
-  
+
   onTextChange = (text) => {
     const charCount = text.length;
     let wordCount = 0;
-    if (text.trim().length != 0){
+    if (text.trim().length != 0) {
       wordCount = text.trim().replace(`/\s+gi\b`, ' ').split(' ').length;
     }
     this.setState({
-      currentCharCount: charCount, 
+      currentCharCount: charCount,
       currentWordCount: wordCount,
     });
   };
 
   render() {
-    const { label, placeholder, value, rows, cols, name, className } = this.props;
+    const { label, placeholder, rows, cols, name, showWordCount, className } = this.props;
     const { currentCharCount, currentWordCount, maxWordCount } = this.state;
     const numWordsAvailable = maxWordCount - currentWordCount;
     const wordCountExceeded = (currentWordCount - 1) >= maxWordCount;
@@ -40,17 +40,16 @@ class TextArea extends React.Component {
           <textarea
             placeholder={placeholder}
             onChange={e => this.onTextChange(e.target.value)}
-            value={value}
             name={name}
             rows={rows}
             cols={cols}
             className={`pad-sides-s pad-ends-s flex jc-between ${wordCountExceeded ? 'error' : ''}`}
             maxLength={wordCountExceeded ? (currentCharCount) : undefined}
-          >{value}</textarea>
+          />
         </label>
-          {(wordCountExceeded) ? 
-            (<p className="error"> Sorry! It looks like your answer is more than {maxWordCount} words. </p>) : 
-            (<p>You have {numWordsAvailable} words left.</p>)}
+        {wordCountExceeded ?
+          (<p className="error">Sorry! It looks like your answer is more than {maxWordCount} words.</p>) :
+          (<p>{showWordCount ? `You have ${numWordsAvailable} words left.` : ""}</p>)}
       </div>
     );
   }
@@ -70,9 +69,6 @@ TextArea.propTypes = {
 
   // maximum word count for textarea
   maxWordCount: PropTypes.number.isRequired,
-
-  // initial textarea value
-  value: PropTypes.string,
 
   // number of rows for textarea (determines height)
   rows: PropTypes.number,
