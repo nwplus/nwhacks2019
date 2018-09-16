@@ -36,7 +36,7 @@ class TextArea extends React.Component {
     const wordCountExceeded = (currentWordCount - 1) >= maxWordCount;
     return (
       <div className={`text-area ${className}`}>
-        <h5>{label}</h5>
+        <h5 className="body-text">{label}</h5>
         <div>
           <textarea
             placeholder={placeholder}
