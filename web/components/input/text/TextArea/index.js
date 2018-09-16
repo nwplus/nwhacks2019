@@ -44,7 +44,7 @@ class TextArea extends React.Component {
             name={name}
             rows={rows}
             cols={cols}
-            className={`pad-sides-s pad-ends-s flex jc-between ${wordCountExceeded ? 'error' : ''}`}
+            className={`pad-sides-s pad-ends-s flex jc-between body-text fill-width box-sizing-bb ${wordCountExceeded ? 'error' : ''}`}
             maxLength={wordCountExceeded ? (currentCharCount) : undefined}
           />
         </div>
