@@ -11,12 +11,7 @@ class TextArea extends React.Component {
       maxWordCount,
     };
   }
-
-  // handleClick = () => {
-  //   const { showDropDown } = this.state;
-  //   this.setState({ showDropDown: !showDropDown });
-  // };
-
+  
   onTextChange = (text) => {
     const charCount = text.length;
     let wordCount = 0;
