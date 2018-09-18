@@ -1,5 +1,5 @@
 const path = require('path');
-const config = require('./webpack.config');
+const config = require('./webpack.dev');
 const plugins = require('./webpack.plugins');
 
 // Define production (build) webpack configuration here
