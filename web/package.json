@@ -12,10 +12,14 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "serve": "http-server ../docs -a localhost -p 8081 -c-1",
     "serve:public": "http-server ../docs -a 0.0.0.0 -p 8080 -c-1",
-    "test": "cross-env NODE_ENV=development FIREBASE=development jest",
+    "test": "cross-env `egrep -v '^#' ../.env | xargs` jest",
     "lint": "eslint . --ignore-pattern node_modules/"
   },
   "jest": {
+    "globals": {
+      "NODE_ENV": "development",
+      "FIREBASE": "development"
+    },
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transformer.js"
     },
