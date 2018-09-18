@@ -6,21 +6,21 @@ import { auth } from '../firebase';
  for refactoring.
  */
 
+let user;
 
-test('basic test', async (done) => {
-  let user;
-  try {
-    user = await auth.createUserWithEmailAndPassword('user@example.com', '12345678');
-  } catch (e) {
-    done.fail(e);
-    return;
-  }
+beforeAll(() => auth.createUserWithEmailAndPassword('user@example.com', '12345678').then((userCredential) => {
+  console.log('user successfully created!');
+  ({ user } = userCredential);
+}).catch((error) => {
+  console.err('failed to create user: ', error);
+}));
 
+test('basic test', () => {
   expect(user.email).toBe('user@example.com');
-
-  try {
-    await user.delete();
-  } catch (e) {
-    done.fail(e);
-  }
 });
+
+afterAll(() => user.delete().then(() => {
+  console.log('user successfully deleted!');
+}).catch((error) => {
+  console.err('failed to delete user: ', error);
+}));
