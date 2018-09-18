@@ -10,6 +10,5 @@ module.exports = [
     filename: 'index.html',
     inject: true,
   }),
-
   new MinifyPlugin(),
 ];
