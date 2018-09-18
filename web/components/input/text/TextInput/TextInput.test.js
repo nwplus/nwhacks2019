@@ -14,6 +14,24 @@ describe('TextInput component', () => {
 
   const value = 'some text';
 
+  describe('maxLength', () => {
+    const props = {
+      value,
+      placeholder: 'some placeholder',
+      label: 'some label',
+      name: 'some name',
+      maxCharNumber: 3,
+    };
+
+    beforeEach(() => {
+      wrapper = getWrapper(props);
+    });
+
+    it('maxLength matches maxCharNumber', () => {
+      expect(wrapper.find('input').props()).toHaveProperty('maxLength', 3);
+    });
+  });
+
   describe('text', () => {
     const props = {
       value,
