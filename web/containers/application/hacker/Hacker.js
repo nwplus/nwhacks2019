@@ -83,7 +83,8 @@ export class HackerApplicationContainer extends React.Component {
 
   submitApplication = (userCredentials) => {
     const { firebase } = this.props;
-    this.signUp(firebase, userCredentials);
+    // TODO: hide this under feature flag https://github.com/nwplus/nwhacks2019/issues/114
+    // this.signUp(firebase, userCredentials);
   }
 
   signUp(firebase, userCredentials) {
