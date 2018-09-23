@@ -12,25 +12,26 @@ export const QUESTIONS = Object.freeze({
       </div>
     ),
     questions: [{
-      'What is a "hackathon?"': (
+      'What is a hackathon?': (
         <div>
           <p className="margin-top-none">
-            A hackathon is an event where teams of 2-5 people collaborate on an application
-            within the specified time limit (nwHacks is 24 hours long). Industry
-            professionals from the local community mentor at hackathons to share their
-            experiences, support projects from a technical perspective, and meet
-            the younger generation of hackers. The winners will be chosen by a panel
-            of judges comprised of top industry professionals. Prizes vary in every
-            hackathon but, for example, can be awarded to hacks that challenge the
-            status quo, fulfill specific challenges, and create meaningful impact.
+            A hackathon is an event where teams collaborate on a project or "hack" within
+            a tight time limit. At nwHacks, teams of 2-4 collaborate over 24 hours to
+            challenge the status quo, fulfill prize challenges, and create meaningful impact.
+            Industry professionals from the local community mentor at hackathons to share their
+            experiences, support projects from a technical perspective, and meet the younger
+            generation of hackers. The winners will be chosen by a panel of judges comprised
+            of top industry professionals.
           </p>
         </div>
       ),
     },
     {
       'How can I officially sign up?': (
-        <p className="margin-top-none">Registration on our website will open in November.
-          <a href="http://eepurl.com/dF3b7n">Click here to sign up for an email reminder</a>.
+        <p className="margin-top-none">Registration on our website will open in November.&nbsp;
+          <a href="http://eepurl.com/dF3b7n">
+            Let us know your email and we'll tell you once it does!
+          </a>
         </p>
       ),
     },
@@ -48,49 +49,48 @@ export const QUESTIONS = Object.freeze({
     {
       'Is there a theme for nwHacks?': (
         <p className="margin-top-none">
-          At nwHacks, we love seeing the variety of projects that are inspired by the
-          countless areas of tech that teams want to explore. We do not have a specific
-          theme but there may be sponsored prizes that will have specific criteria
-          to qualify. If you are looking for ideas, sponsored prizes may help your
-          team choose a particular direction.
+          At nwHacks, we love seeing the variety of projects inspired by the countless areas of
+          tech that teams want to explore. We do not have a specific theme but there may be
+          sponsored prizes with specific qualifying criteria.
         </p>
       ),
     },
     {
       "What if I don't have any experience?": (
-        <p className="margin-top-none">
-          {/* Marked as "to be edited" on Notion" */}
-          No worries!
-          Hackathons are really a place for learning.
-          We&apos;ll have series of workshops to bootstrap you for hacking so you&apos;ll be
-          ready in no time. Mentors will be walking around to help you with
-          any problems you&apos;ll face. By the time you walk out,
-          you&apos;ll have a new skill under your belt!
-        </p>
+        <div>
+          <p className="margin-top-none">
+            {/* Marked as "to be edited" on Notion" */}
+            Have no fear! Hackathons are really a place for learning and one of the best ways
+            to do so. We&apos;ll have series of workshops to bootstrap you for hacking. And when
+            you run into any problems or questions, mentors will be happy to help you out.
+            By the time you walk out, you will have new skills, friends, and a project
+            under your belt!
+          </p>
+          <p>
+            On the first day of nwHacks, we will also facilitate team building so no one gets
+            left out! There will be opportunities to connect with people and form teams before
+            the event in-person and online.
+          </p>
+        </div>
       ),
     },
     {
-      "I'm a designer, can I attend?": (
+      "I'm a designer/graduate/rad human! Can I attend?": (
         <p className="margin-top-none">
-          {/* Missing on Notion */}
+          We are excited to invite 650 people to nwHacks including high school and
+          university students from all faculties! Great projects are more than just
+          their code. New graduates are welcome as long as your graduation date is
+          within one year of January 2019.
         </p>
       ),
     },
-    {
-      "I'm a new graduate, can I attend?": (
-        <p className="margin-top-none">
-          {/* Marked as "to be revisited" on Notion" */}
-          Yes, as long as on the day of the event you&apos;re within a year of your graduation date.
-        </p>
-      ),
-    },
-    {
-      "What's it like being a volunteer at nwHacks?": (
-        <p className="margin-top-none">
-          {/* Missing on Notion */}
-        </p>
-      ),
-    },
+      // {
+      //   "What's it like being a volunteer at nwHacks?": (
+      //     <p className="margin-top-none">
+      //       {/* Missing on Notion */}
+      //     </p>
+      //   ),
+      // },
     ],
   },
   teams_and_projects: {
@@ -127,12 +127,11 @@ export const QUESTIONS = Object.freeze({
       {
         'Can I work on my previous projects?': (
           <p className="margin-top-none">
-            No, all &ldquo;hacks&rdquo; must be built from scratch, although it is ok if you
-            came up with the idea before hand. This rule is strictly adhered to at nwHacks
-            and any team found working on a project that they already started will be
-            automatically disqualified in the event. However this does not apply to
-            any open source libraries or tools that you have made, so feel free to use
-            libraries and any other code!
+            No, all projects must be built from scratch. However, you are welcome to brainstorm
+            ideas beforehand. This rule is strictly adhered to at nwHacks and any team found
+            working on previous projects will be automatically disqualified in the event. If
+            you are using libraries or tools that you have made in the past, don't worry, this
+            does not apply.
           </p>
         ),
       },
@@ -146,7 +145,7 @@ export const QUESTIONS = Object.freeze({
     ),
     questions: [
       {
-        'What should I pack?': (
+        'What should I bring?': (
           <p className="margin-top-none">
             nwHacks is a 24h event, which means that hackers should be prepared
             to sleep overnight at the venue. Be sure to bring everything you need
@@ -155,25 +154,26 @@ export const QUESTIONS = Object.freeze({
           </p>
         ),
       },
+      // {
+      //   'Can I come late?': (
+      //     <p className="margin-top-none">
+      //       {/* Not finalized on Notion */}
+      //     </p>
+      //   ),
+      // },
       {
-        'What documentation do I have to bring?': (
-          <p className="margin-top-none">
-            {/* Not finalized on Notion */}
-          </p>
-        ),
-      },
-      {
-        'Can I come late?': (
-          <p className="margin-top-none">
-            {/* Not finalized on Notion */}
-          </p>
-        ),
-      },
-      {
-        'How do I get to the event?': (
-          <p className="margin-top-none">
-            {/* Not finalized on Notion */}
-          </p>
+        'How do I get to nwHacks?': (
+          <div>
+            <p className="margin-top-none">
+              If you are coming from afar, we will be offering a limited number of
+              travel reimbursements up to $200 per person. We also recommend
+              applying for travel subsidies with your university or local government.
+            </p>
+            <p>
+              For attendees from Seattle and the surrounding area, we will have
+              buses to and from the University of Washington.
+            </p>
+          </div>
         ),
       },
     ],
