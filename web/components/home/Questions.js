@@ -15,7 +15,7 @@ export const QUESTIONS = Object.freeze({
       'What is a hackathon?': (
         <div>
           <p className="margin-top-none">
-            A hackathon is an event where teams collaborate on a project or "hack" within
+            A hackathon is an event where teams collaborate on a project or &quot;hack&quot; within
             a tight time limit. At nwHacks, teams of 2-4 collaborate over 24 hours to
             challenge the status quo, fulfill prize challenges, and create meaningful impact.
             Industry professionals from the local community mentor at hackathons to share their
@@ -30,7 +30,7 @@ export const QUESTIONS = Object.freeze({
       'How can I officially sign up?': (
         <p className="margin-top-none">Registration on our website will open in November.&nbsp;
           <a href="http://eepurl.com/dF3b7n">
-            Let us know your email and we'll tell you once it does!
+            Let us know your email and we&apos;ll tell you once it does!
           </a>
         </p>
       ),
@@ -130,7 +130,7 @@ export const QUESTIONS = Object.freeze({
             No, all projects must be built from scratch. However, you are welcome to brainstorm
             ideas beforehand. This rule is strictly adhered to at nwHacks and any team found
             working on previous projects will be automatically disqualified in the event. If
-            you are using libraries or tools that you have made in the past, don't worry, this
+            you are using libraries or tools that you have made in the past, don&apos;t worry, this
             does not apply.
           </p>
         ),
