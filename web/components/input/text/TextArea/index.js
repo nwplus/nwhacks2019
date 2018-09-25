@@ -11,7 +11,7 @@ class TextArea extends React.Component {
       maxWordCount,
     };
   }
-  
+
   onTextChange = (text) => {
     const charCount = text.length;
     let wordCount = 0;
