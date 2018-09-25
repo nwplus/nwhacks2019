@@ -19,15 +19,15 @@ class ShowHideTextView extends React.Component {
     return (
       <div className={`show-hide card secondary-outline ${className}`}>
         <div className="show-hide-label-container pad-sides-s pad-ends-s user-select-none clickable flex jc-between" onClick={this.handleClick}>
-          <p className="show-hide-label margin-ends-s margin-right-s clickable">{label}</p>
+          <div className="show-hide-label margin-ends-s margin-right-s clickable">{label}</div>
           <img
             className={`show-hide-arrow margin-ends-s flex-no-shrink ${showDropDown ? 'flip-vertical' : ''}`}
             src={arrow}
             alt="arrow" />
         </div>
-        <p className={`show-hide-drop-down-text margin-sides-s margin-bottom-s ${showDropDown ? '' : 'display-none'}`}>
+        <div className={`show-hide-drop-down-text margin-sides-s margin-bottom-s ${showDropDown ? '' : 'display-none'}`}>
           {dropDownText}
-        </p>
+        </div>
       </div>
     );
   }
@@ -37,12 +37,14 @@ ShowHideTextView.defaultProps = {
   className: '',
 };
 
+const stringOrElement = PropTypes.oneOfType([PropTypes.string, PropTypes.element]);
+
 ShowHideTextView.propTypes = {
   // the label text for the component
-  label: PropTypes.string.isRequired,
+  label: stringOrElement.isRequired,
 
   // the text revealed when the component is clicked
-  dropDownText: PropTypes.string.isRequired,
+  dropDownText: stringOrElement.isRequired,
 
   // optional extra className
   className: PropTypes.string,

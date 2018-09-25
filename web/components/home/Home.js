@@ -1,8 +1,10 @@
 import React from 'react';
 import { SECTION } from './Sections';
+import { QUESTIONS } from './Questions';
 import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
 import { PrimaryButton } from '../input/buttons';
+import { ShowHideTextView } from '../view';
 
 import sun from '../../assets/sun.svg';
 
@@ -26,6 +28,25 @@ const getImage = (alt, src, className = '') => (
     className={className}
     alt={alt}
     src={src} />
+);
+
+const getFaqSection = section => (
+  <div>
+    <h3>{QUESTIONS[section].title}</h3>
+    {
+      QUESTIONS[section].questions.map((question) => {
+        const labelText = Object.keys(question)[0];
+        const dropDownText = question[labelText];
+        return (
+          <ShowHideTextView
+            label={`${labelText}`}
+            dropDownText={dropDownText}
+            key={labelText}
+            className="margin-ends-s fill-width" />
+        );
+      })
+    }
+  </div>
 );
 
 const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
@@ -58,12 +79,12 @@ const userToText = {
     <div>
       <h5>Avinash, <a href="https://devpost.com/software/talky" target="_blank" rel="noopener noreferrer">Talky</a></h5>
       <p>
-      Attending nwHacks 2018 was one of the best decisions I made.
-      The coolest things I saw was the use of NFC chips
-      in our check-in tags that were used to access food and more.
-      It felt like something out of movie
-      and it was an innovative idea that I&apos;ve never seen at another hackathon.
-      Building Talky was an absolute blast and I can&apos;t wait to attend next year!
+        Attending nwHacks 2018 was one of the best decisions I made.
+        The coolest things I saw was the use of NFC chips
+        in our check-in tags that were used to access food and more.
+        It felt like something out of movie
+        and it was an innovative idea that I&apos;ve never seen at another hackathon.
+        Building Talky was an absolute blast and I can&apos;t wait to attend next year!
       </p>
     </div>
   ),
@@ -100,6 +121,7 @@ class Home extends React.Component {
         this.storiesDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.FAQ:
+        this.faqDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.SPONSORS:
         break;
@@ -198,7 +220,7 @@ class Home extends React.Component {
         <div
           ref={node => this.storiesDiv = node}
           className={`${ROW_STYLE}`}
-          >
+        >
           <h2 className="fill-width margin-bottom-xxl">Hacker stories</h2>
           <div className="flex jc-between row-stories scale-row-tablet">
             {
@@ -216,6 +238,31 @@ class Home extends React.Component {
               ))
             }
           </div>
+        </div>
+
+        <div ref={node => this.faqDiv = node} className={`${ROW_STYLE}`}>
+          <h2 className="fill-width margin-bottom-s">Frequently asked questions</h2>
+          <div className="flex jc-start faq scale-row-desktop">
+            <div className="flex jc-between dir-row margin-right-s">
+              <div className="scale-width-desktop fill-width" key={`${'general'}`}>
+                <div className="relative overflow-hidden">
+                  {getFaqSection('general')}
+                </div>
+              </div>
+            </div>
+            <div className="flex jc-start dir-col margin-left-s">
+              {
+                ['teams_and_projects', 'logistics'].map(section => (
+                  <div className="scale-width-desktop jc-start fill-width" key={`${section}`}>
+                    <div className="relative overflow-hidden">
+                      {getFaqSection(section)}
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <p className="fill-min-width margin-top-s">Still have questions? Feel free to email us at <a href="mailto:hello@nwplus.io">hello@nwplus.io</a> or shoot us a message on <a href="https://facebook.com/nwhacks">Facebook</a>.</p>
         </div>
 
         <div className="flex jc-center dir-col pad-ends-tera">
