@@ -4,31 +4,24 @@ import PropTypes from 'prop-types';
 class TextArea extends React.Component {
   constructor(props) {
     super(props);
-    const { maxWordCount } = this.props;
+    const { maxLength } = this.props;
     this.state = {
       currentCharCount: 0,
-      currentWordCount: 0,
-      maxWordCount,
+      maxLength,
     };
   }
 
   onTextChange = (text) => {
-    const charCount = text.length;
-    let wordCount = 0;
-    if (text.trim().length !== 0) {
-      wordCount = text.trim().replace(/\s+gi\b/, ' ').split(' ').length;
-    }
     this.setState({
-      currentCharCount: charCount,
-      currentWordCount: wordCount,
+      currentCharCount: text.length,
     });
   };
 
   render() {
-    const { label, placeholder, rows, cols, name, showWordCount, className } = this.props;
-    const { currentCharCount, currentWordCount, maxWordCount } = this.state;
-    const numWordsAvailable = maxWordCount - currentWordCount;
-    const wordCountExceeded = (currentWordCount - 1) >= maxWordCount;
+    const { label, placeholder, rows, cols, name, showCharCount, className } = this.props;
+    const { currentCharCount, maxLength } = this.state;
+    const numCharsAvailable = maxLength - currentCharCount;
+    const maxLengthExceeded = currentCharCount >= maxLength;
     return (
       <div className={`text-area ${className}`}>
         <h5 className="body-text">{label}</h5>
@@ -39,20 +32,20 @@ class TextArea extends React.Component {
             name={name}
             rows={rows}
             cols={cols}
-            className={`pad-sides-s pad-ends-s flex jc-between body-text fill-width box-sizing-bb ${wordCountExceeded ? 'error' : ''}`}
-            maxLength={wordCountExceeded ? (currentCharCount) : undefined}
+            className={`pad-sides-s pad-ends-s flex jc-between body-text fill-width box-sizing-bb ${maxLengthExceeded ? 'error' : ''}`}
+            maxLength={maxLengthExceeded ? (currentCharCount) : undefined}
           />
         </div>
-        {wordCountExceeded
-          ? (<p className="error">Sorry! It looks like your answer is more than {maxWordCount} words.</p>)
-          : (<p>{showWordCount ? `You have ${numWordsAvailable} words left.` : ''}</p>)}
+        {maxLengthExceeded
+          ? (<p className="error">Sorry! It looks like your answer is more than {maxLength} characters long.</p>)
+          : (<p>{showCharCount ? `You have ${numCharsAvailable} characters left.` : ''}</p>)}
       </div>
     );
   }
 }
 
 TextArea.defaultProps = {
-  showWordCount: true,
+  showCharCount: true,
   className: '',
 };
 
@@ -63,8 +56,8 @@ TextArea.propTypes = {
   // placeholder text for the textarea
   placeholder: PropTypes.string,
 
-  // maximum word count for textarea
-  maxWordCount: PropTypes.number.isRequired,
+  // maximum char count for textarea
+  maxLength: PropTypes.number.isRequired,
 
   // number of rows for textarea (determines height)
   rows: PropTypes.number,
@@ -75,8 +68,8 @@ TextArea.propTypes = {
   // input name on form
   name: PropTypes.string.isRequired,
 
-  // show the word count as the user is typing
-  showWordCount: PropTypes.bool,
+  // show the char count as the user is typing
+  showCharCount: PropTypes.bool,
 
   // optional extra className
   className: PropTypes.string,

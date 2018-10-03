@@ -105,7 +105,16 @@ class FrontEndComponents extends React.Component {
         <TextArea
           label="Enter some long answer"
           name="some_text_area"
-          maxWordCount={10}
+          maxLength={25}
+          rows={7}
+          cols={60}
+        />
+        <br />
+        <TextArea
+          label="This has a character limit but you can't see it until it's too late"
+          name="some_text_area"
+          maxLength={25}
+          showCharCount={false}
           rows={7}
           cols={60}
         />

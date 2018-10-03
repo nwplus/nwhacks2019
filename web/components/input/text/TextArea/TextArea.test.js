@@ -17,7 +17,7 @@ describe('TextArea component', () => {
       placeholder: 'some placeholder',
       label: 'some label',
       name: 'some name',
-      maxWordCount: 5,
+      maxLength: 5,
     };
 
     beforeEach(() => {
@@ -32,26 +32,26 @@ describe('TextArea component', () => {
       expect(wrapper.find('h5').text()).toBe('some label');
     });
 
-    describe('word count', () => {
-      describe('showWordCount flag', () => {
-        it('word count is not visible', () => {
-          props.showWordCount = false;
+    describe('char count', () => {
+      describe('showCharCount flag', () => {
+        it('char count is not visible', () => {
+          props.showCharCount = false;
           wrapper = getWrapper(props);
           expect(wrapper.find('p').text()).toBe('');
         });
 
-        it('word count is visible', () => {
-          props.showWordCount = true;
+        it('char count is visible', () => {
+          props.showCharCount = true;
           wrapper = getWrapper(props);
           expect(wrapper.find('p').text()).not.toBe('');
         });
       });
     });
 
-    describe('word count limit', () => {
+    describe('char count limit', () => {
       beforeEach(() => {
-        props.showWordCount = true;
-        props.maxWordCount = 5;
+        props.showCharCount = true;
+        props.maxLength = 5;
         wrapper = getWrapper(props);
       });
 
@@ -60,7 +60,7 @@ describe('TextArea component', () => {
       });
 
       it('exceeded', () => {
-        const event = { target: { value: 'This is more than five words.' } };
+        const event = { target: { value: 'This is more than five chars.' } };
         wrapper.find('textarea').simulate('change', event);
         expect(wrapper.find('textarea').hasClass('error')).toBeTruthy();
       });
