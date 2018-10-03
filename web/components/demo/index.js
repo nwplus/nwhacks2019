@@ -4,7 +4,7 @@ import { SecondaryButton, PrimaryButton, ProgressGroup } from '../input/buttons'
 
 import { Checkbox, CheckboxGroup } from '../input/buttons/CheckboxGroup';
 import { RadioButton, RadioGroup } from '../input/buttons/RadioGroup';
-import { TextInput, PasswordInput } from '../input/text';
+import { TextInput, PasswordInput, TextArea } from '../input/text';
 import { ShowHideTextView } from '../view';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
@@ -100,6 +100,23 @@ class FrontEndComponents extends React.Component {
           label="Disabled"
           disabled
           name="some_disabled_text_input"
+        />
+        <br />
+        <TextArea
+          label="Enter some long answer"
+          name="some_text_area"
+          maxLength={25}
+          rows={7}
+          cols={60}
+        />
+        <br />
+        <TextArea
+          label="This has a character limit but you can't see it until it's too late"
+          name="some_text_area"
+          maxLength={25}
+          showCharCount={false}
+          rows={7}
+          cols={60}
         />
         <br />
         <p>Show/Hide Component</p>
