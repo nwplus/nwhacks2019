@@ -8,3 +8,15 @@ if ('serviceWorker' in navigator) {
     console.log('Service Worker registration failed: ', err);
   });
 }
+
+// remove old caches
+oldCaches = [
+  "sw-precache-v3--https://www.nwhacks.io/", // from nwhacks2018_static
+];
+caches.keys().then(function (cacheNames) {
+  cacheNames.filter(function (cacheName) {
+    return (oldCaches.indexOf(cacheName) > -1)
+  }).map(function (cacheName) {
+    return caches.delete(cacheName);
+  });
+});
