@@ -1,9 +1,14 @@
 <svg width="225" height="223" viewBox="0 0 225 223" fill="none" 
   xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="110.441" cy="113.733" rx="75.9652" ry="35.5321" fill="#ABB8F9" />
+  <defs>
+    <clipPath id="cut-off-bottom">
+      <rect x="0" y="0" width="200" height="109.5"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="110.441" cy="113.733" rx="75.9652" ry="35.5321" fill="#ABB8F9" clip-path="url(#cut-off-bottom)" />
   <rect width="15.8199" height="21.1827" rx="7.90997" transform="matrix(0.641756 -0.766909 0.765178 0.643818 67.5547 57.2505)" fill="#735BA5"/>
   <rect width="15.8199" height="21.1827" rx="7.90997" transform="matrix(-0.641756 -0.766909 -0.765178 0.643818 153.322 57.2505)" fill="#735BA5"/>
-  <rect x="74.2456" y="45.5371" width="73.5009" height="90.2475" rx="36.7504" fill="#ABB8F9"/>
+  <rect x="74.2456" y="45.5371" width="73.5009" height="90.2475" rx="36.7504" fill="#ABB8F9" clip-path="url(#cut-off-bottom)"/>
   <ellipse rx="10.2276" ry="7.60277" transform="matrix(0.172509 -0.985008 0.984613 0.174751 95.0753 72.9619)" fill="#735BA5" />
   <ellipse rx="10.2276" ry="7.60277" transform="matrix(-0.172509 -0.985008 -0.984613 0.174751 125.352 72.9618)" fill="#735BA5"/>
   <ellipse cx="96.4369" cy="70.1243" rx="2.4286" ry="2.42894" fill="#1E0E47"/>
