@@ -9,13 +9,11 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// remove old caches
-oldCaches = [
-  "sw-precache-v3--https://www.nwhacks.io/", // from nwhacks2018_static
-];
+// remove old cache from nwhacks2018_static
+oldCachePrefix = "sw-precache-v3";
 caches.keys().then(function (cacheNames) {
-  cacheNames.filter(function (cacheName) {
-    return (oldCaches.indexOf(cacheName) > -1)
+  cacheNames.filter(function (cacheName) { 
+    return cacheName.startsWith(oldCachePrefix);
   }).map(function (cacheName) {
     return caches.delete(cacheName);
   });
