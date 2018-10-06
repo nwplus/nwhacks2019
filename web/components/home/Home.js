@@ -177,7 +177,7 @@ class Home extends React.Component {
             <h2>This is nwHacks 2019</h2>
             <p>
               Come make things and break things, and then make them cooler. You&apos;ll
-              never be short on inspiration when you’re surrounded by 600 of the
+              never be short on inspiration when you’re surrounded by 650 of the
               brightest minds in the Pacific Northwest. All you need to bring is an
               open mind and an insatiable desire to learn; we’ll take care of the
               rest. After all, we&apos;re western Canada’s largest hackathon — we make
