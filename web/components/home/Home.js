@@ -5,7 +5,7 @@ import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
 import { PrimaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
-import { Footer } from '../footer'
+import { Footer } from '../footer';
 
 import sun from '../../assets/sun.svg';
 
@@ -273,8 +273,8 @@ class Home extends React.Component {
           </p>
         </div>
 
-        <Footer/>
-        
+        <Footer />
+
       </div>
     );
   }
