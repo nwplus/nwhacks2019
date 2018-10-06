@@ -18,3 +18,8 @@ caches.keys().then(function (cacheNames) {
     return caches.delete(cacheName);
   });
 });
+
+// force new service worker to activate
+self.addEventListener('install', event => {
+  self.skipWaiting();
+});
