@@ -136,7 +136,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
-        <a className="mlh-trust-badge scale-hide-phablet" href={EXTERNAL.MLH_UPCOMINGHACKATHON_LINK} target="_blank">
+        <a className="mlh-trust-badge scale-hide-phablet" href={EXTERNAL.MLH_UPCOMINGHACKATHON_LINK} target="_blank" rel="noopener noreferrer">
           <img className="fill-width" src={mlhblueribbon} alt="Major League Hacking 2019 Hackathon Season" />
         </a>
         <div
