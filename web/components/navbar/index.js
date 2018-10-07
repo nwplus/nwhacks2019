@@ -2,24 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { DISPLAY_TYPE } from '../../containers/navbar/DisplayTypes';
-import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
+// import { BUTTON_TYPE } from '../../containers/navbar/ButtonTypes';
 import { SECTION } from '../home/Sections';
-import { SecondaryButton } from '../input/buttons';
+// import { SecondaryButton } from '../input/buttons';
 
 import logo from '../../assets/logo.svg';
 
-const getButton = (buttonType) => {
-  switch (buttonType) {
-    case BUTTON_TYPE.SIGN_IN:
-      return (<Link to="/login"><SecondaryButton text="Sign in" /></Link>);
-    case BUTTON_TYPE.SIGN_OUT:
-      return (<Link to="/logout"><SecondaryButton text="Sign out" /></Link>);
-    case BUTTON_TYPE.DASHBOARD:
-      return (<Link to="/dashboard"><SecondaryButton text="My application" /></Link>);
-    default:
-      return (<div />);
-  }
-};
+// const getButton = (buttonType) => {
+//   switch (buttonType) {
+//     case BUTTON_TYPE.SIGN_IN:
+//       return (<Link to="/login"><SecondaryButton text="Sign in" /></Link>);
+//     case BUTTON_TYPE.SIGN_OUT:
+//       return (<Link to="/logout"><SecondaryButton text="Sign out" /></Link>);
+//     case BUTTON_TYPE.DASHBOARD:
+//       return (<Link to="/dashboard"><SecondaryButton text="My application" /></Link>);
+//     default:
+//       return (<div />);
+//   }
+// };
 
 const NAVBAR_HEIGHT = 96;
 const LINK_CLASS = 'flex ai-center margin-sides-l scale-margin-sides-tablet';
@@ -65,8 +65,9 @@ class Navbar extends React.Component {
 
   render() {
     const { hidden, transparent } = this.state;
-    const { displayType, buttonType } = this.props;
-    const button = getButton(buttonType);
+    const { displayType } = this.props;
+    // const { displayType, buttonType } = this.props;
+    // const button = getButton(buttonType);
     const linkElements = [
       <Link to={{ pathname: '/', hash: SECTION.ABOUT }}><b>About</b></Link>,
       <Link to={{ pathname: '/', hash: SECTION.STORIES }}><b>Stories</b></Link>,
@@ -81,9 +82,9 @@ class Navbar extends React.Component {
     switch (displayType) {
       case DISPLAY_TYPE.ONLY_LOGO:
         break;
-      case DISPLAY_TYPE.LOGO_AND_BUTTON:
-        navbarRight = <div className={LINK_CLASS}>{button}</div>;
-        break;
+      // case DISPLAY_TYPE.LOGO_AND_BUTTON:
+      //   navbarRight = <div className={LINK_CLASS}>{button}</div>;
+      //   break;
       case DISPLAY_TYPE.LOGO_AND_LINKS:
         navbarRight = linkElements.map(l => (
           <div
@@ -101,13 +102,13 @@ class Navbar extends React.Component {
             {l}
           </div>
         ));
-        navbarRight.push((
-          <div
-            key={key += 1}
-            className={LINK_CLASS}>
-            {button}
-          </div>
-        ));
+        // navbarRight.push((
+        //   <div
+        //     key={key += 1}
+        //     className={LINK_CLASS}>
+        //     {button}
+        //   </div>
+        // ));
     }
 
     return (
@@ -117,7 +118,7 @@ class Navbar extends React.Component {
             <Link to="/"><img alt="nwHacks" src={logo} /></Link>
           </div>
         </div>
-        <div className="flex jc-end fill-width">
+        <div className="flex jc-end fill-width pad-right-s">
           {navbarRight}
         </div>
       </nav>
@@ -127,7 +128,7 @@ class Navbar extends React.Component {
 
 Navbar.propTypes = {
   displayType: PropTypes.symbol,
-  buttonType: PropTypes.symbol,
+  // buttonType: PropTypes.symbol,
 };
 
 export default Navbar;
