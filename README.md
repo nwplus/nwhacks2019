@@ -4,13 +4,13 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.com/nwhacks/nwhacks2019">
-    <img src="https://travis-ci.com/nwhacks/nwhacks2019.svg?branch=master"
+  <a href="https://travis-ci.com/nwplus/nwhacks2019">
+    <img src="https://travis-ci.com/nwplus/nwhacks2019.svg?branch=master"
       alt="Build Status" />
   </a>
 
-  <a href="https://codecov.io/gh/nwhacks/nwhacks2019">
-    <img src="https://codecov.io/gh/nwhacks/nwhacks2019/branch/master/graph/badge.svg" />
+  <a href="https://codecov.io/gh/nwplus/nwhacks2019">
+    <img src="https://codecov.io/gh/nwplus/nwhacks2019/branch/master/graph/badge.svg" />
   </a>
 </p>
 
