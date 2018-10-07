@@ -183,7 +183,7 @@ class Home extends React.Component {
                 open mind and an insatiable desire to learn; we’ll take care of the
                 rest. After all, we&apos;re western Canada’s largest hackathon — we make
                 the west coast the best coast.
-            </p>
+              </p>
             </div>
             <div className="scale-width-tablet flex jc-center">
               <div className="large-svg pad-left-giga pad-ends-l scale-pad-sides-tablet-none">
@@ -206,15 +206,15 @@ class Home extends React.Component {
                 conversations surrounding the critical impact of youth and industrial
                 advancement. The home of nwHacks is a hub of learning opportunities,
                 community support, and connections to the tech industry.
-            </p>
+              </p>
               <p>
                 We&apos;re growing and we invite you to be a part of our journey.
-            </p>
+              </p>
               <p>
                 nwHacks is dedicated to supporting the thriving community of technology
                 lovers in the Pacific Northwest region by bringing together ambitious
                 minds for an epic two day event.
-            </p>
+              </p>
             </div>
           </div>
         </div>
