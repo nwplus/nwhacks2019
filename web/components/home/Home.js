@@ -133,9 +133,9 @@ class Home extends React.Component {
     return (
       <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
         <div
-          className="flex jc-between ai-center pad-top-peta pad-sides-peta scale-pad-sides-tablet homepage-scale-top container-width">
+          className="homepage-main-panel flex jc-between ai-center pad-top-peta pad-sides-peta pad-bottom-l scale-pad-sides-tablet homepage-scale-top container-width">
           <div>
-            <h1 className="scale-h1-tablet">nwHacks 2019</h1>
+            <h1 className="scale-h1-tablet pad-bottom-s">nwHacks 2019</h1>
             <p className="primary">
               Western Canada&apos;s largest hackathon<br />
               January 26-27, 2019 @ the University of British Columbia
@@ -144,7 +144,7 @@ class Home extends React.Component {
               Get notified when registration opens!
             </p>
             <form
-              className="homepage-email-registration flex ai-end"
+              className="homepage-email-registration flex ai-end pad-bottom-s"
               action={EXTERNAL.MAILCHIMP_FORM}
               method="post">
               <TextInput
@@ -161,7 +161,7 @@ class Home extends React.Component {
               </a>
             </p>
           </div>
-          <div className="pad-sides-xxl scale-hide-laptop">
+          <div className="margin-left-mega margin-bottom-l scale-hide-laptop">
             {getImage('sun', sun)}
           </div>
         </div>
