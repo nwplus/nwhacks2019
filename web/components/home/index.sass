@@ -1,7 +1,11 @@
+$spacing-section: 80px // padding between each section
+
 body
   overflow-x: hidden
 .homepage
   background: $gradient-purple
+  .pad-bottom-section
+    padding-bottom: $spacing-section
 
   &-email-registration
     @media screen and (max-width: $mobile-s)
@@ -31,8 +35,18 @@ body
     @media screen and (max-width: $tablet)
       padding-top: $spacing-tera !important
 
-  p
-    max-width: 38.889em
+  .row-intro:first-of-type
+    padding-bottom: 0
+  .row-image-and-desc
+    @extend .pad-sides-tera
+    .large-svg
+      @media screen and (max-width: $laptop)
+        margin: 0 auto
+        height: auto
+      img
+        max-width: 100%
+        display: block;
+        margin: 0 auto;
 
   .row-stories
     > div

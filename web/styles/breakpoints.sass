@@ -22,9 +22,18 @@ $mobile-s:  320px
       &-rev
         @media screen and (max-width: $desktop)
           flex-direction: column-reverse !important
+    &-laptop
+      @media screen and (max-width: $laptop)
+        flex-direction: column !important
+      &-rev
+        @media screen and (max-width: $laptop)
+          flex-direction: column-reverse !important
     &-tablet
       @media screen and (max-width: $tablet)
         flex-direction: column !important
+      &-rev
+        @media screen and (max-width: $tablet)
+          flex-direction: column-reverse !important
     &-mobile
       @media screen and (max-width: $mobile)
         flex-direction: column !important
@@ -39,10 +48,22 @@ $mobile-s:  320px
           @media screen and (max-width: $tablet)
             padding-right: 0 !important
             padding-left: 0 !important
+      &-laptop
+        @media screen and (max-width: $laptop)
+          padding-right: $spacing-s !important
+          padding-left: $spacing-s !important
+        &-none
+          @media screen and (max-width: $laptop)
+            padding-right: 0 !important
+            padding-left: 0 !important
       &-tablet
         @media screen and (max-width: $tablet)
           padding-right: $spacing-s !important
           padding-left: $spacing-s !important
+        &-none
+          @media screen and (max-width: $tablet)
+            padding-right: 0 !important
+            padding-left: 0 !important
 
   &-margin
     &-sides
@@ -54,6 +75,12 @@ $mobile-s:  320px
   &-jc
     &-desktop
       @media screen and (max-width: $desktop)
+        justify-content: center !important
+    &-laptop
+      @media screen and (max-width: $laptop)
+        justify-content: center !important
+    &-tablet
+      @media screen and (max-width: $tablet)
         justify-content: center !important
 
   &-h1
@@ -84,14 +111,20 @@ $mobile-s:  320px
         display: none !important
 
   &-width
+    &-desktop
+      @media screen and (max-width: $desktop)
+        width: 100% !important
+    &-laptop
+      @media screen and (max-width: $laptop)
+        width: 100% !important
     &-tablet
       @media screen and (max-width: $tablet)
         width: 100% !important
     &-phablet
       @media screen and (max-width: $phablet)
         width: 100% !important
-    &-desktop
-      @media screen and (max-width: $desktop)
+    &-mobile
+      @media screen and (max-width: $mobile)
         width: 100% !important
 
   &-hover

@@ -49,7 +49,7 @@ const getFaqSection = section => (
   </div>
 );
 
-const ROW_STYLE = 'pad-sides-peta pad-bottom-giga scale-pad-sides-tablet container-width';
+const ROW_STYLE = 'pad-sides-tera pad-bottom-section scale-pad-sides-laptop container-width';
 
 const userToText = {
   spencer: (
@@ -170,50 +170,52 @@ class Home extends React.Component {
           {getImage('skyline', skyline)}
         </div>
 
-        <div
-          ref={node => this.aboutDiv = node}
-          className={`${ROW_STYLE} flex jc-between ai-center dir-row split scale-row-desktop`}>
-          <div className="scale-width-desktop">
-            <h2>This is nwHacks 2019</h2>
-            <p>
-              Come make things and break things, and then make them cooler. You&apos;ll
-              never be short on inspiration when you’re surrounded by 650 of the
-              brightest minds in the Pacific Northwest. All you need to bring is an
-              open mind and an insatiable desire to learn; we’ll take care of the
-              rest. After all, we&apos;re western Canada’s largest hackathon — we make
-              the west coast the best coast.
+        <div className="row-intro">
+          <div
+            ref={node => this.aboutDiv = node}
+            className={`${ROW_STYLE} row-image-and-desc flex jc-between scale-jc-tablet ai-center dir-row split scale-row-tablet`}>
+            <div className="scale-width-tablet">
+              <h2>This is nwHacks 2019</h2>
+              <p>
+                Come make things and break things, and then make them cooler. You&apos;ll
+                never be short on inspiration when you’re surrounded by 650 of the
+                brightest minds in the Pacific Northwest. All you need to bring is an
+                open mind and an insatiable desire to learn; we’ll take care of the
+                rest. After all, we&apos;re western Canada’s largest hackathon — we make
+                the west coast the best coast.
             </p>
-          </div>
-          <div className="scale-width-desktop flex jc-center">
-            <div className="pad-left-giga pad-ends-l scale-pad-sides-desktop-none">
-              {getImage('bear', panelBear, 'scale-width-phablet')}
+            </div>
+            <div className="scale-width-tablet flex jc-center">
+              <div className="large-svg pad-left-giga pad-ends-l scale-pad-sides-tablet-none">
+                {getImage('bear', panelBear, 'scale-width-phablet')}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={`${ROW_STYLE} flex jc-between ai-center dir-row split scale-row-desktop-rev`}>
-          <div className="scale-width-desktop flex jc-center">
-            <div className="pad-right-giga pad-ends-l scale-pad-sides-desktop-none">
-              {getImage('train', panelTrain, 'scale-width-phablet')}
+          <div className={`${ROW_STYLE} row-image-and-desc flex jc-between scale-jc-tablet ai-center dir-row split scale-row-tablet-rev`}>
+            <div className="scale-width-tablet flex jc-center">
+              <div className="large-svg pad-right-giga pad-ends-l scale-pad-sides-tablet-none">
+                {getImage('train', panelTrain, 'scale-width-phablet')}
+              </div>
             </div>
-          </div>
-          <div className="scale-width-desktop">
-            <h2>Why nwHacks?</h2>
-            <p>
-              Vancouver is more than its breathtaking scenery, coastal lifestyle,
-              and diverse food options. It is also increasingly present in global
-              conversations surrounding the critical impact of youth and industrial
-              advancement. The home of nwHacks is a hub of learning opportunities,
-              community support, and connections to the tech industry.
+            <div className="scale-width-tablet">
+              <h2>Why nwHacks?</h2>
+              <p>
+                Vancouver is more than its breathtaking scenery, coastal lifestyle,
+                and diverse food options. It is also increasingly present in global
+                conversations surrounding the critical impact of youth and industrial
+                advancement. The home of nwHacks is a hub of learning opportunities,
+                community support, and connections to the tech industry.
             </p>
-            <p>
-              We&apos;re growing and we invite you to be a part of our journey.
+              <p>
+                We&apos;re growing and we invite you to be a part of our journey.
             </p>
-            <p>
-              nwHacks is dedicated to supporting the thriving community of technology
-              lovers in the Pacific Northwest region by bringing together ambitious
-              minds for an epic two day event.
+              <p>
+                nwHacks is dedicated to supporting the thriving community of technology
+                lovers in the Pacific Northwest region by bringing together ambitious
+                minds for an epic two day event.
             </p>
+            </div>
           </div>
         </div>
 
