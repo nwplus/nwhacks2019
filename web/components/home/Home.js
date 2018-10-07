@@ -132,6 +132,9 @@ class Home extends React.Component {
   render() {
     return (
       <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
+      <a className="mlh-trust-badge"  href="https://mlh.io/seasons/na-2019/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2019-season&utm_content=black" target="_blank">
+      <img src="https://s3.amazonaws.com/logged-assets/trust-badge/2019/mlh-trust-badge-2019-blue.svg" alt="Major League Hacking 2019 Hackathon Season" style={{width: '100%' }} />
+      </a>
         <div
           className="flex jc-between ai-center pad-top-peta pad-sides-peta scale-pad-sides-tablet homepage-scale-top container-width">
           <div>
