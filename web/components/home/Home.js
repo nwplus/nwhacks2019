@@ -233,7 +233,7 @@ class Home extends React.Component {
                       <div className="pad-top-l pad-bottom-xxl pad-sides-m hover-description flex dir-col jc-center fill-height">{userToText[person]}</div>
                     </div>
                   </div>
-                  <div className="scale-show-full-screen pad-top-m pad-bottom-xxl flex dir-col jc-center fill-height">{userToText[person]}</div>
+                  <div className="stories-text scale-show-full-screen pad-top-m pad-bottom-xxl flex dir-col jc-center">{userToText[person]}</div>
                 </div>
               ))
             }
