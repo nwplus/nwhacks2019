@@ -89,6 +89,4 @@ const Footer = () => (
   </footer>
 );
 
-Footer.propTypes = {};
-
 export { Footer };
