@@ -7,6 +7,10 @@ import { PrimaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
 import { Footer } from '../footer';
 
+// MLH ribbon
+import mlhblueribbon from '../../assets/mlh-blue-ribbon.svg';
+
+
 import sun from '../../assets/sun.svg';
 
 import skyline from '../../assets/skyline.svg';
@@ -133,6 +137,9 @@ class Home extends React.Component {
   render() {
     return (
       <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
+        <a className="mlh-trust-badge scale-hide-phablet" href={EXTERNAL.MLH_UPCOMINGHACKATHON_LINK} target="_blank" rel="noopener noreferrer">
+          <img className="fill-width" src={mlhblueribbon} alt="Major League Hacking 2019 Hackathon Season" />
+        </a>
         <div
           className="flex jc-between ai-center pad-top-peta pad-sides-peta scale-pad-sides-tablet homepage-scale-top container-width">
           <div>
