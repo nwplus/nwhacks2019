@@ -2,7 +2,7 @@ import { auth } from '../firebase';
 
 /*
  This test suite needs refactoring if we do decide to pursue this further
- Refer to robert's comment https://github.com/nwhacks/nwhacks2019/pull/3
+ Refer to robert's comment https://github.com/nwplus/nwhacks2019/pull/3
  for refactoring.
  */
 
