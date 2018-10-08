@@ -24,6 +24,10 @@
 //////////////////////////
 
 .flex
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
   display: flex
 
   &-inline
@@ -135,8 +139,7 @@
 .hover-show
   opacity: 0
   -webkit-transition: $transition-time
-  @media (hover:hover)
-    &:hover
+  &:hover
       opacity: 100
       cursor: pointer
 
