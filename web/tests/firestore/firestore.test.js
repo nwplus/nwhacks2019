@@ -1,4 +1,4 @@
-import { auth } from '../firebase';
+// import { auth } from '../firebase';
 
 /*
  This test suite needs refactoring if we do decide to pursue this further
@@ -8,7 +8,8 @@ import { auth } from '../firebase';
 
 // let user;
 
-// beforeAll(() => auth.createUserWithEmailAndPassword('user@example.com', '12345678').then((userCredential) => {
+// beforeAll(() => auth.createUserWithEmailAndPassword('user@example.com', '12345678').then(
+// (userCredential) => {
 //   console.log('user successfully created!');
 //   ({ user } = userCredential);
 // }).catch((error) => {
