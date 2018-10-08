@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EXTERNAL } from '../home/External';
-// import { Link } from 'react-router-dom';
 
 import farLeftEvergreen from '../../assets/footer/scenery/far-left-evergreen.svg';
 import leftEvergreen from '../../assets/footer/scenery/left-evergreen.svg';
@@ -53,50 +52,43 @@ const getIcon = obj => (
   </a>
 );
 
-const Footer = ({ hidden }) => {
-  if (hidden) {
-    return (null);
-  }
-  return (
-    <footer className="footer fill-width">
-      {/* desktop scenery */}
-      {getImage('tree', leftDeciduous, 'left-deciduous scale-hide-laptop')}
-      {getImage('tree', leftEvergreen, 'left-evergreen scale-hide-tablet')}
-      {getImage('tree', farLeftEvergreen, 'far-left-evergreen scale-hide-phablet')}
-      {getImage('bear', bear, 'bear scale-hide-tablet')}
-      {getImage('tree', rightDeciduous, 'right-deciduous scale-hide-laptop')}
-      {getImage('tree', rightEvergreen, 'right-evergreen scale-hide-phablet')}
+const Footer = () => (
+  <footer className="footer fill-width">
+    {/* desktop scenery */}
+    {getImage('tree', leftDeciduous, 'left-deciduous scale-hide-laptop')}
+    {getImage('tree', leftEvergreen, 'left-evergreen scale-hide-tablet')}
+    {getImage('tree', farLeftEvergreen, 'far-left-evergreen scale-hide-phablet')}
+    {getImage('bear', bear, 'bear scale-hide-tablet')}
+    {getImage('tree', rightDeciduous, 'right-deciduous scale-hide-laptop')}
+    {getImage('tree', rightEvergreen, 'right-evergreen scale-hide-phablet')}
 
-      {/* mobile scenery */}
-      <div className="scale-show-phablet">
-        {getImage('trees', mobileLeftTrees, 'mobile-left-trees')}
-        {getImage('bear', bear, 'mobile-bear')}
-        {getImage('trees', mobileRightTrees, 'mobile-right-trees')}
+    {/* mobile scenery */}
+    <div className="scale-show-phablet">
+      {getImage('trees', mobileLeftTrees, 'mobile-left-trees')}
+      {getImage('bear', bear, 'mobile-bear')}
+      {getImage('trees', mobileRightTrees, 'mobile-right-trees')}
+    </div>
+    <div className="footer-content">
+      <div className="social flex dir-row jc-between pad-top-l">
+        {getIcon(social.facebook)}
+        {getIcon(social.instagram)}
+        {getIcon(social.medium)}
+        {getIcon(social.twitter)}
       </div>
-      <div className="footer-content">
-        <div className="social flex dir-row jc-between pad-top-l">
-          {getIcon(social.facebook)}
-          {getIcon(social.instagram)}
-          {getIcon(social.medium)}
-          {getIcon(social.twitter)}
-        </div>
-        <div className="links flex jc-between pad-ends-l">
-          <a href={EXTERNAL.EMAIL_US}>E-mail Us</a>
-          <a href={EXTERNAL.CODE_OF_CONDUCT}>Code of Conduct</a>
-          <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>Become a Sponsor</a>
-        </div>
-        <div className="footnote pad-bot-l">
-          <p>Organized and held by nwPlus
-            <br />Copyright © 2018 nwHacks
-          </p>
-        </div>
+      <div className="links flex jc-between pad-ends-l">
+        <a href={EXTERNAL.EMAIL_US}>E-mail Us</a>
+        <a href={EXTERNAL.CODE_OF_CONDUCT}>Code of Conduct</a>
+        <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>Become a Sponsor</a>
       </div>
-    </footer>
-  );
-};
+      <div className="footnote pad-bot-l">
+        <p>Organized and held by nwPlus
+          <br />Copyright © 2018 nwHacks
+        </p>
+      </div>
+    </div>
+  </footer>
+);
 
-Footer.propTypes = {
-  hidden: PropTypes.bool,
-};
+Footer.propTypes = {};
 
 export { Footer };
