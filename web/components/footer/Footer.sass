@@ -37,57 +37,56 @@ footer
         line-height: 25px
         color: $white
 
-  .bear
-    position: absolute
-    height: 225.24px
-    left: 424px
-    top: -110.73px
+  .scale-scenery
+    .left-trees, .bear, .right-trees
+      position: absolute
+    .left-trees
+      height: 136px
+      top: -111.89px
+      left: -6px
+    .bear
+      height: 100.48px
+      top: -49.5px
+      left: 108.58px
+    .right-trees
+      height: 151px
+      top: -137px
+      right: 10px
+    @media (min-width: $mobile)
+      .left-trees
+        height: 170px
+        top: -139.77px
+        left: -6px
+      .bear
+        height: 125.6px
+        top: -61.875px
+        left: 135.725px
+      .right-trees
+        height: 188.75px
+        top: -171.25px
+        right: 10px
+    @media (min-width: $phablet)
+      .left-trees
+        height: 272px
+        top: -223.8px
+      .bear
+        height: 200.96px
+        top: -98.7px
+        left: 217.16px
+      .right-trees
+        height: 302px
+        top: -274px
+        right: 40px
+    @media (min-width: $laptop)
+      .left-trees
+        height: 489px
+        top: -401.8px
+      .bear
+        height: 225.24px
+        top: -110.9px
+        left: 424px
+      .right-trees
+        height: 541.06px
+        top: -492px
+        right: 93px
 
-  .left-deciduous
-    position: absolute
-    width: 428px
-    height: 451px
-    left: 202.88px
-    top: -401.808px
-
-  .left-evergreen
-    position: absolute
-    width: 218px
-    height: 322px
-    left: 134px
-    top: -290px
-
-  .far-left-evergreen
-    position: absolute
-    width: 364px
-    height: 411px
-    left: -57px
-    top: -320px
-
-  .right-deciduous
-    position: absolute
-    height: 520px
-    top: -472.76px
-    right: 101.88px
-
-  .right-evergreen
-    position: absolute
-    width: 181px
-    height: 268px
-    right: 89px
-    top: -230px
-
-  .mobile-left-trees
-    position: absolute
-    top: -111.9374px
-
-  .mobile-bear
-    position: absolute
-    height: 100.48px
-    left: 108.58px
-    top: -49.5px
-
-  .mobile-right-trees
-    position: absolute
-    top: -137px
-    right: 10px

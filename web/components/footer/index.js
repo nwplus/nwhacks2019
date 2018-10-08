@@ -1,13 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { EXTERNAL } from '../home/External';
 
-import farLeftEvergreen from '../../assets/footer/scenery/far-left-evergreen.svg';
-import leftEvergreen from '../../assets/footer/scenery/left-evergreen.svg';
-import leftDeciduous from '../../assets/footer/scenery/left-deciduous.svg';
 import bear from '../../assets/footer/scenery/bear.svg';
-import rightDeciduous from '../../assets/footer/scenery/right-deciduous.svg';
-import rightEvergreen from '../../assets/footer/scenery/right-evergreen.svg';
 import mobileRightTrees from '../../assets/footer/scenery/right-trees.svg';
 import mobileLeftTrees from '../../assets/footer/scenery/left-trees.svg';
 
@@ -54,19 +48,10 @@ const getIcon = obj => (
 
 const Footer = () => (
   <footer className="footer fill-width">
-    {/* desktop scenery */}
-    {getImage('tree', leftDeciduous, 'left-deciduous scale-hide-laptop')}
-    {getImage('tree', leftEvergreen, 'left-evergreen scale-hide-tablet')}
-    {getImage('tree', farLeftEvergreen, 'far-left-evergreen scale-hide-phablet')}
-    {getImage('bear', bear, 'bear scale-hide-tablet')}
-    {getImage('tree', rightDeciduous, 'right-deciduous scale-hide-laptop')}
-    {getImage('tree', rightEvergreen, 'right-evergreen scale-hide-phablet')}
-
-    {/* mobile scenery */}
-    <div className="scale-show-phablet">
-      {getImage('trees', mobileLeftTrees, 'mobile-left-trees')}
-      {getImage('bear', bear, 'mobile-bear')}
-      {getImage('trees', mobileRightTrees, 'mobile-right-trees')}
+    <div className="scale-scenery">
+      {getImage('trees', mobileLeftTrees, 'left-trees')}
+      {getImage('bear', bear, 'bear')}
+      {getImage('trees', mobileRightTrees, 'right-trees')}
     </div>
     <div className="footer-content">
       <div className="social flex dir-row jc-between pad-top-l">
