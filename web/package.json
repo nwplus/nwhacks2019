@@ -1,7 +1,7 @@
 {
   "name": "nwhacks2019",
   "description": "The frontend website, registration, and check-in system for nwHacks 2019",
-  "repository": "github:nwhacks/nwhacks2019",
+  "repository": "github:nwplus/nwhacks2019",
   "author": "nwHacks 2019",
   "license": "MIT + Apache 2.0",
   "main": "index.js",
