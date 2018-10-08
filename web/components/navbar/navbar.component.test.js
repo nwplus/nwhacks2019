@@ -17,77 +17,77 @@ describe('Navbar component', () => {
   const getWrapper = () => shallow(<Navbar {...props} />);
 
   describe('when the display type is LOGO_BUTTON_AND_LINKS', () => {
-    describe('when the button type is DASHBOARD', () => {
-      beforeEach(() => {
-        props = {
-          displayType: DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS,
-          buttonType: BUTTON_TYPE.DASHBOARD,
-        };
+    // describe('when the button type is DASHBOARD', () => {
+    //   beforeEach(() => {
+    //     props = {
+    //       displayType: DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS,
+    //       buttonType: BUTTON_TYPE.DASHBOARD,
+    //     };
 
-        wrapper = getWrapper();
-      });
+    //     wrapper = getWrapper();
+    //   });
 
-      test('there are some links', () => {
-        expect(wrapper.find(Link).length).toBeGreaterThan(3);
-      });
+    //   test('there are some links', () => {
+    //     expect(wrapper.find(Link).length).toBeGreaterThan(3);
+    //   });
 
-      test('the first link is to home page', () => {
-        expect(wrapper.find(Link).first().props()).toHaveProperty('to', '/');
-      });
+    //   test('the first link is to home page', () => {
+    //     expect(wrapper.find(Link).first().props()).toHaveProperty('to', '/');
+    //   });
 
-      test('the last link is to dashboard page', () => {
-        expect(wrapper.find(Link).last().props()).toHaveProperty('to', '/dashboard');
-      });
-    });
+    //   test('the last link is to dashboard page', () => {
+    //     expect(wrapper.find(Link).last().props()).toHaveProperty('to', '/dashboard');
+    //   });
+    // });
 
-    describe('when the button type is SIGN_IN', () => {
-      beforeEach(() => {
-        props = {
-          displayType: DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS,
-          buttonType: BUTTON_TYPE.SIGN_IN,
-        };
+    // describe('when the button type is SIGN_IN', () => {
+    //   beforeEach(() => {
+    //     props = {
+    //       displayType: DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS,
+    //       buttonType: BUTTON_TYPE.SIGN_IN,
+    //     };
 
-        wrapper = getWrapper();
-      });
+    //     wrapper = getWrapper();
+    //   });
 
-      test('there are some links', () => {
-        expect(wrapper.find(Link).length).toBeGreaterThan(3);
-      });
+    //   test('there are some links', () => {
+    //     expect(wrapper.find(Link).length).toBeGreaterThan(3);
+    //   });
 
-      test('the first link is to home page', () => {
-        expect(wrapper.find(Link).first().props()).toHaveProperty('to', '/');
-      });
+    //   test('the first link is to home page', () => {
+    //     expect(wrapper.find(Link).first().props()).toHaveProperty('to', '/');
+    //   });
 
-      test('the last link is to sign in page', () => {
-        expect(wrapper.find(Link).last().props()).toHaveProperty('to', '/login');
-      });
-    });
+    //   test('the last link is to sign in page', () => {
+    //     expect(wrapper.find(Link).last().props()).toHaveProperty('to', '/login');
+    //   });
+    // });
   });
 
-  describe('when the display type is LOGO_AND_BUTTON', () => {
-    describe('when the button type is SIGN_OUT', () => {
-      beforeEach(() => {
-        props = {
-          displayType: DISPLAY_TYPE.LOGO_AND_BUTTON,
-          buttonType: BUTTON_TYPE.SIGN_OUT,
-        };
+  // describe('when the display type is LOGO_AND_BUTTON', () => {
+  //   describe('when the button type is SIGN_OUT', () => {
+  //     beforeEach(() => {
+  //       props = {
+  //         displayType: DISPLAY_TYPE.LOGO_AND_BUTTON,
+  //         buttonType: BUTTON_TYPE.SIGN_OUT,
+  //       };
 
-        wrapper = getWrapper();
-      });
+  //       wrapper = getWrapper();
+  //     });
 
-      test('there are two Links', () => {
-        expect(wrapper.find(Link)).toHaveProperty('length', 2);
-      });
+  //     test('there are two Links', () => {
+  //       expect(wrapper.find(Link)).toHaveProperty('length', 2);
+  //     });
 
-      test('the first link is to home page', () => {
-        expect(wrapper.find(Link).first().props()).toHaveProperty('to', '/');
-      });
+  //     test('the first link is to home page', () => {
+  //       expect(wrapper.find(Link).first().props()).toHaveProperty('to', '/');
+  //     });
 
-      test('the last link is to sign out page', () => {
-        expect(wrapper.find(Link).last().props()).toHaveProperty('to', '/logout');
-      });
-    });
-  });
+  //     test('the last link is to sign out page', () => {
+  //       expect(wrapper.find(Link).last().props()).toHaveProperty('to', '/logout');
+  //     });
+  //   });
+  // });
 
   describe('when the display type is ONLY_LOGO', () => {
     beforeEach(() => {
