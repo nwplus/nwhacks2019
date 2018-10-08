@@ -117,7 +117,7 @@ class Navbar extends React.Component {
             <Link to="/"><img alt="nwHacks" src={logo} /></Link>
           </div>
         </div>
-        <div className="flex jc-end fill-width">
+        <div className="flex jc-end fill-width pad-right-s">
           {navbarRight}
         </div>
       </nav>
