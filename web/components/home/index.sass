@@ -1,5 +1,11 @@
+$spacing-section: 80px // padding between each section
+
+body
+  overflow-x: hidden
 .homepage
   background: $gradient-purple
+  .pad-bottom-section
+    padding-bottom: $spacing-section
 
   .mlh-trust-badge
     display: block
@@ -20,6 +26,15 @@
       width: 100%
       max-width: 300px
 
+  &-main-panel
+    padding-top: 166px
+    padding-left: 152px
+    p
+      &.primary
+      margin-top: -10px
+      &.secondary
+        margin-top: 0
+        
   &-skyline
     margin-bottom: -$spacing-tera
     @media screen and (max-width: $desktop)
@@ -29,8 +44,18 @@
     @media screen and (max-width: $tablet)
       padding-top: $spacing-tera !important
 
-  p
-    max-width: 38.889em
+  .row-intro:first-of-type
+    padding-bottom: 0
+  .row-image-and-desc
+    @extend .pad-sides-tera
+    .large-svg
+      @media screen and (max-width: $laptop)
+        margin: 0 auto
+        height: auto
+      img
+        max-width: 100%
+        display: block;
+        margin: 0 auto;
 
   .row-stories
     > div
