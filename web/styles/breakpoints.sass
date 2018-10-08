@@ -68,9 +68,19 @@ $mobile-s:  320px
     &-laptop
       @media screen and (max-width: $laptop)
         display: none !important
+    &-tablet
+      @media screen and (max-width: $tablet)
+        display: none !important
     &-phablet
       @media screen and (max-width: $phablet)
         display: none !important
+    &-mobile
+      @media screen and (max-width: $mobile)
+        display: none !important
+    &-mobile-s
+      @media screen and (max-width: $mobile-s)
+        display: none !important
+    
 
   &-show
     &-full-screen
@@ -82,6 +92,13 @@ $mobile-s:  320px
     &-laptop
       @media screen and (min-width: $laptop)
         display: none !important
+    &-phablet
+      @media screen and (min-width: $phablet)
+        display: none !important
+    &-mobile
+      @media screen and (min-width: $mobile)
+        display: none !important
+      
 
   &-width
     &-tablet
