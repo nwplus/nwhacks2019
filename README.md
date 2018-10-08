@@ -19,7 +19,7 @@
 ## :construction: Development
 
 ```bash
-$> git clone https://github.com/nwhacks/nwhacks2019.git
+$> git clone https://github.com/nwplus/nwhacks2019.git
 $> cd nwhacks2019 ; make
 $> cp .example.env .env
 $> vi .env # fill out environment variables
