@@ -46,7 +46,7 @@ report-coverage:
 .PHONY: build
 build:
 	@echo Building web app...
-	@(cd ./web ; yarn build)
+	@(rm -rf ./docs/assets/ ; mkdir -p ./docs/assets/ ; cp -r ./web/assets/favicon ./docs/assets/favicon; cd ./web ; yarn build)
 
 # Runs webpack dev server
 .PHONY: web
