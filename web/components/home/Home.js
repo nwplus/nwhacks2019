@@ -169,7 +169,7 @@ class Home extends React.Component {
               </a>
             </p>
           </div>
-          <div className="margin-left-mega margin-bottom-l scale-hide-laptop">
+          <div className="margin-left-mega margin-bottom-l pad-right-l scale-hide-laptop">
             {getImage('sun', sun)}
           </div>
         </div>
