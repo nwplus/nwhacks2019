@@ -239,11 +239,11 @@ class Home extends React.Component {
                   <div className="relative overflow-hidden">
                     {getImage(`${person}-bg`, userToBg[person], 'fill-width pad-right-s')}
                     {getImage(`${person}`, userToImg[person], 'fill-width overlay')}
-                    <div className="overlay scale-hide-full-screen scale-hover-disable-full-screen hover-show fill-width fill-height">
-                      <div className="pad-top-l pad-bottom-xxl pad-sides-m hover-description flex dir-col jc-center fill-height">{userToText[person]}</div>
+                    <div className="overlay scale-hide-desktop scale-hover-disable-desktop hover-show fill-width fill-height">
+                      <div className="pad-top-l pad-bottom-s pad-sides-m hover-description flex dir-col jc-center fill-height">{userToText[person]}</div>
                     </div>
                   </div>
-                  <div className="scale-show-full-screen pad-top-m pad-bottom-xxl flex dir-col jc-center">{userToText[person]}</div>
+                  <div className="scale-show-desktop pad-top-m pad-bottom-xxl flex dir-col jc-center">{userToText[person]}</div>
                 </div>
               ))
             }

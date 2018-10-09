@@ -92,6 +92,9 @@ $mobile-s:  320px
     &-full-screen
       @media screen and (max-width: $full-screen)
         display: none !important
+    &-desktop
+      @media screen and (max-width: $desktop)
+        display: none !important
     &-laptop
       @media screen and (max-width: $laptop)
         display: none !important
@@ -107,7 +110,7 @@ $mobile-s:  320px
     &-mobile-s
       @media screen and (max-width: $mobile-s)
         display: none !important
-    
+
 
   &-show
     &-full-screen
@@ -125,7 +128,7 @@ $mobile-s:  320px
     &-mobile
       @media screen and (min-width: $mobile)
         display: none !important
-      
+
 
   &-width
     &-desktop
@@ -150,5 +153,11 @@ $mobile-s:  320px
         &:hover
           @media (hover:hover)
             @media screen and (max-width: $full-screen)
+              cursor: default !important
+              opacity: 100 !important
+      &-desktop
+        &:hover
+          @media (hover:hover)
+            @media screen and (max-width: $desktop)
               cursor: default !important
               opacity: 100 !important
