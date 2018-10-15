@@ -81,21 +81,26 @@ export class HackerApplicationContainer extends React.Component {
     }
   }
 
-  submitApplication = (userCredentials) => {
-    const { firebase } = this.props;
+  // submitApplication = (userCredentials) => {
+  //   const { firebase } = this.props;
+  //   // TODO: hide this under feature flag https://github.com/nwplus/nwhacks2019/issues/114
+  //   // this.signUp(firebase, userCredentials);
+  // }
+  submitApplication = () => {
+    // const { firebase } = this.props;
     // TODO: hide this under feature flag https://github.com/nwplus/nwhacks2019/issues/114
     // this.signUp(firebase, userCredentials);
   }
 
-  signUp(firebase, userCredentials) {
-    const auth = firebase.auth();
-    const { email, password } = userCredentials;
-    auth.createUserWithEmailAndPassword(email, password).then(() => {
-      console.log('user successfully created!');
-    }).catch((error) => {
-      console.err('failed to create user: ', error);
-    });
-  }
+  // signUp(firebase, userCredentials) {
+  //   const auth = firebase.auth();
+  //   const { email, password } = userCredentials;
+  //   auth.createUserWithEmailAndPassword(email, password).then(() => {
+  //     console.log('user successfully created!');
+  //   }).catch((error) => {
+  //     console.err('failed to create user: ', error);
+  //   });
+  // }
 
   render() {
     const {
@@ -196,4 +201,7 @@ HackerApplicationContainer.propTypes = {
   featureFlags: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withFirebase(HackerApplicationContainer));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withFirebase(HackerApplicationContainer));
