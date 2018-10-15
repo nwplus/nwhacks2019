@@ -92,6 +92,14 @@ PageOne.propTypes = {
   hackerApplication: propTypesTemplates.application.hacker,
   onHackerApplicationChange: PropTypes.func.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
+  count: PropTypes.number,
+  activeIndex: PropTypes.number,
+  lastValidIndex: PropTypes.number,
+  onPageChange: PropTypes.func,
+  onPageBack: PropTypes.func,
+  onPageNext: PropTypes.func,
+  isNextButtonEnabled: PropTypes.bool.isRequired,
+  cancelHackerApplication: PropTypes.func.isRequired,
 };
 
 export default PageOne;
