@@ -15,30 +15,45 @@ const HackerApplication = (props) => {
   if (hackerApplication.isSubmitted) return (<Redirect to="/dashboard" />);
   if (cancelled) return (<Redirect to="/" />);
 
-  const indexToPage = {
-    0: (
-      <PageOne />
-    ),
-    1: (
-      <PageTwo />
-    ),
-    2: (
-      <SignUp />
-    ),
-  };
+  // const indexToPage = {
+  //   0: (
+  //     <PageOne />
+  //   ),
+  //   1: (
+  //     <PageTwo />
+  //   ),
+  //   2: (
+  //     <SignUp />
+  //   ),
+  // };
+
+  // return (
+  //   <HackerApplicationContext.Consumer>
+  //     {
+  //       (hackerApplicationProps) => {
+  //         const { activeIndex } = hackerApplicationProps;
+  //         return React.cloneElement(indexToPage[activeIndex], hackerApplicationProps)
+  //       }
+  //     }
+  //   </HackerApplicationContext.Consumer>
+  // );
+
+  // return (<div>{children[0]}</div>)
+
+  const { children } = props;
+
+  // return (<div>{children}</div>);
 
   return (
     <HackerApplicationContext.Consumer>
       {
         (hackerApplicationProps) => {
           const { activeIndex } = hackerApplicationProps;
-          return React.cloneElement(indexToPage[activeIndex], hackerApplicationProps)
+          return React.cloneElement(children[activeIndex], hackerApplicationProps)
         }
       }
     </HackerApplicationContext.Consumer>
-  );
-
-  // return (<div>{children[0]}</div>)
+  )
 
   // return (
   //   <HackerApplicationContext.Consumer>

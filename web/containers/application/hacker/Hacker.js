@@ -121,7 +121,7 @@ export class HackerApplicationContainer extends React.Component {
     if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
 
     const applicationProps = {
-      count: 3,
+      count: this.props.children.length,
       activeIndex,
       lastValidIndex,
       onPageChange: this.onPageChange,
