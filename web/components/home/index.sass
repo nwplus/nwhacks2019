@@ -15,7 +15,7 @@ body
     right: 100px
     top: 64px
     width: 10%
-  
+
   &-email-registration
     @media screen and (max-width: $mobile-s)
       flex-direction: column !important
@@ -34,7 +34,7 @@ body
       margin-top: -10px
       &.secondary
         margin-top: 0
-        
+
   &-skyline
     margin-bottom: -$spacing-tera
     @media screen and (max-width: $desktop)
@@ -68,7 +68,7 @@ body
         padding-top: 16px
 
       .hover-description
-        background: $gradient-secondary
+        background: $background
 
   .faq
     > div
@@ -87,3 +87,16 @@ body
 
   .sponsors
     font-weight: bold
+
+.scale-show-stories
+  @media screen and (min-width: 1401px)
+    display: none !important
+
+.scale-hide-stories
+  @media screen and (max-width: 1400px)
+    display: none !important
+
+.scale-hover-disable-stories
+  @media screen and (max-width: 1400px)
+    cursor: default !important
+    opacity: 100 !important
