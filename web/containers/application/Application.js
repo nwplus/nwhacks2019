@@ -131,13 +131,29 @@ export class ApplicationContainer extends React.Component {
 }
 
 ApplicationContainer.propTypes = {
-  application: PropTypes.object,
+  // application contains the application itself.
+  application: PropTypes.object.isRequired,
+
+  // changePage is called whenever the user changes pages with an argument for the new active index.
   changePage: PropTypes.func.isRequired,
+
+  // changeLastActiveIndex is called whenever the user visits an unvisited page,
+  // with an argument for the index of such page.
   changeLastActiveIndex: PropTypes.func.isRequired,
+
+  // activeIndex determines the current index/page the user is on.
   activeIndex: PropTypes.number.isRequired,
+
+  // lastValidIndex determines the furthest page that the user has been on.
   lastValidIndex: PropTypes.number.isRequired,
+
+  // updateApplication is called whenver the user updates the application.
   updateApplication: PropTypes.func.isRequired,
+
+  // cancelApplication is called whenever the user cancels the application.
   cancelApplication: PropTypes.func.isRequired,
+
+  // pages determines the pages in the application.
   pages: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
