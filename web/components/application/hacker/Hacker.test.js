@@ -33,6 +33,7 @@ describe('Hacker component', () => {
     cancelled: false,
     isNextButtonEnabled: false,
     updateNextButtonState: jest.fn(),
+    submitApplication: jest.fn(),
   };
   let wrapper;
 
@@ -198,7 +199,7 @@ describe('Hacker component', () => {
               props.isNextButtonEnabled = true;
             });
 
-            it('calls onPageNext when it is not the last page', () => {
+            it('calls onPageNext when it is not the last page and calls submitApplication for the last page', () => {
               for (let i = 0; i < props.count; i += 1) {
                 props.activeIndex = i;
                 wrapper = getWrapper();
@@ -208,6 +209,7 @@ describe('Hacker component', () => {
                   expect(props.onPageNext).toHaveBeenCalled();
                 } else {
                   expect(props.onPageNext).not.toHaveBeenCalled();
+                  expect(props.submitApplication).toHaveBeenCalled();
                 }
 
                 props.onPageNext.mockClear();
