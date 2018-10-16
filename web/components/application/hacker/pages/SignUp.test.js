@@ -12,13 +12,13 @@ beforeAll(() => {
 describe('Sign up component', () => {
   let wrapper;
   const props = {
-    hackerApplication: {
+    application: {
       isSubmitted: false,
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@example.com',
     },
-    onHackerApplicationChange: jest.fn(),
+    onApplicationChange: jest.fn(),
     updateNextButtonState: jest.fn(),
     disableNextButton: jest.fn(),
   };
@@ -53,10 +53,10 @@ describe('Sign up component', () => {
   });
 
   describe('onEmailChange', () => {
-    it('calls onHackerApplicationChange with new email', () => {
+    it('calls onApplicationChange with new email', () => {
       wrapper.instance().onEmailChange('jane.doe@example.com');
-      const { onHackerApplicationChange } = props;
-      expect(onHackerApplicationChange).toHaveBeenCalledWith({
+      const { onApplicationChange } = props;
+      expect(onApplicationChange).toHaveBeenCalledWith({
         isSubmitted: false,
         firstName: 'John',
         lastName: 'Doe',
