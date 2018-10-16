@@ -87,3 +87,16 @@ body
 
   .sponsors
     font-weight: bold
+
+.scale-show-stories
+  @media screen and (min-width: 1401px)
+    display: none !important
+
+.scale-hide-stories
+  @media screen and (max-width: 1400px)
+    display: none !important
+
+.scale-hover-disable-stories
+  @media screen and (max-width: 1400px)
+    cursor: default !important
+    opacity: 100 !important
