@@ -38,6 +38,12 @@ export class HackerApplicationContainer extends React.Component {
       cancelApplication,
     } = this.props;
 
+    const pages = [
+      (<PageOne />),
+      (<PageTwo />),
+      (<SignUp />)
+    ];
+
     return (
       <Application
         application={hackerApplication}
@@ -47,11 +53,8 @@ export class HackerApplicationContainer extends React.Component {
         lastValidIndex={lastValidIndex}
         updateApplication={updateApplication}
         cancelApplication={cancelApplication}
-      >
-        <PageOne />
-        <PageTwo />
-        <SignUp />
-      </Application>
+        pages={pages}
+        />
     );
   }
 }

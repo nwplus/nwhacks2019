@@ -104,10 +104,10 @@ export class ApplicationContainer extends React.Component {
     } = this.props;
     const { cancelled, isNextButtonEnabled } = this.state;
 
-    const { children } = this.props;
+    const { pages } = this.props;
 
     const applicationProps = {
-      count: children.length,
+      count: pages.length,
       activeIndex,
       lastValidIndex,
       onPageChange: this.onPageChange,
@@ -124,7 +124,7 @@ export class ApplicationContainer extends React.Component {
 
     return (
       <ApplicationContext.Provider value={applicationProps}>
-        <Application pages={children} />
+        <Application pages={pages} />
       </ApplicationContext.Provider>
     );
   }
@@ -138,7 +138,7 @@ ApplicationContainer.propTypes = {
   lastValidIndex: PropTypes.number.isRequired,
   updateApplication: PropTypes.func.isRequired,
   cancelApplication: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
+  pages: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
   ]),
