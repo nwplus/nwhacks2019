@@ -42,7 +42,7 @@ export const QUESTIONS = Object.freeze({
           strictly limited to high school and university students, and recent graduates only.
           A bus will be sent to the University of Washington for attendees from Seattle and
           the surrounding area. For other hackers, we will be offering a limited number
-          of travel reimbursements of up to $200 per person (economy flights only).
+          of travel reimbursements of up to $200 CAD per person (economy flights only).
         </p>
       ),
     },
