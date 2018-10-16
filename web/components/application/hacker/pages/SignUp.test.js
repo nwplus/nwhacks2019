@@ -211,8 +211,7 @@ describe('Sign up component', () => {
         it('enables next button', () => {
           wrapper.instance().onPasswordChange('1234');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(true);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(true);
         });
       });
 
@@ -224,8 +223,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordChange('12345');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
 
@@ -237,8 +235,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordChange('');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
     });
@@ -252,8 +249,7 @@ describe('Sign up component', () => {
         it('enables next button', () => {
           wrapper.instance().onPasswordConfirmationChange('1234');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(true);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(true);
         });
       });
 
@@ -265,8 +261,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordConfirmationChange('12345');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
 
@@ -278,8 +273,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordConfirmationChange('');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
     });
