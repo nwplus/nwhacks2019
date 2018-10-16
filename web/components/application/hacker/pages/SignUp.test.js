@@ -12,13 +12,13 @@ beforeAll(() => {
 describe('Sign up component', () => {
   let wrapper;
   const props = {
-    hackerApplication: {
+    application: {
       isSubmitted: false,
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@example.com',
     },
-    onHackerApplicationChange: jest.fn(),
+    onApplicationChange: jest.fn(),
     updateNextButtonState: jest.fn(),
     disableNextButton: jest.fn(),
   };
@@ -53,10 +53,10 @@ describe('Sign up component', () => {
   });
 
   describe('onEmailChange', () => {
-    it('calls onHackerApplicationChange with new email', () => {
+    it('calls onApplicationChange with new email', () => {
       wrapper.instance().onEmailChange('jane.doe@example.com');
-      const { onHackerApplicationChange } = props;
-      expect(onHackerApplicationChange).toHaveBeenCalledWith({
+      const { onApplicationChange } = props;
+      expect(onApplicationChange).toHaveBeenCalledWith({
         isSubmitted: false,
         firstName: 'John',
         lastName: 'Doe',
@@ -211,8 +211,7 @@ describe('Sign up component', () => {
         it('enables next button', () => {
           wrapper.instance().onPasswordChange('1234');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(true);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(true);
         });
       });
 
@@ -224,8 +223,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordChange('12345');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
 
@@ -237,8 +235,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordChange('');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
     });
@@ -252,8 +249,7 @@ describe('Sign up component', () => {
         it('enables next button', () => {
           wrapper.instance().onPasswordConfirmationChange('1234');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(true);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(true);
         });
       });
 
@@ -265,8 +261,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordConfirmationChange('12345');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
 
@@ -278,8 +273,7 @@ describe('Sign up component', () => {
         it('disables next button', () => {
           wrapper.instance().onPasswordConfirmationChange('');
           wrapper.update();
-          const { updateNextButtonState } = props;
-          expect(updateNextButtonState).toHaveBeenCalledWith(false);
+          expect(wrapper.state('isNextButtonEnabled')).toEqual(false);
         });
       });
     });

@@ -1,5 +1,5 @@
-import HackerApplication from './hacker/Hacker';
+import Application from './Application';
 
 export {
-  HackerApplication,
+  Application,
 };
