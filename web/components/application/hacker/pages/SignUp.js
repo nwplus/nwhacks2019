@@ -73,9 +73,8 @@ class SignUp extends React.Component {
   updateNextButtonState = (password, passwordConfirmation) => {
     const match = this.doPasswordsMatch(password, passwordConfirmation);
 
-    const enable = match && password.length > 0;
-    const { updateNextButtonState } = this.props;
-    updateNextButtonState(enable);
+    const isNextButtonEnabled = match && password.length > 0;
+    this.setState({ isNextButtonEnabled });
   }
 
   render() {
@@ -96,10 +95,11 @@ class SignUp extends React.Component {
       onPageChange,
       onPageBack,
       onPageNext,
-      isNextButtonEnabled,
       cancelApplication,
       submitApplication,
     } = this.props;
+
+    const { isNextButtonEnabled } = this.state;
 
     const error = this.getError();
 
@@ -169,14 +169,12 @@ class SignUp extends React.Component {
 SignUp.propTypes = {
   application: propTypesTemplates.application.hacker,
   onApplicationChange: PropTypes.func.isRequired,
-  updateNextButtonState: PropTypes.func.isRequired,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
   lastValidIndex: PropTypes.number,
   onPageChange: PropTypes.func,
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
-  isNextButtonEnabled: PropTypes.bool.isRequired,
   cancelApplication: PropTypes.func.isRequired,
   submitApplication: PropTypes.func.isRequired,
 };

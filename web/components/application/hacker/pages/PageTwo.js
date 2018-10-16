@@ -18,10 +18,8 @@ class PageTwo extends React.Component {
   }
 
   updateNextButtonState = (email) => {
-    const { updateNextButtonState } = this.props;
-
-    const enabled = email.length > 0;
-    updateNextButtonState(enabled);
+    const isNextButtonEnabled = email.length > 0;
+    this.setState({ isNextButtonEnabled });
   }
 
   render() {
@@ -34,9 +32,10 @@ class PageTwo extends React.Component {
       onPageChange,
       onPageBack,
       onPageNext,
-      isNextButtonEnabled,
       cancelApplication,
     } = this.props;
+
+    const { isNextButtonEnabled } = this.state;
     const { email } = application;
 
     return (
@@ -94,14 +93,12 @@ class PageTwo extends React.Component {
 PageTwo.propTypes = {
   application: propTypesTemplates.application.hacker,
   onApplicationChange: PropTypes.func.isRequired,
-  updateNextButtonState: PropTypes.func.isRequired,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
   lastValidIndex: PropTypes.number,
   onPageChange: PropTypes.func,
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
-  isNextButtonEnabled: PropTypes.bool.isRequired,
   cancelApplication: PropTypes.func.isRequired,
 };
 

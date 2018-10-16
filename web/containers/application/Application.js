@@ -9,14 +9,12 @@ export class ApplicationContainer extends React.Component {
     super(props);
     this.state = {
       cancelled: false,
-      isNextButtonEnabled: false,
     };
   }
 
   onPageChange = (activeIndex) => {
     const { changePage, changeLastActiveIndex, lastValidIndex } = this.props;
     changePage(activeIndex);
-    this.setState({ isNextButtonEnabled: false });
     if (activeIndex > lastValidIndex) {
       changeLastActiveIndex(activeIndex);
     }
@@ -51,30 +49,6 @@ export class ApplicationContainer extends React.Component {
     cancelApplication();
   }
 
-  updateNextButtonState = (enabled) => {
-    if (enabled) {
-      this.enableNextButton();
-    } else {
-      this.disableNextButton();
-    }
-  }
-
-  enableNextButton = () => {
-    const { isNextButtonEnabled } = this.state;
-
-    if (!isNextButtonEnabled) {
-      this.setState({ isNextButtonEnabled: true });
-    }
-  }
-
-  disableNextButton = () => {
-    const { isNextButtonEnabled } = this.state;
-
-    if (isNextButtonEnabled) {
-      this.setState({ isNextButtonEnabled: false });
-    }
-  }
-
   // submitApplication = (userCredentials) => {
   //   const { firebase } = this.props;
   //   // TODO: hide this under feature flag https://github.com/nwplus/nwhacks2019/issues/114
@@ -102,7 +76,7 @@ export class ApplicationContainer extends React.Component {
       activeIndex,
       lastValidIndex,
     } = this.props;
-    const { cancelled, isNextButtonEnabled } = this.state;
+    const { cancelled } = this.state;
 
     const { pages } = this.props;
 
@@ -116,8 +90,6 @@ export class ApplicationContainer extends React.Component {
       onApplicationChange: this.onApplicationChange,
       cancelApplication: this.alertThenCancel,
       cancelled,
-      isNextButtonEnabled,
-      updateNextButtonState: this.updateNextButtonState,
       submitApplication: this.submitApplication,
       application,
     };

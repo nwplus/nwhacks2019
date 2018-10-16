@@ -15,10 +15,8 @@ class PageOne extends React.Component {
   }
 
   updateNextButtonState = (firstName) => {
-    const { updateNextButtonState } = this.props;
-
-    const enabled = firstName.length > 0;
-    updateNextButtonState(enabled);
+    const isNextButtonEnabled = firstName.length > 0;
+    this.setState({ isNextButtonEnabled });
   }
 
   render() {
@@ -31,9 +29,10 @@ class PageOne extends React.Component {
       onPageChange,
       onPageBack,
       onPageNext,
-      isNextButtonEnabled,
       cancelApplication,
     } = this.props;
+
+    const { isNextButtonEnabled } = this.state;
     const { firstName } = application;
 
     return (
@@ -91,14 +90,12 @@ class PageOne extends React.Component {
 PageOne.propTypes = {
   application: propTypesTemplates.application.hacker,
   onApplicationChange: PropTypes.func.isRequired,
-  updateNextButtonState: PropTypes.func.isRequired,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
   lastValidIndex: PropTypes.number,
   onPageChange: PropTypes.func,
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
-  isNextButtonEnabled: PropTypes.bool.isRequired,
   cancelApplication: PropTypes.func.isRequired,
 };
 
