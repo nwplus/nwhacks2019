@@ -8,75 +8,49 @@ import SignUp from './pages/SignUp';
 
 import propTypesTemplates from '../../../prop-types-templates';
 
+import { HackerApplicationContext } from '../../../containers/application/hacker/Context'
+
 const HackerApplication = (props) => {
   const { hackerApplication, cancelled } = props;
   if (hackerApplication.isSubmitted) return (<Redirect to="/dashboard" />);
   if (cancelled) return (<Redirect to="/" />);
 
-  const {
-    count,
-    activeIndex,
-    lastValidIndex,
-    onPageChange,
-    onPageBack,
-    onPageNext,
-    onHackerApplicationChange,
-    cancelHackerApplication,
-    isNextButtonEnabled,
-    updateNextButtonState,
-    submitApplication,
-  } = props;
-
   const indexToPage = {
     0: (
-      <PageOne
-        hackerApplication={hackerApplication}
-        onHackerApplicationChange={onHackerApplicationChange}
-        updateNextButtonState={updateNextButtonState}
-        count={count}
-        lastValidIndex={lastValidIndex}
-        onPageChange={onPageChange}
-        onPageBack={onPageBack}
-        onPageNext={onPageNext}
-        isNextButtonEnabled={isNextButtonEnabled}
-        cancelHackerApplication={cancelHackerApplication}
-        activeIndex={activeIndex}
-        />
+      <PageOne />
     ),
     1: (
-      <PageTwo
-        hackerApplication={hackerApplication}
-        onHackerApplicationChange={onHackerApplicationChange}
-        updateNextButtonState={updateNextButtonState}
-        count={count}
-        lastValidIndex={lastValidIndex}
-        onPageChange={onPageChange}
-        onPageBack={onPageBack}
-        onPageNext={onPageNext}
-        isNextButtonEnabled={isNextButtonEnabled}
-        cancelHackerApplication={cancelHackerApplication}
-        activeIndex={activeIndex}
-        />
+      <PageTwo />
     ),
     2: (
-      <SignUp
-        hackerApplication={hackerApplication}
-        onHackerApplicationChange={onHackerApplicationChange}
-        updateNextButtonState={updateNextButtonState}
-        count={count}
-        lastValidIndex={lastValidIndex}
-        onPageChange={onPageChange}
-        onPageBack={onPageBack}
-        onPageNext={onPageNext}
-        isNextButtonEnabled={isNextButtonEnabled}
-        cancelHackerApplication={cancelHackerApplication}
-        activeIndex={activeIndex}
-        submitApplication={submitApplication}
-        />
+      <SignUp />
     ),
   };
 
-  return (indexToPage[activeIndex]);
+  return (
+    <HackerApplicationContext.Consumer>
+      {
+        (hackerApplicationProps) => {
+          const { activeIndex } = hackerApplicationProps;
+          return React.cloneElement(indexToPage[activeIndex], hackerApplicationProps)
+        }
+      }
+    </HackerApplicationContext.Consumer>
+  );
+
+  // return (<div>{children[0]}</div>)
+
+  // return (
+  //   <HackerApplicationContext.Consumer>
+  //     {
+  //       (hackerApplicationProps) => {
+  //         const childrenWithProps = React.Children.map(children, child =>
+  //           React.cloneElement(child, hackerApplicationProps));
+  //         return (<div>{childrenWithProps[0]}</div>)
+  //       }
+  //     }
+  //   </HackerApplicationContext.Consumer>
+  // );
 };
 
 HackerApplication.propTypes = {

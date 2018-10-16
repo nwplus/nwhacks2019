@@ -9,6 +9,7 @@ import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, add
 import propTypesTemplates from '../../../prop-types-templates';
 import { getFromFirestore } from '../../../services/firestore';
 import { initialState as hackerApplicationInitialState } from '../../../reducers/entities/application/hacker';
+import { HackerApplicationContext } from './Context';
 
 export class HackerApplicationContainer extends React.Component {
   constructor(props) {
@@ -119,22 +120,29 @@ export class HackerApplicationContainer extends React.Component {
     const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
     if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
 
+    const applicationProps = {
+      count: 3,
+      activeIndex,
+      lastValidIndex,
+      onPageChange: this.onPageChange,
+      onPageBack: this.onPageBack,
+      onPageNext: this.onPageNext,
+      onHackerApplicationChange: this.onHackerApplicationChange,
+      cancelHackerApplication: this.alertThenCancel,
+      cancelled,
+      isNextButtonEnabled,
+      updateNextButtonState: this.updateNextButtonState,
+      submitApplication: this.submitApplication,
+      hackerApplication,
+    }
+
     return (
-      <HackerApplication
-        hackerApplication={hackerApplication}
-        activeIndex={activeIndex}
-        lastValidIndex={lastValidIndex}
-        count={3}
-        onPageChange={this.onPageChange}
-        onPageNext={this.onPageNext}
-        onPageBack={this.onPageBack}
-        onHackerApplicationChange={this.onHackerApplicationChange}
-        cancelHackerApplication={this.alertThenCancel}
-        cancelled={cancelled}
-        isNextButtonEnabled={isNextButtonEnabled}
-        updateNextButtonState={this.updateNextButtonState}
-        submitApplication={this.submitApplication}
-        />
+      <HackerApplicationContext.Provider value={applicationProps}>
+        <HackerApplication
+          hackerApplication={hackerApplication}
+          children={this.props.children}
+          />
+      </HackerApplicationContext.Provider>
     );
   }
 }
