@@ -12,7 +12,7 @@ import { getPrimaryButtonText } from './utils';
 // since we're only concerned about functionality at the moment
 class PageTwo extends React.Component {
   componentWillMount() {
-    const { hackerApplication: { email } } = this.props;
+    const { application: { email } } = this.props;
 
     this.updateNextButtonState(email);
   }
@@ -26,8 +26,8 @@ class PageTwo extends React.Component {
 
   render() {
     const {
-      hackerApplication,
-      onHackerApplicationChange,
+      application,
+      onApplicationChange,
       count,
       activeIndex,
       lastValidIndex,
@@ -35,9 +35,9 @@ class PageTwo extends React.Component {
       onPageBack,
       onPageNext,
       isNextButtonEnabled,
-      cancelHackerApplication,
+      cancelApplication,
     } = this.props;
-    const { email } = hackerApplication;
+    const { email } = application;
 
     return (
       <div className="pad-nav application fill-width flex jc-center">
@@ -64,12 +64,12 @@ class PageTwo extends React.Component {
               name="hacker-application-email"
               value={email}
               onChange={(emailInput) => {
-                const updatedHackerApplication = update(hackerApplication, {
+                const updatedHackerApplication = update(application, {
                   $merge: {
                     email: emailInput,
                   },
                 });
-                onHackerApplicationChange(updatedHackerApplication);
+                onApplicationChange(updatedHackerApplication);
                 this.updateNextButtonState(emailInput);
               }}
               />
@@ -77,7 +77,7 @@ class PageTwo extends React.Component {
           <ButtonGroup className="pad-top-mega">
             <SecondaryButton
               text={activeIndex === 0 ? 'Cancel' : 'Back'}
-              onClick={activeIndex === 0 ? cancelHackerApplication : onPageBack}
+              onClick={activeIndex === 0 ? cancelApplication : onPageBack}
               />
             <PrimaryButton
               disabled={!isNextButtonEnabled}
@@ -92,8 +92,8 @@ class PageTwo extends React.Component {
 }
 
 PageTwo.propTypes = {
-  hackerApplication: propTypesTemplates.application.hacker,
-  onHackerApplicationChange: PropTypes.func.isRequired,
+  application: propTypesTemplates.application.hacker,
+  onApplicationChange: PropTypes.func.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
@@ -102,7 +102,7 @@ PageTwo.propTypes = {
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool.isRequired,
-  cancelHackerApplication: PropTypes.func.isRequired,
+  cancelApplication: PropTypes.func.isRequired,
 };
 
 export default PageTwo;

@@ -20,11 +20,11 @@ class SignUp extends React.Component {
   }
 
   onEmailChange = (email) => {
-    const { onHackerApplicationChange, hackerApplication } = this.props;
-    const updatedHackerApplication = update(hackerApplication, {
+    const { onApplicationChange, application } = this.props;
+    const updatedHackerApplication = update(application, {
       $merge: { email },
     });
-    onHackerApplicationChange(updatedHackerApplication);
+    onApplicationChange(updatedHackerApplication);
   }
 
   onPasswordChange = (password) => {
@@ -87,7 +87,7 @@ class SignUp extends React.Component {
     } = this.state;
 
     const {
-      hackerApplication: {
+      application: {
         email,
       },
       count,
@@ -97,7 +97,7 @@ class SignUp extends React.Component {
       onPageBack,
       onPageNext,
       isNextButtonEnabled,
-      cancelHackerApplication,
+      cancelApplication,
       submitApplication,
     } = this.props;
 
@@ -150,7 +150,7 @@ class SignUp extends React.Component {
           <ButtonGroup className="pad-top-mega">
             <SecondaryButton
               text={activeIndex === 0 ? 'Cancel' : 'Back'}
-              onClick={activeIndex === 0 ? cancelHackerApplication : onPageBack}
+              onClick={activeIndex === 0 ? cancelApplication : onPageBack}
               />
             <PrimaryButton
               disabled={!isNextButtonEnabled}
@@ -167,8 +167,8 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
-  hackerApplication: propTypesTemplates.application.hacker,
-  onHackerApplicationChange: PropTypes.func.isRequired,
+  application: propTypesTemplates.application.hacker,
+  onApplicationChange: PropTypes.func.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
@@ -177,7 +177,7 @@ SignUp.propTypes = {
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool.isRequired,
-  cancelHackerApplication: PropTypes.func.isRequired,
+  cancelApplication: PropTypes.func.isRequired,
   submitApplication: PropTypes.func.isRequired,
 };
 

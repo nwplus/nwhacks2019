@@ -11,9 +11,9 @@ import Navbar from '../../containers/navbar';
 // Components
 import { Login, Logout } from '../auth';
 import AdminPanel from '../admin';
+
 import { HackerApplication } from '../../containers/application';
-import PageOne from '../application/hacker/pages/PageOne';
-import PageTwo from '../application/hacker/pages/PageTwo';
+
 import NotFound from '../errors/NotFound';
 import DashBoard from '../dashboard';
 
@@ -32,14 +32,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
-            <Route
-              path="/application/hacker"
-              component={() => (
-                <HackerApplication>
-                  <PageOne />
-                  <PageTwo />
-                </HackerApplication>
-              )} />
+            <Route path="/application/hacker" component={HackerApplication} />
             <Route path="/dashboard" component={DashBoard} />
             <Route path="/admin" component={AdminPanel} />
             <Route path="/ui_demo" component={UIDemo} />

@@ -9,7 +9,7 @@ import { getPrimaryButtonText } from './utils';
 
 class PageOne extends React.Component {
   componentWillMount() {
-    const { hackerApplication: { firstName } } = this.props;
+    const { application: { firstName } } = this.props;
 
     this.updateNextButtonState(firstName);
   }
@@ -23,8 +23,8 @@ class PageOne extends React.Component {
 
   render() {
     const {
-      hackerApplication,
-      onHackerApplicationChange,
+      application,
+      onApplicationChange,
       count,
       activeIndex,
       lastValidIndex,
@@ -32,9 +32,9 @@ class PageOne extends React.Component {
       onPageBack,
       onPageNext,
       isNextButtonEnabled,
-      cancelHackerApplication,
+      cancelApplication,
     } = this.props;
-    const { firstName } = hackerApplication;
+    const { firstName } = application;
 
     return (
       <div className="pad-nav application fill-width flex jc-center">
@@ -61,12 +61,12 @@ class PageOne extends React.Component {
               name="first-name"
               value={firstName}
               onChange={(fname) => {
-                const updatedHackerApplication = update(hackerApplication, {
+                const updatedHackerApplication = update(application, {
                   $merge: {
                     firstName: fname,
                   },
                 });
-                onHackerApplicationChange(updatedHackerApplication);
+                onApplicationChange(updatedHackerApplication);
                 this.updateNextButtonState(fname);
               }}
               />
@@ -74,7 +74,7 @@ class PageOne extends React.Component {
           <ButtonGroup className="pad-top-mega">
             <SecondaryButton
               text={activeIndex === 0 ? 'Cancel' : 'Back'}
-              onClick={activeIndex === 0 ? cancelHackerApplication : onPageBack}
+              onClick={activeIndex === 0 ? cancelApplication : onPageBack}
               />
             <PrimaryButton
               disabled={!isNextButtonEnabled}
@@ -89,8 +89,8 @@ class PageOne extends React.Component {
 }
 
 PageOne.propTypes = {
-  hackerApplication: propTypesTemplates.application.hacker,
-  onHackerApplicationChange: PropTypes.func.isRequired,
+  application: propTypesTemplates.application.hacker,
+  onApplicationChange: PropTypes.func.isRequired,
   updateNextButtonState: PropTypes.func.isRequired,
   count: PropTypes.number,
   activeIndex: PropTypes.number,
@@ -99,7 +99,7 @@ PageOne.propTypes = {
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool.isRequired,
-  cancelHackerApplication: PropTypes.func.isRequired,
+  cancelApplication: PropTypes.func.isRequired,
 };
 
 export default PageOne;
