@@ -41,7 +41,7 @@ export class HackerApplicationContainer extends React.Component {
     const pages = [
       (<PageOne />),
       (<PageTwo />),
-      (<SignUp />)
+      (<SignUp />),
     ];
 
     return (
