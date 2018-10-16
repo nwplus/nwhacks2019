@@ -120,8 +120,10 @@ export class HackerApplicationContainer extends React.Component {
     const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
     if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
 
+    const { children } = this.props;
+
     const applicationProps = {
-      count: this.props.children.length,
+      count: children.length,
       activeIndex,
       lastValidIndex,
       onPageChange: this.onPageChange,
@@ -134,14 +136,11 @@ export class HackerApplicationContainer extends React.Component {
       updateNextButtonState: this.updateNextButtonState,
       submitApplication: this.submitApplication,
       hackerApplication,
-    }
+    };
 
     return (
       <HackerApplicationContext.Provider value={applicationProps}>
-        <HackerApplication
-          hackerApplication={hackerApplication}
-          children={this.props.children}
-          />
+        <HackerApplication pages={children} />
       </HackerApplicationContext.Provider>
     );
   }
@@ -207,6 +206,10 @@ HackerApplicationContainer.propTypes = {
   updateApplication: PropTypes.func.isRequired,
   cancelApplication: PropTypes.func.isRequired,
   featureFlags: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.array,
+  ]),
 };
 
 export default connect(

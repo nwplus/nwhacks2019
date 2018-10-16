@@ -32,12 +32,14 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
-            <Route path="/application/hacker" component={() => (
-              <HackerApplication>
-                <PageOne />
-                <PageTwo />
-              </HackerApplication>
-            )} />
+            <Route
+              path="/application/hacker"
+              component={() => (
+                <HackerApplication>
+                  <PageOne />
+                  <PageTwo />
+                </HackerApplication>
+              )} />
             <Route path="/dashboard" component={DashBoard} />
             <Route path="/admin" component={AdminPanel} />
             <Route path="/ui_demo" component={UIDemo} />
