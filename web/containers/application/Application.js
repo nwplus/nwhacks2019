@@ -44,33 +44,13 @@ export class ApplicationContainer extends React.Component {
     cancelApplication();
   }
 
-  // submitApplication = (userCredentials) => {
-  //   const { firebase } = this.props;
-  //   // TODO: hide this under feature flag https://github.com/nwplus/nwhacks2019/issues/114
-  //   // this.signUp(firebase, userCredentials);
-  // }
-  submitApplication = () => {
-    // const { firebase } = this.props;
-    // TODO: hide this under feature flag https://github.com/nwplus/nwhacks2019/issues/114
-    // this.signUp(firebase, userCredentials);
-  }
-
-  // signUp(firebase, userCredentials) {
-  //   const auth = firebase.auth();
-  //   const { email, password } = userCredentials;
-  //   auth.createUserWithEmailAndPassword(email, password).then(() => {
-  //     console.log('user successfully created!');
-  //   }).catch((error) => {
-  //     console.err('failed to create user: ', error);
-  //   });
-  // }
-
   render() {
     const {
       application,
       activeIndex,
       lastValidIndex,
       updateApplication,
+      submitApplication,
     } = this.props;
     const { cancelled } = this.state;
 
@@ -86,7 +66,7 @@ export class ApplicationContainer extends React.Component {
       onApplicationChange: updateApplication,
       cancelApplication: this.alertThenCancel,
       cancelled,
-      submitApplication: this.submitApplication,
+      submitApplication,
       application,
     };
 
@@ -120,6 +100,10 @@ ApplicationContainer.propTypes = {
 
   // cancelApplication is called whenever the user cancels the application.
   cancelApplication: PropTypes.func.isRequired,
+
+  // submitApplication is called whenever the user submits the application.
+  // In the pages, you may supply an argument when calling this function.
+  submitApplication: PropTypes.func.isRequired,
 
   // pages determines the pages in the application.
   pages: PropTypes.oneOfType([

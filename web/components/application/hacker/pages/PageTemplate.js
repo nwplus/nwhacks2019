@@ -12,6 +12,7 @@ export const HackerApplicationPageTemplate = ({
   onPageBack,
   onPageNext,
   cancelApplication,
+  submitApplication,
   isNextButtonEnabled,
   children,
 }) => (
@@ -35,7 +36,7 @@ export const HackerApplicationPageTemplate = ({
         <PrimaryButton
           disabled={!isNextButtonEnabled}
           text={getPrimaryButtonText(activeIndex, count)}
-          onClick={activeIndex !== count - 1 ? onPageNext : () => console.log('submit application')}
+          onClick={activeIndex !== count - 1 ? onPageNext : () => submitApplication()}
           />
       </ButtonGroup>
     </div>
@@ -50,6 +51,7 @@ HackerApplicationPageTemplate.propTypes = {
   onPageBack: PropTypes.func,
   onPageNext: PropTypes.func,
   cancelApplication: PropTypes.func,
+  submitApplication: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.element,

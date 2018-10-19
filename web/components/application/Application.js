@@ -19,7 +19,7 @@ const Application = (props) => {
           if (cancelled) return (<Redirect to="/" />);
 
           const { activeIndex } = applicationProps;
-          return React.cloneElement(pages[activeIndex], { application });
+          return React.cloneElement(pages[activeIndex], applicationProps);
         }
       }
     </ApplicationContext.Consumer>

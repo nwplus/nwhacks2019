@@ -14,6 +14,35 @@ import PageOne from '../../../components/application/hacker/pages/PageOne';
 import PageTwo from '../../../components/application/hacker/pages/PageTwo';
 
 export class HackerApplicationContainer extends React.Component {
+  signUp(firebase, userCredentials) {
+    const auth = firebase.auth();
+    const { email, password } = userCredentials;
+    auth.createUserWithEmailAndPassword(email, password).then(() => {
+      console.log('user successfully created!');
+    }).catch((error) => {
+      console.err('failed to create user: ', error);
+    });
+  }
+
+  submitApplication = (userCredentials) => {
+    const {
+      firebase,
+      featureFlags: {
+        data: {
+          auth: {
+            enabled: isAuthEnabled
+          }
+        }
+      }
+    } = this.props;
+
+    if (isAuthEnabled) {
+      this.signUp(firebase, userCredentials);
+    } else {
+      console.log("application submitted");
+    }
+  }
+
   render() {
     const {
       featureFlags: {
@@ -51,6 +80,7 @@ export class HackerApplicationContainer extends React.Component {
         lastValidIndex={lastValidIndex}
         updateApplication={updateApplication}
         cancelApplication={cancelApplication}
+        submitApplication={this.submitApplication}
         pages={pages}
         />
     );
