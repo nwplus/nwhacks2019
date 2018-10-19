@@ -51,6 +51,10 @@ HackerApplicationPageTemplate.propTypes = {
   onPageNext: PropTypes.func,
   cancelApplication: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool,
+<<<<<<< HEAD
+=======
+  cancelApplication: PropTypes.func.isRequired,
+>>>>>>> lint
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,
