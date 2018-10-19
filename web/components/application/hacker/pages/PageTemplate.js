@@ -55,4 +55,8 @@ PageTemplate.propTypes = {
   onPageNext: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool,
   cancelApplication: PropTypes.func.isRequired,
-}
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.array,
+  ]),
+};
