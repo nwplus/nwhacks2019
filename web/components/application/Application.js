@@ -11,7 +11,7 @@ const Application = (props) => {
     <ApplicationContext.Consumer>
       {
         (applicationProps) => {
-          const { cancelled } = applicationProps;
+          const { cancelled, application } = applicationProps;
           // const { application, cancelled } = applicationProps;
 
           // TODO: under feature flag
@@ -19,7 +19,7 @@ const Application = (props) => {
           if (cancelled) return (<Redirect to="/" />);
 
           const { activeIndex } = applicationProps;
-          return React.cloneElement(pages[activeIndex], applicationProps);
+          return React.cloneElement(pages[activeIndex], { application });
         }
       }
     </ApplicationContext.Consumer>
