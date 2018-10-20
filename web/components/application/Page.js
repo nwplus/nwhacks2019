@@ -19,6 +19,15 @@ export class Page extends React.Component {
     this.updateNextButtonStateIfNeeded();
   }
 
+  getPageTemplateProps = () => {
+    const { isNextButtonEnabled } = this.state;
+
+    return {
+      ...this.props,
+      isNextButtonEnabled,
+    };
+  }
+
   shouldNextButtonBeEnabled = () => {
     throw new Error('This method must be implemented by inherited class');
   }
@@ -44,15 +53,6 @@ export class Page extends React.Component {
     });
 
     onApplicationChange(updatedApplication);
-  }
-
-  getPageTemplateProps = () => {
-    const { isNextButtonEnabled } = this.state;
-
-    return {
-      ...this.props,
-      isNextButtonEnabled,
-    };
   }
 }
 

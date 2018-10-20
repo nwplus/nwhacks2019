@@ -43,6 +43,13 @@ export const HackerApplicationPageTemplate = ({
 );
 
 HackerApplicationPageTemplate.propTypes = {
+  count: PropTypes.number,
+  activeIndex: PropTypes.number,
+  lastValidIndex: PropTypes.number,
+  onPageChange: PropTypes.func,
+  onPageBack: PropTypes.func,
+  onPageNext: PropTypes.func,
+  cancelApplication: PropTypes.func,
   isNextButtonEnabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.element,

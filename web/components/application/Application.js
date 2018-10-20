@@ -11,7 +11,7 @@ const Application = (props) => {
     <ApplicationContext.Consumer>
       {
         (applicationProps) => {
-          const { cancelled, application } = applicationProps;
+          const { cancelled } = applicationProps;
           // const { application, cancelled } = applicationProps;
 
           // TODO: under feature flag

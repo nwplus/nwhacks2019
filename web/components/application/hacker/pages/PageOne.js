@@ -17,8 +17,8 @@ class PageOne extends Page {
   render() {
     const {
       application: {
-        firstName
-      }
+        firstName,
+      },
     } = this.props;
 
     return (

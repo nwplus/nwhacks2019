@@ -21,7 +21,7 @@ class PageTwo extends Page {
     const {
       application: {
         email,
-      }
+      },
     } = this.props;
 
     return (
