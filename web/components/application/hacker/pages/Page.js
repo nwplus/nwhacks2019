@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import update from 'immutability-helper';
 
 export class Page extends React.Component {
   constructor(props) {
@@ -14,25 +15,55 @@ export class Page extends React.Component {
     this.updateNextButtonStateIfNeeded();
   }
 
+  componentDidUpdate() {
+    this.updateNextButtonStateIfNeeded();
+  }
+
   shouldNextButtonBeEnabled = () => {
     throw new Error('This method must be implemented by inherited class');
   }
 
   updateNextButtonStateIfNeeded = () => {
-    const { isNextButtonEnabled } = this.state;
-
     const shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled();
 
+    const { isNextButtonEnabled } = this.state;
+
     if (isNextButtonEnabled !== shouldNextButtonBeEnabled) {
-      this.updateNextButtonState(shouldNextButtonBeEnabled);
+      this.setState({ isNextButtonEnabled: shouldNextButtonBeEnabled });
     }
   }
 
-  updateNextButtonState = (isNextButtonEnabled) => {
-    this.setState({ isNextButtonEnabled });
+  updateApplication = (change) => {
+    const {
+      onApplicationChange,
+      application,
+    } = this.props;
+
+    const updatedApplication = update(application, {
+      $merge: change,
+    });
+
+    onApplicationChange(updatedApplication);
+  }
+
+  getPageTemplateProps = () => {
+    const { isNextButtonEnabled } = this.state;
+
+    return {
+      ...this.props,
+      isNextButtonEnabled,
+    };
   }
 }
 
 Page.propTypes = {
   application: PropTypes.object,
+  onApplicationChange: PropTypes.func,
+  count: PropTypes.number,
+  activeIndex: PropTypes.number,
+  lastValidIndex: PropTypes.number,
+  onPageChange: PropTypes.func,
+  onPageBack: PropTypes.func,
+  onPageNext: PropTypes.func,
+  cancelApplication: PropTypes.func,
 };
