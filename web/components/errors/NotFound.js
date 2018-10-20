@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import mountain from '../../assets/circle-mountain.svg';
 
 const NotFound = () => (
-  <div className="fill-height flex dir-col ai-center jc-center margin-sides-l">
+  <div className="pad-nav fill-height flex dir-col ai-center jc-center margin-sides-l">
     <img alt="oops!" className="pad-bottom-s" width="25%" src={mountain} />
     <br />
     <h1 className="text-align-center">Oops!</h1>

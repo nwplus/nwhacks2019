@@ -12,7 +12,6 @@ import { initialState as hackerApplicationInitialState } from '../../../reducers
 
 import PageOne from '../../../components/application/hacker/pages/PageOne';
 import PageTwo from '../../../components/application/hacker/pages/PageTwo';
-import SignUp from '../../../components/application/hacker/pages/SignUp';
 
 export class HackerApplicationContainer extends React.Component {
   render() {
@@ -41,7 +40,6 @@ export class HackerApplicationContainer extends React.Component {
     const pages = [
       (<PageOne />),
       (<PageTwo />),
-      (<SignUp />),
     ];
 
     return (

@@ -32,11 +32,6 @@ export class ApplicationContainer extends React.Component {
     this.onPageChange(nextIndex);
   }
 
-  onApplicationChange = (app) => {
-    const { updateApplication } = this.props;
-    updateApplication(app);
-  }
-
   alertThenCancel = () => {
     if (window.confirm('Are you sure you want to cancel?')) {
       this.cancel();
@@ -75,6 +70,7 @@ export class ApplicationContainer extends React.Component {
       application,
       activeIndex,
       lastValidIndex,
+      updateApplication,
     } = this.props;
     const { cancelled } = this.state;
 
@@ -87,7 +83,7 @@ export class ApplicationContainer extends React.Component {
       onPageChange: this.onPageChange,
       onPageBack: this.onPageBack,
       onPageNext: this.onPageNext,
-      onApplicationChange: this.onApplicationChange,
+      onApplicationChange: updateApplication,
       cancelApplication: this.alertThenCancel,
       cancelled,
       submitApplication: this.submitApplication,
