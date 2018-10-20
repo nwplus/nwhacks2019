@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TextInput } from '../../../input/text';
 import { HackerApplicationPageTemplate } from './PageTemplate';
-import { Page } from './Page';
+import { Page } from '../../Page';
 
 class PageOne extends Page {
   shouldNextButtonBeEnabled = () => {

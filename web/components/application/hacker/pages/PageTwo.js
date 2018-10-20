@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TextInput } from '../../../input/text';
 import { HackerApplicationPageTemplate } from './PageTemplate';
-import { Page } from './Page';
+import { Page } from '../../Page';
 
 // TODO: Update design for page two
 // For now, just copy pasted design from page one,
