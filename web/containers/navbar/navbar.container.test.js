@@ -27,7 +27,7 @@ describe('Navbar container', () => {
         },
         auth: {
           enabled: true,
-        }
+        },
       },
     },
   };
