@@ -108,8 +108,8 @@ class Login extends React.Component {
             enabled: isApplicationEnabled,
           },
           auth: {
-            enabled: isAuthEnabled
-          }
+            enabled: isAuthEnabled,
+          },
         },
       },
     } = this.props;

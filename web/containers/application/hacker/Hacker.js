@@ -14,7 +14,7 @@ import PageOne from '../../../components/application/hacker/pages/PageOne';
 import PageTwo from '../../../components/application/hacker/pages/PageTwo';
 
 export class HackerApplicationContainer extends React.Component {
-  signUp(firebase, userCredentials) {
+  static signUp(firebase, userCredentials) {
     const auth = firebase.auth();
     const { email, password } = userCredentials;
     auth.createUserWithEmailAndPassword(email, password).then(() => {
@@ -30,16 +30,16 @@ export class HackerApplicationContainer extends React.Component {
       featureFlags: {
         data: {
           auth: {
-            enabled: isAuthEnabled
-          }
-        }
-      }
+            enabled: isAuthEnabled,
+          },
+        },
+      },
     } = this.props;
 
     if (isAuthEnabled) {
       this.signUp(firebase, userCredentials);
     } else {
-      console.log("application submitted");
+      console.log('application submitted');
     }
   }
 
@@ -105,6 +105,7 @@ const mapStateToProps = (state) => {
       },
     },
     firestore,
+    firebase,
   } = state;
 
   const featureFlags = getFromFirestore(firestore, 'feature_flags');
@@ -114,6 +115,7 @@ const mapStateToProps = (state) => {
     activeIndex,
     lastValidIndex,
     featureFlags,
+    firebase,
   };
 };
 
@@ -147,6 +149,7 @@ HackerApplicationContainer.propTypes = {
   updateApplication: PropTypes.func.isRequired,
   cancelApplication: PropTypes.func.isRequired,
   featureFlags: PropTypes.object.isRequired,
+  firebase: PropTypes.object,
 };
 
 export default connect(
