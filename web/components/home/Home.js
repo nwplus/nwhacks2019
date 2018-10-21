@@ -117,7 +117,8 @@ class Home extends React.Component {
   }
 
   jumpToHash = () => {
-    const { location: { hash } = {} } = window;
+    let { location: { hash } = {} } = window;
+    hash = hash.split('/').pop();
     switch (hash) {
       case SECTION.ABOUT:
         this.aboutDiv.scrollIntoView({ behavior: 'smooth' });

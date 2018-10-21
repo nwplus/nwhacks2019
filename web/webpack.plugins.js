@@ -11,11 +11,6 @@ module.exports = [
     filename: 'index.html',
     inject: true,
   }),
-  new HtmlWebpackPlugin({
-    template: './index.html',
-    filename: '404.html',
-    inject: true,
-  }),
   new Dotenv({
     path: '../.env',
     systemvars: true,
