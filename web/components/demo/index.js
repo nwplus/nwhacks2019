@@ -6,6 +6,7 @@ import { Checkbox, CheckboxGroup } from '../input/buttons/CheckboxGroup';
 import { RadioButton, RadioGroup } from '../input/buttons/RadioGroup';
 import { TextInput, PasswordInput, TextArea } from '../input/text';
 import { ShowHideTextView } from '../view';
+import { Select } from '../input/select';
 
 const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button clicked!`);
 
@@ -119,6 +120,28 @@ class FrontEndComponents extends React.Component {
           cols={60}
         />
         <br />
+        <Select
+          name="some_select"
+          options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
+          label="Regular drop-down input"
+        /><br /><br />
+        <Select
+          name="some_select"
+          options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
+          label="Searchable drop-down input"
+          placeholder="Start typing to search"
+          isSearchable
+        /><br /><br />
+        <Select
+          name="some_select"
+          onChange={(props) => { console.log(props); }}
+          options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
+          label="Searchable drop-down input that allows new options"
+          formatNewOptionLabel={label => `My school is not listed, use "${label}"`}
+          placeholder="Start typing to search"
+          isSearchable
+          allowNewOption
+        /><br /><br />
         <p>Show/Hide Component</p>
         <br />
         <ShowHideTextView label="Don't click me" dropDownText="Wow I can't believe you actually did that" />
