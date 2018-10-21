@@ -102,7 +102,7 @@ Select.propTypes = {
   isMulti: PropTypes.bool,
   // is input disabled
   disabled: PropTypes.bool,
-  // onChange handler
+  // see onChange here: https://react-select.com/props#select-props
   onChange: PropTypes.func,
   // allows user to define a new option if their answer isn't available by default
   allowNewOption: PropTypes.bool,
