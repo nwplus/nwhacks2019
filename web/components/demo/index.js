@@ -134,6 +134,7 @@ class FrontEndComponents extends React.Component {
         /><br /><br />
         <Select
           name="some_select"
+          onChange={(props) => { console.log(props); }}
           options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
           label="Searchable drop-down input that allows new options"
           formatNewOptionLabel={label => `My school is not listed, use "${label}"`}
