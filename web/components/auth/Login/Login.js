@@ -107,11 +107,14 @@ class Login extends React.Component {
           application: {
             enabled: isApplicationEnabled,
           },
+          auth: {
+            enabled: isAuthEnabled,
+          },
         },
       },
     } = this.props;
 
-    if (!isApplicationEnabled) return (<Redirect to="/page_not_found" />);
+    if (!isApplicationEnabled || !isAuthEnabled) return (<Redirect to="/page_not_found" />);
     if (needLogin) return this.loginView();
 
     return (<AfterLogin />);

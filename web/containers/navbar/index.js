@@ -14,7 +14,14 @@ const getDisplayType = (location, featureFlags) => {
   const { pathname } = location;
   const isHomePage = pathname === '/';
   const isDashBoardPage = pathname === '/dashboard';
-  const { application: { enabled: isApplicationEnabled } } = featureFlags;
+  const {
+    application: {
+      enabled: isApplicationEnabled,
+    },
+    auth: {
+      enabled: isAuthEnabled,
+    },
+  } = featureFlags;
 
   let displayType = DISPLAY_TYPE.ONLY_LOGO;
 
@@ -22,7 +29,7 @@ const getDisplayType = (location, featureFlags) => {
   if (pathname === '/ui_demo') return DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
 
   if (isHomePage) {
-    if (isApplicationEnabled) {
+    if (isApplicationEnabled && isAuthEnabled) {
       displayType = DISPLAY_TYPE.LOGO_BUTTON_AND_LINKS;
     } else {
       displayType = DISPLAY_TYPE.LOGO_AND_LINKS;

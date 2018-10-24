@@ -25,6 +25,9 @@ describe('Navbar container', () => {
         application: {
           enabled: true,
         },
+        auth: {
+          enabled: true,
+        },
       },
     },
   };
@@ -225,6 +228,47 @@ describe('Navbar container', () => {
 
         test('Display type of NavbarContainer is ONLY_LOGO', () => {
           expect(navbarWrapper.props()).toHaveProperty('displayType', DISPLAY_TYPE.ONLY_LOGO);
+        });
+      });
+    });
+
+    describe('when auth flag is disabled', () => {
+      beforeEach(() => {
+        const { featureFlags } = props;
+        featureFlags.data.auth.enabled = false;
+      });
+
+      describe('when the location is home page', () => {
+        beforeEach(() => {
+          props.location = {
+            pathname: '/',
+          };
+        });
+
+        describe('when the user is signed in', () => {
+          beforeEach(() => {
+            props.signedIn = true;
+
+            wrapper = getWrapper();
+            navbarWrapper = wrapper.find(Navbar);
+          });
+
+          test('Display type of NavbarContainer is LOGO_AND_LINKS', () => {
+            expect(navbarWrapper.props()).toHaveProperty('displayType', DISPLAY_TYPE.LOGO_AND_LINKS);
+          });
+        });
+
+        describe('when the user is not signed in', () => {
+          beforeEach(() => {
+            props.signedIn = false;
+
+            wrapper = getWrapper();
+            navbarWrapper = wrapper.find(Navbar);
+          });
+
+          test('Display type of NavbarContainer is LOGO_AND_LINKS', () => {
+            expect(navbarWrapper.props()).toHaveProperty('displayType', DISPLAY_TYPE.LOGO_AND_LINKS);
+          });
         });
       });
     });
