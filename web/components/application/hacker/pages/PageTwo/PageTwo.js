@@ -1,20 +1,17 @@
 import React from 'react';
 
-import { TextInput } from '../../../input/text';
-import { HackerApplicationPageTemplate } from './PageTemplate';
-import { Page } from '../../Page';
+import { TextInput } from '../../../../input/text';
+import { HackerApplicationPageTemplate } from '../PageTemplate';
+import { Page } from '../../../Page';
+import { constraints } from './PageTwoConstraints';
 
 // TODO: Update design for page two
 // For now, just copy pasted design from page one,
 // since we're only concerned about functionality at the moment
 class PageTwo extends Page {
-  shouldNextButtonBeEnabled = () => {
-    const {
-      application: {
-        email,
-      },
-    } = this.props;
-    return email.length > 0;
+  constructor(props) {
+    super(props);
+    this.constraints = constraints;
   }
 
   render() {
@@ -44,6 +41,8 @@ class PageTwo extends Page {
               email: newEmail,
             });
           }}
+          onBlur={() => this.setFieldAsBlurred('email')}
+          error={this.getErrorIfBlurred('email')}
           />
       </HackerApplicationPageTemplate>
     );

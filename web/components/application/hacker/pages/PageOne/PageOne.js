@@ -1,23 +1,21 @@
 import React from 'react';
 
-import { TextInput } from '../../../input/text';
-import { HackerApplicationPageTemplate } from './PageTemplate';
-import { Page } from '../../Page';
+import { TextInput } from '../../../../input/text';
+import { HackerApplicationPageTemplate } from '../PageTemplate';
+import { Page } from '../../../Page';
+import { constraints } from './PageOneConstraints';
 
 class PageOne extends Page {
-  shouldNextButtonBeEnabled = () => {
-    const {
-      application: {
-        firstName,
-      },
-    } = this.props;
-    return firstName.length > 0;
+  constructor(props) {
+    super(props);
+    this.constraints = constraints;
   }
 
   render() {
     const {
       application: {
         firstName,
+        lastName,
       },
     } = this.props;
 
@@ -35,12 +33,28 @@ class PageOne extends Page {
         <TextInput
           label="First Name"
           name="first-name"
+          className="margin-ends-l"
           value={firstName}
           onChange={(newFirstName) => {
             this.updateApplication({
               firstName: newFirstName,
             });
           }}
+          onBlur={() => this.setFieldAsBlurred('firstName')}
+          error={this.getErrorIfBlurred('firstName')}
+          />
+        <TextInput
+          label="Last Name"
+          name="last-name"
+          className="margin-ends-l"
+          value={lastName}
+          onChange={(newLastName) => {
+            this.updateApplication({
+              lastName: newLastName,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('lastName')}
+          error={this.getErrorIfBlurred('lastName')}
           />
       </HackerApplicationPageTemplate>
     );

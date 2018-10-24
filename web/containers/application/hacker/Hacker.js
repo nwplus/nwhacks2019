@@ -10,8 +10,8 @@ import propTypesTemplates from '../../../prop-types-templates';
 import { getFromFirestore } from '../../../services/firestore';
 import { initialState as hackerApplicationInitialState } from '../../../reducers/entities/application/hacker';
 
-import PageOne from '../../../components/application/hacker/pages/PageOne';
-import PageTwo from '../../../components/application/hacker/pages/PageTwo';
+import PageOne from '../../../components/application/hacker/pages/PageOne/PageOne';
+import PageTwo from '../../../components/application/hacker/pages/PageTwo/PageTwo';
 
 export class HackerApplicationContainer extends React.Component {
   static signUp(firebase, userCredentials) {
