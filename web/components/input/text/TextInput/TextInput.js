@@ -51,6 +51,7 @@ TextInput.defaultProps = {
   className: '',
   sideLinkOnClick: () => {},
   maxCharNumber: 254,
+  showErrorMessage: true,
 };
 
 TextInput.propTypes = {

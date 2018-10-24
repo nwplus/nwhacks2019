@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import update from 'immutability-helper';
+import validate from 'validate.js';
 
 export class Page extends React.Component {
   constructor(props) {
@@ -8,15 +9,26 @@ export class Page extends React.Component {
 
     this.state = {
       isNextButtonEnabled: false,
+      showErrorByField: {},
     };
   }
 
   componentWillMount() {
+    const { application } = this.props;
+    this.errorByField = this.validateApplication(application);
     this.updateNextButtonStateIfNeeded();
   }
 
   componentDidUpdate() {
     this.updateNextButtonStateIfNeeded();
+  }
+
+  getErrorIfBlurred(fieldName) {
+    const { showErrorByField } = this.state;
+    if (showErrorByField[fieldName] && this.errorByField && !!this.errorByField[fieldName]) {
+      return { message: this.errorByField[fieldName][0] };
+    }
+    return null;
   }
 
   getPageTemplateProps = () => {
@@ -28,9 +40,20 @@ export class Page extends React.Component {
     };
   }
 
-  shouldNextButtonBeEnabled = () => {
-    throw new Error('This method must be implemented by inherited class');
+  setFieldAsBlurred(fieldName) {
+    const { showErrorByField } = this.state;
+    if (!showErrorByField[fieldName]) {
+      this.setState({
+        showErrorByField: update(showErrorByField, {
+          $merge: {
+            [fieldName]: true,
+          },
+        }),
+      });
+    }
   }
+
+  shouldNextButtonBeEnabled = () => this.errorByField === undefined
 
   updateNextButtonStateIfNeeded = () => {
     const shouldNextButtonBeEnabled = this.shouldNextButtonBeEnabled();
@@ -53,7 +76,10 @@ export class Page extends React.Component {
     });
 
     onApplicationChange(updatedApplication);
+    this.errorByField = this.validateApplication(updatedApplication);
   }
+
+  validateApplication = application => validate(application, this.constraints)
 }
 
 Page.propTypes = {
