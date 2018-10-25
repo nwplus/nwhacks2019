@@ -135,6 +135,8 @@ Select.propTypes = {
   // error of format { message: "error message" }. The message will be displayed with error styling
   error: PropTypes.object,
   // see handlers here: https://react-select.com/props#select-props
+  isLoading: PropTypes.bool,
+  inputValue: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,

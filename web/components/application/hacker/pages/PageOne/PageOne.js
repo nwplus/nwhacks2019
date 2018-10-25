@@ -15,7 +15,7 @@ class PageOne extends Page {
     const {
       application: {
         city,
-      }
+      },
     } = this.props;
 
     this.state.cityQuery = city;
@@ -72,8 +72,8 @@ class PageOne extends Page {
           />
         <SelectCity
           value={cityQuery}
-          onChange={(cityQuery) => this.setState({ cityQuery })}
-          onSelect={(city) => this.updateApplication({ city })}
+          onChange={newCityQuery => this.setState({ cityQuery: newCityQuery })}
+          onSelect={city => this.updateApplication({ city })}
           onBlur={() => this.setFieldAsBlurred('city')}
           error={this.getErrorIfBlurred('city')}
           />

@@ -1,6 +1,7 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
-import { Select } from '../';
+import PropTypes from 'prop-types';
+import { Select } from '..';
 
 // based on https://github.com/hibiken/react-places-autocomplete/blob/master/src/PlacesAutocomplete.js
 
@@ -36,7 +37,6 @@ export class SelectCity extends React.Component {
 
     this.autocompleteService = new window.google.maps.places.AutocompleteService();
     this.autocompleteOK = window.google.maps.places.PlacesServiceStatus.OK;
-    this.setState({ ready: true });
   }
 
   autocompleteCallback = (predictions, status) => {
@@ -46,7 +46,7 @@ export class SelectCity extends React.Component {
       return;
     }
     this.setState({
-      suggestions: predictions.map((p) => p.description),
+      suggestions: predictions.map(p => p.description),
     });
   }
 
@@ -68,7 +68,7 @@ export class SelectCity extends React.Component {
     this.setState({ suggestions: [] });
   };
 
-  handleInputChange = value => {
+  handleInputChange = (value) => {
     const { onChange } = this.props;
     onChange(value);
     this.setState({ userInputValue: value });
@@ -80,25 +80,38 @@ export class SelectCity extends React.Component {
   };
 
   render() {
-    const { suggestions } = this.state;
+    const {
+      suggestions,
+      loading,
+    } = this.state;
     const {
       value,
       onBlur,
       error,
+      onSelect,
     } = this.props;
 
     return (
       <Select
         name="city-select"
         label="Where are you traveling from?"
-        onChange={({ value }) => this.props.onSelect(value)}
-        onInputChange={(value) => this.handleInputChange(value)}
+        onChange={({ selection }) => onSelect(selection)}
+        onInputChange={newInput => this.handleInputChange(newInput)}
         options={suggestions}
         inputValue={value}
         onBlur={onBlur}
         error={error}
+        loading={loading}
         isSearchable
         />
     );
   }
 }
+
+SelectCity.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  error: PropTypes.object,
+  onSelect: PropTypes.func,
+};
