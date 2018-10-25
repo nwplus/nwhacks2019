@@ -75,7 +75,7 @@ class PageOne extends Page {
           inputValue={cityQuery}
           value={city}
           onChange={newCityQuery => this.setState({ cityQuery: newCityQuery })}
-          onSelect={city => this.updateApplication({ city })}
+          onSelect={newCity => this.updateApplication({ city: newCity })}
           onBlur={() => this.setFieldAsBlurred('city')}
           error={this.getErrorIfBlurred('city')}
           />

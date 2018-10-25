@@ -117,6 +117,7 @@ export class SelectCity extends React.Component {
 
 SelectCity.propTypes = {
   value: PropTypes.string,
+  inputValue: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   error: PropTypes.object,

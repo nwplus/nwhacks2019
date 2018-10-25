@@ -80,7 +80,7 @@ export class Select extends React.Component {
         <h5 className="body-text">{label}</h5>
         <Creatable
           {...inputProps}
-          options={options.map(value => ((typeof value === 'object') ? value : { value, label: value }))}
+          options={options.map(option => ((typeof option === 'object') ? option : { value: option, label: option }))}
           value={{ value, label: value }}
           className={`react-select-container ${error ? 'react-select-error' : ''}`}
           classNamePrefix="react-select"
@@ -137,6 +137,10 @@ Select.propTypes = {
   // error of format { message: "error message" }. The message will be displayed with error styling
   error: PropTypes.object,
   // see handlers here: https://react-select.com/props#select-props
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   isLoading: PropTypes.bool,
   inputValue: PropTypes.string,
   onBlur: PropTypes.func,
