@@ -95,7 +95,7 @@ export class SelectCity extends React.Component {
       <Select
         name="city-select"
         label="Where are you traveling from?"
-        onChange={({ selection }) => onSelect(selection)}
+        onChange={({ value: selection }) => onSelect(selection)}
         onInputChange={newInput => this.handleInputChange(newInput)}
         options={suggestions}
         inputValue={value}
