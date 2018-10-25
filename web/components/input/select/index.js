@@ -56,6 +56,7 @@ export class Select extends React.Component {
       onMenuScrollToBottom,
       inputValue,
       error,
+      value,
     } = this.props;
 
     const inputProps = {
@@ -80,6 +81,7 @@ export class Select extends React.Component {
         <Creatable
           {...inputProps}
           options={options.map(value => ((typeof value === 'object') ? value : { value, label: value }))}
+          value={{ value, label: value }}
           className={`react-select-container ${error ? 'react-select-error' : ''}`}
           classNamePrefix="react-select"
           components={{ DropdownIndicator }}

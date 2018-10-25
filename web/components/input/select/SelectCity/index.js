@@ -84,12 +84,23 @@ export class SelectCity extends React.Component {
       suggestions,
       loading,
     } = this.state;
+
     const {
+      inputValue,
       value,
       onBlur,
       error,
       onSelect,
     } = this.props;
+
+    const selectProps = {
+      options: suggestions,
+      inputValue,
+      value,
+      onBlur,
+      error,
+      loading,
+    };
 
     return (
       <Select
@@ -97,11 +108,7 @@ export class SelectCity extends React.Component {
         label="Where are you traveling from?"
         onChange={({ value: selection }) => onSelect(selection)}
         onInputChange={newInput => this.handleInputChange(newInput)}
-        options={suggestions}
-        inputValue={value}
-        onBlur={onBlur}
-        error={error}
-        loading={loading}
+        {...selectProps}
         isSearchable
         />
     );

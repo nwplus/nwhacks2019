@@ -26,6 +26,7 @@ class PageOne extends Page {
       application: {
         firstName,
         lastName,
+        city,
       },
     } = this.props;
 
@@ -71,7 +72,8 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('lastName')}
           />
         <SelectCity
-          value={cityQuery}
+          inputValue={cityQuery}
+          value={city}
           onChange={newCityQuery => this.setState({ cityQuery: newCityQuery })}
           onSelect={city => this.updateApplication({ city })}
           onBlur={() => this.setFieldAsBlurred('city')}
