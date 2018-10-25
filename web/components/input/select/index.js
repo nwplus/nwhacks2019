@@ -54,6 +54,7 @@ export class Select extends React.Component {
       onMenuClose,
       onMenuScrollToTop,
       onMenuScrollToBottom,
+      inputValue
     } = this.props;
 
     const inputProps = {
@@ -69,6 +70,7 @@ export class Select extends React.Component {
       onMenuClose,
       onMenuScrollToTop,
       onMenuScrollToBottom,
+      inputValue,
     };
 
     return (
