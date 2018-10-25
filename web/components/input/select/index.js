@@ -75,13 +75,16 @@ export class Select extends React.Component {
       inputValue,
     };
 
+    if (value) {
+      inputProps.value = { value, label: value };
+    }
+
     return (
       <div className={`${className}`}>
         <h5 className="body-text">{label}</h5>
         <Creatable
           {...inputProps}
           options={options.map(option => ((typeof option === 'object') ? option : { value: option, label: option }))}
-          value={{ value, label: value }}
           className={`react-select-container ${error ? 'react-select-error' : ''}`}
           classNamePrefix="react-select"
           components={{ DropdownIndicator }}
