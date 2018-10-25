@@ -1,16 +1,11 @@
 import rootReducers from '../../..';
-import hackerApplication from '.';
+import hackerApplication, { initialState } from '.';
 import ACTION_TYPES from '../../../../actions/action_types';
 
 describe('hacker application reducer', () => {
   describe('when state is undefined', () => {
     it('returns the initial state', () => {
-      expect(hackerApplication(undefined, {})).toEqual({
-        firstName: '',
-        lastName: '',
-        email: '',
-        isSubmitted: false,
-      });
+      expect(hackerApplication(undefined, {})).toEqual(initialState);
     });
   });
 
@@ -58,12 +53,7 @@ describe('when action type is RESET', () => {
     const action = { type: 'RESET' };
     expect(rootReducers(state, action).entities).toEqual({
       application: {
-        hacker: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          isSubmitted: false,
-        },
+        hacker: initialState,
       },
     });
   });
@@ -84,12 +74,7 @@ describe('when action type is CANCEL_HACKER_APPLICATION', () => {
     const action = { type: ACTION_TYPES.CANCEL_HACKER_APPLICATION };
     expect(rootReducers(state, action).entities).toEqual({
       application: {
-        hacker: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          isSubmitted: false,
-        },
+        hacker: initialState,
       },
     });
   });
