@@ -8,10 +8,12 @@ export class SelectCity extends React.Component {
   constructor(props) {
     super(props);
 
+    const { value } = this.props;
+
     this.state = {
       loading: false,
       suggestions: [],
-      userInputValue: '',
+      userInputValue: value,
     };
 
     this.debouncedFetchPredictions = debounce(
@@ -67,6 +69,8 @@ export class SelectCity extends React.Component {
   };
 
   handleInputChange = value => {
+    const { onChange } = this.props;
+    onChange(value);
     this.setState({ userInputValue: value });
     if (!value) {
       this.clearSuggestions();
@@ -77,14 +81,22 @@ export class SelectCity extends React.Component {
 
   render() {
     const { suggestions } = this.state;
+    const {
+      value,
+      onBlur,
+      error,
+    } = this.props;
 
     return (
       <Select
-        name="some_select"
-        label="Regular drop-down input"
-        onChange={this.props.onSelect}
+        name="city-select"
+        label="Where are you traveling from?"
+        onChange={({ value }) => this.props.onSelect(value)}
         onInputChange={(value) => this.handleInputChange(value)}
         options={suggestions}
+        inputValue={value}
+        onBlur={onBlur}
+        error={error}
         isSearchable
         />
     );

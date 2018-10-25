@@ -9,8 +9,16 @@ import { SelectCity } from '../../../../input/select/SelectCity';
 class PageOne extends Page {
   constructor(props) {
     super(props);
+
     this.constraints = constraints;
-    this.state.cityQuery = "Vancouver";
+
+    const {
+      application: {
+        city,
+      }
+    } = this.props;
+
+    this.state.cityQuery = city;
   }
 
   render() {
@@ -63,7 +71,11 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('lastName')}
           />
         <SelectCity
-          onSelect={(selection) => console.log(selection.value)}
+          value={cityQuery}
+          onChange={(cityQuery) => this.setState({ cityQuery })}
+          onSelect={(city) => this.updateApplication({ city })}
+          onBlur={() => this.setFieldAsBlurred('city')}
+          error={this.getErrorIfBlurred('city')}
           />
       </HackerApplicationPageTemplate>
     );

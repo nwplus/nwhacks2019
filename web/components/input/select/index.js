@@ -54,7 +54,8 @@ export class Select extends React.Component {
       onMenuClose,
       onMenuScrollToTop,
       onMenuScrollToBottom,
-      inputValue
+      inputValue,
+      error,
     } = this.props;
 
     const inputProps = {
@@ -79,13 +80,14 @@ export class Select extends React.Component {
         <Creatable
           {...inputProps}
           options={options.map(value => ((typeof value === 'object') ? value : { value, label: value }))}
-          className="react-select-container"
+          className={`react-select-container ${error ? 'react-select-error' : ''}`}
           classNamePrefix="react-select"
           components={{ DropdownIndicator }}
           formatCreateLabel={formatNewOptionLabel}
           isValidNewOption={this.isValidNewOption}
           isDisabled={disabled}
         />
+        <div>{error ? (<p className="error-message">{error.message}</p>) : null}</div>
       </div>
     );
   }
@@ -130,6 +132,8 @@ Select.propTypes = {
   newOptionMaxCharNumber: PropTypes.number,
   // additional handler used to validate new option created by user
   isValidNewOption: PropTypes.func,
+  // error of format { message: "error message" }. The message will be displayed with error styling
+  error: PropTypes.object,
   // see handlers here: https://react-select.com/props#select-props
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
