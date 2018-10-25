@@ -45,14 +45,30 @@ export class Select extends React.Component {
       placeholder,
       isSearchable,
       isMulti,
+      onBlur,
       onChange,
+      onFocus,
+      onInputChange,
+      onKeyDown,
+      onMenuOpen,
+      onMenuClose,
+      onMenuScrollToTop,
+      onMenuScrollToBottom,
     } = this.props;
 
     const inputProps = {
       placeholder,
       isSearchable,
       isMulti,
+      onBlur,
       onChange,
+      onFocus,
+      onInputChange,
+      onKeyDown,
+      onMenuOpen,
+      onMenuClose,
+      onMenuScrollToTop,
+      onMenuScrollToBottom,
     };
 
     return (
@@ -102,8 +118,6 @@ Select.propTypes = {
   isMulti: PropTypes.bool,
   // is input disabled
   disabled: PropTypes.bool,
-  // see onChange here: https://react-select.com/props#select-props
-  onChange: PropTypes.func,
   // allows user to define a new option if their answer isn't available by default
   allowNewOption: PropTypes.bool,
   // new handler that returns string shown when user is creating new option
@@ -114,4 +128,14 @@ Select.propTypes = {
   newOptionMaxCharNumber: PropTypes.number,
   // additional handler used to validate new option created by user
   isValidNewOption: PropTypes.func,
+  // see handlers here: https://react-select.com/props#select-props
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onInputChange: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onMenuOpen: PropTypes.func,
+  onMenuClose: PropTypes.func,
+  onMenuScrollToTop: PropTypes.func,
+  onMenuScrollToBottom: PropTypes.func,
 };
