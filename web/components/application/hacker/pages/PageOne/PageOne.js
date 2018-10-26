@@ -6,7 +6,10 @@ import { Page } from '../../../Page';
 import { constraints } from './PageOneConstraints';
 import { SelectCity } from '../../../../input/select/SelectCity';
 import { Select } from '../../../../input/select';
+import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
+
 import { schools } from '../../../schools';
+import { genders } from '../../../genders';
 
 class PageOne extends Page {
   constructor(props) {
@@ -30,6 +33,7 @@ class PageOne extends Page {
         lastName,
         city,
         school,
+        gender,
       },
     } = this.props;
 
@@ -49,7 +53,7 @@ class PageOne extends Page {
         we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
         </p>
         <TextInput
-          label="First Name"
+          label="What is your first name?"
           name="first-name"
           className="margin-ends-giga"
           value={firstName}
@@ -62,7 +66,7 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('firstName')}
           />
         <TextInput
-          label="Last Name"
+          label="What is your last name?"
           name="last-name"
           className="margin-ends-giga"
           value={lastName}
@@ -74,6 +78,27 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('lastName')}
           error={this.getErrorIfBlurred('lastName')}
           />
+        <Select
+          options={genders}
+          value={gender}
+          name="gender"
+          label="What gender do you identify as?"
+          className="margin-ends-giga"
+          onChange={({ value: newGender }) => this.updateApplication({ gender: newGender })}
+          onBlur={() => this.setFieldAsBlurred('gender')}
+          error={this.getErrorIfBlurred('gender')}
+          isSearchable
+          allowNewOption
+          />
+        <RadioGroup
+          name="Hello"
+          className="dir-row"
+          onChange={(change) => console.log(change)}
+          >
+          <RadioButton label="Label 1" value="value1" selected />
+          <RadioButton label="Label 2" value="value2" disabled />
+          <RadioButton label="Label 3" value="value3" />
+        </RadioGroup>
         <Select
           options={schools}
           value={school}

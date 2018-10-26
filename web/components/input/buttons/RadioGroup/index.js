@@ -5,23 +5,28 @@ const InputContext = React.createContext({});
 
 const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
-    {context => (
-      <div className={`radio-button user-select-none margin-bottom-s margin-left-s ${className}`}>
-        <label className="clickable">
-          <input
-            type="radio"
-            name={name || context.name}
-            className="pos-abs opacity-0"
-            value={value}
-            defaultChecked={selected || context.selected}
-            disabled={disabled || context.disabled}
-            onChange={onChange || context.onChange}
-          />
-          <span className="radio-img size-icon pos-abs" />
-          <span className="label-text margin-left-l white-space-nowrap">{label}</span>
-        </label>
-      </div>
-    )}
+    {
+      context => {
+        const contextOnChange = (event) => context.onChange(event.target.value);
+        return (
+          <div className={`radio-button user-select-none margin-bottom-s margin-left-s ${className}`}>
+            <label className="clickable">
+              <input
+                type="radio"
+                name={name || context.name}
+                className="pos-abs opacity-0"
+                value={value}
+                defaultChecked={selected || context.selected}
+                disabled={disabled || context.disabled}
+                onChange={onChange || contextOnChange}
+              />
+              <span className="radio-img size-icon pos-abs" />
+              <span className="label-text margin-left-l white-space-nowrap">{label}</span>
+            </label>
+          </div>
+        );
+      }
+    }
   </InputContext.Consumer>
 );
 

@@ -5,4 +5,5 @@ export const constraints = {
   lastName: atLeastOneCharacter,
   city: atLeastOneCharacter,
   school: atLeastOneCharacter,
+  gender: atLeastOneCharacter,
 };
