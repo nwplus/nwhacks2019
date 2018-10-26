@@ -128,15 +128,6 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('education')}
           error={this.getErrorIfBlurred('education')}
           />
-        <TextInput
-          label="What is your graduation year?"
-          name="graduation-year"
-          className="margin-ends-giga"
-          value={gradYear}
-          onChange={newGradYear => this.updateApplication({ gradYear: newGradYear })}
-          onBlur={() => this.setFieldAsBlurred('gradYear')}
-          error={this.getErrorIfBlurred('gradYear')}
-          />
         <Select
           options={schools}
           value={school}
@@ -148,6 +139,15 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('school')}
           isSearchable
           allowNewOption
+          />
+        <TextInput
+          label="What is your graduation year?"
+          name="graduation-year"
+          className="margin-ends-giga"
+          value={gradYear}
+          onChange={newGradYear => this.updateApplication({ gradYear: newGradYear })}
+          onBlur={() => this.setFieldAsBlurred('gradYear')}
+          error={this.getErrorIfBlurred('gradYear')}
           />
         <SelectCity
           inputValue={cityQuery}
