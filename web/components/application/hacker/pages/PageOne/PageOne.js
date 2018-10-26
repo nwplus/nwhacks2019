@@ -10,6 +10,7 @@ import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
 
 import { schools } from '../../../schools';
 import { genders } from '../../../genders';
+import { levelsOfEducation } from '../../../education';
 
 class PageOne extends Page {
   constructor(props) {
@@ -35,6 +36,9 @@ class PageOne extends Page {
         school,
         gender,
         isAdult,
+        education,
+        gradYear,
+        travel,
       },
     } = this.props;
 
@@ -95,19 +99,44 @@ class PageOne extends Page {
           name="age-19-or-older"
           label="Will you be 19 years of age or older by January 26th, 2019?"
           className="dir-row margin-ends-giga"
-          onChange={newIsAdult => this.updateApplication({ isAdult: newIsAdult })}
+          onChange={(newIsAdult) => {
+            newIsAdult = newIsAdult === 'true';
+            this.updateApplication({ isAdult: newIsAdult });
+          }
+          }
           >
           <RadioButton
             label="Yes"
             value="true"
-            selected={isAdult === 'true'}
+            selected={isAdult === true}
             />
           <RadioButton
             label="No"
             value="false"
-            selected={isAdult === 'false'}
+            selected={isAdult === false}
             />
         </RadioGroup>
+        <Select
+          options={levelsOfEducation}
+          value={education}
+          name="education-level"
+          label="What level of education are you currently studying at?"
+          className="margin-ends-giga"
+          onChange={({ value: newEducation }) => this.updateApplication({
+            education: newEducation,
+          })}
+          onBlur={() => this.setFieldAsBlurred('education')}
+          error={this.getErrorIfBlurred('education')}
+          />
+        <TextInput
+          label="What is your graduation year?"
+          name="graduation-year"
+          className="margin-ends-giga"
+          value={gradYear}
+          onChange={newGradYear => this.updateApplication({ gradYear: newGradYear })}
+          onBlur={() => this.setFieldAsBlurred('gradYear')}
+          error={this.getErrorIfBlurred('gradYear')}
+          />
         <Select
           options={schools}
           value={school}
@@ -129,6 +158,33 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('city')}
           className="margin-ends-giga"
           />
+        <p>
+          {'Would you like to apply for a travel reimbursement? If you are coming from the University of Washington, or the surrounding area, we will be providing shuttle busses.'}
+        </p>
+        <p>
+          {'Note: If selected to participate, we will be subsidizing a maximum of $200 CAD and you must submit this application by 11:59PM PST Dec 1st, 2018.'}
+        </p>
+        <RadioGroup
+          name="travel-reimbursement"
+          className="dir-col margin-bottom-giga"
+          onChange={newTravel => this.updateApplication({ travel: parseInt(newTravel, 10) })}
+          >
+          <RadioButton
+            label="No, I will not need a travel reimbursement."
+            value="0"
+            selected={travel === 0}
+            />
+          <RadioButton
+            label="Yes, I would like to apply for a travel reimbursement."
+            value="1"
+            selected={travel === 1}
+            />
+          <RadioButton
+            label="No, but I would like a seat on the bus from the Seattle/UW area."
+            value="2"
+            selected={travel === 2}
+            />
+        </RadioGroup>
       </HackerApplicationPageTemplate>
     );
   }

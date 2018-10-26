@@ -5,10 +5,13 @@ export const initialState = {
   firstName: '',
   lastName: '',
   email: '',
-  city: '',
-  school: '',
-  gender: '',
+  city: null,
+  school: null,
+  gender: null,
   isAdult: null,
+  gradYear: '',
+  education: null,
+  travel: null,
 };
 
 const hackerApplication = (state = initialState, action) => {

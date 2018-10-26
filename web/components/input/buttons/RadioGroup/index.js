@@ -34,12 +34,9 @@ RadioButton.propTypes = {
   // name should be the same amongst radio buttons in a radio group
   name: PropTypes.string,
   // input value for the radio button
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]).isRequired,
+  value: PropTypes.string.isRequired,
   // label text for the radio button
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   // extra CSS classes to apply to the radio button
   className: PropTypes.string,
   // determines if the radio button is selected
@@ -59,7 +56,7 @@ const RadioGroup = (props) => {
   return (
     <InputContext.Provider value={props}>
       <div className={className}>
-        <h5>{label}</h5>
+        {label ? <h5>{label}</h5> : null}
         <div className="flex wrap margin-top-s">{children}</div>
       </div>
     </InputContext.Provider>

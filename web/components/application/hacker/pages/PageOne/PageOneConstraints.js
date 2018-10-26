@@ -9,4 +9,15 @@ export const constraints = {
   isAdult: {
     presence: true,
   },
+  education: atLeastOneCharacter,
+  gradYear: {
+    presence: true,
+    length: {
+      is: 4,
+      message: 'has to be a valid year.',
+    },
+  },
+  travel: {
+    presence: true,
+  },
 };
