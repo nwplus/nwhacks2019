@@ -8,6 +8,7 @@ export const initialState = {
   city: '',
   school: '',
   gender: '',
+  isAdult: null,
 };
 
 const hackerApplication = (state = initialState, action) => {

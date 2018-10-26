@@ -6,10 +6,10 @@ const InputContext = React.createContext({});
 const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
     {
-      context => {
-        const contextOnChange = (event) => context.onChange(event.target.value);
+      (context) => {
+        const contextOnChange = event => context.onChange(event.target.value);
         return (
-          <div className={`radio-button user-select-none margin-bottom-s margin-left-s ${className}`}>
+          <div className={`radio-button user-select-none margin-bottom-s margin-right-xxl ${className}`}>
             <label className="clickable">
               <input
                 type="radio"
@@ -34,7 +34,10 @@ RadioButton.propTypes = {
   // name should be the same amongst radio buttons in a radio group
   name: PropTypes.string,
   // input value for the radio button
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]).isRequired,
   // label text for the radio button
   label: PropTypes.string.isRequired,
   // extra CSS classes to apply to the radio button
@@ -52,10 +55,13 @@ RadioButton.defaultProps = {
 };
 
 const RadioGroup = (props) => {
-  const { children, className } = props;
+  const { children, className, label } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={`flex wrap ${className}`}>{children}</div>
+      <div className={className}>
+        <h5>{label}</h5>
+        <div className="flex wrap margin-top-s">{children}</div>
+      </div>
     </InputContext.Provider>
   );
 };
@@ -68,6 +74,7 @@ RadioGroup.propTypes = {
   ]),
   // extra CSS class names for the container (not applied to children)
   className: PropTypes.string,
+  label: PropTypes.string,
   /* Additional optional parameters implicitly passed down to children
 
       // see RadioButton.propTypes

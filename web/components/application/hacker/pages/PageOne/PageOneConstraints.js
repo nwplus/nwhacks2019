@@ -6,4 +6,7 @@ export const constraints = {
   city: atLeastOneCharacter,
   school: atLeastOneCharacter,
   gender: atLeastOneCharacter,
+  isAdult: {
+    presence: true,
+  },
 };

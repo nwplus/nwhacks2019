@@ -34,6 +34,7 @@ class PageOne extends Page {
         city,
         school,
         gender,
+        isAdult,
       },
     } = this.props;
 
@@ -91,13 +92,21 @@ class PageOne extends Page {
           allowNewOption
           />
         <RadioGroup
-          name="Hello"
-          className="dir-row"
-          onChange={(change) => console.log(change)}
+          name="age-19-or-older"
+          label="Will you be 19 years of age or older by January 26th, 2019?"
+          className="dir-row margin-ends-giga"
+          onChange={newIsAdult => this.updateApplication({ isAdult: newIsAdult })}
           >
-          <RadioButton label="Label 1" value="value1" selected />
-          <RadioButton label="Label 2" value="value2" disabled />
-          <RadioButton label="Label 3" value="value3" />
+          <RadioButton
+            label="Yes"
+            value="true"
+            selected={isAdult === 'true'}
+            />
+          <RadioButton
+            label="No"
+            value="false"
+            selected={isAdult === 'false'}
+            />
         </RadioGroup>
         <Select
           options={schools}
