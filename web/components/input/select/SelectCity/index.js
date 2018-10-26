@@ -91,6 +91,7 @@ export class SelectCity extends React.Component {
       onBlur,
       error,
       onSelect,
+      className,
     } = this.props;
 
     const selectProps = {
@@ -109,11 +110,16 @@ export class SelectCity extends React.Component {
         onChange={({ value: selection }) => onSelect(selection)}
         onInputChange={newInput => this.handleInputChange(newInput)}
         {...selectProps}
+        className={className}
         isSearchable
         />
     );
   }
 }
+
+SelectCity.defaultProps = {
+  className: '',
+};
 
 SelectCity.propTypes = {
   value: PropTypes.string,
@@ -122,4 +128,5 @@ SelectCity.propTypes = {
   onBlur: PropTypes.func,
   error: PropTypes.object,
   onSelect: PropTypes.func,
+  className: PropTypes.string,
 };

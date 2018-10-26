@@ -6,6 +6,7 @@ export const initialState = {
   lastName: '',
   email: '',
   city: '',
+  school: '',
 };
 
 const hackerApplication = (state = initialState, action) => {

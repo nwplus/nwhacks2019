@@ -5,6 +5,8 @@ import { HackerApplicationPageTemplate } from '../PageTemplate';
 import { Page } from '../../../Page';
 import { constraints } from './PageOneConstraints';
 import { SelectCity } from '../../../../input/select/SelectCity';
+import { Select } from '../../../../input/select';
+import { schools } from '../../../schools';
 
 class PageOne extends Page {
   constructor(props) {
@@ -27,6 +29,7 @@ class PageOne extends Page {
         firstName,
         lastName,
         city,
+        school,
       },
     } = this.props;
 
@@ -71,6 +74,18 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('lastName')}
           error={this.getErrorIfBlurred('lastName')}
           />
+        <Select
+          options={schools}
+          value={school}
+          name="school-name"
+          label="What school do you currently attend?"
+          className="margin-ends-l"
+          onChange={({ value: newSchool }) => this.updateApplication({ school: newSchool })}
+          onBlur={() => this.setFieldAsBlurred('school')}
+          error={this.getErrorIfBlurred('school')}
+          isSearchable
+          allowNewOption
+          />
         <SelectCity
           inputValue={cityQuery}
           value={city}
@@ -78,6 +93,7 @@ class PageOne extends Page {
           onSelect={newCity => this.updateApplication({ city: newCity })}
           onBlur={() => this.setFieldAsBlurred('city')}
           error={this.getErrorIfBlurred('city')}
+          className="margin-ends-l"
           />
       </HackerApplicationPageTemplate>
     );
