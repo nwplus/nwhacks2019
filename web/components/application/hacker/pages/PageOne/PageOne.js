@@ -51,7 +51,7 @@ class PageOne extends Page {
         <TextInput
           label="First Name"
           name="first-name"
-          className="margin-ends-l"
+          className="margin-ends-giga"
           value={firstName}
           onChange={(newFirstName) => {
             this.updateApplication({
@@ -64,7 +64,7 @@ class PageOne extends Page {
         <TextInput
           label="Last Name"
           name="last-name"
-          className="margin-ends-l"
+          className="margin-ends-giga"
           value={lastName}
           onChange={(newLastName) => {
             this.updateApplication({
@@ -79,7 +79,7 @@ class PageOne extends Page {
           value={school}
           name="school-name"
           label="What school do you currently attend?"
-          className="margin-ends-l"
+          className="margin-ends-giga"
           onChange={({ value: newSchool }) => this.updateApplication({ school: newSchool })}
           onBlur={() => this.setFieldAsBlurred('school')}
           error={this.getErrorIfBlurred('school')}
@@ -93,7 +93,7 @@ class PageOne extends Page {
           onSelect={newCity => this.updateApplication({ city: newCity })}
           onBlur={() => this.setFieldAsBlurred('city')}
           error={this.getErrorIfBlurred('city')}
-          className="margin-ends-l"
+          className="margin-ends-giga"
           />
       </HackerApplicationPageTemplate>
     );
