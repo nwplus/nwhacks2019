@@ -1,12 +1,4 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-
-admin.initializeApp(functions.config().firebase);
-
-const db = admin.firestore();
-
-// required due to future breaking changes to API
-db.settings({ timestampsInSnapshots: true });
+const { db } = require('../utils/firestore').db;
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
   // Sets 'Access-Control-Allow-Origin' field in the response's HTTP header to match all origins
