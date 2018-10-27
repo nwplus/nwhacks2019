@@ -18,18 +18,19 @@
     "logs": "./node_modules/.bin/firebase functions:log"
   },
   "dependencies": {
-    "firebase-admin": "^5.12.1",
-    "firebase-functions": "^1.0.3",
+    "@google-cloud/functions-emulator": "^1.0.0-beta.5",
+    "firebase-admin": "^6.1.0",
+    "firebase-functions": "^2.1.0",
     "firebase-tools": "^6.0.0",
-    "nyc": "12.0.2"
+    "nyc": "13.1.0"
   },
   "devDependencies": {
-    "coveralls": "3.0.1",
-    "eslint": "5.0.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-promise": "3.6.0",
-    "jest": "23.3.0"
+    "coveralls": "3.0.2",
+    "eslint": "5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-promise": "4.0.1",
+    "jest": "23.6.0"
   },
   "jest": {
     "collectCoverage": true,
