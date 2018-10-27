@@ -1,4 +1,4 @@
-const { db } = require('../utils/firestore').db;
+const { db, functions } = require('../utils/firestore');
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
   // Sets 'Access-Control-Allow-Origin' field in the response's HTTP header to match all origins

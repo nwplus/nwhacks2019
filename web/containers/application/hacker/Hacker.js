@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withFirebase } from 'react-redux-firebase';
+import Axios from 'axios';
 
 import Application from '../Application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
@@ -27,6 +28,7 @@ export class HackerApplicationContainer extends React.Component {
   submitApplication = (userCredentials) => {
     const {
       firebase,
+      hackerApplication,
       featureFlags: {
         data: {
           auth: {
@@ -38,9 +40,25 @@ export class HackerApplicationContainer extends React.Component {
 
     if (isAuthEnabled) {
       this.signUp(firebase, userCredentials);
-    } else {
-      console.log('application submitted');
     }
+
+    // POST application data to cloud function for submission
+    Axios.post(
+      firebase.nwUtils.getFunctionUrl('submitApplicationHacker'),
+      hackerApplication,
+      { headers: { crossDomain: true, 'Content-Type': 'application/json' } }
+    ).then((res) => {
+      if (res.status === 200) {
+        //     clear_application_cache()
+        //     redirect_to_application_success()
+        console.log(res);
+      } else {
+        //     display_error_message()
+      }
+    }).catch((err) => {
+      // redirect to err
+      console.log(err);
+    });
   }
 
   render() {
@@ -82,7 +100,7 @@ export class HackerApplicationContainer extends React.Component {
         cancelApplication={cancelApplication}
         submitApplication={this.submitApplication}
         pages={pages}
-        />
+      />
     );
   }
 }

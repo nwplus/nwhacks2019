@@ -6,4 +6,8 @@ admin.initializeApp(functions.config().firebase);
 const db = admin.firestore();
 db.settings({ timestampsInSnapshots: true }); // required due to future breaking changes to API
 
-export default { admin, db };
+module.exports = {
+  db,
+  admin,
+  functions,
+};
