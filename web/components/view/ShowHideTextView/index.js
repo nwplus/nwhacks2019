@@ -19,7 +19,7 @@ class ShowHideTextView extends React.Component {
     return (
       <div className={`show-hide card secondary-outline ${className}`}>
         <div className="show-hide-label-container pad-sides-s pad-ends-s user-select-none clickable flex jc-between" onClick={this.handleClick}>
-          <div className="show-hide-label margin-ends-s margin-right-s clickable">{label}</div>
+          <div className="show-hide-label margin-ends-s margin-right-s clickable bold">{label}</div>
           <img
             className={`show-hide-arrow margin-ends-s flex-no-shrink ${showDropDown ? 'flip-vertical' : ''}`}
             src={arrow}

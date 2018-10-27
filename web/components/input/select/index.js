@@ -45,29 +45,54 @@ export class Select extends React.Component {
       placeholder,
       isSearchable,
       isMulti,
+      onBlur,
       onChange,
+      onFocus,
+      onInputChange,
+      onKeyDown,
+      onMenuOpen,
+      onMenuClose,
+      onMenuScrollToTop,
+      onMenuScrollToBottom,
+      inputValue,
+      error,
+      value,
     } = this.props;
 
     const inputProps = {
       placeholder,
       isSearchable,
       isMulti,
+      onBlur,
       onChange,
+      onFocus,
+      onInputChange,
+      onKeyDown,
+      onMenuOpen,
+      onMenuClose,
+      onMenuScrollToTop,
+      onMenuScrollToBottom,
+      inputValue,
     };
+
+    if (value) {
+      inputProps.value = { value, label: value };
+    }
 
     return (
       <div className={`${className}`}>
         <h5 className="body-text">{label}</h5>
         <Creatable
           {...inputProps}
-          options={options.map(value => ((typeof value === 'object') ? value : { value, label: value }))}
-          className="react-select-container"
+          options={options.map(option => ((typeof option === 'object') ? option : { value: option, label: option }))}
+          className={`react-select-container ${error ? 'react-select-error' : ''}`}
           classNamePrefix="react-select"
           components={{ DropdownIndicator }}
           formatCreateLabel={formatNewOptionLabel}
           isValidNewOption={this.isValidNewOption}
           isDisabled={disabled}
         />
+        <div>{error ? (<p className="error-message">{error.message}</p>) : null}</div>
       </div>
     );
   }
@@ -102,8 +127,6 @@ Select.propTypes = {
   isMulti: PropTypes.bool,
   // is input disabled
   disabled: PropTypes.bool,
-  // see onChange here: https://react-select.com/props#select-props
-  onChange: PropTypes.func,
   // allows user to define a new option if their answer isn't available by default
   allowNewOption: PropTypes.bool,
   // new handler that returns string shown when user is creating new option
@@ -114,4 +137,22 @@ Select.propTypes = {
   newOptionMaxCharNumber: PropTypes.number,
   // additional handler used to validate new option created by user
   isValidNewOption: PropTypes.func,
+  // error of format { message: "error message" }. The message will be displayed with error styling
+  error: PropTypes.object,
+  // see handlers here: https://react-select.com/props#select-props
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  isLoading: PropTypes.bool,
+  inputValue: PropTypes.string,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onInputChange: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onMenuOpen: PropTypes.func,
+  onMenuClose: PropTypes.func,
+  onMenuScrollToTop: PropTypes.func,
+  onMenuScrollToBottom: PropTypes.func,
 };

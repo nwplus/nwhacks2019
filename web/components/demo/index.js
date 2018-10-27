@@ -13,18 +13,34 @@ const ButtonCallback = e => console.log(`${e.currentTarget.textContent} button c
 class FrontEndComponents extends React.Component {
   constructor(props) {
     super(props);
+    const universities = ['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University'];
     this.state = {
       active: 3,
       textValue: '',
       password: '',
+      options: universities,
+      randomOptions: this.randomStringArray(5, 8),
     };
   }
+
+
+  onSelectInputChange = () => this.setState({ randomOptions: this.randomStringArray(5, 8) })
 
   onTextInputChange = event => this.setState({ textValue: event.target.value });
 
   onPasswordChange = event => this.setState({ password: event.target.value });
 
   onBlur = e => console.log(e.target);
+
+  randomString = length => Math.random().toString(36).substring(length);
+
+  randomStringArray = (arrLength, strLength) => {
+    const arr = [];
+    for (let i = 0; i < arrLength; i += 1) {
+      arr.push(this.randomString(strLength));
+    }
+    return arr;
+  }
 
   switchProgress = index => this.setState({ active: index })
 
@@ -33,7 +49,7 @@ class FrontEndComponents extends React.Component {
       message: 'Something went wrong',
     };
 
-    const { textValue, password } = this.state;
+    const { textValue, password, options, randomOptions } = this.state;
 
     const { active } = this.state;
     return (
@@ -122,25 +138,32 @@ class FrontEndComponents extends React.Component {
         <br />
         <Select
           name="some_select"
-          options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
+          options={options}
           label="Regular drop-down input"
         /><br /><br />
         <Select
           name="some_select"
-          options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
+          options={options}
           label="Searchable drop-down input"
           placeholder="Start typing to search"
           isSearchable
         /><br /><br />
         <Select
           name="some_select"
-          onChange={(props) => { console.log(props); }}
-          options={['University of Toronto', 'McGill University', 'University of Waterloo', 'University of Alberta', 'University of Manitoba', 'University of Saskatchewan', 'University of New Brunswick', 'Memorial University of Newfoundland', 'Dalhousie University']}
+          options={options}
           label="Searchable drop-down input that allows new options"
           formatNewOptionLabel={label => `My school is not listed, use "${label}"`}
           placeholder="Start typing to search"
           isSearchable
           allowNewOption
+        /><br /><br />
+        <Select
+          name="some_select"
+          onInputChange={this.onSelectInputChange}
+          options={randomOptions}
+          label="This will generate random options when you type (demonstrates event handlers)."
+          placeholder="Start typing to search"
+          isSearchable
         /><br /><br />
         <p>Show/Hide Component</p>
         <br />
