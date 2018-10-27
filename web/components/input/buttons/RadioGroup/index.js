@@ -21,7 +21,7 @@ const RadioButton = ({ name, value, label, className, selected, disabled, onChan
                 onChange={onChange || contextOnChange}
               />
               <span className="radio-img size-icon pos-abs" />
-              <span className="label-text margin-left-l white-space-nowrap">{label}</span>
+              <span className="label-text margin-left-l">{label}</span>
             </label>
           </div>
         );
