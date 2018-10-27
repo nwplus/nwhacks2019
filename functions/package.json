@@ -5,21 +5,22 @@
   "author": "nwHacks2019",
   "license": "MIT",
   "scripts": {
-    "pick:dev": "firebase login && firebase use development",
-    "pick:prod": "firebase login && firebase use production",
+    "firebase-login": "./node_modules/.bin/firebase login --interactive",
+    "pick:dev": "yarn firebase-login && ./node_modules/.bin/firebase use development",
+    "pick:prod": "yarn firebase-login && ./node_modules/.bin/firebase use production",
     "lint": "eslint .",
     "test": "exit 0",
-    "serve": "yarn pick:dev && firebase serve --only functions",
-    "shell": "yarn pick:dev && firebase functions:shell",
+    "serve": "yarn pick:dev && ./node_modules/.bin/firebase serve --only functions",
+    "shell": "yarn pick:dev && ./node_modules/.bin/firebase functions:shell",
     "start": "yarn pick:dev && yarn run shell",
-    "deploy:dev": "yarn pick:dev && firebase deploy --only functions",
-    "deploy:prod": "yarn pick:prod && firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "deploy:dev": "yarn pick:dev && ./node_modules/.bin/firebase deploy --only functions",
+    "deploy:prod": "yarn pick:prod && ./node_modules/.bin/firebase deploy --only functions",
+    "logs": "./node_modules/.bin/firebase functions:log"
   },
   "dependencies": {
-    "firebase-admin": "5.12.1",
-    "firebase-functions": "1.0.3",
-    "firebase-tools": "3.19.3",
+    "firebase-admin": "^5.12.1",
+    "firebase-functions": "^1.0.3",
+    "firebase-tools": "^6.0.0",
     "nyc": "12.0.2"
   },
   "devDependencies": {
