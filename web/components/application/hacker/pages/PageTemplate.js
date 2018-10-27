@@ -17,7 +17,7 @@ export const HackerApplicationPageTemplate = ({
   children,
 }) => (
   <div className="pad-nav application fill-width flex jc-center">
-    <div className="pad-ends-mega">
+    <div className="pad-top-mega pad-bottom-tera">
       <ProgressGroup
         count={count}
         activeIndex={activeIndex}

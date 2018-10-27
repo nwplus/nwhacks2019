@@ -5,23 +5,28 @@ const InputContext = React.createContext({});
 
 const RadioButton = ({ name, value, label, className, selected, disabled, onChange }) => (
   <InputContext.Consumer>
-    {context => (
-      <div className={`radio-button user-select-none margin-bottom-s margin-left-s ${className}`}>
-        <label className="clickable">
-          <input
-            type="radio"
-            name={name || context.name}
-            className="pos-abs opacity-0"
-            value={value}
-            defaultChecked={selected || context.selected}
-            disabled={disabled || context.disabled}
-            onChange={onChange || context.onChange}
-          />
-          <span className="radio-img size-icon pos-abs" />
-          <span className="label-text margin-left-l white-space-nowrap">{label}</span>
-        </label>
-      </div>
-    )}
+    {
+      (context) => {
+        const contextOnChange = event => context.onChange(event.target.value);
+        return (
+          <div className={`radio-button user-select-none margin-bottom-s margin-right-xxl ${className}`}>
+            <label className="clickable">
+              <input
+                type="radio"
+                name={name || context.name}
+                className="pos-abs opacity-0"
+                value={value}
+                defaultChecked={selected || context.selected}
+                disabled={disabled || context.disabled}
+                onChange={onChange || contextOnChange}
+              />
+              <span className="radio-img size-icon pos-abs" />
+              <span className="label-text margin-left-l">{label}</span>
+            </label>
+          </div>
+        );
+      }
+    }
   </InputContext.Consumer>
 );
 
@@ -47,10 +52,13 @@ RadioButton.defaultProps = {
 };
 
 const RadioGroup = (props) => {
-  const { children, className } = props;
+  const { children, className, label } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={`flex wrap ${className}`}>{children}</div>
+      <div className={className}>
+        {label ? <h5>{label}</h5> : null}
+        <div className="flex wrap margin-top-s">{children}</div>
+      </div>
     </InputContext.Provider>
   );
 };
@@ -63,6 +71,7 @@ RadioGroup.propTypes = {
   ]),
   // extra CSS class names for the container (not applied to children)
   className: PropTypes.string,
+  label: PropTypes.string,
   /* Additional optional parameters implicitly passed down to children
 
       // see RadioButton.propTypes
