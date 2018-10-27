@@ -44,12 +44,14 @@ report-coverage:
 
 # Builds front-end and deploys cloud functions to production
 .PHONY: prod
-dev: 
+prod: 
+	@(make deps)
 	@(make -j2 build deploy-prod)
 
 # Serves front-end and deploys cloud functions locally
 .PHONY: dev
 dev: 
+	@(make deps)
 	@(make -j2 web functions)
 
 ###############################
