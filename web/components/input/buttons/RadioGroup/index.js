@@ -36,7 +36,7 @@ RadioButton.propTypes = {
   // input value for the radio button
   value: PropTypes.string.isRequired,
   // label text for the radio button
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   // extra CSS classes to apply to the radio button
   className: PropTypes.string,
   // determines if the radio button is selected
