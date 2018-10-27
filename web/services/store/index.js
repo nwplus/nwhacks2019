@@ -17,7 +17,6 @@ import Reducers from '../../reducers';
 import { persistConfig } from './persist.config';
 
 export default (initialState = {}) => {
-
   // Pick between dev and prod firebase configurations
   const selectedFirebaseConfig = firebaseConfig[process.env.NODE_ENV];
 
@@ -27,8 +26,15 @@ export default (initialState = {}) => {
   // Initialize Cloud Functions to firebase instance
   firebase.functions();
 
-  // Store the root cloud functions URL for the project
-  firebase.nwCloudFunctionsUrl = `https://us-central1-${selectedFirebaseConfig.projectId}.cloudfunctions.net`;
+  firebase.nwUtils = {
+    // Define a function for fetching a cloud function's URL given its name
+    getFunctionUrl: (functionName) => {
+      if (process.env.NODE_ENV === 'development') {
+        return `http://localhost:5000/${selectedFirebaseConfig.projectId}/us-central1/${functionName}`;
+      } // production
+      return `https://us-central1-${selectedFirebaseConfig.projectId}.cloudfunctions.net/${functionName}`;
+    },
+  };
 
   // Initialize Cloud Firestore through Firebase
   const firestore = firebase.firestore();

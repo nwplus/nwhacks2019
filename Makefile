@@ -38,8 +38,22 @@ report-coverage:
 	cp web/coverage/coverage-final.json .nyc_output/coverage-web.json
 	nyc report --reporter=text-lcov > coverage.lcov && codecov
 
+##############################
+#     Important commands     #
+##############################
+
+# Builds front-end and deploys cloud functions to production
+.PHONY: master-prod
+master-dev: 
+	@(make -j2 build deploy-prod)
+
+# Serves front-end and deploys cloud functions locally
+.PHONY: master-dev
+master-dev: 
+	@(make -j2 web functions)
+
 ###############################
-# Component-specific commands #
+#    Web-specific commands    #
 ###############################
 
 # Builds front-end
@@ -59,17 +73,15 @@ web:
 serve:
 	@(cd ./web ; yarn serve)
 
+####################################
+# Cloud-function-specific commands #
+####################################
+
 # Deploys cloud functions to production
 .PHONY: deploy-prod
 deploy-prod:
 	@echo Deploying cloud functions to production...
 	@(cd ./functions; yarn deploy:prod)
-
-# Deploys cloud functions to development
-.PHONY: deploy-dev
-deploy-dev:
-	@echo Deplying cloud functions to development...
-	@(cd ./functions; yarn deploy:dev)
 
 # Emulates cloud functions as local HTTP endpoints
 .PHONY: functions
