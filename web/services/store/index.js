@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import 'firebase/functions';
 
 import { createStore, combineReducers, compose } from 'redux';
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase';
@@ -16,8 +17,19 @@ import Reducers from '../../reducers';
 import { persistConfig } from './persist.config';
 
 export default (initialState = {}) => {
+
+  // Pick between dev and prod firebase configurations
+  const selectedFirebaseConfig = firebaseConfig[process.env.NODE_ENV];
+
   // Initialize firebase instance
-  firebase.initializeApp(firebaseConfig[process.env.NODE_ENV]);
+  firebase.initializeApp(selectedFirebaseConfig);
+
+  // Initialize Cloud Functions to firebase instance
+  firebase.functions();
+
+  // Store the root cloud functions URL for the project
+  firebase.nwCloudFunctionsUrl = `https://us-central1-${selectedFirebaseConfig.projectId}.cloudfunctions.net`;
+
   // Initialize Cloud Firestore through Firebase
   const firestore = firebase.firestore();
   const firestoreSettings = { timestampsInSnapshots: true };
