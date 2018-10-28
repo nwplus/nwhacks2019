@@ -48,6 +48,7 @@ class TextArea extends React.Component {
 TextArea.defaultProps = {
   showCharCount: true,
   className: '',
+  onChange: () => {},
 };
 
 TextArea.propTypes = {
