@@ -1,5 +1,11 @@
+import { atLeastOneCharacter } from '../../../constraints/utils';
+
 export const constraints = {
-  email: {
-    email: true,
+  isFirstHackathon: {
+    presence: true,
   },
+//   // interestedRole: atLeastOneCharacter,
+  resumeLink: atLeastOneCharacter,
+  interestForNwHacks: atLeastOneCharacter,
+  // recentProject: atLeastOneCharacter,
 };

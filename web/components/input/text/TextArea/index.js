@@ -13,7 +13,7 @@ class TextArea extends React.Component {
 
   onTextChange = (text) => {
     this.setState({
-      currentCharCount: text.match(/(\w+)/g).length,
+      currentCharCount: text.length,
     });
   };
 
@@ -51,7 +51,7 @@ TextArea.defaultProps = {
 
 TextArea.propTypes = {
   // the label text for the textarea header
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 
   // placeholder text for the textarea
   placeholder: PropTypes.string,

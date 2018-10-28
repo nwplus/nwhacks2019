@@ -7,6 +7,9 @@ import { constraints } from './PageTwoConstraints';
 import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
 import { Checkbox, CheckboxGroup } from '../../../../input/buttons/CheckboxGroup';
 
+// Emojis
+import thinking from '../../../../../assets/emoji/thinking.svg';
+
 class PageTwo extends Page {
   constructor(props) {
     super(props);
@@ -18,7 +21,10 @@ class PageTwo extends Page {
       application: {
         firstName,
         isFirstHackathon,
-        interestedRole,
+        isHacker,
+        isDesigner,
+        isHardware,
+        isOther,
         githubLink,
         personalWebsiteLink,
         linkedInLink,
@@ -58,27 +64,41 @@ class PageTwo extends Page {
         </RadioGroup>
 
         {/* // Todo - not exactly how you guys want to store the values of the check boxes in the database */}
-        {/* <CheckboxGroup
+        <CheckboxGroup
           name="interested-role"
-          label="Is this your first hackathon?"
+          label="How do you wish to contribute at nwHacks? Your choice will not affect your application and you can always change your mind."
           className="dir-row margin-ends-giga"
-          // onChange={(newIsFirstHackathon) => {
-          //   newIsFirstHackathon = newIsFirstHackathon === 'true';
-          //   this.updateApplication({ isFirstHackathon: newIsFirstHackathon });
-          // }
-          // }
+          onChange={(isCheckboxChecked) => {
+            isCheckboxChecked = isCheckboxChecked === 'true';
+            this.updateApplication({ isHacker: isCheckboxChecked });
+            this.updateApplication({ isDesigner: isCheckboxChecked });
+            this.updateApplication({ isHardware: isCheckboxChecked });
+            this.updateApplication({ isOther: isCheckboxChecked });
+          }
+          }
         >
           <Checkbox
             label="Developer"
             value="true"
-            // selected={isFirstHackathon === true}
+            checked={isHacker === true}
           />
           <Checkbox
             label="Designer"
-            value="false"
-            // selected={isFirstHackathon === false}
+            value="true"
+            checked={isDesigner === true}
           />
-        </CheckboxGroup> */}
+          <Checkbox
+            label="Hardware/Robotics"
+            value="true"
+            checked={isHardware === true}
+          />
+          <Checkbox
+            label="Other"
+            value="true"
+            checked={isOther === true}
+          />
+
+        </CheckboxGroup>
 
         <TextInput
           label="Github/BitBucket/Github link (optional)"
@@ -87,7 +107,7 @@ class PageTwo extends Page {
           placeholder="https://github.com/JohnDoe"
           value={githubLink}
           onChange={newGithubLink => this.updateApplication({ githubLink: newGithubLink })}
-          // onBlur={() => this.setFieldAsBlurred('githubLink')}
+          onBlur={() => this.setFieldAsBlurred('githubLink')}
           error={this.getErrorIfBlurred('githubLink')}
         />
         <TextInput
@@ -97,7 +117,7 @@ class PageTwo extends Page {
           placeholder="https://johndoe.com/"
           value={personalWebsiteLink}
           onChange={newPersonalWebsiteLink => this.updateApplication({ personalWebsiteLink: newPersonalWebsiteLink })}
-          // onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
+          onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
           error={this.getErrorIfBlurred('personalWebsiteLink')}
         />
         <TextInput
@@ -107,13 +127,12 @@ class PageTwo extends Page {
           placeholder="https://www.linkedin.com/in/johndoe/"
           value={linkedInLink}
           onChange={newLinkedInLink => this.updateApplication({ linkedInLink: newLinkedInLink })}
-          // onBlur={() => this.setFieldAsBlurred('linkedInLink')}
+          onBlur={() => this.setFieldAsBlurred('linkedInLink')}
           error={this.getErrorIfBlurred('linkedInLink')}
         />
 
-        {/* Todo -  Need to make resume link mandatory, and add the question hover button */}
         <TextInput
-          label="Resume"
+          label="Resume Link (make sure the link is publicly accessible)"
           name="resume-link"
           className="margin-ends-giga"
           placeholder="https://drive.google.com/open?id=0B0GZwoww_XiFMHJENWlYN0R2RlE"
@@ -123,43 +142,22 @@ class PageTwo extends Page {
           error={this.getErrorIfBlurred('resumeLink')}
         />
 
-        {/* // Todo - 1. Created a duplicate of TextArea under  web/components/input/text/TextAreaWordCount,
-                 not sure if you guys want to create a new custom component to count words or to modify TextArea to support word count because it 
-                is currently just counting characters. 
-               I fixed the operator so that if there are 250 words, it will appear as "You have 0 characters left" in blue.
-              
-                Also, I just kinda hacked TextArea so that it's logic counts words. 
-
-                I modified the following function in web/components/input/text/TextArea/index.js
-
-
-                  onTextChange = (text) => {
-                        this.setState({
-                          currentCharCount: text.match(/(\w+)/g).length,
-                        });
-                      };
-
-
-                2. Need to change the display so that it says "You have X words left instead of characters."
-
-                Todo? - 3. do I need to convert the emoji's to svgs? How would I add svgs within quotes?? 
-              */}
-
         <TextArea
-          label="🏗️ What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited."
-          name="essay-1"
+          label={(<div><img className="vertical-align-top emoji" alt="🏗️" src={thinking} /> What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited.</div>)}
+          name="longanswer-1"
           className="margin-ends-giga"
           placeholder="Max 250 words"
           value={interestForNwHacks}
           maxLength={250}
           rows={7}
+          // onChange={console.log(interestForNwHacks)}
           onChange={newInterestForNwHacks => this.updateApplication({ interestForNwHacks: newInterestForNwHacks })}
           onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
           error={this.getErrorIfBlurred('interestForNwHacks')}
         />
         <TextArea
-          label="🏅 Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)"
-          name="essay-2"
+          label={(<div><img className="vertical-align-top emoji" alt="🏅" src={thinking} /> Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)</div>)}
+          name="longanswer-2"
           className="margin-ends-giga"
           placeholder="Max 250 words"
           value={recentProject}
