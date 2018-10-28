@@ -9,6 +9,8 @@ import { Checkbox, CheckboxGroup } from '../../../../input/buttons/CheckboxGroup
 
 // Emojis
 import thinking from '../../../../../assets/emoji/thinking.svg';
+import crane from '../../../../../assets/emoji/crane.svg';
+import medal from '../../../../../assets/emoji/medal.svg';
 
 class PageTwo extends Page {
   constructor(props) {
@@ -101,7 +103,7 @@ class PageTwo extends Page {
         </CheckboxGroup>
 
         <TextInput
-          label="Github/BitBucket/Github link (optional)"
+          label="Github/BitBucket/Gitlab link (optional)"
           name="github-link"
           className="margin-ends-giga"
           placeholder="https://github.com/JohnDoe"
@@ -143,12 +145,12 @@ class PageTwo extends Page {
         />
 
         <TextArea
-          label={(<div><img className="vertical-align-top emoji" alt="🏗️" src={thinking} /> What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited.</div>)}
+          label={(<div><img className="vertical-align-top emoji" alt="🏗️" src={crane} /> What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited.</div>)}
           name="longanswer-1"
           className="margin-ends-giga"
-          placeholder="Max 250 words"
+          placeholder="Max 750 characters"
           value={interestForNwHacks}
-          maxLength={250}
+          maxLength={750}
           rows={7}
           // onChange={console.log(interestForNwHacks)}
           onChange={newInterestForNwHacks => this.updateApplication({ interestForNwHacks: newInterestForNwHacks })}
@@ -156,12 +158,12 @@ class PageTwo extends Page {
           error={this.getErrorIfBlurred('interestForNwHacks')}
         />
         <TextArea
-          label={(<div><img className="vertical-align-top emoji" alt="🏅" src={thinking} /> Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)</div>)}
+          label={(<div><img className="vertical-align-top emoji" alt="🏅" src={medal} /> Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)</div>)}
           name="longanswer-2"
           className="margin-ends-giga"
-          placeholder="Max 250 words"
+          placeholder="Max 750 characters"
           value={recentProject}
-          maxLength={250}
+          maxLength={750}
           rows={7}
           onChange={newRecentProject => this.updateApplication({ recentProject: newRecentProject })}
           onBlur={() => this.setFieldAsBlurred('recentProject')}
