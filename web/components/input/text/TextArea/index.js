@@ -12,6 +12,7 @@ class TextArea extends React.Component {
   }
 
   onTextChange = (text) => {
+    const { onChange } = this.props; onChange(text);
     this.setState({
       currentCharCount: text.length,
     });
@@ -21,7 +22,7 @@ class TextArea extends React.Component {
     const { label, placeholder, rows, cols, name, showCharCount, className } = this.props;
     const { currentCharCount, maxLength } = this.state;
     const numCharsAvailable = maxLength - currentCharCount;
-    const maxLengthExceeded = currentCharCount >= maxLength;
+    const maxLengthExceeded = currentCharCount > maxLength;
     return (
       <div className={`text-area ${className}`}>
         <h5 className="body-text">{label}</h5>
@@ -51,7 +52,7 @@ TextArea.defaultProps = {
 
 TextArea.propTypes = {
   // the label text for the textarea header
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 
   // placeholder text for the textarea
   placeholder: PropTypes.string,
@@ -73,6 +74,10 @@ TextArea.propTypes = {
 
   // optional extra className
   className: PropTypes.string,
+
+  // onchange prop
+  onChange: PropTypes.func,
+
 };
 
 export { TextArea };
