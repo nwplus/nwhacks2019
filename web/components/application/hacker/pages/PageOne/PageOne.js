@@ -164,6 +164,8 @@ class PageOne extends Page {
               })}
               onBlur={() => this.setFieldAsBlurred('major')}
               error={this.getErrorIfBlurred('major')}
+              isSearchable
+              allowNewOption
           />
           )
           : null
