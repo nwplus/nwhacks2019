@@ -12,6 +12,7 @@ class TextArea extends React.Component {
   }
 
   onTextChange = (text) => {
+    const { onChange } = this.props; onChange(text);
     this.setState({
       currentCharCount: text.length,
     });
@@ -73,6 +74,10 @@ TextArea.propTypes = {
 
   // optional extra className
   className: PropTypes.string,
+
+  // onchange prop
+  onChange: PropTypes.func,
+
 };
 
 export { TextArea };

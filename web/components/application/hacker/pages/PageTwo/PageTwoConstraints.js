@@ -4,8 +4,7 @@ export const constraints = {
   isFirstHackathon: {
     presence: true,
   },
-//   // interestedRole: atLeastOneCharacter,
   resumeLink: atLeastOneCharacter,
   interestForNwHacks: atLeastOneCharacter,
-  // recentProject: atLeastOneCharacter,
+  recentProject: atLeastOneCharacter,
 };

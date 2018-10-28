@@ -8,7 +8,6 @@ import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
 import { Checkbox, CheckboxGroup } from '../../../../input/buttons/CheckboxGroup';
 
 // Emojis
-import thinking from '../../../../../assets/emoji/thinking.svg';
 import crane from '../../../../../assets/emoji/crane.svg';
 import medal from '../../../../../assets/emoji/medal.svg';
 
@@ -23,7 +22,7 @@ class PageTwo extends Page {
       application: {
         firstName,
         isFirstHackathon,
-        isHacker,
+        isDeveloper,
         isDesigner,
         isHardware,
         isOther,
@@ -67,39 +66,47 @@ class PageTwo extends Page {
 
         {/* // Todo - not exactly how you guys want to store the values of the check boxes in the database */}
         <CheckboxGroup
-          name="interested-role"
+          name="interested-role-checkbox"
           label="How do you wish to contribute at nwHacks? Your choice will not affect your application and you can always change your mind."
           className="dir-row margin-ends-giga"
-          onChange={(isCheckboxChecked) => {
-            isCheckboxChecked = isCheckboxChecked === 'true';
-            this.updateApplication({ isHacker: isCheckboxChecked });
-            this.updateApplication({ isDesigner: isCheckboxChecked });
-            this.updateApplication({ isHardware: isCheckboxChecked });
-            this.updateApplication({ isOther: isCheckboxChecked });
-          }
-          }
         >
           <Checkbox
             label="Developer"
-            value="true"
-            checked={isHacker === true}
-          />
-          <Checkbox
-            label="Designer"
-            value="true"
-            checked={isDesigner === true}
-          />
-          <Checkbox
-            label="Hardware/Robotics"
-            value="true"
-            checked={isHardware === true}
-          />
-          <Checkbox
-            label="Other"
-            value="true"
-            checked={isOther === true}
+            value="developer"
+            checked={isDeveloper}
+            className="margin-left-none"
+            onChange={(e) => {
+              this.updateApplication({ isDeveloper: e.target.checked });
+            }}
           />
 
+           <Checkbox
+            label="Designer"
+            value="designer" 
+            checked={isDesigner}
+            className="margin-left-none"
+            onChange={(e) => {
+              this.updateApplication({ isDesigner: e.target.checked });
+            }}
+          />
+ <Checkbox
+            label="Hardware/Robotics"
+            value="hardware" 
+            checked={isHardware}
+            className="margin-left-none"
+            onChange={(e) => {
+              this.updateApplication({ isHardware: e.target.checked });
+            }}
+          />
+           <Checkbox
+            label="Other"
+            value="other" 
+            checked={isOther}
+            className="margin-left-none"
+            onChange={(e) => {
+              this.updateApplication({ isOther: e.target.checked });
+            }}
+          />
         </CheckboxGroup>
 
         <TextInput
