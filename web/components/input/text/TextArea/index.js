@@ -13,7 +13,7 @@ class TextArea extends React.Component {
 
   onTextChange = (text) => {
     this.setState({
-      currentCharCount: text.length,
+      currentCharCount: text.match(/(\w+)/g).length,
     });
   };
 
@@ -21,7 +21,7 @@ class TextArea extends React.Component {
     const { label, placeholder, rows, cols, name, showCharCount, className } = this.props;
     const { currentCharCount, maxLength } = this.state;
     const numCharsAvailable = maxLength - currentCharCount;
-    const maxLengthExceeded = currentCharCount >= maxLength;
+    const maxLengthExceeded = currentCharCount > maxLength;
     return (
       <div className={`text-area ${className}`}>
         <h5 className="body-text">{label}</h5>

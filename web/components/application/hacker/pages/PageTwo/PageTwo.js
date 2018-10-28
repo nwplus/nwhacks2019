@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TextInput } from '../../../../input/text';
+import { TextInput, TextArea } from '../../../../input/text';
 import { HackerApplicationPageTemplate } from '../PageTemplate';
 import { Page } from '../../../Page';
 import { constraints } from './PageTwoConstraints';
@@ -24,6 +24,8 @@ class PageTwo extends Page {
         personalWebsiteLink,
         linkedInLink,
         resumeLink,
+        interestForNwHacks,
+        recentProject,
         email,
       },
     } = this.props;
@@ -108,6 +110,30 @@ class PageTwo extends Page {
           onChange={newResumeLink => this.updateApplication({ resumeLink: newResumeLink })}
           onBlur={() => this.setFieldAsBlurred('resumeLink')}
           error={this.getErrorIfBlurred('resumeLink')}
+          />
+          <TextArea
+          label="🏗️ What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited."
+          name="resume-link"
+          className="margin-ends-giga"
+          placeholder="Max 250 words"
+          value={interestForNwHacks}
+          maxLength={250}
+          rows={7}
+          onChange={newInterestForNwHacks => this.updateApplication({ interestForNwHacks: newInterestForNwHacks })}
+          onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
+          error={this.getErrorIfBlurred('interestForNwHacks')}
+          />
+          <TextArea
+          label="🏅 Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)"
+          name="resume-link"
+          className="margin-ends-giga"
+          placeholder="Max 250 words"
+          value={recentProject}
+          maxLength={250}
+          rows={7}
+          onChange={newRecentProject => this.updateApplication({ recentProject: newRecentProject })}
+          onBlur={() => this.setFieldAsBlurred('recentProject')}
+          error={this.getErrorIfBlurred('recentProject')}
           />
       </HackerApplicationPageTemplate>
     );
