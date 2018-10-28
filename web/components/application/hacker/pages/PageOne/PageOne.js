@@ -144,7 +144,9 @@ class PageOne extends Page {
           label="What is your race/ethnicity?"
           placeholder="Enter your race/ethnicity"
           className="margin-ends-giga"
-          onChange={({ value: newEthnicity }) => this.updateApplication({ ethnicity: newEthnicity })}
+          onChange={({ value: newEthnicity }) => this.updateApplication({
+            ethnicity: newEthnicity,
+          })}
           onBlur={() => this.setFieldAsBlurred('ethnicity')}
           error={this.getErrorIfBlurred('ethnicity')}
           isSearchable
