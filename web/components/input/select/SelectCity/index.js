@@ -107,6 +107,7 @@ export class SelectCity extends React.Component {
       <Select
         name="city-select"
         label="Where are you traveling from?"
+        placeholder="Enter your city"
         onChange={({ value: selection }) => onSelect(selection)}
         onInputChange={newInput => this.handleInputChange(newInput)}
         {...selectProps}
