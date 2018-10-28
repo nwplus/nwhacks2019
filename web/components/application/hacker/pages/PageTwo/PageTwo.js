@@ -38,8 +38,8 @@ class PageTwo extends Page {
     return (
       <HackerApplicationPageTemplate {...this.getPageTemplateProps()}>
         <h2>Nice to meet you, {firstName}! <span role="img" aria-label="wavinghands">👋</span></h2>
-        <p>
-          Help us get to know you better by providing as many links as you feel will support your application.
+        <p>Help us get to know you better by providing as many links as
+           you feel will support your application.
         </p>
 
         <RadioGroup
@@ -80,27 +80,27 @@ class PageTwo extends Page {
             }}
           />
 
-           <Checkbox
+          <Checkbox
             label="Designer"
-            value="designer" 
+            value="designer"
             checked={isDesigner}
             className="margin-left-none"
             onChange={(e) => {
               this.updateApplication({ isDesigner: e.target.checked });
             }}
           />
- <Checkbox
+          <Checkbox
             label="Hardware/Robotics"
-            value="hardware" 
+            value="hardware"
             checked={isHardware}
             className="margin-left-none"
             onChange={(e) => {
               this.updateApplication({ isHardware: e.target.checked });
             }}
           />
-           <Checkbox
+          <Checkbox
             label="Other"
-            value="other" 
+            value="other"
             checked={isOther}
             className="margin-left-none"
             onChange={(e) => {
@@ -125,7 +125,10 @@ class PageTwo extends Page {
           className="margin-ends-giga"
           placeholder="https://johndoe.com/"
           value={personalWebsiteLink}
-          onChange={newPersonalWebsiteLink => this.updateApplication({ personalWebsiteLink: newPersonalWebsiteLink })}
+          onChange={newPersonalWebsiteLink => 
+            this.updateApplication({ 
+              personalWebsiteLink: newPersonalWebsiteLink 
+            })}
           onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
           error={this.getErrorIfBlurred('personalWebsiteLink')}
         />
@@ -159,13 +162,14 @@ class PageTwo extends Page {
           value={interestForNwHacks}
           maxLength={750}
           rows={7}
-          // onChange={console.log(interestForNwHacks)}
-          onChange={newInterestForNwHacks => this.updateApplication({ interestForNwHacks: newInterestForNwHacks })}
+          onChange={newInterestForNwHacks => this.updateApplication({
+             interestForNwHacks: newInterestForNwHacks 
+            })}
           onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
           error={this.getErrorIfBlurred('interestForNwHacks')}
         />
         <TextArea
-          label={(<div><img className="vertical-align-top emoji" alt="🏅" src={medal} /> Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)</div>)}
+          label={(<div><img className="vertical-align-top emoji" alt="🏅" src={medal} /> Tell us about a recent project you&apos;ve worked on that you&apos;re proud of! (It doesn&apos;t have to be technical)</div>)}
           name="longanswer-2"
           className="margin-ends-giga"
           placeholder="Max 750 characters"
@@ -180,7 +184,5 @@ class PageTwo extends Page {
     );
   }
 }
-
-
 
 export default PageTwo;
