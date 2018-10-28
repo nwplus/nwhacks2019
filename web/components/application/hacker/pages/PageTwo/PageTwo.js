@@ -64,7 +64,6 @@ class PageTwo extends Page {
           />
         </RadioGroup>
 
-        {/* // Todo - not exactly how you guys want to store the values of the check boxes in the database */}
         <CheckboxGroup
           name="interested-role-checkbox"
           label="How do you wish to contribute at nwHacks? Your choice will not affect your application and you can always change your mind."
@@ -125,10 +124,9 @@ class PageTwo extends Page {
           className="margin-ends-giga"
           placeholder="https://johndoe.com/"
           value={personalWebsiteLink}
-          onChange={newPersonalWebsiteLink => 
-            this.updateApplication({ 
-              personalWebsiteLink: newPersonalWebsiteLink 
-            })}
+          onChange={newPersonalWebsiteLink => this.updateApplication({
+            personalWebsiteLink: newPersonalWebsiteLink
+          })}
           onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
           error={this.getErrorIfBlurred('personalWebsiteLink')}
         />
@@ -153,7 +151,6 @@ class PageTwo extends Page {
           onBlur={() => this.setFieldAsBlurred('resumeLink')}
           error={this.getErrorIfBlurred('resumeLink')}
         />
-
         <TextArea
           label={(<div><img className="vertical-align-top emoji" alt="🏗️" src={crane} /> What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited.</div>)}
           name="longanswer-1"
@@ -163,8 +160,7 @@ class PageTwo extends Page {
           maxLength={750}
           rows={7}
           onChange={newInterestForNwHacks => this.updateApplication({
-             interestForNwHacks: newInterestForNwHacks 
-            })}
+            interestForNwHacks: newInterestForNwHacks})}
           onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
           error={this.getErrorIfBlurred('interestForNwHacks')}
         />
