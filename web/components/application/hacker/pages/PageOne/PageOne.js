@@ -13,6 +13,9 @@ import { genders } from '../../../genders';
 import { levelsOfEducation } from '../../../education';
 import { majors } from '../../../majors';
 
+import books from '../../../../../assets/emoji/book.svg';
+import mountain from '../../../../../assets/emoji/mountain.svg';
+
 class PageOne extends Page {
   constructor(props) {
     super(props);
@@ -57,14 +60,10 @@ class PageOne extends Page {
 
     return (
       <HackerApplicationPageTemplate {...this.getPageTemplateProps()}>
-        <h1>About you <span role="img" aria-label="book">📚</span></h1>
+        <h1>About you <img className="emoji emoji-h1" alt="📚" src={books} /></h1>
         <p>
-        nwHacks is Western Canada’s largest collegiate hackathon taking place
-        on January 26th - 27th, 2019 at the University of British Columbia.
-        As expected, we receive a large number of applications every year.
-        We focus on curating a quality hackathon experience for each attendee.
-        For a fair assessment of your application,
-        we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
+          {'nwHacks is Western Canada’s largest collegiate hackathon taking place on January 26th - 27th, 2019 at the University of British Columbia. As expected, we receive a large number of applications every year. We focus on curating a quality hackathon experience for each attendee. For a fair assessment of your application, we encourage you to put your best foot forward on this journey! '}
+          <img className="emoji" alt="⛰️" src={mountain} />
         </p>
         <TextInput
           label="What is your first name?"
