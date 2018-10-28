@@ -69,6 +69,7 @@
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "react-select": "2.1.0",
+    "reaptcha": "1.4.0",
     "redux": "4.0.0",
     "redux-firestore": "0.5.7",
     "redux-persist": "5.10.0",
