@@ -111,6 +111,7 @@ class PageOne extends Page {
           value={gender}
           name="gender"
           label="What gender do you identify as?"
+          placeholder="Enter your gender"
           className="margin-ends-giga"
           onChange={({ value: newGender }) => this.updateApplication({ gender: newGender })}
           onBlur={() => this.setFieldAsBlurred('gender')}
