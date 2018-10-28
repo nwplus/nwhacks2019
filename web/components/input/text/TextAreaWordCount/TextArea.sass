@@ -1,0 +1,20 @@
+.text-area
+  p
+    @extend .margin-top-xs
+    font-size: 15px
+  textarea
+    resize: none
+    border: 1px solid $grey-slate
+    margin-top: 10px
+    border-radius: 4px
+
+    &:disabled
+      border-color: $grey-light
+      color: $grey-light
+
+    &:focus
+      outline: none
+      border-color: $primary
+
+    &.error
+      border-color: $error-dark
