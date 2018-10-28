@@ -28,7 +28,6 @@ class PageTwo extends Page {
         resumeLink,
         interestForNwHacks,
         recentProject,
-        email,
       },
     } = this.props;
 
@@ -61,6 +60,7 @@ class PageTwo extends Page {
           />
         </RadioGroup>
 
+        {/* // Todo - not exactly how you guys want to store the values of the check boxes in the database */}
         {/* <CheckboxGroup
           name="interested-role"
           label="Is this your first hackathon?"
@@ -84,18 +84,6 @@ class PageTwo extends Page {
         </CheckboxGroup> */}
 
         <TextInput
-          label="Email"
-          name="hacker-application-email"
-          value={email}
-          onChange={(newEmail) => {
-            this.updateApplication({
-              email: newEmail,
-            });
-          }}
-          onBlur={() => this.setFieldAsBlurred('email')}
-          error={this.getErrorIfBlurred('email')}
-        />
-        <TextInput
           label="Github/BitBucket/Github link (optional)"
           name="github-link"
           className="margin-ends-giga"
@@ -104,8 +92,8 @@ class PageTwo extends Page {
           onChange={newGithubLink => this.updateApplication({ githubLink: newGithubLink })}
           // onBlur={() => this.setFieldAsBlurred('githubLink')}
           error={this.getErrorIfBlurred('githubLink')}
-          />
-          <TextInput
+        />
+        <TextInput
           label="Personal website/portfolio link (optional)"
           name="personal-website-link"
           className="margin-ends-giga"
@@ -114,8 +102,8 @@ class PageTwo extends Page {
           onChange={newPersonalWebsiteLink => this.updateApplication({ personalWebsiteLink: newPersonalWebsiteLink })}
           // onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
           error={this.getErrorIfBlurred('personalWebsiteLink')}
-          />
-          <TextInput
+        />
+        <TextInput
           label="LinkedIn (optional)"
           name="linkedin-link"
           className="margin-ends-giga"
@@ -124,8 +112,10 @@ class PageTwo extends Page {
           onChange={newLinkedInLink => this.updateApplication({ linkedInLink: newLinkedInLink })}
           // onBlur={() => this.setFieldAsBlurred('linkedInLink')}
           error={this.getErrorIfBlurred('linkedInLink')}
-          />
-          <TextInput
+        />
+
+        {/* Todo -  Need to make resume link mandatory? */}
+        <TextInput
           label="Resume"
           name="resume-link"
           className="margin-ends-giga"
@@ -134,10 +124,33 @@ class PageTwo extends Page {
           onChange={newResumeLink => this.updateApplication({ resumeLink: newResumeLink })}
           onBlur={() => this.setFieldAsBlurred('resumeLink')}
           error={this.getErrorIfBlurred('resumeLink')}
-          />
-          <TextArea
+        />
+
+        {/* // Todo - 1. Created a duplicate of TextArea under  web/components/input/text/TextAreaWordCount,
+                 not sure if you guys want to create a new custom component to count words or to modify TextArea to support word count because it 
+                is currently just counting characters. 
+               I fixed the operator so that if there are 250 words, it will appear as "You have 0 characters left" in blue.
+              
+                Also, I just kinda hacked TextArea so that it's logic counts words. 
+
+                I modified the following function in web/components/input/text/TextArea/index.js
+
+
+                  onTextChange = (text) => {
+                        this.setState({
+                          currentCharCount: text.match(/(\w+)/g).length,
+                        });
+                      };
+
+
+                2. Need to change the display so that it says "You have X words left instead of characters."
+
+                Todo? - 3. do I need to convert the emoji's to svgs? How would I add svgs within quotes?? 
+              */}
+
+        <TextArea
           label="🏗️ What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited."
-          name="resume-link"
+          name="essay-1"
           className="margin-ends-giga"
           placeholder="Max 250 words"
           value={interestForNwHacks}
@@ -146,10 +159,10 @@ class PageTwo extends Page {
           onChange={newInterestForNwHacks => this.updateApplication({ interestForNwHacks: newInterestForNwHacks })}
           onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
           error={this.getErrorIfBlurred('interestForNwHacks')}
-          />
-          <TextArea
+        />
+        <TextArea
           label="🏅 Tell us about a recent project you’ve worked on that you're proud of! (It doesn't have to be technical)"
-          name="resume-link"
+          name="essay-2"
           className="margin-ends-giga"
           placeholder="Max 250 words"
           value={recentProject}
@@ -158,7 +171,7 @@ class PageTwo extends Page {
           onChange={newRecentProject => this.updateApplication({ recentProject: newRecentProject })}
           onBlur={() => this.setFieldAsBlurred('recentProject')}
           error={this.getErrorIfBlurred('recentProject')}
-          />
+        />
       </HackerApplicationPageTemplate>
     );
   }
