@@ -125,8 +125,7 @@ class PageTwo extends Page {
           placeholder="https://johndoe.com/"
           value={personalWebsiteLink}
           onChange={newPersonalWebsiteLink => this.updateApplication({
-            personalWebsiteLink: newPersonalWebsiteLink
-          })}
+            personalWebsiteLink: newPersonalWebsiteLink })}
           onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
           error={this.getErrorIfBlurred('personalWebsiteLink')}
         />
@@ -160,7 +159,7 @@ class PageTwo extends Page {
           maxLength={750}
           rows={7}
           onChange={newInterestForNwHacks => this.updateApplication({
-            interestForNwHacks: newInterestForNwHacks})}
+            interestForNwHacks: newInterestForNwHacks })}
           onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
           error={this.getErrorIfBlurred('interestForNwHacks')}
         />
