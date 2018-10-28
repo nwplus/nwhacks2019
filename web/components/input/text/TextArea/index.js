@@ -19,7 +19,7 @@ class TextArea extends React.Component {
   };
 
   render() {
-    const { label, placeholder, rows, cols, name, showCharCount, className } = this.props;
+    const { label, placeholder, rows, cols, name, showCharCount, className, onBlur } = this.props;
     const { currentCharCount, maxLength } = this.state;
     const numCharsAvailable = maxLength - currentCharCount;
     const maxLengthExceeded = currentCharCount > maxLength;
@@ -30,6 +30,7 @@ class TextArea extends React.Component {
           <textarea
             placeholder={placeholder}
             onChange={e => this.onTextChange(e.target.value)}
+            onBlur={onBlur}
             name={name}
             rows={rows}
             cols={cols}
@@ -48,7 +49,6 @@ class TextArea extends React.Component {
 TextArea.defaultProps = {
   showCharCount: true,
   className: '',
-  onChange: () => {},
 };
 
 TextArea.propTypes = {
@@ -78,6 +78,9 @@ TextArea.propTypes = {
 
   // onchange prop
   onChange: PropTypes.func,
+
+  // on blur function
+  onBlur: PropTypes.func,
 
 };
 
