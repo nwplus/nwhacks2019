@@ -42,23 +42,26 @@ export class HackerApplicationContainer extends React.Component {
       this.signUp(firebase, userCredentials);
     }
 
-    // POST application data to cloud function for submission
-    Axios.post(
-      firebase.nwUtils.getFunctionUrl('submitApplicationHacker'),
-      hackerApplication,
-      { headers: { crossDomain: true, 'Content-Type': 'application/json' } }
-    ).then((res) => {
-      if (res.status === 200) {
-        //     clear_application_cache()
-        //     redirect_to_application_success()
-        console.log(res);
-      } else {
-        //     display_error_message()
-      }
-    }).catch((err) => {
-      // redirect to err
-      console.log(err);
-    });
+    if (!hackerApplication.isSubmitted || true) {
+      // POST application data to cloud function for submission
+      hackerApplication.isSubmitted = true;
+      Axios.post(
+        firebase.nwUtils.getFunctionUrl('submitApplicationHacker'),
+        hackerApplication,
+        { headers: { 'Content-Type': 'text/plain' } }
+      ).then((res) => {
+        if (res.status === 200) {
+          //     clear_application_cache()
+          //     redirect_to_application_success()
+          console.log(res);
+        } else {
+          //     display_error_message()
+        }
+      }).catch((err) => {
+        // redirect to err
+        console.log(err);
+      });
+    }
   }
 
   render() {
