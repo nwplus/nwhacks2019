@@ -20,6 +20,10 @@ class PageTwo extends Page {
       application: {
         firstName,
         isFirstHackathon,
+        githubLink,
+        personalWebsiteLink,
+        linkedInLink,
+        resumeLink,
         email,
       },
     } = this.props;
@@ -65,6 +69,46 @@ class PageTwo extends Page {
           onBlur={() => this.setFieldAsBlurred('email')}
           error={this.getErrorIfBlurred('email')}
         />
+        <TextInput
+          label="Github/BitBucket/Github link (optional)"
+          name="github-link"
+          className="margin-ends-giga"
+          placeholder="https://github.com/JohnDoe"
+          value={githubLink}
+          onChange={newGithubLink => this.updateApplication({ githubLink: newGithubLink })}
+          // onBlur={() => this.setFieldAsBlurred('githubLink')}
+          error={this.getErrorIfBlurred('githubLink')}
+          />
+          <TextInput
+          label="Personal website/portfolio link (optional)"
+          name="personal-website-link"
+          className="margin-ends-giga"
+          placeholder="https://johndoe.com/"
+          value={personalWebsiteLink}
+          onChange={newPersonalWebsiteLink => this.updateApplication({ personalWebsiteLink: newPersonalWebsiteLink })}
+          // onBlur={() => this.setFieldAsBlurred('personalWebsiteLink')}
+          error={this.getErrorIfBlurred('personalWebsiteLink')}
+          />
+          <TextInput
+          label="LinkedIn (optional)"
+          name="linkedin-link"
+          className="margin-ends-giga"
+          placeholder="https://www.linkedin.com/in/johndoe/"
+          value={linkedInLink}
+          onChange={newLinkedInLink => this.updateApplication({ linkedInLink: newLinkedInLink })}
+          // onBlur={() => this.setFieldAsBlurred('linkedInLink')}
+          error={this.getErrorIfBlurred('linkedInLink')}
+          />
+          <TextInput
+          label="Resume"
+          name="resume-link"
+          className="margin-ends-giga"
+          placeholder="https://drive.google.com/open?id=0B0GZwoww_XiFMHJENWlYN0R2RlE"
+          value={resumeLink}
+          onChange={newResumeLink => this.updateApplication({ resumeLink: newResumeLink })}
+          onBlur={() => this.setFieldAsBlurred('resumeLink')}
+          error={this.getErrorIfBlurred('resumeLink')}
+          />
       </HackerApplicationPageTemplate>
     );
   }
