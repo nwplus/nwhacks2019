@@ -22,5 +22,6 @@ export const constraints = {
   },
   email: {
     email: true,
-  }
+  },
+  major: atLeastOneCharacter,
 };
