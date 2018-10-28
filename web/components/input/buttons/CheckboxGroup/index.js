@@ -5,23 +5,29 @@ const InputContext = React.createContext({});
 
 const Checkbox = ({ name, value, label, className, checked, disabled, onChange }) => (
   <InputContext.Consumer>
-    {context => (
-      <div className={`checkbox user-select-none margin-bottom-s margin-left-s ${className}`}>
-        <label className="clickable">
-          <input
-            type="checkbox"
-            name={name || context.name}
-            className="pos-abs opacity-0"
-            value={value}
-            defaultChecked={checked || context.checked}
-            disabled={disabled || context.disabled}
-            onChange={onChange || context.onChange}
-          />
-          <span className="checkmark size-icon pos-abs" />
-          <span className="label-text margin-left-l white-space-nowrap">{label}</span>
-        </label>
-      </div>
-    )}
+
+    {
+      (context) => {
+        const contextOnChange = event => context.onChange(event.target.value);
+        return (
+          <div className={`checkbox user-select-none margin-bottom-s margin-left-s ${className}`}>
+            <label className="clickable">
+              <input
+                type="checkbox"
+                name={name || context.name}
+                className="pos-abs opacity-0"
+                value={value}
+                defaultChecked={checked || context.checked}
+                disabled={disabled || context.disabled}
+                onChange={onChange || contextOnChange}
+              />
+              <span className="checkmark size-icon pos-abs" />
+              <span className="label-text margin-left-l white-space-nowrap">{label}</span>
+            </label>
+          </div>
+        );
+      }
+    }
   </InputContext.Consumer>
 );
 
@@ -47,10 +53,13 @@ Checkbox.defaultProps = {
 };
 
 const CheckboxGroup = (props) => {
-  const { children, className } = props;
+  const { children, className, label } = props;
   return (
     <InputContext.Provider value={props}>
-      <div className={`flex wrap ${className}`}>{children}</div>
+      <div className={className}>
+        {label ? <h5>{label}</h5> : null}
+        <div className={`flex wrap ${className}`}>{children}</div>
+      </div>
     </InputContext.Provider>
   );
 };
