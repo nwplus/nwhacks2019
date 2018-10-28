@@ -5,6 +5,7 @@ import { HackerApplicationPageTemplate } from '../PageTemplate';
 import { Page } from '../../../Page';
 import { constraints } from './PageTwoConstraints';
 import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
+import { Checkbox, CheckboxGroup } from '../../../../input/buttons/CheckboxGroup';
 
 // TODO: Update design for page two
 // For now, just copy pasted design from page one,
@@ -20,6 +21,7 @@ class PageTwo extends Page {
       application: {
         firstName,
         isFirstHackathon,
+        interestedRole,
         githubLink,
         personalWebsiteLink,
         linkedInLink,
@@ -58,6 +60,28 @@ class PageTwo extends Page {
             selected={isFirstHackathon === false}
           />
         </RadioGroup>
+
+        {/* <CheckboxGroup
+          name="interested-role"
+          label="Is this your first hackathon?"
+          className="dir-row margin-ends-giga"
+          // onChange={(newIsFirstHackathon) => {
+          //   newIsFirstHackathon = newIsFirstHackathon === 'true';
+          //   this.updateApplication({ isFirstHackathon: newIsFirstHackathon });
+          // }
+          // }
+        >
+          <Checkbox
+            label="Developer"
+            value="true"
+            // selected={isFirstHackathon === true}
+          />
+          <Checkbox
+            label="Designer"
+            value="false"
+            // selected={isFirstHackathon === false}
+          />
+        </CheckboxGroup> */}
 
         <TextInput
           label="Email"
@@ -139,5 +163,7 @@ class PageTwo extends Page {
     );
   }
 }
+
+
 
 export default PageTwo;
