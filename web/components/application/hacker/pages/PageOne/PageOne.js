@@ -12,6 +12,7 @@ import { schools } from '../../../schools';
 import { genders } from '../../../genders';
 import { levelsOfEducation } from '../../../education';
 import { majors } from '../../../majors';
+import { ethnicities } from '../../../ethnicity';
 
 import books from '../../../../../assets/emoji/book.svg';
 import mountain from '../../../../../assets/emoji/mountain.svg';
@@ -51,6 +52,8 @@ class PageOne extends Page {
         gradYear,
         travel,
         major,
+        phoneNumber,
+        ethnicity,
       },
     } = this.props;
 
@@ -94,10 +97,11 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('lastName')}
           />
         <TextInput
-          label="Email"
+          label="What is your email?"
           placeholder="hacker@email.com"
           name="hacker-application-email"
           value={email}
+          className="margin-ends-giga"
           onChange={(newEmail) => {
             this.updateApplication({
               email: newEmail,
@@ -106,16 +110,43 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('email')}
           error={this.getErrorIfBlurred('email')}
           />
+        <TextInput
+          label="What is your phone number?"
+          placeholder="123-456-7890"
+          name="phone-number"
+          value={phoneNumber}
+          className="margin-ends-giga"
+          onChange={(newPhoneNumber) => {
+            this.updateApplication({
+              phoneNumber: newPhoneNumber,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('phoneNumber')}
+          error={this.getErrorIfBlurred('phoneNumber')}
+          />
         <Select
           options={genders}
           value={gender}
           name="gender"
-          label="What gender do you identify as?"
+          label="Which gender do you identify as?"
           placeholder="Enter your gender"
           className="margin-ends-giga"
           onChange={({ value: newGender }) => this.updateApplication({ gender: newGender })}
           onBlur={() => this.setFieldAsBlurred('gender')}
           error={this.getErrorIfBlurred('gender')}
+          isSearchable
+          allowNewOption
+          />
+        <Select
+          options={ethnicities}
+          value={ethnicity}
+          name="ethnicity"
+          label="What is your race/ethnicity?"
+          placeholder="Enter your race/ethnicity"
+          className="margin-ends-giga"
+          onChange={({ value: newEthnicity }) => this.updateApplication({ ethnicity: newEthnicity })}
+          onBlur={() => this.setFieldAsBlurred('ethnicity')}
+          error={this.getErrorIfBlurred('ethnicity')}
           isSearchable
           allowNewOption
           />

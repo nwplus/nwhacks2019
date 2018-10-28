@@ -24,4 +24,6 @@ export const constraints = {
     email: true,
   },
   major: atLeastOneCharacter,
+  phoneNumber: atLeastOneCharacter,
+  ethnicity: atLeastOneCharacter,
 };
