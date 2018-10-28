@@ -28,11 +28,11 @@ class PageOne extends Page {
     this.state.cityQuery = city;
   }
 
-  isEducationChosen = (education) =>  education === levelsOfEducation[0] ||
-                                      education === levelsOfEducation[1] ||
-                                      education === levelsOfEducation[2]
+  isEducationChosen = education => education === levelsOfEducation[0]
+                                      || education === levelsOfEducation[1]
+                                      || education === levelsOfEducation[2]
 
-  isHighSchool = (education) => education === levelsOfEducation[0]
+  isHighSchool = education => education === levelsOfEducation[0]
 
   render() {
     const {
@@ -152,19 +152,21 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('education')}
           error={this.getErrorIfBlurred('education')}
           />
-        { this.isEducationChosen(education) ?
-        <Select
-          options={majors}
-          value={major}
-          name="major"
-          label={this.isHighSchool(education) ? 'What do you plan on studying?' : 'What is your major?'}
-          className="margin-ends-giga"
-          onChange={({ value: newMajor }) => this.updateApplication({
-            major: newMajor,
-          })}
-          onBlur={() => this.setFieldAsBlurred('major')}
-          error={this.getErrorIfBlurred('major')}
+        { this.isEducationChosen(education)
+          ? (
+            <Select
+              options={majors}
+              value={major}
+              name="major"
+              label={this.isHighSchool(education) ? 'What do you plan on studying?' : 'What is your major?'}
+              className="margin-ends-giga"
+              onChange={({ value: newMajor }) => this.updateApplication({
+                major: newMajor,
+              })}
+              onBlur={() => this.setFieldAsBlurred('major')}
+              error={this.getErrorIfBlurred('major')}
           />
+          )
           : null
         }
         <Select

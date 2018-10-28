@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { TextInput } from '../../../../input/text';
 import { HackerApplicationPageTemplate } from '../PageTemplate';
 import { Page } from '../../../Page';
 import { constraints } from './PageTwoConstraints';
