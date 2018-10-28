@@ -17,20 +17,16 @@ class PageTwo extends Page {
   render() {
     const {
       application: {
+        firstName,
         email,
       },
     } = this.props;
 
     return (
       <HackerApplicationPageTemplate {...this.getPageTemplateProps()}>
-        <h1>About you <span role="img" aria-label="book">📚</span></h1>
+        <h2>Nice to meet you, {firstName}! <span role="img" aria-label="wavinghands">👋</span></h2>
         <p>
-          nwHacks is Western Canada’s largest collegiate hackathon taking place
-          on January 26th - 27th, 2019 at the University of British Columbia.
-          As expected, we receive a large number of applications every year.
-          We focus on curating a quality hackathon experience for each attendee.
-          For a fair assessment of your application,
-          we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
+          Help us get to know you better by providing as many links as you feel will support your application.
         </p>
         <TextInput
           label="Email"
