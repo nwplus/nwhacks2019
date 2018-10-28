@@ -114,7 +114,7 @@ class PageTwo extends Page {
           error={this.getErrorIfBlurred('linkedInLink')}
         />
 
-        {/* Todo -  Need to make resume link mandatory? */}
+        {/* Todo -  Need to make resume link mandatory, and add the question hover button */}
         <TextInput
           label="Resume"
           name="resume-link"
