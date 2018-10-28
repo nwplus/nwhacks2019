@@ -15,12 +15,6 @@ class PageTwo extends Page {
   }
 
   render() {
-    const {
-      application: {
-        email,
-      },
-    } = this.props;
-
     return (
       <HackerApplicationPageTemplate {...this.getPageTemplateProps()}>
         <h1>About you <span role="img" aria-label="book">📚</span></h1>
@@ -32,18 +26,6 @@ class PageTwo extends Page {
           For a fair assessment of your application,
           we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
         </p>
-        <TextInput
-          label="Email"
-          name="hacker-application-email"
-          value={email}
-          onChange={(newEmail) => {
-            this.updateApplication({
-              email: newEmail,
-            });
-          }}
-          onBlur={() => this.setFieldAsBlurred('email')}
-          error={this.getErrorIfBlurred('email')}
-          />
       </HackerApplicationPageTemplate>
     );
   }

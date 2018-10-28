@@ -32,6 +32,7 @@ class PageOne extends Page {
       application: {
         firstName,
         lastName,
+        email,
         city,
         school,
         gender,
@@ -59,6 +60,7 @@ class PageOne extends Page {
         </p>
         <TextInput
           label="What is your first name?"
+          placeholder="First Name"
           name="first-name"
           className="margin-ends-giga"
           value={firstName}
@@ -72,6 +74,7 @@ class PageOne extends Page {
           />
         <TextInput
           label="What is your last name?"
+          placeholder="Last Name"
           name="last-name"
           className="margin-ends-giga"
           value={lastName}
@@ -82,6 +85,19 @@ class PageOne extends Page {
           }}
           onBlur={() => this.setFieldAsBlurred('lastName')}
           error={this.getErrorIfBlurred('lastName')}
+          />
+        <TextInput
+          label="Email"
+          placeholder="hacker@email.com"
+          name="hacker-application-email"
+          value={email}
+          onChange={(newEmail) => {
+            this.updateApplication({
+              email: newEmail,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('email')}
+          error={this.getErrorIfBlurred('email')}
           />
         <Select
           options={genders}
@@ -133,6 +149,7 @@ class PageOne extends Page {
           value={school}
           name="school-name"
           label="What school do you currently attend?"
+          placeholder="Enter your school"
           className="margin-ends-giga"
           onChange={({ value: newSchool }) => this.updateApplication({ school: newSchool })}
           onBlur={() => this.setFieldAsBlurred('school')}
@@ -142,6 +159,7 @@ class PageOne extends Page {
           />
         <TextInput
           label="What is your graduation year?"
+          placeholder="20--"
           name="graduation-year"
           className="margin-ends-giga"
           value={gradYear}

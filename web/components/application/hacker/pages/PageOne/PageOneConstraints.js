@@ -20,4 +20,7 @@ export const constraints = {
   travel: {
     presence: true,
   },
+  email: {
+    email: true,
+  }
 };
