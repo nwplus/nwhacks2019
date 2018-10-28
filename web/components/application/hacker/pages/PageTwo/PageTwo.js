@@ -7,9 +7,6 @@ import { constraints } from './PageTwoConstraints';
 import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
 import { Checkbox, CheckboxGroup } from '../../../../input/buttons/CheckboxGroup';
 
-// TODO: Update design for page two
-// For now, just copy pasted design from page one,
-// since we're only concerned about functionality at the moment
 class PageTwo extends Page {
   constructor(props) {
     super(props);
