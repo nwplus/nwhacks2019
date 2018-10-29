@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Application } from '../../components/application';
-import { ApplicationContext } from './Context';
 
 export class ApplicationContainer extends React.Component {
   constructor(props) {
@@ -51,6 +50,7 @@ export class ApplicationContainer extends React.Component {
       lastValidIndex,
       updateApplication,
       submitApplication,
+      resetApplicationUI,
     } = this.props;
     const { cancelled } = this.state;
 
@@ -68,12 +68,14 @@ export class ApplicationContainer extends React.Component {
       cancelled,
       submitApplication,
       application,
+      resetApplicationUI,
     };
 
     return (
-      <ApplicationContext.Provider value={applicationProps}>
-        <Application pages={pages} />
-      </ApplicationContext.Provider>
+      <Application
+        pages={pages}
+        {...applicationProps}
+        />
     );
   }
 }
