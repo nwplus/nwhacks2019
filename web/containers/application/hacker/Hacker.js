@@ -65,6 +65,8 @@ export class HackerApplicationContainer extends React.Component {
         // redirect to err
         console.log(err);
       });
+    } else {
+      console.log('Application already submitted!');
     }
   }
 
