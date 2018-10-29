@@ -31,6 +31,8 @@ The front-end is a React web app.
 
 ```bash
 $> make web         # Serve web app using webpack-dev-server
+$> make test        # To run the web app tests locally
+$> make lint        # To run the linter locally
 $> make build       # To build the web app into `./docs`
 $> make serve       # Serve built static web app
 ```

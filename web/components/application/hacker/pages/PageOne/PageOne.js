@@ -11,6 +11,11 @@ import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
 import { schools } from '../../../schools';
 import { genders } from '../../../genders';
 import { levelsOfEducation } from '../../../education';
+import { majors } from '../../../majors';
+import { ethnicities } from '../../../ethnicity';
+
+import books from '../../../../../assets/emoji/book.svg';
+import mountain from '../../../../../assets/emoji/mountain.svg';
 
 class PageOne extends Page {
   constructor(props) {
@@ -27,11 +32,18 @@ class PageOne extends Page {
     this.state.cityQuery = city;
   }
 
+  isEducationChosen = education => education === levelsOfEducation[0]
+                                      || education === levelsOfEducation[1]
+                                      || education === levelsOfEducation[2]
+
+  isHighSchool = education => education === levelsOfEducation[0]
+
   render() {
     const {
       application: {
         firstName,
         lastName,
+        email,
         city,
         school,
         gender,
@@ -39,6 +51,9 @@ class PageOne extends Page {
         education,
         gradYear,
         travel,
+        major,
+        phoneNumber,
+        ethnicity,
       },
     } = this.props;
 
@@ -48,17 +63,14 @@ class PageOne extends Page {
 
     return (
       <HackerApplicationPageTemplate {...this.getPageTemplateProps()}>
-        <h1>About you <span role="img" aria-label="book">📚</span></h1>
+        <h1>About you <img className="emoji emoji-h1" alt="📚" src={books} /></h1>
         <p>
-        nwHacks is Western Canada’s largest collegiate hackathon taking place
-        on January 26th - 27th, 2019 at the University of British Columbia.
-        As expected, we receive a large number of applications every year.
-        We focus on curating a quality hackathon experience for each attendee.
-        For a fair assessment of your application,
-        we encourage you to put your best foot forward on this journey!<span role="img" aria-label="mountain">⛰️</span>
+          {'nwHacks is Western Canada’s largest collegiate hackathon taking place on January 26th - 27th, 2019 at the University of British Columbia. As expected, we receive a large number of applications every year. We focus on curating a quality hackathon experience for each attendee. For a fair assessment of your application, we encourage you to put your best foot forward on this journey! '}
+          <img className="emoji" alt="⛰️" src={mountain} />
         </p>
         <TextInput
           label="What is your first name?"
+          placeholder="First Name"
           name="first-name"
           className="margin-ends-giga"
           value={firstName}
@@ -72,6 +84,7 @@ class PageOne extends Page {
           />
         <TextInput
           label="What is your last name?"
+          placeholder="Last Name"
           name="last-name"
           className="margin-ends-giga"
           value={lastName}
@@ -83,15 +96,59 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('lastName')}
           error={this.getErrorIfBlurred('lastName')}
           />
+        <TextInput
+          label="What is your email?"
+          placeholder="hacker@email.com"
+          name="hacker-application-email"
+          value={email}
+          className="margin-ends-giga"
+          onChange={(newEmail) => {
+            this.updateApplication({
+              email: newEmail,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('email')}
+          error={this.getErrorIfBlurred('email')}
+          />
+        <TextInput
+          label="What is your phone number?"
+          placeholder="123-456-7890"
+          name="phone-number"
+          value={phoneNumber}
+          className="margin-ends-giga"
+          onChange={(newPhoneNumber) => {
+            this.updateApplication({
+              phoneNumber: newPhoneNumber,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('phoneNumber')}
+          error={this.getErrorIfBlurred('phoneNumber')}
+          />
         <Select
           options={genders}
           value={gender}
           name="gender"
-          label="What gender do you identify as?"
+          label="Which gender do you identify as?"
+          placeholder="Enter your gender"
           className="margin-ends-giga"
           onChange={({ value: newGender }) => this.updateApplication({ gender: newGender })}
           onBlur={() => this.setFieldAsBlurred('gender')}
           error={this.getErrorIfBlurred('gender')}
+          isSearchable
+          allowNewOption
+          />
+        <Select
+          options={ethnicities}
+          value={ethnicity}
+          name="ethnicity"
+          label="What is your race/ethnicity?"
+          placeholder="Enter your race/ethnicity"
+          className="margin-ends-giga"
+          onChange={({ value: newEthnicity }) => this.updateApplication({
+            ethnicity: newEthnicity,
+          })}
+          onBlur={() => this.setFieldAsBlurred('ethnicity')}
+          error={this.getErrorIfBlurred('ethnicity')}
           isSearchable
           allowNewOption
           />
@@ -128,11 +185,31 @@ class PageOne extends Page {
           onBlur={() => this.setFieldAsBlurred('education')}
           error={this.getErrorIfBlurred('education')}
           />
+        { this.isEducationChosen(education)
+          ? (
+            <Select
+              options={majors}
+              value={major}
+              name="major"
+              label={this.isHighSchool(education) ? 'What do you plan on studying?' : 'What is your major?'}
+              className="margin-ends-giga"
+              onChange={({ value: newMajor }) => this.updateApplication({
+                major: newMajor,
+              })}
+              onBlur={() => this.setFieldAsBlurred('major')}
+              error={this.getErrorIfBlurred('major')}
+              isSearchable
+              allowNewOption
+          />
+          )
+          : null
+        }
         <Select
           options={schools}
           value={school}
           name="school-name"
           label="What school do you currently attend?"
+          placeholder="Enter your school"
           className="margin-ends-giga"
           onChange={({ value: newSchool }) => this.updateApplication({ school: newSchool })}
           onBlur={() => this.setFieldAsBlurred('school')}
@@ -142,6 +219,7 @@ class PageOne extends Page {
           />
         <TextInput
           label="What is your graduation year?"
+          placeholder="20--"
           name="graduation-year"
           className="margin-ends-giga"
           value={gradYear}

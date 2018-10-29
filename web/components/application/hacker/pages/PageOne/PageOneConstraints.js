@@ -20,4 +20,10 @@ export const constraints = {
   travel: {
     presence: true,
   },
+  email: {
+    email: true,
+  },
+  major: atLeastOneCharacter,
+  phoneNumber: atLeastOneCharacter,
+  ethnicity: atLeastOneCharacter,
 };
