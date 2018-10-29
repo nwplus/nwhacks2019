@@ -137,7 +137,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     resetApplicationUI: () => {
       dispatch({ type: ACTION_TYPES.RESET_HACKER_UI });
-    }
+    },
   };
 };
 

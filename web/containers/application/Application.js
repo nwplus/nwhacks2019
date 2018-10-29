@@ -107,6 +107,12 @@ ApplicationContainer.propTypes = {
   // In the pages, you may supply an argument when calling this function.
   submitApplication: PropTypes.func.isRequired,
 
+  // This function is called whenever the info about application UI in
+  // redux store needs to be reset.
+  // This usually happens when the cached redux store is old and needs a reset.
+  // e.g. cached activeIndex could be larger than the number of pages after we remove some pages.
+  resetApplicationUI: PropTypes.func.isRequired,
+
   // pages determines the pages in the application.
   pages: PropTypes.oneOfType([
     PropTypes.element,

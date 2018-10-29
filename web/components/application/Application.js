@@ -7,7 +7,7 @@ class Application extends React.Component {
     const {
       pages,
       resetApplicationUI,
-      activeIndex
+      activeIndex,
     } = this.props;
 
     if (activeIndex >= pages.length) {
@@ -35,6 +35,9 @@ Application.propTypes = {
     PropTypes.element,
     PropTypes.array,
   ]),
+  resetApplicationUI: PropTypes.func,
+  activeIndex: PropTypes.number,
+  cancelled: PropTypes.bool,
 };
 
 export default Application;
