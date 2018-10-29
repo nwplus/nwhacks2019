@@ -12,16 +12,17 @@ class TextArea extends React.Component {
   }
 
   onTextChange = (text) => {
+    const { onChange } = this.props; onChange(text);
     this.setState({
       currentCharCount: text.length,
     });
   };
 
   render() {
-    const { label, placeholder, rows, cols, name, showCharCount, className } = this.props;
+    const { label, placeholder, rows, cols, name, showCharCount, className, onBlur } = this.props;
     const { currentCharCount, maxLength } = this.state;
     const numCharsAvailable = maxLength - currentCharCount;
-    const maxLengthExceeded = currentCharCount >= maxLength;
+    const maxLengthExceeded = currentCharCount > maxLength;
     return (
       <div className={`text-area ${className}`}>
         <h5 className="body-text">{label}</h5>
@@ -29,6 +30,7 @@ class TextArea extends React.Component {
           <textarea
             placeholder={placeholder}
             onChange={e => this.onTextChange(e.target.value)}
+            onBlur={onBlur}
             name={name}
             rows={rows}
             cols={cols}
@@ -47,11 +49,12 @@ class TextArea extends React.Component {
 TextArea.defaultProps = {
   showCharCount: true,
   className: '',
+  onChange: () => {},
 };
 
 TextArea.propTypes = {
   // the label text for the textarea header
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 
   // placeholder text for the textarea
   placeholder: PropTypes.string,
@@ -73,6 +76,13 @@ TextArea.propTypes = {
 
   // optional extra className
   className: PropTypes.string,
+
+  // onchange prop
+  onChange: PropTypes.func,
+
+  // on blur function
+  onBlur: PropTypes.func,
+
 };
 
 export { TextArea };
