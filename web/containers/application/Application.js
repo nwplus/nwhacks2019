@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Application } from '../../components/application';
-import { ApplicationContext } from './Context';
 
 export class ApplicationContainer extends React.Component {
   constructor(props) {
@@ -51,6 +50,7 @@ export class ApplicationContainer extends React.Component {
       lastValidIndex,
       updateApplication,
       submitApplication,
+      resetApplicationUI,
     } = this.props;
     const { cancelled } = this.state;
 
@@ -68,12 +68,14 @@ export class ApplicationContainer extends React.Component {
       cancelled,
       submitApplication,
       application,
+      resetApplicationUI,
     };
 
     return (
-      <ApplicationContext.Provider value={applicationProps}>
-        <Application pages={pages} />
-      </ApplicationContext.Provider>
+      <Application
+        pages={pages}
+        {...applicationProps}
+        />
     );
   }
 }
@@ -104,6 +106,12 @@ ApplicationContainer.propTypes = {
   // submitApplication is called whenever the user submits the application.
   // In the pages, you may supply an argument when calling this function.
   submitApplication: PropTypes.func.isRequired,
+
+  // This function is called whenever the info about application UI in
+  // redux store needs to be reset.
+  // This usually happens when the cached redux store is old and needs a reset.
+  // e.g. cached activeIndex could be larger than the number of pages after we remove some pages.
+  resetApplicationUI: PropTypes.func.isRequired,
 
   // pages determines the pages in the application.
   pages: PropTypes.oneOfType([

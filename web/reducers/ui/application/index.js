@@ -9,7 +9,8 @@ const applicationUI = combineReducers({
 });
 
 const applicationUIWrapper = (state, action) => {
-  if (action.type === ACTION_TYPES.CANCEL_HACKER_APPLICATION) {
+  if (action.type === ACTION_TYPES.CANCEL_HACKER_APPLICATION
+      || action.type === ACTION_TYPES.RESET_HACKER_UI) {
     state = undefined;
   }
 

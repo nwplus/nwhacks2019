@@ -64,6 +64,7 @@ export class HackerApplicationContainer extends React.Component {
       lastValidIndex,
       updateApplication,
       cancelApplication,
+      resetApplicationUI,
     } = this.props;
 
     const pages = [
@@ -81,6 +82,7 @@ export class HackerApplicationContainer extends React.Component {
         updateApplication={updateApplication}
         cancelApplication={cancelApplication}
         submitApplication={this.submitApplication}
+        resetApplicationUI={resetApplicationUI}
         pages={pages}
         />
     );
@@ -133,6 +135,9 @@ const mapDispatchToProps = (dispatch) => {
     cancelApplication: () => {
       dispatch({ type: ACTION_TYPES.CANCEL_HACKER_APPLICATION });
     },
+    resetApplicationUI: () => {
+      dispatch({ type: ACTION_TYPES.RESET_HACKER_UI });
+    },
   };
 };
 
@@ -148,6 +153,7 @@ HackerApplicationContainer.propTypes = {
   lastValidIndex: PropTypes.number.isRequired,
   updateApplication: PropTypes.func.isRequired,
   cancelApplication: PropTypes.func.isRequired,
+  resetApplicationUI: PropTypes.func.isRequired,
   featureFlags: PropTypes.object.isRequired,
   firebase: PropTypes.object,
 };
