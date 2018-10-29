@@ -13,10 +13,8 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
   data = validate.cleanAttributes(data, allowedFields.hacker);
 
   // validate data fields
-  // (uncomment when all constraints are ready)
-  // const errors = validate(data, constraints.hacker);
-
-  const errors = null;
+  const errors = validate(data, constraints.hacker);
+  console.log(errors);
 
   if (!errors) {
     db.collection('hackers').add(data)

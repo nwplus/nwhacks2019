@@ -38,18 +38,17 @@ exports.constraints = {
     isFirstHackathon: {
       presence: true,
     },
-    githubLink: {
-      url: true,
-    },
-    personalWebsiteLink: {
-      url: true,
-    },
-    linkedInLink: {
-      url: true,
-    },
+    // githubLink: {
+    //   url: true,
+    // },
+    // personalWebsiteLink: {
+    //   url: true,
+    // },
+    // linkedInLink: {
+    //   url: true,
+    // },
     resumeLink: {
       presence: true,
-      url: true,
     },
     interestForNwHacks: {
       presence: true,
