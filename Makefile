@@ -14,7 +14,7 @@ deps:
 	@echo Installing web app dependencies...
 	@(cd ./web ; yarn install)
 	@echo Installing functions dependencies...
-	@(cd ./functions ; yarn install)
+	@(cd ./functions ; yarn install --ignore-engines)
 
 .PHONY: test
 test:

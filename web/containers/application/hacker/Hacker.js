@@ -45,7 +45,7 @@ export class HackerApplicationContainer extends React.Component {
     // include recaptcha token in payload for verification in cloud function
     hackerApplication.recaptcha = recaptchaToken;
 
-    if (!hackerApplication.isSubmitted || true) {
+    if (!hackerApplication.isSubmitted) {
       // POST application data to cloud function for submission
       hackerApplication.isSubmitted = true;
       Axios.post(
@@ -56,9 +56,10 @@ export class HackerApplicationContainer extends React.Component {
         if (res.status === 200) {
           //     clear_application_cache()
           //     redirect_to_application_success()
-          console.log(res);
+          console.log('Submitted application!');
         } else {
           //     display_error_message()
+          console.log('Failed to submit application!');
         }
       }).catch((err) => {
         // redirect to err
