@@ -1,11 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import { SECTION } from './Sections';
 import { QUESTIONS } from './Questions';
 import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
-import { PrimaryButton } from '../input/buttons';
+import { PrimaryButton, SecondaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
 import { Footer } from '../footer';
+
+import { getFromFirestore } from '../../services/firestore';
 
 // MLH ribbon
 import mlhblueribbon from '../../assets/mlh-blue-ribbon.svg';
@@ -136,6 +142,17 @@ class Home extends React.Component {
   }
 
   render() {
+    const {
+      featureFlags: {
+        isLoaded: isFeatureFlagsLoaded,
+        data: featureFlagsData,
+      },
+    } = this.props;
+
+    if (!isFeatureFlagsLoaded) return null;
+
+    const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
+
     return (
       <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
         <a className="mlh-trust-badge scale-hide-phablet" href={EXTERNAL.MLH_UPCOMINGHACKATHON_LINK} target="_blank" rel="noopener noreferrer">
@@ -149,21 +166,49 @@ class Home extends React.Component {
               Western Canada&apos;s largest hackathon<br />
               January 26-27, 2019 @ the University of British Columbia
             </p>
-            <p className="secondary">
-              Get notified when registration opens!
-            </p>
-            <form
-              className="homepage-email-registration flex ai-end pad-bottom-s"
-              action={EXTERNAL.MAILCHIMP_FORM}
-              method="post">
-              <TextInput
-                name="EMAIL"
-                placeholder="hacker@email.com"
-                onChange={() => { }} />
-              <PrimaryButton
-                text="Submit"
-                type="submit" />
-            </form>
+            {
+              isApplicationEnabled
+                ? (
+                  <div className="flex ai-end pad-bottom-s scale-row-mobile">
+                    <Link to="/application/hacker" className="scale-width-mobile margin-right-s scale-margin-sides-mobile-none scale-margin-bottom-mobile-s">
+                      <PrimaryButton
+                        text="Apply now"
+                        className="scale-width-mobile"
+                      />
+                    </Link>
+                    <a
+                      target="_blank"
+                      href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
+                      rel="noopener noreferrer"
+                      className="scale-width-mobile"
+                    >
+                      <SecondaryButton
+                        text="Become a mentor"
+                        className="scale-width-mobile"
+                      />
+                    </a>
+                  </div>
+                )
+                : (
+                  <div>
+                    <p className="secondary">
+                    Get notified when registration opens!
+                    </p>
+                    <form
+                      className="homepage-email-registration flex ai-end pad-bottom-s"
+                      action={EXTERNAL.MAILCHIMP_FORM}
+                      method="post">
+                      <TextInput
+                        name="EMAIL"
+                        placeholder="hacker@email.com"
+                        onChange={() => { }} />
+                      <PrimaryButton
+                        text="Submit"
+                        type="submit" />
+                    </form>
+                  </div>
+                )
+            }
             <p className="secondary">
               <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>
                 Interested in sponsoring?
@@ -290,4 +335,20 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  const {
+    firestore,
+  } = state;
+
+  const featureFlags = getFromFirestore(firestore, 'feature_flags');
+
+  return {
+    featureFlags,
+  };
+};
+
+Home.propTypes = {
+  featureFlags: PropTypes.object.isRequired,
+};
+
+export default connect(mapStateToProps)(Home);
