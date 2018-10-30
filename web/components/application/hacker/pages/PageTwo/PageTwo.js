@@ -67,7 +67,7 @@ class PageTwo extends Page {
         <CheckboxGroup
           name="interested-role-checkbox"
           label="How do you wish to contribute at nwHacks? Your choice will not affect your application and you can always change your mind."
-          className="dir-row margin-ends-giga"
+          className="dir-row margin-ends-s"
         >
           <Checkbox
             label="Developer"
