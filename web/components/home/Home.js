@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -166,43 +167,47 @@ class Home extends React.Component {
               January 26-27, 2019 @ the University of British Columbia
             </p>
             {
-              isApplicationEnabled ?
-                <div className="flex ai-end pad-bottom-s scale-row-mobile">
-                  <Link to="/application/hacker" className="scale-width-mobile margin-right-s scale-margin-sides-mobile-none scale-margin-bottom-mobile-s">
-                    <PrimaryButton
-                      text="Apply now"
-                      className="scale-width-mobile"
+              isApplicationEnabled
+                ? (
+                  <div className="flex ai-end pad-bottom-s scale-row-mobile">
+                    <Link to="/application/hacker" className="scale-width-mobile margin-right-s scale-margin-sides-mobile-none scale-margin-bottom-mobile-s">
+                      <PrimaryButton
+                        text="Apply now"
+                        className="scale-width-mobile"
                       />
-                  </Link>
-                  <a
-                    target="_blank"
-                    href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
-                    className="scale-width-mobile"
+                    </Link>
+                    <a
+                      target="_blank"
+                      href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
+                      rel="noopener noreferrer"
+                      className="scale-width-mobile"
                     >
-                    <SecondaryButton
-                      text="Become a mentor"
-                      className="scale-width-mobile"
+                      <SecondaryButton
+                        text="Become a mentor"
+                        className="scale-width-mobile"
                       />
-                  </a>
-                </div>
-                :
-                <div>
-                  <p className="secondary">
+                    </a>
+                  </div>
+                )
+                : (
+                  <div>
+                    <p className="secondary">
                     Get notified when registration opens!
-                  </p>
-                  <form
-                    className="homepage-email-registration flex ai-end pad-bottom-s"
-                    action={EXTERNAL.MAILCHIMP_FORM}
-                    method="post">
-                    <TextInput
-                      name="EMAIL"
-                      placeholder="hacker@email.com"
-                      onChange={() => { }} />
-                    <PrimaryButton
-                      text="Submit"
-                      type="submit" />
-                  </form>
-                </div>
+                    </p>
+                    <form
+                      className="homepage-email-registration flex ai-end pad-bottom-s"
+                      action={EXTERNAL.MAILCHIMP_FORM}
+                      method="post">
+                      <TextInput
+                        name="EMAIL"
+                        placeholder="hacker@email.com"
+                        onChange={() => { }} />
+                      <PrimaryButton
+                        text="Submit"
+                        type="submit" />
+                    </form>
+                  </div>
+                )
             }
             <p className="secondary">
               <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>
@@ -340,6 +345,10 @@ const mapStateToProps = (state) => {
   return {
     featureFlags,
   };
+};
+
+Home.propTypes = {
+  featureFlags: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(Home);
