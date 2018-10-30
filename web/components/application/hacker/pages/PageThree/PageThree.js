@@ -39,7 +39,7 @@ class PageThree extends Page {
           name="source"
           label="How did you hear about nwHacks?"
           placeholder="Select an option"
-          className="margin-ends-giga"
+          className="margin-top-mega margin-bottom-xxl"
           onChange={({ value: newSource }) => this.updateApplication({ source: newSource })}
           onBlur={() => this.setFieldAsBlurred('source')}
           error={this.getErrorIfBlurred('source')}
@@ -113,7 +113,7 @@ class PageThree extends Page {
               In doing so, information about our hackers is needed in order for attending companies
               to contact you.
             </div>)}
-          className="margin-top-s dir-row margin-bottom-giga"
+          className="margin-top-s dir-row"
         >
           <Checkbox
             label={(
