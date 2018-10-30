@@ -10,11 +10,13 @@ const SuccessPage = () => (
     <img alt="Success!" className="pad-ends-s" max-height="25%" src={mountain} />
     <br />
     <h2 className="text-align-center">Thanks for applying! <img className="emoji" alt="🙌" src={praise} /></h2>
-    <p className="text-align-center" style={{maxWidth: 680}}>Thanks for applying to participate in nwHacks 2019!
-      Stay tuned as your application gets assessed. Expect to hear back from us by the end of December.</p>
+    <p className="text-align-center" style={{ maxWidth: 680 }}>Thanks for applying to participate
+      in nwHacks 2019! Stay tuned as your application gets assessed.
+      Expect to hear back from us by the end of December.
+    </p>
     <br />
     <Link to="/" className="pad-bottom-l">
-        <SecondaryButton text="<- Take me back home"/>
+      <SecondaryButton text="<- Take me back home" />
     </Link>
   </div>
 );

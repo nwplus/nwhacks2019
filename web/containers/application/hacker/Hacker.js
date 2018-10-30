@@ -73,7 +73,7 @@ export class HackerApplicationContainer extends React.Component {
       (<PageOne />),
       (<PageTwo />),
       (<PageThree />),
-      (<SuccessPage/>),
+      (<SuccessPage />),
     ];
 
     return (
