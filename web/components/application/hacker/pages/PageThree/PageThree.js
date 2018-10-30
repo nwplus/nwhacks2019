@@ -56,7 +56,7 @@ class PageThree extends Page {
               MLH administration, and occasional messages about hackathons in line with
               the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" rel="noopener noreferrer">MLH Code of Conduct.</a>
             </div>)}
-          className="margin-top-l dir-row margin-ends-giga"
+          className="margin-top-l dir-row margin-bottom-giga"
         >
           <Checkbox
             label={(
@@ -79,7 +79,6 @@ class PageThree extends Page {
             )}
             value="isCodeOfConductChecked"
             checked={isCodeOfConductChecked}
-            className="margin-left-none"
             onChange={(e) => {
               this.updateApplication({ isCodeOfConductChecked: e.target.checked });
             }}
@@ -94,7 +93,7 @@ class PageThree extends Page {
               nwHacks with each iteration.
             </div>
           )}
-          className="margin-top-l dir-row margin-ends-giga"
+          className="margin-top-l dir-row margin-bottom-giga"
         >
           <Checkbox
             label="I authorize nwPlus to use my anonymized data for data reporting."
@@ -114,7 +113,7 @@ class PageThree extends Page {
               In doing so, information about our hackers is needed in order for attending companies
               to contact you.
             </div>)}
-          className="dir-row margin-ends-giga"
+          className="margin-top-l dir-row margin-bottom-giga"
         >
           <Checkbox
             label={(
