@@ -22,7 +22,7 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
                 onChange={onChange || contextOnChange}
               />
               <span className="checkmark size-icon pos-abs" />
-              <span className="label-text margin-left-l">{label}</span>
+              <span className="label-text margin-left-l margin-right-l">{label}</span>
             </label>
           </div>
         );
