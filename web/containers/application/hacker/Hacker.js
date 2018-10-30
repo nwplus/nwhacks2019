@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withFirebase } from 'react-redux-firebase';
+import Axios from 'axios';
 
 import Application from '../Application';
 import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
@@ -25,9 +26,10 @@ export class HackerApplicationContainer extends React.Component {
     });
   }
 
-  submitApplication = (userCredentials) => {
+  submitApplication = (userCredentials, recaptchaResponse) => {
     const {
       firebase,
+      hackerApplication,
       featureFlags: {
         data: {
           auth: {
@@ -39,8 +41,33 @@ export class HackerApplicationContainer extends React.Component {
 
     if (isAuthEnabled) {
       this.signUp(firebase, userCredentials);
+    }
+
+    // include recaptcha token in payload for verification in cloud function
+    hackerApplication.recaptchaResponse = recaptchaResponse;
+
+    if (!hackerApplication.isSubmitted) {
+      // POST application data to cloud function for submission
+      Axios.post(
+        firebase.nwUtils.getFunctionUrl('submitApplicationHacker'),
+        hackerApplication,
+        { headers: { 'Content-Type': 'text/plain' } }
+      ).then((res) => {
+        if (res.status === 200) {
+          //     clear_application_cache()
+          //     redirect_to_application_success()
+          console.log('Submitted application!');
+          hackerApplication.isSubmitted = true;
+        } else {
+          //     display_error_message()
+          console.log('Failed to submit application!');
+        }
+      }).catch((err) => {
+        // redirect to err
+        console.log(err);
+      });
     } else {
-      console.log('application submitted');
+      console.log('Application already submitted!');
     }
   }
 
@@ -86,7 +113,7 @@ export class HackerApplicationContainer extends React.Component {
         submitApplication={this.submitApplication}
         resetApplicationUI={resetApplicationUI}
         pages={pages}
-        />
+      />
     );
   }
 }
