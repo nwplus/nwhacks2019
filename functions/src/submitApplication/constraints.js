@@ -64,7 +64,7 @@ exports.constraints = {
         maximum: 750,
       },
     },
-    recaptcha: atLeastOneCharacter,
+    recaptchaResponse: atLeastOneCharacter,
   },
 };
 
@@ -93,6 +93,6 @@ exports.allowedFields = {
     isDeveloper: true,
     isHarware: true,
     isDesigner: true,
-    recaptcha: true,
+    recaptchaResponse: true,
   },
 };

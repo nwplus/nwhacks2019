@@ -25,7 +25,7 @@ export class HackerApplicationContainer extends React.Component {
     });
   }
 
-  submitApplication = (userCredentials, recaptchaToken) => {
+  submitApplication = (userCredentials, recaptchaResponse) => {
     const {
       firebase,
       hackerApplication,
@@ -43,7 +43,7 @@ export class HackerApplicationContainer extends React.Component {
     }
 
     // include recaptcha token in payload for verification in cloud function
-    hackerApplication.recaptcha = recaptchaToken;
+    hackerApplication.recaptchaResponse = recaptchaResponse;
 
     if (!hackerApplication.isSubmitted) {
       // POST application data to cloud function for submission
