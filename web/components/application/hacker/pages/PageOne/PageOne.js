@@ -47,7 +47,7 @@ class PageOne extends Page {
         city,
         school,
         gender,
-        isAdult,
+        birthday,
         education,
         gradYear,
         travel,
@@ -152,27 +152,20 @@ class PageOne extends Page {
           isSearchable
           allowNewOption
           />
-        <RadioGroup
-          name="age-19-or-older"
-          label="Will you be 19 years of age or older by January 26th, 2019?"
-          className="dir-row margin-ends-giga"
-          onChange={(newIsAdult) => {
-            newIsAdult = newIsAdult === 'true';
-            this.updateApplication({ isAdult: newIsAdult });
-          }
-          }
-          >
-          <RadioButton
-            label="Yes"
-            value="true"
-            selected={isAdult === true}
-            />
-          <RadioButton
-            label="No"
-            value="false"
-            selected={isAdult === false}
-            />
-        </RadioGroup>
+        <TextInput
+          label="When is your birthday? (YYYY-MM-DD)"
+          placeholder="YYYY-MM-DD"
+          name="birthday"
+          value={birthday}
+          className="margin-ends-giga"
+          onChange={(newBirthday) => {
+            this.updateApplication({
+              birthday: newBirthday,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('birthday')}
+          error={this.getErrorIfBlurred('birthday')}
+          />
         <Select
           options={levelsOfEducation}
           value={education}

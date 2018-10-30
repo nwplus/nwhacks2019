@@ -1,4 +1,18 @@
+import validate from 'validate.js';
+import * as moment from 'moment';
 import { atLeastOneCharacter } from '../../../constraints/utils';
+
+validate.extend(validate.validators.datetime, {
+  // The value is guaranteed not to be null or undefined but otherwise it
+  // could be anything.
+  parse(value) {
+    return +moment.utc(value, 'YYYY-MM-DD', true);
+  },
+  // Input is a unix timestamp
+  format(value) {
+    return moment.utc(value).format('YYYY-MM-DD');
+  },
+});
 
 export const constraints = {
   firstName: atLeastOneCharacter,
@@ -6,7 +20,10 @@ export const constraints = {
   city: atLeastOneCharacter,
   school: atLeastOneCharacter,
   gender: atLeastOneCharacter,
-  isAdult: {
+  birthday: {
+    date: {
+      message: '^Please enter a valid birthday.',
+    },
     presence: true,
   },
   education: atLeastOneCharacter,

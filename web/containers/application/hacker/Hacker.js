@@ -13,6 +13,7 @@ import { initialState as hackerApplicationInitialState } from '../../../reducers
 
 import PageOne from '../../../components/application/hacker/pages/PageOne/PageOne';
 import PageTwo from '../../../components/application/hacker/pages/PageTwo/PageTwo';
+import PageThree from '../../../components/application/hacker/pages/PageThree/PageThree';
 
 export class HackerApplicationContainer extends React.Component {
   static signUp(firebase, userCredentials) {
@@ -91,11 +92,13 @@ export class HackerApplicationContainer extends React.Component {
       lastValidIndex,
       updateApplication,
       cancelApplication,
+      resetApplicationUI,
     } = this.props;
 
     const pages = [
       (<PageOne />),
       (<PageTwo />),
+      (<PageThree />),
     ];
 
     return (
@@ -108,6 +111,7 @@ export class HackerApplicationContainer extends React.Component {
         updateApplication={updateApplication}
         cancelApplication={cancelApplication}
         submitApplication={this.submitApplication}
+        resetApplicationUI={resetApplicationUI}
         pages={pages}
       />
     );
@@ -160,6 +164,9 @@ const mapDispatchToProps = (dispatch) => {
     cancelApplication: () => {
       dispatch({ type: ACTION_TYPES.CANCEL_HACKER_APPLICATION });
     },
+    resetApplicationUI: () => {
+      dispatch({ type: ACTION_TYPES.RESET_HACKER_UI });
+    },
   };
 };
 
@@ -175,6 +182,7 @@ HackerApplicationContainer.propTypes = {
   lastValidIndex: PropTypes.number.isRequired,
   updateApplication: PropTypes.func.isRequired,
   cancelApplication: PropTypes.func.isRequired,
+  resetApplicationUI: PropTypes.func.isRequired,
   featureFlags: PropTypes.object.isRequired,
   firebase: PropTypes.object,
 };
