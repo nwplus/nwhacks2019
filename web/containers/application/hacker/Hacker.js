@@ -48,7 +48,6 @@ export class HackerApplicationContainer extends React.Component {
 
     if (!hackerApplication.isSubmitted) {
       // POST application data to cloud function for submission
-      hackerApplication.isSubmitted = true;
       Axios.post(
         firebase.nwUtils.getFunctionUrl('submitApplicationHacker'),
         hackerApplication,
@@ -58,6 +57,7 @@ export class HackerApplicationContainer extends React.Component {
           //     clear_application_cache()
           //     redirect_to_application_success()
           console.log('Submitted application!');
+          hackerApplication.isSubmitted = true;
         } else {
           //     display_error_message()
           console.log('Failed to submit application!');
