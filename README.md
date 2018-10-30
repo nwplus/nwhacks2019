@@ -49,3 +49,7 @@ $> make shell       # Start an interactive shell for functions
 $> make deploy-dev
 $> make deploy-prod
 ```
+
+### Running the entire app
+*For development:* To serve the web app locally and emulate the cloud functions locally, use `make dev`.
+*For production:* To build the web app and publish the cloud functions to production, use `make prod`.

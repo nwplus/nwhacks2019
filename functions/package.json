@@ -5,30 +5,35 @@
   "author": "nwHacks2019",
   "license": "MIT",
   "scripts": {
-    "pick:dev": "firebase login && firebase use development",
-    "pick:prod": "firebase login && firebase use production",
+    "firebase-login": "./node_modules/.bin/firebase login --interactive",
+    "pick:dev": "yarn firebase-login && ./node_modules/.bin/firebase use development",
+    "pick:prod": "yarn firebase-login && ./node_modules/.bin/firebase use production",
     "lint": "eslint .",
     "test": "exit 0",
-    "serve": "yarn pick:dev && firebase serve --only functions",
-    "shell": "yarn pick:dev && firebase functions:shell",
+    "serve": "yarn pick:dev && ./node_modules/.bin/firebase serve --only functions",
+    "shell": "yarn pick:dev && ./node_modules/.bin/firebase functions:shell",
     "start": "yarn pick:dev && yarn run shell",
-    "deploy:dev": "yarn pick:dev && firebase deploy --only functions",
-    "deploy:prod": "yarn pick:prod && firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "deploy:dev": "yarn pick:dev && ./node_modules/.bin/firebase deploy --only functions",
+    "deploy:prod": "yarn pick:prod && ./node_modules/.bin/firebase deploy --only functions",
+    "logs": "./node_modules/.bin/firebase functions:log"
   },
   "dependencies": {
-    "firebase-admin": "5.12.1",
-    "firebase-functions": "1.0.3",
-    "firebase-tools": "3.19.3",
-    "nyc": "12.0.2"
+    "@google-cloud/functions-emulator": "^1.0.0-beta.5",
+    "axios": "0.18.0",
+    "deep-cleaner": "1.1.2",
+    "firebase-admin": "^6.1.0",
+    "firebase-functions": "^2.1.0",
+    "firebase-tools": "^6.0.0",
+    "nyc": "13.1.0",
+    "validate.js": "0.12.0"
   },
   "devDependencies": {
-    "coveralls": "3.0.1",
-    "eslint": "5.0.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-promise": "3.6.0",
-    "jest": "23.3.0"
+    "coveralls": "3.0.2",
+    "eslint": "5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-promise": "4.0.1",
+    "jest": "23.6.0"
   },
   "jest": {
     "collectCoverage": true,

@@ -20,6 +20,9 @@
     // Removed rule "disallow unused variables" from recommended eslint rules
     "no-unused-vars": "off",
 
+    // ignore linebreak style
+    "linebreak-style": "off",
+
     // Removed rule "disallow mixed spaces and tabs for indentation" from recommended eslint rules
     "no-mixed-spaces-and-tabs": "off",
 
