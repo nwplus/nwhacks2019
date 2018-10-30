@@ -10,19 +10,19 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
       (context) => {
         const contextOnChange = event => context.onChange(event.target.value);
         return (
-          <div className={`checkbox user-select-none margin-bottom-s margin-left-s ${className}`}>
-            <label className="clickable">
+          <div className={`checkbox user-select-none margin-bottom-s margin-top-s${className}`}>
+            <label className="clickable flex">
               <input
                 type="checkbox"
                 name={name || context.name}
-                className="pos-abs opacity-0"
+                className="pos-abs opacity-0 wrap"
                 value={value}
                 defaultChecked={checked || context.checked}
                 disabled={disabled || context.disabled}
                 onChange={onChange || contextOnChange}
               />
               <span className="checkmark size-icon pos-abs" />
-              <span className="label-text margin-left-l white-space-nowrap">{label}</span>
+              <span className="label-text margin-left-l margin-right-l">{label}</span>
             </label>
           </div>
         );
@@ -37,7 +37,7 @@ Checkbox.propTypes = {
   // input value for checkbox
   value: PropTypes.string.isRequired,
   // label text for checkbox
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.element.isRequired]),
   // extra CSS classes to apply to the checkbox
   className: PropTypes.string,
   // determines if checkbox is selected
@@ -72,7 +72,7 @@ CheckboxGroup.propTypes = {
   ]),
   // extra CSS class names for the container (not applied to children)
   className: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   /* Additional optional parameters implicitly passed down to children
 
       // see Checkbox.propTypes

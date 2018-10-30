@@ -12,6 +12,7 @@ import { initialState as hackerApplicationInitialState } from '../../../reducers
 
 import PageOne from '../../../components/application/hacker/pages/PageOne/PageOne';
 import PageTwo from '../../../components/application/hacker/pages/PageTwo/PageTwo';
+import PageThree from '../../../components/application/hacker/pages/PageThree/PageThree';
 
 export class HackerApplicationContainer extends React.Component {
   static signUp(firebase, userCredentials) {
@@ -70,6 +71,7 @@ export class HackerApplicationContainer extends React.Component {
     const pages = [
       (<PageOne />),
       (<PageTwo />),
+      (<PageThree />),
     ];
 
     return (
