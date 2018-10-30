@@ -1,3 +1,4 @@
+
 const atLeastOneCharacter = {
   presence: true,
   length: {
@@ -6,6 +7,7 @@ const atLeastOneCharacter = {
   },
 };
 
+// TODO: update hacker constraints
 exports.constraints = {
   hacker: {
     // page one
@@ -65,34 +67,5 @@ exports.constraints = {
       },
     },
     recaptchaResponse: atLeastOneCharacter,
-  },
-};
-
-exports.allowedFields = {
-  hacker: {
-    firstName: true,
-    lastName: true,
-    email: true,
-    city: true,
-    school: true,
-    gender: true,
-    isAdult: true,
-    education: true,
-    gradYear: true,
-    travel: true,
-    major: true,
-    phoneNumber: true,
-    ethnicity: true,
-    isFirstHackathon: true,
-    githubLink: true,
-    personalWebsiteLink: true,
-    linkedInLink: true,
-    resumeLink: true,
-    interestForNwHacks: true,
-    recentProject: true,
-    isDeveloper: true,
-    isHarware: true,
-    isDesigner: true,
-    recaptchaResponse: true,
   },
 };

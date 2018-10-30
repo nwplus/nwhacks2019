@@ -705,7 +705,7 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
 
-axios@^0.18.0:
+axios@0.18.0, axios@^0.18.0:
   version "0.18.0"
   resolved "http://registry.npmjs.org/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
   dependencies:
@@ -1575,6 +1575,10 @@ decompress-response@^3.3.0:
   resolved "https://registry.yarnpkg.com/decompress-response/-/decompress-response-3.3.0.tgz#80a4dd323748384bfa248083622aedec982adff3"
   dependencies:
     mimic-response "^1.0.0"
+
+deep-cleaner@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/deep-cleaner/-/deep-cleaner-1.1.2.tgz#86d5405564ca810c8ce0e080bdfa29e97448e563"
 
 deep-equal@^1.0.1:
   version "1.0.1"
