@@ -71,6 +71,16 @@ $mobile-s:  320px
         @media screen and (max-width: $tablet)
           margin-right: $spacing-s !important
           margin-left: $spacing-s !important
+      &-mobile
+        &-none
+          @media screen and (max-width: $mobile)
+            margin-right: 0 !important
+            margin-left: 0 !important
+    &-bottom, &-ends
+      &-mobile
+        &-s
+          @media screen and (max-width: $mobile)
+            margin-bottom: $spacing-s !important
 
   &-jc
     &-desktop
