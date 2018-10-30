@@ -73,7 +73,7 @@ class PageThree extends Page {
           />
           <Checkbox
             label={(
-              <div className = "bold">I have read and agree to
+              <div className="bold">I have read and agree to
                 the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" rel="noopener noreferrer"> Major League Hacking Code of Conduct.</a>
               </div>
             )}
@@ -118,7 +118,7 @@ class PageThree extends Page {
         >
           <Checkbox
             label={(
-              <div className="bold"> I authorize nwPlus to provide my resume and supporting documents 
+              <div className="bold"> I authorize nwPlus to provide my resume and supporting documents
                 (Github, Linkedin, etc) to event sponsors for recruitment purposes upon request.
               </div>)}
             value="isDocumentsChecked"

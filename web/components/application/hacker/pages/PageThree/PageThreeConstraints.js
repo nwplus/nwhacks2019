@@ -2,16 +2,16 @@ import { atLeastOneCharacter } from '../../../constraints/utils';
 
 export const constraints = {
   source: atLeastOneCharacter,
-  isCheckedPrivacyPolicy: {
+  isPrivacyPolicyChecked: {
     presence: true,
   },
-  isCheckedCodeOfConduct: {
+  isCodeOfConductChecked: {
     presence: true,
   },
-  isCheckedDataReporting: {
+  isDataReportingChecked: {
     presence: true,
   },
-  isCheckedDocuments: {
+  isDocumentsChecked: {
     presence: true,
   },
 };
