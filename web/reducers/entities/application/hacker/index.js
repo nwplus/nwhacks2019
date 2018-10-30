@@ -8,7 +8,7 @@ export const initialState = {
   city: null,
   school: null,
   gender: null,
-  isAdult: null,
+  birthday: null,
   gradYear: '',
   education: null,
   travel: null,
