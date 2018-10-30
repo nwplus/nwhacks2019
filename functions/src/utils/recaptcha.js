@@ -18,7 +18,6 @@ exports.validateRecaptcha = function validateRecaptcha(response, callback) {
     return callback(false);
   }
   getSecretKey((secret) => {
-    console.log(secret, response);
     Axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`, {}, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

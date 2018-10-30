@@ -33,8 +33,6 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
     if (isHuman && !errors) {
       const hacker = Hacker(data);
 
-      console.log(hacker);
-
       // create a batch job
       const batch = db.batch();
 
