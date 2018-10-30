@@ -186,18 +186,23 @@ class Home extends React.Component {
                   </a>
                 </div>
                 :
-                <form
-                  className="homepage-email-registration flex ai-end pad-bottom-s"
-                  action={EXTERNAL.MAILCHIMP_FORM}
-                  method="post">
-                  <TextInput
-                    name="EMAIL"
-                    placeholder="hacker@email.com"
-                    onChange={() => { }} />
-                  <PrimaryButton
-                    text="Submit"
-                    type="submit" />
-                </form>
+                <div>
+                  <p className="secondary">
+                    Get notified when registration opens!
+                  </p>
+                  <form
+                    className="homepage-email-registration flex ai-end pad-bottom-s"
+                    action={EXTERNAL.MAILCHIMP_FORM}
+                    method="post">
+                    <TextInput
+                      name="EMAIL"
+                      placeholder="hacker@email.com"
+                      onChange={() => { }} />
+                    <PrimaryButton
+                      text="Submit"
+                      type="submit" />
+                  </form>
+                </div>
             }
             <p className="secondary">
               <a href={EXTERNAL.SPONSORSHIP_PACKAGE}>
