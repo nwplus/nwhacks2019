@@ -60,7 +60,7 @@ class PageThree extends Page {
         >
           <Checkbox
             label={(
-              <div>I authorize nwPlus to share certain application/registration information
+              <div className="bold">I authorize nwPlus to share certain application/registration information
                 for event administration, ranking, MLH administration, and occasional messages
                 about hackathons in line with
                 the <a href="https://mlh.io/privacy" target="_blank" rel="noopener noreferrer"> MLH Privacy Policy.</a>
@@ -96,7 +96,8 @@ class PageThree extends Page {
           className="margin-top-s dir-row margin-bottom-giga"
         >
           <Checkbox
-            label="I authorize nwPlus to use my anonymized data for data reporting."
+            label={(
+              <div className="bold"> I authorize nwPlus to use my anonymized data for data reporting.</div>)}
             value="isDataReportingChecked"
             checked={isDataReportingChecked}
             onChange={(e) => {
