@@ -29,7 +29,7 @@ exports.Hacker = function Hacker(data) {
       interestForNwHacks: data.interestForNwHacks,
       recentProject: data.recentProject,
       isDeveloper: data.isDeveloper, // optional
-      isHarware: data.isHarware, // optional
+      isHardware: data.isHardware, // optional
       isDesigner: data.isDesigner, // optional
       // PAGE THREE
       source: data.source,

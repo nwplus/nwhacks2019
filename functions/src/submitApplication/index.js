@@ -13,6 +13,9 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
 
   // this function only allows POST requests
   response.set('Access-Control-Allow-Methods', 'POST');
+  if (request.method !== 'POST') {
+    return response.status(400).send(); // database error
+  }
 
   // ensure request.body is an object, not a string
   const data = typeof request.body !== 'object' ? JSON.parse(request.body) : request.body;
