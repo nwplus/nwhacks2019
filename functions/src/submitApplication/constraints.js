@@ -1,3 +1,5 @@
+const { validate } = require('validate.js');
+const moment = require('moment');
 
 const atLeastOneCharacter = {
   presence: true,
@@ -7,10 +9,23 @@ const atLeastOneCharacter = {
   },
 };
 
-// TODO: update hacker constraints
+validate.extend(validate.validators.datetime, {
+  // The value is guaranteed not to be null or undefined but otherwise it
+  // could be anything.
+  parse(value) {
+    return Number(moment.utc(value, 'YYYY-MM-DD', true));
+  },
+  // Input is a unix timestamp
+  format(value) {
+    return moment.utc(value).format('YYYY-MM-DD');
+  },
+});
+
 exports.constraints = {
   hacker: {
-    // page one
+    // =========
+    //  PAGE ONE
+    // =========
     firstName: atLeastOneCharacter,
     lastName: atLeastOneCharacter,
     city: atLeastOneCharacter,
@@ -20,6 +35,7 @@ exports.constraints = {
       date: {
         message: '^Please enter a valid birthday.',
       },
+      presence: true,
     },
     education: atLeastOneCharacter,
     gradYear: {
@@ -38,21 +54,15 @@ exports.constraints = {
     major: atLeastOneCharacter,
     phoneNumber: atLeastOneCharacter,
     ethnicity: atLeastOneCharacter,
-    // page two
+    // =========
+    //  PAGE TWO
+    // =========
     isFirstHackathon: {
       presence: true,
     },
-    // githubLink: {
-    //   url: true,
-    // },
-    // personalWebsiteLink: {
-    //   url: true,
-    // },
-    // linkedInLink: {
-    //   url: true,
-    // },
     resumeLink: {
       presence: true,
+      url: true,
     },
     interestForNwHacks: {
       presence: true,
@@ -66,6 +76,34 @@ exports.constraints = {
       length: {
         minimum: 1,
         maximum: 750,
+      },
+    },
+    // =========
+    //  PAGE THREE
+    // =========
+    source: atLeastOneCharacter,
+    isPrivacyPolicyChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isCodeOfConductChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isDataReportingChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isDocumentsChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
       },
     },
     recaptchaResponse: atLeastOneCharacter,
