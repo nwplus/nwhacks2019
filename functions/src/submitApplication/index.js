@@ -36,7 +36,7 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
 
       // create a new document reference in hacker_full_info and hacker_quick_info with the same ID
       const hackerFullInfoRef = db.collection('hacker_full_info').doc();
-      const hackerId = hackerFullInfoRef.id; // use same document ID for all of this hacker's documents
+      const hackerId = hackerFullInfoRef.id; // use same ID for all of this hacker's documents
       const hackerQuickInfoRef = db.collection('hacker_quick_info').doc(hackerId);
 
       // also store the ID in a data field to make querying easier

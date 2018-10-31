@@ -39,7 +39,7 @@ exports.Hacker = function Hacker(data) {
       isDocumentsChecked: data.isDocumentsChecked,
     },
     // contains a subset of frequently used fields from hacker_full_info
-    hacker_quick_info: { 
+    hacker_quick_info: {
       id: data.id,
       firstName: data.firstName,
       lastName: data.lastName,
