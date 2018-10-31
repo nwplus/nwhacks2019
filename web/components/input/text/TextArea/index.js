@@ -19,7 +19,8 @@ class TextArea extends React.Component {
   };
 
   render() {
-    const { label, placeholder, rows, cols, name, showCharCount, className, onBlur } = this.props;
+    const { label, placeholder, rows, cols, name,
+      value, showCharCount, className, onBlur } = this.props;
     const { currentCharCount, maxLength } = this.state;
     const numCharsAvailable = maxLength - currentCharCount;
     const maxLengthExceeded = currentCharCount > maxLength;
@@ -32,6 +33,7 @@ class TextArea extends React.Component {
             onChange={e => this.onTextChange(e.target.value)}
             onBlur={onBlur}
             name={name}
+            value={value}
             rows={rows}
             cols={cols}
             className={`pad-sides-s pad-ends-s flex jc-between body-text fill-width box-sizing-bb ${maxLengthExceeded ? 'error' : ''}`}
@@ -58,6 +60,9 @@ TextArea.propTypes = {
 
   // placeholder text for the textarea
   placeholder: PropTypes.string,
+
+  // value of the textarea
+  value: PropTypes.string,
 
   // maximum char count for textarea
   maxLength: PropTypes.number.isRequired,
