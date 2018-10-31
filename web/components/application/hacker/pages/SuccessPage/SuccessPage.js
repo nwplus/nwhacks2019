@@ -6,7 +6,7 @@ import mountain from '../../../../../assets/circle-mountain.svg';
 import praise from '../../../../../assets/emoji/praise.svg';
 
 const SuccessPage = () => (
-  <div className="pad-nav fill-min-height flex dir-col ai-center jc-center margin-sides-l">
+  <div className="pad-nav fill-min-height flex dir-col ai-center jc-center pad-sides-l">
     <img alt="Success!" className="pad-ends-s" max-height="25%" src={mountain} />
     <br />
     <h2 className="text-align-center">Thanks for applying! <img className="emoji" alt="🙌" src={praise} /></h2>
