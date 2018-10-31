@@ -34,10 +34,10 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
       // create a batch job
       const batch = db.batch();
 
-      // create a new document reference in hacker_quick_info and hacker_main_info with the same ID
-      const hackerQuickInfoRef = db.collection('hacker_quick_info').doc();
-      const hackerId = hackerQuickInfoRef.id; // use same document ID for this hacker's documents
-      const hackerMainInfoRef = db.collection('hacker_main_info').doc(hackerId);
+      // create a new document reference in hacker_full_info and hacker_quick_info with the same ID
+      const hackerFullInfoRef = db.collection('hacker_full_info').doc();
+      const hackerId = hackerFullInfoRef.id; // use same document ID for all of this hacker's documents
+      const hackerQuickInfoRef = db.collection('hacker_quick_info').doc(hackerId);
 
       // also store the ID in a data field to make querying easier
       data.id = hackerId;
@@ -46,8 +46,8 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
       const hacker = Hacker(data);
 
       // write data fields to each document
+      batch.set(hackerFullInfoRef, hacker.hacker_full_info);
       batch.set(hackerQuickInfoRef, hacker.hacker_quick_info);
-      batch.set(hackerMainInfoRef, hacker.hacker_main_info);
 
       // commit the batch (either the above two documents are successfully created, or not at all)
       batch.commit()
