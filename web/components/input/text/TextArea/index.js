@@ -19,7 +19,8 @@ class TextArea extends React.Component {
   };
 
   render() {
-    const { label, placeholder, rows, cols, name, value, showCharCount, className, onBlur } = this.props;
+    const { label, placeholder, rows, cols, name,
+      value, showCharCount, className, onBlur } = this.props;
     const { currentCharCount, maxLength } = this.state;
     const numCharsAvailable = maxLength - currentCharCount;
     const maxLengthExceeded = currentCharCount > maxLength;
