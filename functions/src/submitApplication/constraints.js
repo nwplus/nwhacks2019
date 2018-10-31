@@ -16,8 +16,10 @@ exports.constraints = {
     city: atLeastOneCharacter,
     school: atLeastOneCharacter,
     gender: atLeastOneCharacter,
-    isAdult: {
-      presence: true,
+    birthday: {
+      date: {
+        message: '^Please enter a valid birthday.',
+      },
     },
     education: atLeastOneCharacter,
     gradYear: {
