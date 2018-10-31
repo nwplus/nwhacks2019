@@ -1,5 +1,5 @@
 import validate from 'validate.js';
-import * as moment from 'moment';
+import moment from 'moment';
 import { atLeastOneCharacter } from '../../../constraints/utils';
 
 validate.extend(validate.validators.datetime, {

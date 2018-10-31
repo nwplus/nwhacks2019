@@ -1,10 +1,23 @@
-import { atLeastOneCharacter } from '../../../constraints/utils';
-
 export const constraints = {
   isFirstHackathon: {
     presence: true,
   },
-  resumeLink: atLeastOneCharacter,
-  interestForNwHacks: atLeastOneCharacter,
-  recentProject: atLeastOneCharacter,
+  resumeLink: {
+    presence: true,
+    url: true,
+  },
+  interestForNwHacks: {
+    presence: true,
+    length: {
+      minimum: 1,
+      maximum: 750,
+    },
+  },
+  recentProject: {
+    presence: true,
+    length: {
+      minimum: 1,
+      maximum: 750,
+    },
+  },
 };
