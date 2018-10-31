@@ -3,12 +3,14 @@ const cleaner = require('deep-cleaner');
 exports.Hacker = function Hacker(data) {
   const hacker = {
     hacker_quick_info: {
+      id: data.id,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       timestamp: data.timestamp,
     },
     hacker_main_info: {
+      id: data.id,
       // PAGE ONE
       city: data.city,
       school: data.school,

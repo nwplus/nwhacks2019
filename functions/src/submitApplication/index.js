@@ -31,17 +31,21 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
   //    else return error response
   validateRecaptcha(data.recaptchaResponse, (isHuman) => {
     if (isHuman && !errors) {
-      const hacker = Hacker(data);
-
       // create a batch job
       const batch = db.batch();
 
-      // create a new document in hacker_quick_info and hacker_main_info with the same ID
+      // create a new document reference in hacker_quick_info and hacker_main_info with the same ID
       const hackerQuickInfoRef = db.collection('hacker_quick_info').doc();
       const hackerId = hackerQuickInfoRef.id; // use same document ID for this hacker's documents
       const hackerMainInfoRef = db.collection('hacker_main_info').doc(hackerId);
 
-      // set the fields of the documents
+      // also store the ID in a data field to make querying easier
+      data.id = hackerId;
+
+      // build hacker data object
+      const hacker = Hacker(data);
+
+      // write data fields to each document
       batch.set(hackerQuickInfoRef, hacker.hacker_quick_info);
       batch.set(hackerMainInfoRef, hacker.hacker_main_info);
 
@@ -49,6 +53,8 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
       batch.commit()
         .then(() => response.status(200).send()) // success
         .catch(() => response.status(500).send()); // database error
+    } else {
+      response.status(400).send(); // bad request
     }
   });
 });
