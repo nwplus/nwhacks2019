@@ -1,5 +1,3 @@
-import { atLeastOneCharacter } from '../../../constraints/utils';
-
 export const constraints = {
   isFirstHackathon: {
     presence: true,
@@ -8,6 +6,18 @@ export const constraints = {
     presence: true,
     url: true,
   },
-  interestForNwHacks: atLeastOneCharacter,
-  recentProject: atLeastOneCharacter,
+  interestForNwHacks: {
+    presence: true,
+    length: {
+      minimum: 1,
+      maximum: 750,
+    },
+  },
+  recentProject: {
+    presence: true,
+    length: {
+      minimum: 1,
+      maximum: 750,
+    },
+  },
 };
