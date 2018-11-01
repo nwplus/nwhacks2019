@@ -141,7 +141,7 @@ class PageTwo extends Page {
         />
 
         <TextInput
-          label="Resume Link (make sure the link is publicly accessible)"
+          label="Resume link (make sure the link is publicly accessible)"
           name="resume-link"
           className="margin-ends-giga"
           placeholder="https://drive.google.com/open?id=0B0GZwoww_XiFMHJENWlYN0R2RlE"
