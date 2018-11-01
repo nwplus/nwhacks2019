@@ -38,7 +38,22 @@ export const constraints = {
     presence: true,
   },
   email: {
-    email: true,
+    presence: true,
+    email: {
+      attribute: true,
+      message: '^Please enter a valid email.',
+    },
+  },
+  confirmEmail: {
+    presence: true,
+    email: {
+      attribute: true,
+      message: '^Please enter a valid email.',
+    },
+    equality: {
+      attribute: 'email',
+      message: '^Please enter the same email.',
+    },
   },
   major: atLeastOneCharacter,
   phoneNumber: atLeastOneCharacter,

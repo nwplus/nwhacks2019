@@ -51,6 +51,13 @@ exports.constraints = {
     email: {
       email: true,
     },
+    confirmEmail: {
+      email: true,
+      equality: {
+        attribute: 'email',
+        message: '^Please enter the same email.',
+      },
+    },
     major: atLeastOneCharacter,
     phoneNumber: atLeastOneCharacter,
     ethnicity: atLeastOneCharacter,

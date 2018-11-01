@@ -44,6 +44,7 @@ class PageOne extends Page {
         firstName,
         lastName,
         email,
+        confirmEmail,
         city,
         school,
         gender,
@@ -109,6 +110,20 @@ class PageOne extends Page {
           }}
           onBlur={() => this.setFieldAsBlurred('email')}
           error={this.getErrorIfBlurred('email')}
+          />
+        <TextInput
+          label="Please re-enter your email"
+          placeholder="hacker@email.com"
+          name="hacker-application-confirm-email"
+          value={confirmEmail}
+          className="margin-ends-giga"
+          onChange={(newEmail) => {
+            this.updateApplication({
+              confirmEmail: newEmail,
+            });
+          }}
+          onBlur={() => this.setFieldAsBlurred('confirmEmail')}
+          error={this.getErrorIfBlurred('confirmEmail')}
           />
         <TextInput
           label="What is your phone number?"
