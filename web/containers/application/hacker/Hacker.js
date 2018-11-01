@@ -35,6 +35,7 @@ export class HackerApplicationContainer extends React.Component {
     const {
       firebase,
       hackerApplication,
+      cancelApplication,
       featureFlags: {
         data: {
           auth: {
@@ -63,6 +64,7 @@ export class HackerApplicationContainer extends React.Component {
           //     redirect_to_application_success()
           console.log('Submitted application!');
           this.setState({ isSubmitted: true });
+          cancelApplication();
         } else {
           //     display_error_message()
           console.log('Failed to submit application!');
