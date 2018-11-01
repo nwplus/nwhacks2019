@@ -14,7 +14,7 @@ import AdminPanel from '../admin';
 
 import { HackerApplication } from '../../containers/application';
 
-import SuccessPage from '../../components/application/hacker/pages/SuccessPage/SuccessPage';
+import SuccessPage from '../application/hacker/pages/SuccessPage/SuccessPage';
 import NotFound from '../errors/NotFound';
 import DashBoard from '../dashboard';
 

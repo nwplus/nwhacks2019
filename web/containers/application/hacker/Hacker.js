@@ -14,14 +14,8 @@ import { initialState as hackerApplicationInitialState } from '../../../reducers
 import PageOne from '../../../components/application/hacker/pages/PageOne/PageOne';
 import PageTwo from '../../../components/application/hacker/pages/PageTwo/PageTwo';
 import PageThree from '../../../components/application/hacker/pages/PageThree/PageThree';
-import SuccessPage from '../../../components/application/hacker/pages/SuccessPage/SuccessPage';
 
 export class HackerApplicationContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isSubmitted: false };
-  }
-
   static signUp(firebase, userCredentials) {
     const auth = firebase.auth();
     const { email, password } = userCredentials;
@@ -30,6 +24,11 @@ export class HackerApplicationContainer extends React.Component {
     }).catch((error) => {
       console.err('failed to create user: ', error);
     });
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = { isSubmitted: false };
   }
 
   submitApplication = (userCredentials, recaptchaResponse) => {
@@ -63,7 +62,7 @@ export class HackerApplicationContainer extends React.Component {
           //     clear_application_cache()
           //     redirect_to_application_success()
           console.log('Submitted application!');
-          this.setState ({ isSubmitted : true });
+          this.setState({ isSubmitted: true });
         } else {
           //     display_error_message()
           console.log('Failed to submit application!');
