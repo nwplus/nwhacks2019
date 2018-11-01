@@ -66,7 +66,7 @@ class PageOne extends Page {
       <HackerApplicationPageTemplate {...this.getPageTemplateProps()}>
         <h1>About you <img className="emoji emoji-h1" alt="📚" src={books} /></h1>
         <p>
-          {'nwHacks is Western Canada’s largest collegiate hackathon taking place on January 26th - 27th, 2019 at the University of British Columbia. As expected, we receive a large number of applications every year. We focus on curating a quality hackathon experience for each attendee. For a fair assessment of your application, we encourage you to put your best foot forward on this journey! '}
+          {"nwHacks is Western Canada’s largest collegiate hackathon taking place on January 26th - 27th, 2019 at the University of British Columbia. We focus on creating a quality hackathon experience all of our attendees but historically we've had more applicants than we would be able to accommodate at our event. So, for a fair assessment of your application, we encourage you to put your best foot forward on this journey!"}
           <img className="emoji" alt="⛰️" src={mountain} />
         </p>
         <TextInput
@@ -144,7 +144,7 @@ class PageOne extends Page {
           value={gender}
           name="gender"
           label="Which gender do you identify as?"
-          placeholder="Enter your gender"
+          placeholder="Enter your gender or choose from the dropdown"
           className="margin-ends-giga"
           onChange={({ value: newGender }) => this.updateApplication({ gender: newGender })}
           onBlur={() => this.setFieldAsBlurred('gender')}
@@ -157,7 +157,7 @@ class PageOne extends Page {
           value={ethnicity}
           name="ethnicity"
           label="What is your race/ethnicity?"
-          placeholder="Enter your race/ethnicity"
+          placeholder="Enter your race/ethnicity or choose from the dropdown"
           className="margin-ends-giga"
           onChange={({ value: newEthnicity }) => this.updateApplication({
             ethnicity: newEthnicity,
@@ -200,6 +200,7 @@ class PageOne extends Page {
               value={major}
               name="major"
               label={this.isHighSchool(education) ? 'What do you plan on studying?' : 'What is your major?'}
+              placeholder="Enter your major or choose from the dropdown"
               className="margin-ends-giga"
               onChange={({ value: newMajor }) => this.updateApplication({
                 major: newMajor,
@@ -217,7 +218,7 @@ class PageOne extends Page {
           value={school}
           name="school-name"
           label="What school do you currently attend?"
-          placeholder="Enter your school"
+          placeholder="Enter your school or choose from the dropdown"
           className="margin-ends-giga"
           onChange={({ value: newSchool }) => this.updateApplication({ school: newSchool })}
           onBlur={() => this.setFieldAsBlurred('school')}
