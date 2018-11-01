@@ -109,7 +109,7 @@ class PageTwo extends Page {
         </CheckboxGroup>
 
         <TextInput
-          label="Github/BitBucket/Gitlab link (optional)"
+          label="Github/BitBucket/GitLab link (recommended)"
           name="github-link"
           className="margin-ends-giga"
           placeholder="https://github.com/JohnDoe"
@@ -119,7 +119,7 @@ class PageTwo extends Page {
           error={this.getErrorIfBlurred('githubLink')}
         />
         <TextInput
-          label="Personal website/portfolio link (optional)"
+          label="Personal website/portfolio link (recommended)"
           name="personal-website-link"
           className="margin-ends-giga"
           placeholder="https://johndoe.com/"
