@@ -17,6 +17,11 @@ import PageThree from '../../../components/application/hacker/pages/PageThree/Pa
 import SuccessPage from '../../../components/application/hacker/pages/SuccessPage/SuccessPage';
 
 export class HackerApplicationContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isSubmitted: false };
+  }
+
   static signUp(firebase, userCredentials) {
     const auth = firebase.auth();
     const { email, password } = userCredentials;
@@ -58,7 +63,7 @@ export class HackerApplicationContainer extends React.Component {
           //     clear_application_cache()
           //     redirect_to_application_success()
           console.log('Submitted application!');
-          hackerApplication.isSubmitted = true;
+          this.setState ({ isSubmitted : true });
         } else {
           //     display_error_message()
           console.log('Failed to submit application!');
@@ -81,6 +86,9 @@ export class HackerApplicationContainer extends React.Component {
     } = this.props;
 
     if (!isFeatureFlagsLoaded) return null;
+
+    const { isSubmitted } = this.state;
+    if (isSubmitted) return (<Redirect to="/success" />);
 
     const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
     if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
