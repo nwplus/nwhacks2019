@@ -2,14 +2,14 @@ const cleaner = require('deep-cleaner');
 
 exports.Hacker = function Hacker(data) {
   const hacker = {
-    hacker_quick_info: {
+    // contains all info about a hacker
+    hacker_full_info: {
+      id: data.id,
+      timestamp: data.timestamp,
+      // PAGE ONE
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      timestamp: data.timestamp,
-    },
-    hacker_main_info: {
-      // PAGE ONE
       city: data.city,
       school: data.school,
       gender: data.gender,
@@ -38,11 +38,19 @@ exports.Hacker = function Hacker(data) {
       isDataReportingChecked: data.isDataReportingChecked,
       isDocumentsChecked: data.isDocumentsChecked,
     },
+    // contains a subset of frequently used fields from hacker_full_info
+    hacker_quick_info: {
+      id: data.id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      timestamp: data.timestamp,
+    },
   };
 
   // remove any empty values
   cleaner(hacker.hacker_quick_info);
-  cleaner(hacker.hacker_main_info);
+  cleaner(hacker.hacker_full_info);
 
   return hacker;
 };
