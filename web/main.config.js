@@ -22,7 +22,7 @@ export const firebaseConfig = {
 
 export const recaptchaConfig = {
   production: {
-    apiKey: '6LdmP3cUAAAAAPbtt6GQOq3tk-ptflXnj-RtNAHc',
+    sitekey: '6LdmP3cUAAAAAPbtt6GQOq3tk-ptflXnj-RtNAHc',
   },
   development: {
     sitekey: process.env.RECAPTCHA_SITE_KEY,
