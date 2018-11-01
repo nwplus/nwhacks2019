@@ -11,6 +11,28 @@ export class HackerApplicationPageTemplate extends React.Component {
   constructor(props) {
     super(props);
     this.captcha = null;
+    this.state = {
+      submitFailed: false,
+      isSubmitting: false,
+    };
+    this.onSubmitFail = this.onSubmitFail.bind(this);
+  }
+
+  onSubmitButtonClick() {
+    const { submitFailed } = this.state;
+    const { submitApplication } = this.props;
+    if (submitFailed) { // if user has previously failed a submit
+      this.setState({ isSubmitting: true, submitFailed: false });
+      const { token } = this.state; // still-valid token from the last time user clicked submit
+      submitApplication(null, token, this.onSubmitFail);
+    } else {
+      this.setState({ submitFailed: false });
+      this.captcha.execute();
+    }
+  }
+
+  onSubmitFail() {
+    this.setState({ isSubmitting: false, submitFailed: true });
   }
 
   render() {
@@ -26,6 +48,8 @@ export class HackerApplicationPageTemplate extends React.Component {
       isNextButtonEnabled,
       children,
     } = this.props;
+
+    const { isSubmitting, submitFailed } = this.state;
 
     return (
       <div className="pad-nav application fill-width flex jc-center">
@@ -46,15 +70,18 @@ export class HackerApplicationPageTemplate extends React.Component {
               onClick={activeIndex === 0 ? cancelApplication : onPageBack}
             />
             <PrimaryButton
-              disabled={!isNextButtonEnabled}
-              text={getPrimaryButtonText(activeIndex, count)}
-              onClick={activeIndex !== count - 1 ? onPageNext : () => this.captcha.execute()}
+              disabled={!isNextButtonEnabled || isSubmitting}
+              text={isSubmitting ? 'Submitting...' : getPrimaryButtonText(activeIndex, count)}
+              onClick={activeIndex !== count - 1 ? onPageNext : () => this.onSubmitButtonClick()}
             />
+            {submitFailed ? (<p>Failed to submit application, please try again!</p>) : null}
             <Reaptcha
               ref={e => (this.captcha = e)}
               sitekey={recaptchaConfig[process.env.NODE_ENV].sitekey}
               onVerify={(token) => {
-                submitApplication(null, token);
+                this.setState({ isSubmitting: true });
+                this.setState({ token });
+                submitApplication(null, token, this.onSubmitFail);
               }}
               size="invisible"
             />

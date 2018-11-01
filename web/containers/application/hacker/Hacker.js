@@ -31,7 +31,7 @@ export class HackerApplicationContainer extends React.Component {
     this.state = { isSubmitted: false };
   }
 
-  submitApplication = (userCredentials, recaptchaResponse) => {
+  submitApplication = (userCredentials, recaptchaResponse, onSubmitFailCallback) => {
     const {
       firebase,
       hackerApplication,
@@ -60,21 +60,15 @@ export class HackerApplicationContainer extends React.Component {
         { headers: { 'Content-Type': 'text/plain' } }
       ).then((res) => {
         if (res.status === 200) {
-          //     clear_application_cache()
-          //     redirect_to_application_success()
           console.log('Submitted application!');
           this.setState({ isSubmitted: true });
           cancelApplication();
         } else {
-          //     display_error_message()
-          console.log('Failed to submit application!');
+          onSubmitFailCallback();
         }
-      }).catch((err) => {
-        // redirect to err
-        console.log(err);
+      }).catch(() => {
+        onSubmitFailCallback();
       });
-    } else {
-      console.log('Application already submitted!');
     }
   }
 
