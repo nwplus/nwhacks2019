@@ -6,4 +6,5 @@ export const sources = [
   'Club newsletter',
   'Faculty newsletter',
   'Prof/in class',
+  'Previously attended nwHacks',
 ];
