@@ -176,7 +176,7 @@ class Home extends React.Component {
                         className="scale-width-mobile"
                       />
                     </Link>
-                    <a
+                    {/**<a
                       target="_blank"
                       href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
                       rel="noopener noreferrer"
@@ -186,7 +186,7 @@ class Home extends React.Component {
                         text="Become a mentor"
                         className="scale-width-mobile"
                       />
-                    </a>
+                    </a>**/}
                   </div>
                 )
                 : (
