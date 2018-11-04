@@ -7,7 +7,8 @@ import { SECTION } from './Sections';
 import { QUESTIONS } from './Questions';
 import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
-import { PrimaryButton, SecondaryButton } from '../input/buttons';
+// SecondaryButton lint error so had to put it here
+import { PrimaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
 import { Footer } from '../footer';
 
@@ -176,7 +177,7 @@ class Home extends React.Component {
                         className="scale-width-mobile"
                       />
                     </Link>
-                    {/**<a
+                    {/** <a
                       target="_blank"
                       href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
                       rel="noopener noreferrer"
@@ -186,7 +187,7 @@ class Home extends React.Component {
                         text="Become a mentor"
                         className="scale-width-mobile"
                       />
-                    </a>**/}
+                    </a> * */}
                   </div>
                 )
                 : (

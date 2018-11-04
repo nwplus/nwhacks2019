@@ -27,11 +27,23 @@ export const QUESTIONS = Object.freeze({
       ),
     },
     {
-      'How can I officially sign up?': (
-        <p className="margin-top-none">Registration on our website will open in November.&nbsp;
-          <a href="http://eepurl.com/dF3b7n">
-            Let us know your email and we&apos;ll tell you once it does!
-          </a>
+      'When is the application deadline?': (
+        <p className="margin-top-none">
+          <b>December 1, 2018 11:59PM Pacific Time</b> is the deadline for
+          applications requesting travel reimbursements.
+          <br />
+          <b>December 15, 2018 11:59PM Pacific Time</b> is the
+          deadline for the rest of the applications.
+        </p>
+      ),
+    },
+    {
+      'How can I officially sign up to be a hacker? mentor? volunteer?': (
+        <p className="margin-top-none">
+          Hacker applications are open now, you can click &quot;Apply Now&quot;
+          to access the application.
+          &nbsp;
+          Mentor and volunteer applications are open November 24, 2018
         </p>
       ),
     },
