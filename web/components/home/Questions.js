@@ -31,8 +31,9 @@ export const QUESTIONS = Object.freeze({
         <p className="margin-top-none">
           <b>December 1, 2018 11:59PM Pacific Time</b> is the deadline for
           applications requesting travel reimbursements.
-          &nbsp;<b>December 15, 2018 11:59PM Pacific Time</b> is the
-          deadline for the rest of applications.
+          <br />
+          <b>December 15, 2018 11:59PM Pacific Time</b> is the
+          deadline for the rest of the applications.
         </p>
       ),
     },
