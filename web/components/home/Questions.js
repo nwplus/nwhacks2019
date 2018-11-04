@@ -27,22 +27,22 @@ export const QUESTIONS = Object.freeze({
       ),
     },
     {
-      'Application deadline?': (
+      'When is the application deadline?': (
         <p className="margin-top-none">
-          December 1, 2018 11:59PM Pacific Time is the deadline for
+          <b>December 1, 2018 11:59PM Pacific Time</b> is the deadline for
           applications requesting travel reimbursements.
-          <br />
-          December 15, 2018 11:59PM Pacific Time is the deadline for the rest of applications.
+          &nbsp;<b>December 15, 2018 11:59PM Pacific Time</b> is the
+          deadline for the rest of applications.
         </p>
       ),
     },
     {
       'How can I officially sign up to be a hacker? mentor? volunteer?': (
         <p className="margin-top-none">
-            Hacker applications are open now, you can click &quot;Apply Now&quot;
-            to access the application.
-          <br />
-            Mentor and volunteer applications are open November 24, 2018
+          Hacker applications are open now, you can click &quot;Apply Now&quot;
+          to access the application.
+          &nbsp;
+          Mentor and volunteer applications are open November 24, 2018
         </p>
       ),
     },
