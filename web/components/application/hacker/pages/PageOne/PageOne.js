@@ -60,6 +60,7 @@ class PageOne extends Page {
 
     const {
       cityQuery,
+      genderQuery,
     } = this.state;
 
     return (
@@ -140,15 +141,17 @@ class PageOne extends Page {
           error={this.getErrorIfBlurred('phoneNumber')}
           />
         <Select
-          options={genders}
+          options={genderQuery && genderQuery.length > 0 ? genders : []}
           value={gender}
           name="gender"
           label="Which gender do you identify as?"
-          placeholder="Enter your gender or choose from the dropdown"
+          placeholder="Type your gender"
           className="margin-ends-giga"
           onChange={({ value: newGender }) => this.updateApplication({ gender: newGender })}
           onBlur={() => this.setFieldAsBlurred('gender')}
           error={this.getErrorIfBlurred('gender')}
+          inputValue={genderQuery}
+          onInputChange={(input) => this.setState({ genderQuery: input })}
           isSearchable
           allowNewOption
           />
@@ -157,7 +160,7 @@ class PageOne extends Page {
           value={ethnicity}
           name="ethnicity"
           label="What is your race/ethnicity?"
-          placeholder="Enter your race/ethnicity or choose from the dropdown"
+          placeholder="Type your race/ethnicity"
           className="margin-ends-giga"
           onChange={({ value: newEthnicity }) => this.updateApplication({
             ethnicity: newEthnicity,
@@ -200,7 +203,7 @@ class PageOne extends Page {
               value={major}
               name="major"
               label={this.isHighSchool(education) ? 'What do you plan on studying?' : 'What is your major?'}
-              placeholder="Enter your major or choose from the dropdown"
+              placeholder="Type your major"
               className="margin-ends-giga"
               onChange={({ value: newMajor }) => this.updateApplication({
                 major: newMajor,
@@ -218,7 +221,7 @@ class PageOne extends Page {
           value={school}
           name="school-name"
           label="What school do you currently attend?"
-          placeholder="Enter your school or choose from the dropdown"
+          placeholder="Type your school"
           className="margin-ends-giga"
           onChange={({ value: newSchool }) => this.updateApplication({ school: newSchool })}
           onBlur={() => this.setFieldAsBlurred('school')}

@@ -38,7 +38,7 @@ class PageThree extends Page {
           value={source}
           name="source"
           label="How did you hear about nwHacks?"
-          placeholder="Enter an option or choose from the dropdown"
+          placeholder="Type your answer"
           className="margin-top-mega margin-bottom-xxl"
           onChange={({ value: newSource }) => this.updateApplication({ source: newSource })}
           onBlur={() => this.setFieldAsBlurred('source')}

@@ -91,6 +91,7 @@ export class Select extends React.Component {
           formatCreateLabel={formatNewOptionLabel}
           isValidNewOption={this.isValidNewOption}
           isDisabled={disabled}
+          noOptionsMessage={() => 'Start typing to search'}
         />
         <div>{error ? (<p className="error-message">{error.message}</p>) : null}</div>
       </div>
