@@ -15,89 +15,29 @@ import grounds from '../../assets/sponsors/in-kind/grounds.png';
 import sparkingIce from '../../assets/sponsors/in-kind/sparkling-ice.svg';
 import zoho from '../../assets/sponsors/in-kind/zoho.svg';
 
-const sponsors = {
-  tetra: [
-    {
-      alt: 'Microsoft',
-      src: microsoft,
-      href: 'https://www.microsoft.com/',
-    },
-    {
-      alt: 'Standard Library',
-      src: stdlib,
-      href: 'https://stdlib.com/',
-    },
-  ],
-  mega: [
-    {
-      alt: 'CSE (Communications Security Establishment)',
-      src: cse,
-      href: 'https://www.cse-cst.gc.ca/',
-    },
-    {
-      alt: 'Hootsuite',
-      src: hootsuite,
-      href: 'https://hootsuite.com/',
-    },
-    {
-      alt: 'SAP Concur',
-      src: sap,
-      href: 'https://www.concur.ca/sap',
-    },
-  ],
-  kilo: [
-    {
-      alt: 'Google',
-      src: google,
-      href: 'https://www.google.ca/',
-    },
-  ],
-  'in-kind': [
-    {
-      alt: 'DAVIDsTEA',
-      src: davidsTea,
-      href: 'https://www.davidstea.com/',
-    },
-    {
-      alt: 'Grounds for Coffee',
-      src: grounds,
-      href: 'https://groundsforcoffee.ca/locations/',
-    },
-    {
-      alt: 'Sparkling Ice',
-      src: sparkingIce,
-      href: 'https://www.sparklingice.ca/',
-    },
-    {
-      alt: 'Zoho',
-      src: zoho,
-      href: 'https://www.zoho.com/',
-    },
-  ],
-};
-
-const getSponsor = (sponsor, className) => (
-  <a href={sponsor.href}>
+const getSponsor = (alt, src, href, className) => (
+  <a href={href}>
     <img
-      className={className}
-      alt={sponsor.alt}
-      src={sponsor.src}
+      alt={alt}
+      src={src}
+      className={`scale-on-hover ${className}`}
     />
   </a>
 );
 
-const getSponsors = (tier, className) => (
-  <div className={className}>
-    {sponsors[tier].map(sponsor => getSponsor(sponsor, tier))}
-  </div>
-);
-
 const Sponsors = () => (
-  <div className="sponsors flex wrap dir-row jc-center">
-    {getSponsors('tetra', 'tetra flex wrap dir-row ai-center fill-width')}
-    {getSponsors('mega', 'mega flex wrap dir-row ai-center')}
-    {getSponsors('kilo', 'kilo flex wrap dir-row ai-center')}
-    {getSponsors('in-kind', 'in-kind flex wrap dir-row ai-center')}
+  <div className="sponsors">
+    <h2 className="margin-bottom-m">Sponsors</h2>
+    {getSponsor('Microsoft', microsoft, 'https://www.microsoft.com/', 'tetra')}<br /><br />
+    {getSponsor('Standard Library', stdlib, 'https://stdlib.com/', 'tetra')}<br />
+    {getSponsor('CSE (Communications Security Establishment)', cse, 'https://www.cse-cst.gc.ca/', 'mega')}
+    {getSponsor('Hootsuite', hootsuite, 'https://hootsuite.com/', 'mega')}<br />
+    {getSponsor('SAP Concur', sap, 'https://www.concur.ca/sap/', 'mega')}
+    {getSponsor('Google', google, 'https://www.google.com', 'kilo')}<br />
+    {getSponsor('DAVIDsTEA', davidsTea, 'https://www.davidstea.com/', 'in-kind')}
+    {getSponsor('Grounds For Coffee', grounds, 'https://groundsforcoffee.ca/locations/', 'in-kind')}
+    {getSponsor('Sparkling Ice', sparkingIce, 'https://www.sparklingice.ca/', 'in-kind')}
+    {getSponsor('Zoho', zoho, 'https://www.zoho.com/', 'in-kind')}
   </div>
 );
 
