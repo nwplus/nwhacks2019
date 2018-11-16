@@ -26,8 +26,6 @@ import skyline from '../../assets/skyline.svg';
 import panelBear from '../../assets/panel-bear.svg';
 import panelTrain from '../../assets/panel-train.svg';
 
-import bearCircle from '../../assets/bear-circle.svg';
-
 // stories assets import
 import spencerBg from '../../assets/stories/spencer-bg.svg';
 import spencer from '../../assets/stories/spencer.png';
