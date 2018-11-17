@@ -55,3 +55,8 @@ $transition-time-long: 1.5s
 .flip
   &-vertical
     @include transform(scaleY(-1))
+
+.scale-on-hover
+    -webkit-transition: all .18s ease-in-out
+    &:hover
+      -webkit-transform: scale(1.02);

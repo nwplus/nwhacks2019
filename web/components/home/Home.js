@@ -10,6 +10,7 @@ import { TextInput } from '../input/text';
 // SecondaryButton lint error so had to put it here
 import { PrimaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
+import { Sponsors } from './Sponsors';
 import { Footer } from '../footer';
 
 import { getFromFirestore } from '../../services/firestore';
@@ -24,8 +25,6 @@ import skyline from '../../assets/skyline.svg';
 
 import panelBear from '../../assets/panel-bear.svg';
 import panelTrain from '../../assets/panel-train.svg';
-
-import bearCircle from '../../assets/bear-circle.svg';
 
 // stories assets import
 import spencerBg from '../../assets/stories/spencer-bg.svg';
@@ -322,12 +321,14 @@ class Home extends React.Component {
           <p className="fill-min-width margin-top-s">Still have questions? Feel free to email us at <a href="mailto:hello@nwplus.io">hello@nwplus.io</a> or shoot us a message on <a href="https://facebook.com/nwhacks">Facebook</a>.</p>
         </div>
 
-        <div className="sponsors flex jc-center dir-col pad-top-tera">
+        {/* <div className="sponsors flex jc-center dir-col pad-top-tera">
           {getImage('cute-bear', bearCircle)}
           <p className="primary flex jc-center text-center">
             Stay tuned for sponsor updates!
           </p>
-        </div>
+        </div> */}
+
+        <Sponsors />
 
         <Footer />
 
