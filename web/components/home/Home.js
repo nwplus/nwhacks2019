@@ -170,28 +170,28 @@ class Home extends React.Component {
             {
               isApplicationEnabled
                 ? (
-                  <div className="flex ai-end pad-bottom-s scale-row-mobile">
-                    <Link to="/application/hacker" className="scale-width-mobile margin-right-s scale-margin-sides-mobile-none scale-margin-bottom-mobile-s">
+                  <div className="flex ai-end pad-bottom-s scale-row-phablet">
+                    <Link to="/application/hacker" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet">
                       <PrimaryButton
                         text="Apply now"
-                        className="scale-width-mobile"
+                        className="scale-width-phablet"
                       />
                     </Link>
-                    <Link to="/application/volunteer" className="scale-width-mobile margin-right-s scale-margin-sides-mobile-none scale-margin-bottom-mobile-s">
+                    <Link to="/application/volunteer" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet">
                       <SecondaryButton
                         text="Become a volunteer"
-                        className="scale-width-mobile"
+                        className="scale-width-phablet"
                       />
                     </Link>
                     <a
-                    target="_blank"
-                    href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
-                    rel="noopener noreferrer"
-                    className="scale-width-mobile"
+                      target="_blank"
+                      href="https://goo.gl/forms/qHweO1xJxF1wua4G3"
+                      rel="noopener noreferrer"
+                      className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet"
                     >
                       <SecondaryButton
                         text="Become a mentor"
-                        className="scale-width-mobile"
+                        className="scale-width-phablet"
                       />
                     </a>
                   </div>
