@@ -28,9 +28,11 @@ class App extends React.Component {
     return (
       <HashRouter basename={base}>
         <Switch>
+          {/* Admin */}
           <Route path="/admin">
             <Switch>
               <Route path="/admin/login">
+                {/* TODO: replace with actual login page */}
                 <AdminPanel />
               </Route>
               <Route path="*">
@@ -40,8 +42,10 @@ class App extends React.Component {
               </Route>
             </Switch>
           </Route>
+          {/* Everything else */}
           <Route path="*">
             <div>
+              {/* Only render Navbar outside of admin pages */}
               <Navbar />
               <Switch>
                 <Route exact path="/" component={Home} />
@@ -53,6 +57,7 @@ class App extends React.Component {
 
                 <Route path="/ui_demo" component={UIDemo} />
                 <Route path="/page_not_found" component={NotFound} />
+                {/* Default is page not found */}
                 <Route component={() => <Redirect to="/page_not_found" />} />
               </Switch>
             </div>
