@@ -10,7 +10,7 @@ import Navbar from '../../containers/navbar';
 
 // Components
 import { Login, Logout } from '../auth';
-import AdminPanel from '../admin';
+import { AdminPanel, AdminGate } from '../admin';
 
 import { HackerApplication } from '../../containers/application';
 
@@ -29,7 +29,16 @@ class App extends React.Component {
       <HashRouter basename={base}>
         <Switch>
           <Route path="/admin">
-            <AdminPanel />
+            <Switch>
+              <Route path="/admin/login">
+                <AdminPanel />
+              </Route>
+              <Route path="*">
+                <AdminGate>
+                  <AdminPanel />
+                </AdminGate>
+              </Route>
+            </Switch>
           </Route>
           <Route path="*">
             <div>
