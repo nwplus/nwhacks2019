@@ -12,9 +12,9 @@ const AdminPanel = ({ firestore, auth }) => {
     return (<span>Loading...</span>);
   }
 
-  if (isEmpty(auth) || firestore.errors.byQuery.admins) {
-    return (<Redirect to="/page_not_found" />);
-  }
+  // if (isEmpty(auth) || firestore.errors.byQuery.admins) {
+  //   return (<Redirect to="/page_not_found" />);
+  // }
 
   return (
     <div>

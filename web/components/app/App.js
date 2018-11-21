@@ -27,21 +27,28 @@ class App extends React.Component {
 
     return (
       <HashRouter basename={base}>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/application/hacker" component={HackerApplication} />
-            <Route path="/success" component={SuccessPage} />
-            <Route path="/dashboard" component={DashBoard} />
-            <Route path="/admin" component={AdminPanel} />
-            <Route path="/ui_demo" component={UIDemo} />
-            <Route path="/page_not_found" component={NotFound} />
-            <Route component={() => <Redirect to="/page_not_found" />} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/admin">
+            <AdminPanel />
+          </Route>
+          <Route path="*">
+            <div>
+              <Navbar />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/login" component={Login} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/application/hacker" component={HackerApplication} />
+                <Route path="/success" component={SuccessPage} />
+                <Route path="/dashboard" component={DashBoard} />
+
+                <Route path="/ui_demo" component={UIDemo} />
+                <Route path="/page_not_found" component={NotFound} />
+                <Route component={() => <Redirect to="/page_not_found" />} />
+              </Switch>
+            </div>
+          </Route>
+        </Switch>
       </HashRouter>
     );
   }
