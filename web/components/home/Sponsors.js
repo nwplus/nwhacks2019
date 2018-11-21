@@ -1,7 +1,7 @@
 import React from 'react';
 
 // tetra
-import microsoft from '../../assets/sponsors/tetra/microsoft.svg';
+import microsoft from '../../assets/sponsors/tetra/microsoft.png';
 import stdlib from '../../assets/sponsors/tetra/stdlib.svg';
 // mega
 import cse from '../../assets/sponsors/mega/cse.png';
@@ -28,7 +28,7 @@ const getSponsor = (alt, src, href, className) => (
 const Sponsors = () => (
   <div className="sponsors">
     <h2 className="margin-bottom-m">Sponsors</h2>
-    {getSponsor('Microsoft', microsoft, 'https://www.microsoft.com/', 'tetra')}<br /><br />
+    {getSponsor('Microsoft', microsoft, 'https://www.microsoft.com/', 'tetra')}
     {getSponsor('Standard Library', stdlib, 'https://stdlib.com/', 'tetra')}<br />
     {getSponsor('CSE (Communications Security Establishment)', cse, 'https://www.cse-cst.gc.ca/', 'mega')}
     {getSponsor('Hootsuite', hootsuite, 'https://hootsuite.com/', 'mega')}<br />
