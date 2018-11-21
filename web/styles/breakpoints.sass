@@ -86,8 +86,9 @@ $mobile-s:  320px
             margin-left: 0 !important
     &-bottom, &-ends
       &-phablet
-        @media screen and (max-width: $mobile)
-          margin-bottom: $spacing-s !important
+        &-s
+          @media screen and (max-width: $mobile)
+            margin-bottom: $spacing-s !important
       &-mobile
         &-s
           @media screen and (max-width: $mobile)

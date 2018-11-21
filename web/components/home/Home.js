@@ -170,13 +170,13 @@ class Home extends React.Component {
               isApplicationEnabled
                 ? (
                   <div className="flex ai-end pad-bottom-s scale-row-phablet">
-                    <Link to="/application/hacker" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet">
+                    <Link to="/application/hacker" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
                       <PrimaryButton
                         text="Apply now"
                         className="scale-width-phablet"
                       />
                     </Link>
-                    <Link to="/application/volunteer" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet">
+                    <Link to="/application/volunteer" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
                       <SecondaryButton
                         text="Become a volunteer"
                         className="scale-width-phablet"
@@ -186,7 +186,7 @@ class Home extends React.Component {
                       target="_blank"
                       href="https://goo.gl/forms/qHweO1xJxF1wua4G3"
                       rel="noopener noreferrer"
-                      className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet"
+                      className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s"
                     >
                       <SecondaryButton
                         text="Become a mentor"
