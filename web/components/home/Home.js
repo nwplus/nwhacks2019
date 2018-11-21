@@ -136,6 +136,7 @@ class Home extends React.Component {
         this.faqDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       case SECTION.SPONSORS:
+        this.sponsorsDiv.scrollIntoView({ behavior: 'smooth' });
         break;
       default:
     }
@@ -328,7 +329,9 @@ class Home extends React.Component {
           </p>
         </div> */}
 
-        <Sponsors />
+        <div ref={node => this.sponsorsDiv = node}>
+          <Sponsors />
+        </div>
 
         <Footer />
 
