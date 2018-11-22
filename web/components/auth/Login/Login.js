@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
@@ -45,10 +44,6 @@ const Login = ({
               type="submit"
               className="fill-width"
               />
-            <p className="flex jc-center">
-                Don&apos;t have an account yet?&nbsp;
-              <Link to="/">Apply here</Link>
-            </p>
           </div>
           <div className="card-right" />
         </div>
