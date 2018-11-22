@@ -27,7 +27,7 @@ const AdminGate = ({ auth, firestore, children }) => {
   } = firestore;
 
   const { uid } = auth;
-  const isAdmin = uid in admins;
+  const isAdmin = admins && uid in admins;
 
   if (isEmpty(auth)) {
     return (<Redirect to="/page_not_found" />);
