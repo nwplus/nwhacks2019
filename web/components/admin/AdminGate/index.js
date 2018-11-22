@@ -5,6 +5,8 @@ import { firebaseConnect, firestoreConnect, isLoaded, isEmpty } from 'react-redu
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { Logout } from '../../auth';
+
 const AdminGate = ({ auth, firestore, children }) => {
   const {
     status: {
@@ -24,10 +26,13 @@ const AdminGate = ({ auth, firestore, children }) => {
     },
   } = firestore;
 
-  const isAdmin = !!admins;
+  const { uid } = auth;
+  const isAdmin = uid in admins;
 
-  if (isEmpty(auth) || !isAdmin) {
+  if (isEmpty(auth)) {
     return (<Redirect to="/page_not_found" />);
+  } else if (!isAdmin) {
+    return (<Logout redirect="/page_not_found" />)
   }
 
   return (
