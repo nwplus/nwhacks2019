@@ -31,8 +31,8 @@ const AdminGate = ({ auth, firestore, children }) => {
 
   if (isEmpty(auth)) {
     return (<Redirect to="/page_not_found" />);
-  } else if (!isAdmin) {
-    return (<Logout redirect="/page_not_found" />)
+  } if (!isAdmin) {
+    return (<Logout redirect="/page_not_found" />);
   }
 
   return (

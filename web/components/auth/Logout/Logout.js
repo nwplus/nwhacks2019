@@ -27,7 +27,7 @@ class Logout extends React.Component {
 }
 
 Logout.defaultProps = {
-  redirect: "/",
+  redirect: '/',
 };
 
 Logout.propTypes = {
