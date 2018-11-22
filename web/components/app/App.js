@@ -10,7 +10,7 @@ import Navbar from '../../containers/navbar';
 import { Login } from '../../containers/auth';
 
 // Components
-// import { Login, Logout } from '../auth';
+import { Logout } from '../auth';
 import { AdminPanel, AdminGate } from '../admin';
 
 import { HackerApplication } from '../../containers/application';
@@ -33,8 +33,10 @@ class App extends React.Component {
           <Route path="/admin">
             <Switch>
               <Route path="/admin/login">
-                {/* TODO: replace with actual login page */}
                 <Login />
+              </Route>
+              <Route path="/admin/logout">
+                <Logout />
               </Route>
               <Route path="*">
                 <AdminGate>
