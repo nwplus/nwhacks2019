@@ -45,6 +45,7 @@ class App extends React.Component {
                     <Route path="/admin/home2">
                       <AdminPanel />
                     </Route>
+                    <Route component={() => <Redirect to="/page_not_found" />} />
                   </Switch>
                 </AdminGate>
               </Route>
