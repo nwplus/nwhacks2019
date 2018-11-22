@@ -6,13 +6,27 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 const AdminGate = ({ auth, firestore, children }) => {
-  const { admins } = firestore.data;
+  const {
+    status: {
+      requesting: {
+        admins: isAdminsLoading,
+      }
+    }
+  } = firestore;
 
-  if (!isLoaded(auth) || !isLoaded(admins)) {
+  if (!isLoaded(auth) || isAdminsLoading) {
     return (<span>Loading...</span>);
   }
 
-  if (isEmpty(auth) || firestore.errors.byQuery.admins) {
+  const {
+    data: {
+      admins
+    }
+  } = firestore;
+
+  const isAdmin = !!admins;
+
+  if (isEmpty(auth) || !isAdmin) {
     return (<Redirect to="/page_not_found" />);
   }
 
@@ -34,7 +48,11 @@ AdminGate.propTypes = {
 
 export default compose(
   firebaseConnect(),
-  firestoreConnect(['admins']),
+  firestoreConnect(({
+    firebase,
+  }) =>  {
+    return [{ collection: 'admins' }];
+  }),
   connect((state) => {
     return {
       firestore: state.firestore,

@@ -7,9 +7,10 @@ import { compose } from 'redux';
 // Containers
 import Home from '../home/Home';
 import Navbar from '../../containers/navbar';
+import { Login } from '../../containers/auth';
 
 // Components
-import { Login, Logout } from '../auth';
+// import { Login, Logout } from '../auth';
 import { AdminPanel, AdminGate } from '../admin';
 
 import { HackerApplication } from '../../containers/application';
@@ -33,11 +34,18 @@ class App extends React.Component {
             <Switch>
               <Route path="/admin/login">
                 {/* TODO: replace with actual login page */}
-                <AdminPanel />
+                <Login />
               </Route>
               <Route path="*">
                 <AdminGate>
-                  <AdminPanel />
+                  <Switch>
+                    <Route path="/admin/home">
+                      <AdminPanel />
+                    </Route>
+                    <Route path="/admin/home2">
+                      <AdminPanel />
+                    </Route>
+                  </Switch>
                 </AdminGate>
               </Route>
             </Switch>
@@ -49,8 +57,6 @@ class App extends React.Component {
               <Navbar />
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/login" component={Login} />
-                <Route path="/logout" component={Logout} />
                 <Route path="/application/hacker" component={HackerApplication} />
                 <Route path="/success" component={SuccessPage} />
                 <Route path="/dashboard" component={DashBoard} />
