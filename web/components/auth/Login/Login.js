@@ -11,52 +11,59 @@ const Login = ({
   login,
   email,
   password,
-  error
-}) => {
-  return (
-    <div id="login" className="fill-height flex jc-center ai-center dir-col">
-      <div>
-        <form
-          onSubmit={login}
-          className="input-group"
-          name="login-form">
-          <h3 className="pad-sides-xxl margin-bottom-m">Sign in</h3>
-          <div className="card split flex">
-            <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
-              <TextInput
-                placeholder="Enter your email"
-                value={email}
-                onChange={onEmailChange}
-                error={error}
-                label="Email"
-                name="email"
+  error,
+}) => (
+  <div id="login" className="fill-height flex jc-center ai-center dir-col">
+    <div>
+      <form
+        onSubmit={login}
+        className="input-group"
+        name="login-form">
+        <h3 className="pad-sides-xxl margin-bottom-m">Sign in</h3>
+        <div className="card split flex">
+          <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
+            <TextInput
+              placeholder="Enter your email"
+              value={email}
+              onChange={onEmailChange}
+              error={error}
+              label="Email"
+              name="email"
               />
-              <PasswordInput
-                placeholder="Enter your password"
-                value={password}
-                onChange={onPasswordChange}
-                error={error}
-                label="Password"
-                name="password"
-                showErrorMessage
-                showForgot
+            <PasswordInput
+              placeholder="Enter your password"
+              value={password}
+              onChange={onPasswordChange}
+              error={error}
+              label="Password"
+              name="password"
+              showErrorMessage
+              showForgot
               />
-              <PrimaryButton
-                text="Submit"
-                type="submit"
-                className="fill-width"
+            <PrimaryButton
+              text="Submit"
+              type="submit"
+              className="fill-width"
               />
-              <p className="flex jc-center">
+            <p className="flex jc-center">
                 Don&apos;t have an account yet?&nbsp;
-                <Link to="/">Apply here</Link>
-              </p>
-            </div>
-            <div className="card-right" />
+              <Link to="/">Apply here</Link>
+            </p>
           </div>
-        </form>
-      </div>
+          <div className="card-right" />
+        </div>
+      </form>
     </div>
-  );
+  </div>
+);
+
+Login.propTypes = {
+  onEmailChange: PropTypes.func.isRequired,
+  onPasswordChange: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  error: PropTypes.object,
 };
 
 export default Login;

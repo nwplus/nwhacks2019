@@ -53,16 +53,18 @@ class LoginContainer extends React.Component {
 
     if (!isAuthLoaded) return (<span>Loading...</span>);
 
-    if (needLogin) return (
-      <Login
-        onEmailChange={this.onEmailChange}
-        onPasswordChange={this.onPasswordChange}
-        login={this.login}
-        email={email}
-        password={password}
-        error={error}
+    if (needLogin) {
+      return (
+        <Login
+          onEmailChange={this.onEmailChange}
+          onPasswordChange={this.onPasswordChange}
+          login={this.login}
+          email={email}
+          password={password}
+          error={error}
         />
-    );
+      );
+    }
 
     return (<Redirect to="/admin/home" />);
   }
@@ -75,7 +77,7 @@ LoginContainer.propTypes = {
   auth: PropTypes.object,
 };
 
-const mapStateToProps = ({ firebase: { auth }}) => {
+const mapStateToProps = ({ firebase: { auth } }) => {
   return { auth };
 };
 

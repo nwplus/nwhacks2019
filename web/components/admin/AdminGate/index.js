@@ -10,8 +10,8 @@ const AdminGate = ({ auth, firestore, children }) => {
     status: {
       requesting: {
         admins: isAdminsLoading,
-      }
-    }
+      },
+    },
   } = firestore;
 
   if (!isLoaded(auth) || isAdminsLoading) {
@@ -20,8 +20,8 @@ const AdminGate = ({ auth, firestore, children }) => {
 
   const {
     data: {
-      admins
-    }
+      admins,
+    },
   } = firestore;
 
   const isAdmin = !!admins;
