@@ -48,11 +48,7 @@ AdminGate.propTypes = {
 
 export default compose(
   firebaseConnect(),
-  firestoreConnect(({
-    firebase,
-  }) =>  {
-    return [{ collection: 'admins' }];
-  }),
+  firestoreConnect([{ collection: 'admins' }]),
   connect((state) => {
     return {
       firestore: state.firestore,
