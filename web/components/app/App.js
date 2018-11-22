@@ -41,6 +41,7 @@ class App extends React.Component {
               <Route path="*">
                 <AdminGate>
                   <Switch>
+                    {/* These routes are just for demo only, to be finalized later */}
                     <Route path="/admin/home">
                       <AdminPanel />
                     </Route>
