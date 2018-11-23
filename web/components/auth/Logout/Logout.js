@@ -21,15 +21,21 @@ class Logout extends React.Component {
   }
 
   render() {
-    return (<Redirect to="/" />);
+    const { redirect } = this.props;
+    return (<Redirect to={redirect} />);
   }
 }
+
+Logout.defaultProps = {
+  redirect: '/',
+};
 
 Logout.propTypes = {
   firebase: PropTypes.shape({
     logout: PropTypes.func.isRequired,
   }),
   resetState: PropTypes.func.isRequired,
+  redirect: PropTypes.string,
 };
 
 const mapStateToProps = ({ firebase }) => {
