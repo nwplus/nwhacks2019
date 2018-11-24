@@ -37,11 +37,11 @@ class AssessmentPanelContainer extends React.Component {
     } = this.props;
 
     const { applicantType } = this.state;
-    const { hackerFullInfo, volunteerFullInfo, mentorFullInfo } = firestore.data;
+    const { hackerMainInfo, volunteerMainInfo, mentorMainInfo } = firestore.data;
     const applicants = {
-      hacker: hackerFullInfo,
-      volunteer: volunteerFullInfo,
-      mentor: mentorFullInfo,
+      hacker: hackerMainInfo,
+      volunteer: volunteerMainInfo,
+      mentor: mentorMainInfo,
     };
     return applicants[applicantType];
   }
@@ -108,17 +108,17 @@ export default compose(
   firestoreConnect([
     {
       collection: 'hacker_full_info',
-      storeAs: 'hackerFullInfo',
+      storeAs: 'hackerMainInfo',
       orderBy: 'timestamp',
     },
     {
       collection: 'volunteer_full_info',
-      storeAs: 'volunteerFullInfo',
+      storeAs: 'volunteerMainInfo',
       orderBy: 'timestamp',
     },
     {
       collection: 'mentor_full_info',
-      storeAs: 'mentorFullInfo',
+      storeAs: 'mentorMainInfo',
       orderBy: 'timestamp',
     },
   ]),
