@@ -7,8 +7,7 @@ const AssessmentPanel = ({
   applicants,
   selectedApplicantMainInfo,
   selectedApplicantLongInfo,
-  onApplicantClick }) => {
-  return (
+  onApplicantClick }) => (
     <div className="dashboard">
       <div className="toolbar pad-sides-s pad-top-s fill-width">
 
@@ -34,8 +33,7 @@ const AssessmentPanel = ({
         </div>
       </div>
     </div>
-  );
-};
+);
 
 AssessmentPanel.propTypes = {
   applicantType: PropTypes.string,
