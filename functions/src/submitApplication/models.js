@@ -79,12 +79,13 @@ exports.Hacker = function Hacker(data) {
       timestamp: data.timestamp,
       recentProject: data.recentProject,
       interestForNwHacks: data.interestForNwHacks,
-    }
+    },
   };
 
   // remove any empty values
-  cleaner(hacker.hacker_quick_info);
   cleaner(hacker.hacker_full_info);
+  cleaner(hacker.hacker_short_info);
+  cleaner(hacker.hacker_long_info);
 
   return hacker;
 };
