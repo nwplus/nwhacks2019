@@ -14,7 +14,7 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
   // this function only allows POST requests
   response.set('Access-Control-Allow-Methods', 'POST');
   if (request.method !== 'POST') {
-    return response.status(400).send(); // database error
+    return response.status(400).send("Unrecognized method"); // database error
   }
 
   // ensure request.body is an object, not a string
@@ -30,31 +30,53 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
   //    if token verified successfully, write hacker application to firestore
   //    else return error response
   validateRecaptcha(data.recaptchaResponse, (isHuman) => {
-    if (isHuman && !errors) {
-      // create a batch job
-      const batch = db.batch();
-
-      // create a new document reference in hacker_full_info and hacker_quick_info with the same ID
-      const hackerFullInfoRef = db.collection('hacker_full_info').doc();
-      const hackerId = hackerFullInfoRef.id; // use same ID for all of this hacker's documents
-      const hackerQuickInfoRef = db.collection('hacker_quick_info').doc(hackerId);
-
-      // also store the ID in a data field to make querying easier
-      data.id = hackerId;
-
-      // build hacker data object
-      const hacker = Hacker(data);
-
-      // write data fields to each document
-      batch.set(hackerFullInfoRef, hacker.hacker_full_info);
-      batch.set(hackerQuickInfoRef, hacker.hacker_quick_info);
-
-      // commit the batch (either the above two documents are successfully created, or not at all)
-      batch.commit()
-        .then(() => response.status(200).send()) // success
-        .catch(() => response.status(500).send()); // database error
+    if (!isHuman) {
+      response.status(400).send("Recaptcha validation failed");
+    } else if (errors) {
+      response.status(400).send("Data constraint check failed");
     } else {
-      response.status(400).send(); // bad request
+      try {
+        // create a batch job
+        const batch = db.batch();
+
+        // create a new document reference in hacker_full_info and hacker_quick_info with the same ID
+        const hackerFullInfoRef = db.collection('hacker_full_info').doc();
+        const hackerId = hackerFullInfoRef.id; // use same ID for all of this hacker's documents
+
+        const hackerShortInfoRef = db.collection('hacker_short_info').doc(hackerId);
+        const hackerLongInfoRef = db.collection('hacker_long_info').doc(hackerId);
+
+        // console.log("full info ref: ", hackerFullInfoRef);
+        // console.log("short info ref: ", hackerShortInfoRef);
+        // console.log("long info ref: ", hackerLongInfoRef);
+
+        // also store the ID in a data field to make querying easier
+        data.id = hackerId;
+
+        // build hacker data object
+        const hacker = Hacker(data);
+
+        // write data fields to each document
+
+        // TODO: make a function for this and validate
+        Object.keys(hacker.hacker_full_info).forEach(key => hacker.hacker_full_info[key] === undefined && delete hacker.hacker_full_info[key]);
+        Object.keys(hacker.hacker_short_info).forEach(key => hacker.hacker_short_info[key] === undefined && delete hacker.hacker_short_info[key]);
+        Object.keys(hacker.hacker_long_info).forEach(key => hacker.hacker_long_info[key] === undefined && delete hacker.hacker_long_info[key]);
+        batch.set(hackerFullInfoRef, hacker.hacker_full_info);
+        console.log("short info ref: ", hackerShortInfoRef);
+        console.log("hacker short info: ", hacker.hacker_short_info);
+        console.log("data: ", data);
+        batch.set(hackerShortInfoRef, hacker.hacker_short_info);
+        batch.set(hackerLongInfoRef, hacker.hacker_long_info);
+
+        // commit the batch (either the above three documents are successfully created, or not at all)
+        batch.commit()
+          .then(() => response.status(200).send()) // success
+          .catch(() => response.status(500).send()); // database error
+      } catch (e) {
+        console.log(e);
+        response.status(500).send("Internal Server Error");
+      }
     }
   });
 });

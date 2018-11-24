@@ -13,7 +13,7 @@ exports.Hacker = function Hacker(data) {
       city: data.city,
       school: data.school,
       gender: data.gender,
-      birthDate: data.birthDate,
+      birthDate: data.birthday,
       education: data.education,
       gradYear: data.gradYear,
       travel: data.travel,
@@ -33,13 +33,13 @@ exports.Hacker = function Hacker(data) {
       isDesigner: data.isDesigner, // optional
       // PAGE THREE
       source: data.source,
-      isPrivacyPolicyChecked: data.isisPrivacyPolicyChecked,
+      isPrivacyPolicyChecked: data.isPrivacyPolicyChecked,
       isCodeOfConductChecked: data.isCodeOfConductChecked,
       isDataReportingChecked: data.isDataReportingChecked,
       isDocumentsChecked: data.isDocumentsChecked,
     },
-    // contains a subset of frequently used fields from hacker_full_info
-    hacker_quick_info: {
+    // contains a subset of short fields from hacker_full_info
+    hacker_short_info: {
       id: data.id,
       timestamp: data.timestamp,
       // PAGE ONE
@@ -49,7 +49,7 @@ exports.Hacker = function Hacker(data) {
       city: data.city,
       school: data.school,
       gender: data.gender,
-      birthDate: data.birthDate,
+      birthDate: data.birthday,
       education: data.education,
       gradYear: data.gradYear,
       travel: data.travel,
@@ -67,11 +67,19 @@ exports.Hacker = function Hacker(data) {
       isDesigner: data.isDesigner, // optional
       // PAGE THREE
       source: data.source,
-      isPrivacyPolicyChecked: data.isisPrivacyPolicyChecked,
+      isPrivacyPolicyChecked: data.isPrivacyPolicyChecked,
       isCodeOfConductChecked: data.isCodeOfConductChecked,
       isDataReportingChecked: data.isDataReportingChecked,
       isDocumentsChecked: data.isDocumentsChecked,
     },
+    // contains a subset of long answer fields from hacker_full_info,
+    // as well as id and timestamp
+    hacker_long_info: {
+      id: data.id,
+      timestamp: data.timestamp,
+      recentProject: data.recentProject,
+      interestForNwHacks: data.interestForNwHacks,
+    }
   };
 
   // remove any empty values
