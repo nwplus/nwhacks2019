@@ -75,3 +75,5 @@ typings/
 
 # nodenv
 .node-version
+
+\.idea/

@@ -21,6 +21,7 @@ import DashBoard from '../dashboard';
 
 // Demo
 import UIDemo from '../demo';
+import {VolunteerApplicationContainer} from "../../containers/application/Volunteer/Volunteer";
 
 class App extends React.Component {
   render() {
@@ -62,9 +63,9 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/application/hacker" component={HackerApplication} />
+                <Route path="/application/volunteer" component={VolunteerApplicationContainer} />
                 <Route path="/success" component={SuccessPage} />
                 <Route path="/dashboard" component={DashBoard} />
-
                 <Route path="/ui_demo" component={UIDemo} />
                 <Route path="/page_not_found" component={NotFound} />
                 {/* Default is page not found */}
