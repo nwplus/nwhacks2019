@@ -73,7 +73,6 @@ export class HackerApplicationPageTemplate extends React.Component {
               sitekey={recaptchaConfig[process.env.NODE_ENV].sitekey}
               onVerify={(token) => {
                 this.setState({ isSubmitting: true });
-                this.setState({ token });
                 submitApplication(null, token, this.onSubmitFail);
               }}
               size="invisible"
