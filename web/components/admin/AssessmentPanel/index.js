@@ -1,47 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ApplicantList from '../ApplicantList';
+import ApplicantInfoPanel from '../ApplicantInfoPanel';
 
 const AssessmentPanel = ({
   applicantType,
   applicants,
-  selectedApplicantMainInfo,
-  selectedApplicantLongInfo,
-  onApplicantClick }) => (
-    <div className="dashboard">
-      <div className="toolbar pad-sides-s pad-top-s fill-width">
+  selectedApplicantId,
+  onApplicantClick,
+}) => (
+  <div className="dashboard">
 
-        <i>TODO: Toolbar component</i> <br />
+    {/* TOOLBAR */}
+    <div className="toolbar pad-sides-s pad-top-s fill-width">
+      <i>TODO: Toolbar component</i> <br />
         Collection: {applicantType}
+    </div>
 
+    <div className="applicant-view flex">
+
+      {/* APPLICANT LIST */}
+      <ApplicantList
+        applicants={applicants}
+        selectedApplicantId={selectedApplicantId}
+        onApplicantClick={onApplicantClick}
+        className={`${!selectedApplicantId ? 'fill-min-width' : ''}`} />
+
+      {/* SCORE PANEL */}
+      <div className={`middle-col pad-sides-s pad-top-s ${!selectedApplicantId ? 'display-none' : ''}`}>
+        <i>TODO: Score panel component</i>
       </div>
-      <div className="applicant-view flex">
-        <ApplicantList
-          applicants={applicants}
-          selectedApplicantId={selectedApplicantMainInfo.id}
-          onApplicantClick={onApplicantClick}
-          className={`${!selectedApplicantMainInfo.id ? 'fill-min-width' : ''}`} />
-        <div className={`middle-col pad-sides-s pad-top-s ${!selectedApplicantMainInfo.id ? 'display-none' : ''}`}>
-          <i>TODO: Score panel component</i>
-        </div>
-        <div className={`applicant-info pad-sides-s pad-ends-s  ${!selectedApplicantMainInfo.id ? 'display-none' : ''}`}>
-          <i>TODO: Applicant info component</i>
-          <br /><br />
-          <h5>Main info</h5>
-          {JSON.stringify(selectedApplicantMainInfo)}
-          <br /><br />
-          <h5>Long info</h5>
-          {JSON.stringify(selectedApplicantLongInfo)}
-        </div>
+
+      {/* APPLICANT INFO PANEL */}
+      <div className={`applicant-info pad-sides-s pad-ends-s  ${!selectedApplicantId ? 'display-none' : ''}`}>
+        <i>TODO: Applicant info component</i>
+        <ApplicantInfoPanel
+          applicantId={selectedApplicantId}
+          applicantType={applicantType}
+        />
+
       </div>
     </div>
+  </div>
 );
 
 AssessmentPanel.propTypes = {
+  // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string,
+  // documents from <applicantType>_main_info
   applicants: PropTypes.object,
-  selectedApplicantMainInfo: PropTypes.object,
-  selectedApplicantLongInfo: PropTypes.object,
+  // the id of the applicant that's currrently selected
+  selectedApplicantId: PropTypes.string,
+  // handler for applicant click
   onApplicantClick: PropTypes.func,
 };
 

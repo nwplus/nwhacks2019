@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import AssessmentPanel from '../../../components/admin/AssessmentPanel';
+import applicantCollections from '../../../util/applicantCollections';
 
 class AssessmentPanelContainer extends React.Component {
   static contextTypes = {
@@ -15,73 +16,62 @@ class AssessmentPanelContainer extends React.Component {
     super(props);
 
     this.state = {
-      // one of 'hacker', 'mentor', 'volunteer'
       applicantType: 'hacker',
-      // all documents from <applicantType>_main_info collection
-      applicants: {},
-      // single document from <applicantType>_main_info for selected applicant
-      selectedApplicantMainInfo: {},
-      // single document from <applicantType>_long_info collection for selected applicant
-      selectedApplicantLongInfo: {},
+      selectedApplicantId: null,
     };
   }
 
   componentWillMount() {
-    this.setState({ applicants: this.getApplicants() });
+    this.loadApplicants();
   }
 
-  // returns all documents from <applicantType>_main_info
-  getApplicants() {
-    const {
-      firestore,
-    } = this.props;
-
-    const { applicantType } = this.state;
-    const { hackerMainInfo, volunteerMainInfo, mentorMainInfo } = firestore.data;
-    const applicants = {
-      hacker: hackerMainInfo,
-      volunteer: volunteerMainInfo,
-      mentor: mentorMainInfo,
-    };
-    return applicants[applicantType];
-  }
-
-  // promise which returns <applicant_type>_long_info document for a particular applicant
-  getLongInfo(applicantId) {
-    const { applicantType } = this.state;
-    // http://docs.react-redux-firebase.com/history/v2.0.0/docs/firestore.html#manual
-    const { store } = this.context;
-    const { firestore } = store;
-
-    const longInfoCollections = {
-      hacker: 'hacker_long_info',
-      volunteer: 'volunteer_long_info',
-      mentor: 'mentor_long_info',
-    };
-
-    return firestore.get(
-      { collection: longInfoCollections[applicantType], doc: applicantId }
-    ).then(doc => doc.data());
+  componentWillUnmount() {
+    this.unloadApplicants();
   }
 
   // handles selecting an applicant
   selectApplicant = (e) => {
-    const { applicants } = this.state;
     const applicantId = e.currentTarget.getAttribute('data-applicant-id');
-    this.setState({ selectedApplicantMainInfo: applicants[applicantId] });
-    this.getLongInfo(applicantId).then((data) => {
-      this.setState({ selectedApplicantLongInfo: data });
+    this.setState({ selectedApplicantId: applicantId });
+  }
+
+  // Fills state.firestore.data.applicants by listening to <applicantType>_main_info collection
+  loadApplicants() {
+    const { store } = this.context;
+    const { firestore } = store;
+    const { applicantType } = this.state;
+    firestore.setListener({
+      collection: applicantCollections[applicantType].shortInfo,
+      orderBy: 'timestamp',
+    });
+  }
+
+  // Clears state.firestore.data.applicants by unlistening to <applicantType>_main_info collection
+  unloadApplicants() {
+    const { store } = this.context;
+    const { firestore } = store;
+    const { applicantType } = this.state;
+    firestore.unsetListener(applicantCollections[applicantType].shortInfo);
+  }
+
+  // switches applicant types (hacker, mentor, volunteer)
+  switchApplicantType(newApplicantType) {
+    this.unloadApplicants(); // remove listener for old applicantType's collections
+    this.setState({ applicantType: newApplicantType }, () => {
+      this.loadApplicants(); // add listener for new applicantType's collections
     });
   }
 
   render() {
     const {
       applicantType,
-      applicants,
-      selectedApplicantMainInfo,
-      selectedApplicantLongInfo,
+      selectedApplicantId,
     } = this.state;
 
+    const {
+      firestore,
+    } = this.props;
+    const applicants = firestore.data[applicantCollections[applicantType].shortInfo];
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
@@ -90,8 +80,8 @@ class AssessmentPanelContainer extends React.Component {
         <AssessmentPanel
           applicantType={applicantType}
           applicants={applicants}
-          selectedApplicantMainInfo={selectedApplicantMainInfo}
-          selectedApplicantLongInfo={selectedApplicantLongInfo}
+          selectedApplicantId={selectedApplicantId}
+          switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
         />
       </div>
@@ -105,23 +95,7 @@ AssessmentPanelContainer.propTypes = {
 
 export default compose(
   firebaseConnect(),
-  firestoreConnect([
-    {
-      collection: 'hacker_full_info',
-      storeAs: 'hackerMainInfo',
-      orderBy: 'timestamp',
-    },
-    {
-      collection: 'volunteer_full_info',
-      storeAs: 'volunteerMainInfo',
-      orderBy: 'timestamp',
-    },
-    {
-      collection: 'mentor_full_info',
-      storeAs: 'mentorMainInfo',
-      orderBy: 'timestamp',
-    },
-  ]),
+  firestoreConnect(),
   connect((state) => {
     return {
       firestore: state.firestore,
