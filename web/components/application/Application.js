@@ -23,7 +23,7 @@ class Application extends React.Component {
     } = this.props;
 
     // TODO: under feature flag
-    // if (application.isSubmitted) return (<Redirect to="/dashboard" />);
+    // if (hackerApplcation.isSubmitted) return (<Redirect to="/dashboard" />);
     if (cancelled) return (<Redirect to="/" />);
 
     return React.cloneElement(pages[activeIndex], this.props);

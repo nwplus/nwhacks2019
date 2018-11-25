@@ -1,8 +1,8 @@
 import { changeHackerApplicationPage } from '.';
 import ACTION_TYPES from '../action_types';
 
-describe('change active index for hacker application', () => {
-  it('creates an action to change active index for hacker application', () => {
+describe('change active index for hacker hackerApplcation', () => {
+  it('creates an action to change active index for hacker hackerApplcation', () => {
     const expectedAction = {
       type: ACTION_TYPES.CHANGE_HACKER_APPLICATION_PAGE,
       page: 3243,

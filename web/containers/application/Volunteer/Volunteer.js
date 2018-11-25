@@ -6,10 +6,10 @@ import { withFirebase } from 'react-redux-firebase';
 import Axios from 'axios';
 
 import Application from '../Application';
-import { changeHackerApplicationPage, changeHackerApplicationLastValidIndex, addHackerApplication, ACTION_TYPES } from '../../../actions';
+import { changeVolunteerApplicationPage, changeVolunteerApplicationLastValidIndex, addVolunteerApplication, ACTION_TYPES } from '../../../actions';
 import propTypesTemplates from '../../../prop-types-templates';
 import { getFromFirestore } from '../../../services/firestore';
-import { initialState as hackerApplicationInitialState } from '../../../reducers/entities/application/hacker';
+import { initialState as volunteerApplicationInitialState } from '../../../reducers/entities/application/volunteer';
 
 import PageOne from '../../../components/application/volunteer/pages/PageOne/PageOne';
 import PageTwo from '../../../components/application/volunteer/pages/PageTwo/PageTwo';
@@ -33,7 +33,7 @@ export class VolunteerApplicationContainer extends React.Component {
   submitApplication = (userCredentials, recaptchaResponse, onSubmitFailCallback) => {
     const {
       firebase,
-      hackerApplication,
+      volunteerApplication,
       cancelApplication,
       featureFlags: {
         data: {
@@ -49,17 +49,17 @@ export class VolunteerApplicationContainer extends React.Component {
     }
 
     // include recaptcha token in payload for verification in cloud function
-    hackerApplication.recaptchaResponse = recaptchaResponse;
+    volunteerApplication.recaptchaResponse = recaptchaResponse;
 
-    if (!hackerApplication.isSubmitted) {
-      // POST application data to cloud function for submission
+    if (!volunteerApplication.isSubmitted) {
+      // POST hackerApplcation data to cloud function for submission
       Axios.post(
         firebase.nwUtils.getFunctionUrl('submitApplicationVolunteer'),
-        hackerApplication,
+        volunteerApplication,
         { headers: { 'Content-Type': 'text/plain' } }
       ).then((res) => {
         if (res.status === 200) {
-          console.log('Submitted application!');
+          console.log('Submitted volunteerApplication!');
           this.setState({ isSubmitted: true });
           cancelApplication();
         } else {
@@ -72,23 +72,23 @@ export class VolunteerApplicationContainer extends React.Component {
   }
 
   render() {
-    const {
-      featureFlags: {
-        isLoaded: isFeatureFlagsLoaded,
-        data: featureFlagsData,
-      },
-    } = this.props;
-
-    if (!isFeatureFlagsLoaded) return null;
+    // const {
+    //   featureFlags: {
+    //     isLoaded: isFeatureFlagsLoaded,
+    //     data: featureFlagsData,
+    //   },
+    // } = this.props;
+    //
+    // if (!isFeatureFlagsLoaded) return null;
 
     const { isSubmitted } = this.state;
     if (isSubmitted) return (<Redirect to="/success" />);
 
-    const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
-    if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
+    // const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
+    // if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
 
     const {
-      hackerApplication,
+      volunteerApplication,
       changePage,
       changeLastActiveIndex,
       activeIndex,
@@ -105,7 +105,7 @@ export class VolunteerApplicationContainer extends React.Component {
 
     return (
       <Application
-        application={hackerApplication}
+        application={volunteerApplication}
         changePage={changePage}
         changeLastActiveIndex={changeLastActiveIndex}
         activeIndex={activeIndex}
@@ -125,12 +125,12 @@ const mapStateToProps = (state) => {
     root: {
       entities: {
         application: {
-          hacker: hackerApplication,
+          volunteer: volunteerApplication,
         },
       },
       ui: {
         application: {
-          hacker: {
+          volunteer: {
             activeIndex,
             lastValidIndex,
           },
@@ -144,7 +144,7 @@ const mapStateToProps = (state) => {
   const featureFlags = getFromFirestore(firestore, 'feature_flags');
 
   return {
-    hackerApplication,
+    volunteerApplication,
     activeIndex,
     lastValidIndex,
     featureFlags,
@@ -155,29 +155,29 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changePage: (page) => {
-      dispatch(changeHackerApplicationPage(page));
+      dispatch(changeVolunteerApplicationPage(page));
     },
     changeLastActiveIndex: (index) => {
-      dispatch(changeHackerApplicationLastValidIndex(index));
+      dispatch(changeVolunteerApplicationLastValidIndex(index));
     },
     updateApplication: (app) => {
-      dispatch(addHackerApplication(app));
+      dispatch(addVolunteerApplication(app));
     },
     cancelApplication: () => {
-      dispatch({ type: ACTION_TYPES.CANCEL_HACKER_APPLICATION });
+      dispatch({ type: ACTION_TYPES.CANCEL_VOLUNTEER_APPLICATION});
     },
     resetApplicationUI: () => {
-      dispatch({ type: ACTION_TYPES.RESET_HACKER_UI });
+      dispatch({ type: ACTION_TYPES.RESET_VOLUNTEER_UI });
     },
   };
 };
 
 VolunteerApplicationContainer.defaultProps = {
-  hackerApplication: hackerApplicationInitialState,
+  volunteerApplication: volunteerApplicationInitialState,
 };
 
 VolunteerApplicationContainer.propTypes = {
-  hackerApplication: propTypesTemplates.application.hacker,
+  volunteerApplication: propTypesTemplates.application.hacker,
   changePage: PropTypes.func.isRequired,
   changeLastActiveIndex: PropTypes.func.isRequired,
   activeIndex: PropTypes.number.isRequired,

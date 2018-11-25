@@ -11,7 +11,7 @@ const DashBoard = (props) => {
   let content;
 
   if (application.hacker.isSubmitted) {
-    content = 'you have one hacker application';
+    content = 'you have one hacker hackerApplcation';
   } else {
     content = 'you didn\'t apply as hacker';
   }

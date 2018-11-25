@@ -18,7 +18,7 @@ export class AfterLoginContainer extends React.Component {
       // purge store and state after logging in - blank slate
       this.purge();
 
-      // populate store with user's hacker application
+      // populate store with user's hacker hackerApplcation
       if (hackerApplication.data) {
         storeHackerApplication(hackerApplication.data);
       }

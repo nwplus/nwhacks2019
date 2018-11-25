@@ -81,7 +81,7 @@ export class ApplicationContainer extends React.Component {
 }
 
 ApplicationContainer.propTypes = {
-  // application contains the application itself.
+  // hackerApplcation contains the hackerApplcation itself.
   application: PropTypes.object.isRequired,
 
   // changePage is called whenever the user changes pages with an argument for the new active index.
@@ -97,23 +97,23 @@ ApplicationContainer.propTypes = {
   // lastValidIndex determines the furthest page that the user has been on.
   lastValidIndex: PropTypes.number.isRequired,
 
-  // updateApplication is called whenver the user updates the application.
+  // updateApplication is called whenver the user updates the hackerApplcation.
   updateApplication: PropTypes.func.isRequired,
 
-  // cancelApplication is called whenever the user cancels the application.
+  // cancelApplication is called whenever the user cancels the hackerApplcation.
   cancelApplication: PropTypes.func.isRequired,
 
-  // submitApplication is called whenever the user submits the application.
+  // submitApplication is called whenever the user submits the hackerApplcation.
   // In the pages, you may supply an argument when calling this function.
   submitApplication: PropTypes.func.isRequired,
 
-  // This function is called whenever the info about application UI in
+  // This function is called whenever the info about hackerApplcation UI in
   // redux store needs to be reset.
   // This usually happens when the cached redux store is old and needs a reset.
   // e.g. cached activeIndex could be larger than the number of pages after we remove some pages.
   resetApplicationUI: PropTypes.func.isRequired,
 
-  // pages determines the pages in the application.
+  // pages determines the pages in the hackerApplcation.
   pages: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.array,

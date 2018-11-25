@@ -53,14 +53,14 @@ export class HackerApplicationContainer extends React.Component {
     hackerApplication.recaptchaResponse = recaptchaResponse;
 
     if (!hackerApplication.isSubmitted) {
-      // POST application data to cloud function for submission
+      // POST hackerApplcation data to cloud function for submission
       Axios.post(
         firebase.nwUtils.getFunctionUrl('submitApplicationHacker'),
         hackerApplication,
         { headers: { 'Content-Type': 'text/plain' } }
       ).then((res) => {
         if (res.status === 200) {
-          console.log('Submitted application!');
+          console.log('Submitted hackerApplcation!');
           this.setState({ isSubmitted: true });
           cancelApplication();
         } else {

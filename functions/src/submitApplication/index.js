@@ -4,7 +4,7 @@ const { validateRecaptcha } = require('../utils/recaptcha');
 const { constraints } = require('./constraints');
 const { Hacker } = require('./models');
 
-// cloud function for submitting hacker application
+// cloud function for submitting hacker hackerApplcation
 exports.submitApplicationHacker = functions.https.onRequest((request, response) => {
   // set origin and headers to allow CORS for local testing
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -27,7 +27,7 @@ exports.submitApplicationHacker = functions.https.onRequest((request, response) 
   data.timestamp = Date.now();
 
   // validate user's one-time recaptcha token with google servers
-  //    if token verified successfully, write hacker application to firestore
+  //    if token verified successfully, write hacker hackerApplcation to firestore
   //    else return error response
   validateRecaptcha(data.recaptchaResponse, (isHuman) => {
     if (isHuman && !errors) {

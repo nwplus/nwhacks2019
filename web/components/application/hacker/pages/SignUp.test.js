@@ -39,7 +39,7 @@ describe('Sign up component', () => {
       expect(wrapper.find(TextInput).props()).toHaveProperty('disabled', true);
     });
 
-    it('email text input contains email from hacker application email', () => {
+    it('email text input contains email from hacker hackerApplcation email', () => {
       expect(wrapper.find(TextInput).props()).toHaveProperty('value', 'john.doe@example.com');
     });
 
