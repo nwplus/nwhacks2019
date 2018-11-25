@@ -125,7 +125,6 @@ export default compose(
   connect((state) => {
     return {
       firestore: state.firestore,
-      // auth: state.auth,
     };
   }),
 )(AssessmentPanelContainer);
