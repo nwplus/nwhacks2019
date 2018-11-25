@@ -127,7 +127,7 @@ exports.constraints = {
     city: atLeastOneCharacter,
     school: atLeastOneCharacter,
     gender: atLeastOneCharacter,
-    birthDate: {
+    birthdate: {
       date: {
         message: '^Please enter a valid birthday.',
       },
@@ -207,7 +207,7 @@ exports.constraints = {
     city: atLeastOneCharacter,
     school: atLeastOneCharacter,
     gender: atLeastOneCharacter,
-    birthDate: {
+    birthdate: {
       date: {
         message: '^Please enter a valid birthday.',
       },
