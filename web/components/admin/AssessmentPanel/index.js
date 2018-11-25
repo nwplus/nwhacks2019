@@ -19,8 +19,7 @@ const AssessmentPanel = ({
         <ApplicantList
           applicants={applicants}
           selectedApplicantId={selectedApplicantMainInfo.id}
-          onApplicantClick={onApplicantClick}
-          className="applicant-list" />
+          onApplicantClick={onApplicantClick} />
         <div className="middle-col pad-sides-s pad-top-s"><i>TODO: Score panel component</i></div>
         <div className="applicant-info pad-sides-s pad-ends-s">
           <i>TODO: Applicant info component</i>

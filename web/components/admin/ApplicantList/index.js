@@ -9,7 +9,7 @@ class ApplicantList extends React.Component {
     let applicantNumber = 0;
 
     return (
-      <div className={`flex dir-col wrap ${className}`}>
+      <div className={`applicant-list ${className}`}>
         {Object.keys(applicants).map((key) => {
           const { firstName, lastName, email, final_score } = applicants[key];
           applicantNumber += 1;
