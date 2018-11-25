@@ -7,10 +7,11 @@ import { compose } from 'redux';
 // Containers
 import Home from '../home/Home';
 import Navbar from '../../containers/navbar';
+import { Login } from '../../containers/auth';
 
 // Components
-import { Login, Logout } from '../auth';
-import AdminPanel from '../admin';
+import { Logout } from '../auth';
+import { AdminPanel, AdminGate } from '../admin';
 
 import { HackerApplication } from '../../containers/application';
 
@@ -27,21 +28,51 @@ class App extends React.Component {
 
     return (
       <HashRouter basename={base}>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/application/hacker" component={HackerApplication} />
-            <Route path="/success" component={SuccessPage} />
-            <Route path="/dashboard" component={DashBoard} />
-            <Route path="/admin" component={AdminPanel} />
-            <Route path="/ui_demo" component={UIDemo} />
-            <Route path="/page_not_found" component={NotFound} />
-            <Route component={() => <Redirect to="/page_not_found" />} />
-          </Switch>
-        </div>
+        <Switch>
+          {/* Admin */}
+          <Route path="/admin">
+            <Switch>
+              <Route path="/admin/login">
+                <Login />
+              </Route>
+              <Route path="/admin/logout">
+                <Logout />
+              </Route>
+              <Route path="*">
+                <AdminGate>
+                  <Switch>
+                    {/* These routes are just for demo only, to be finalized later */}
+                    <Route path="/admin/home">
+                      <AdminPanel />
+                    </Route>
+                    <Route path="/admin/home2">
+                      <AdminPanel />
+                    </Route>
+                    <Route component={() => <Redirect to="/page_not_found" />} />
+                  </Switch>
+                </AdminGate>
+              </Route>
+            </Switch>
+          </Route>
+          {/* Everything else */}
+          <Route path="*">
+            <div>
+              {/* Only render Navbar outside of admin pages */}
+              <Navbar />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/application/hacker" component={HackerApplication} />
+                <Route path="/success" component={SuccessPage} />
+                <Route path="/dashboard" component={DashBoard} />
+
+                <Route path="/ui_demo" component={UIDemo} />
+                <Route path="/page_not_found" component={NotFound} />
+                {/* Default is page not found */}
+                <Route component={() => <Redirect to="/page_not_found" />} />
+              </Switch>
+            </div>
+          </Route>
+        </Switch>
       </HashRouter>
     );
   }
