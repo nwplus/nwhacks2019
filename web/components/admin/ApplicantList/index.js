@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/* eslint-disable camelcase */
-
 class ApplicantList extends React.Component {
   render() {
     const { applicants, selectedApplicantId, onApplicantClick, className } = this.props;
@@ -11,7 +9,7 @@ class ApplicantList extends React.Component {
     return (
       <div className={`applicant-list ${className}`}>
         {Object.keys(applicants).map((key) => {
-          const { firstName, lastName, email, final_score } = applicants[key];
+          const { firstName, lastName, email, finalScore } = applicants[key];
           applicantNumber += 1;
           return (
             <div
@@ -26,7 +24,7 @@ class ApplicantList extends React.Component {
               </div>
               <div className="right margin-ends-s flex-no-shrink">
                 <div className="order">{applicantNumber}</div>
-                <div className="score">{final_score}/10</div>
+                <div className="score">{finalScore}/10</div>
               </div>
             </div>
           );
