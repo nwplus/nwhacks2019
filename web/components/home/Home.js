@@ -8,7 +8,7 @@ import { QUESTIONS } from './Questions';
 import { EXTERNAL } from './External';
 import { TextInput } from '../input/text';
 // SecondaryButton lint error so had to put it here
-import { PrimaryButton } from '../input/buttons';
+import { PrimaryButton, SecondaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
 import { Sponsors } from './Sponsors';
 import { Footer } from '../footer';
@@ -170,24 +170,30 @@ class Home extends React.Component {
             {
               isApplicationEnabled
                 ? (
-                  <div className="flex ai-end pad-bottom-s scale-row-mobile">
-                    <Link to="/application/hacker" className="scale-width-mobile margin-right-s scale-margin-sides-mobile-none scale-margin-bottom-mobile-s">
+                  <div className="flex ai-end pad-bottom-s scale-row-phablet">
+                    <Link to="/application/hacker" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
                       <PrimaryButton
                         text="Apply now"
-                        className="scale-width-mobile"
+                        className="scale-width-phablet"
                       />
                     </Link>
-                    {/** <a
+                    <Link to="/application/volunteer" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
+                      <SecondaryButton
+                        text="Become a volunteer"
+                        className="scale-width-phablet"
+                      />
+                    </Link>
+                    <a
                       target="_blank"
-                      href="https://docs.google.com/forms/d/1HQDZ2YWv8NCkSznOf-Bp6b14gRENiqoSCWYQ8_rYFLM/edit?usp=drivesdk"
+                      href="https://goo.gl/forms/qHweO1xJxF1wua4G3"
                       rel="noopener noreferrer"
-                      className="scale-width-mobile"
+                      className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s"
                     >
                       <SecondaryButton
                         text="Become a mentor"
-                        className="scale-width-mobile"
+                        className="scale-width-phablet"
                       />
-                    </a> * */}
+                    </a>
                   </div>
                 )
                 : (
