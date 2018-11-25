@@ -36,6 +36,9 @@ class ApplicantList extends React.Component {
   }
 }
 
+ApplicantList.defaultProps = {
+  className: '',
+};
 
 ApplicantList.propTypes = {
   applicants: PropTypes.object,
