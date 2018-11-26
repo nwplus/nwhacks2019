@@ -115,4 +115,168 @@ exports.constraints = {
     },
     recaptchaResponse: atLeastOneCharacter,
   },
+  hacker_full_info: {
+    id: { presence: true },
+    timestamp: { presence: true },
+    // =========
+    //  PAGE ONE
+    // =========
+    firstName: atLeastOneCharacter,
+    lastName: atLeastOneCharacter,
+    email: { email: true },
+    city: atLeastOneCharacter,
+    school: atLeastOneCharacter,
+    gender: atLeastOneCharacter,
+    birthdate: {
+      date: {
+        message: '^Please enter a valid birthday.',
+      },
+      presence: true,
+    },
+    education: atLeastOneCharacter,
+    gradYear: {
+      presence: true,
+      length: {
+        is: 4,
+      },
+    },
+    travel: { presence: true },
+    major: atLeastOneCharacter,
+    phoneNumber: atLeastOneCharacter,
+    ethnicity: atLeastOneCharacter,
+    // =========
+    //  PAGE TWO
+    // =========
+    isFirstHackathon: { presence: true },
+    resumeLink: {
+      presence: true,
+      url: true,
+    },
+    interestForNwHacks: {
+      presence: true,
+      length: {
+        minimum: 1,
+        maximum: 750,
+      },
+    },
+    recentProject: {
+      presence: true,
+      length: {
+        minimum: 1,
+        maximum: 750,
+      },
+    },
+    // =========
+    //  PAGE THREE
+    // =========
+    source: atLeastOneCharacter,
+    isPrivacyPolicyChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isCodeOfConductChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isDataReportingChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isDocumentsChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+  },
+  hacker_short_info: {
+    id: { presence: true },
+    timestamp: { presence: true },
+    // =========
+    //  PAGE ONE
+    // =========
+    firstName: atLeastOneCharacter,
+    lastName: atLeastOneCharacter,
+    email: { email: true },
+    city: atLeastOneCharacter,
+    school: atLeastOneCharacter,
+    gender: atLeastOneCharacter,
+    birthdate: {
+      date: {
+        message: '^Please enter a valid birthday.',
+      },
+      presence: true,
+    },
+    education: atLeastOneCharacter,
+    gradYear: {
+      presence: true,
+      length: {
+        is: 4,
+      },
+    },
+    travel: { presence: true },
+    major: atLeastOneCharacter,
+    phoneNumber: atLeastOneCharacter,
+    ethnicity: atLeastOneCharacter,
+    // =========
+    //  PAGE TWO
+    // =========
+    isFirstHackathon: { presence: true },
+    resumeLink: {
+      presence: true,
+      url: true,
+    },
+    // =========
+    //  PAGE THREE
+    // =========
+    source: atLeastOneCharacter,
+    isPrivacyPolicyChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isCodeOfConductChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isDataReportingChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+    isDocumentsChecked: {
+      presence: true,
+      inclusion: {
+        within: [true],
+      },
+    },
+  },
+  hacker_long_info: {
+    id: { presence: true },
+    timestamp: { presence: true },
+    interestForNwHacks: {
+      presence: true,
+      length: {
+        minimum: 1,
+        maximum: 750,
+      },
+    },
+    recentProject: {
+      presence: true,
+      length: {
+        minimum: 1,
+        maximum: 750,
+      },
+    },
+  },
 };

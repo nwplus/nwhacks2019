@@ -13,7 +13,7 @@ exports.Hacker = function Hacker(data) {
       city: data.city,
       school: data.school,
       gender: data.gender,
-      birthDate: data.birthDate,
+      birthdate: data.birthday,
       education: data.education,
       gradYear: data.gradYear,
       travel: data.travel,
@@ -33,24 +33,59 @@ exports.Hacker = function Hacker(data) {
       isDesigner: data.isDesigner, // optional
       // PAGE THREE
       source: data.source,
-      isPrivacyPolicyChecked: data.isisPrivacyPolicyChecked,
+      isPrivacyPolicyChecked: data.isPrivacyPolicyChecked,
       isCodeOfConductChecked: data.isCodeOfConductChecked,
       isDataReportingChecked: data.isDataReportingChecked,
       isDocumentsChecked: data.isDocumentsChecked,
     },
-    // contains a subset of frequently used fields from hacker_full_info
-    hacker_quick_info: {
+    // contains a subset of short fields from hacker_full_info
+    hacker_short_info: {
       id: data.id,
+      timestamp: data.timestamp,
+      // PAGE ONE
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
+      city: data.city,
+      school: data.school,
+      gender: data.gender,
+      birthdate: data.birthday,
+      education: data.education,
+      gradYear: data.gradYear,
+      travel: data.travel,
+      major: data.major,
+      phoneNumber: data.phoneNumber,
+      ethnicity: data.ethnicity,
+      // PAGE TWO
+      isFirstHackathon: data.isFirstHackathon,
+      githubLink: data.githubLink, // optional
+      personalWebsiteLink: data.personalWebsiteLink, // optional
+      linkedInLink: data.linkedInLink, // optional
+      resumeLink: data.resumeLink,
+      isDeveloper: data.isDeveloper, // optional
+      isHardware: data.isHardware, // optional
+      isDesigner: data.isDesigner, // optional
+      // PAGE THREE
+      source: data.source,
+      isPrivacyPolicyChecked: data.isPrivacyPolicyChecked,
+      isCodeOfConductChecked: data.isCodeOfConductChecked,
+      isDataReportingChecked: data.isDataReportingChecked,
+      isDocumentsChecked: data.isDocumentsChecked,
+    },
+    // contains a subset of long answer fields from hacker_full_info,
+    // as well as id and timestamp
+    hacker_long_info: {
+      id: data.id,
       timestamp: data.timestamp,
+      recentProject: data.recentProject,
+      interestForNwHacks: data.interestForNwHacks,
     },
   };
 
   // remove any empty values
-  cleaner(hacker.hacker_quick_info);
   cleaner(hacker.hacker_full_info);
+  cleaner(hacker.hacker_short_info);
+  cleaner(hacker.hacker_long_info);
 
   return hacker;
 };
