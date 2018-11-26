@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import Home from '../home/Home';
 import Navbar from '../../containers/navbar';
 import { Login } from '../../containers/auth';
+import VolunteerApplicationContainer from "../../containers/application/Volunteer/Volunteer";
 
 // Components
 import { Logout } from '../auth';
@@ -21,7 +22,6 @@ import DashBoard from '../dashboard';
 
 // Demo
 import UIDemo from '../demo';
-import {VolunteerApplicationContainer} from "../../containers/application/Volunteer/Volunteer";
 
 class App extends React.Component {
   render() {

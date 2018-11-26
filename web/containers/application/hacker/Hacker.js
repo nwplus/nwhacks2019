@@ -15,7 +15,7 @@ import PageOne from '../../../components/application/hacker/pages/PageOne/PageOn
 import PageTwo from '../../../components/application/hacker/pages/PageTwo/PageTwo';
 import PageThree from '../../../components/application/hacker/pages/PageThree/PageThree';
 
-export class HackerApplicationContainer extends React.Component {
+class HackerApplicationContainer extends React.Component {
   static signUp(firebase, userCredentials) {
     const auth = firebase.auth();
     const { email, password } = userCredentials;

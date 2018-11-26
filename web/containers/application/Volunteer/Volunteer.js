@@ -14,7 +14,7 @@ import { initialState as volunteerApplicationInitialState } from '../../../reduc
 import PageOne from '../../../components/application/volunteer/pages/PageOne/PageOne';
 import PageTwo from '../../../components/application/volunteer/pages/PageTwo/PageTwo';
 
-export class VolunteerApplicationContainer extends React.Component {
+class VolunteerApplicationContainer extends React.Component {
   static signUp(firebase, userCredentials) {
     const auth = firebase.auth();
     const { email, password } = userCredentials;
