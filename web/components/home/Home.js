@@ -152,7 +152,17 @@ class Home extends React.Component {
 
     if (!isFeatureFlagsLoaded) return null;
 
-    const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
+    const {
+      application: {
+        enabled: isApplicationEnabled,
+      },
+      volunteer_application: {
+        enabled: isVolunteerApplicationEnabled,
+      },
+      mentor_application: {
+        enabled: isMentorApplicationEnabled,
+      },
+    } = featureFlagsData;
 
     return (
       <div className="homepage overflow-hidden flex jc-center ai-center dir-col">
@@ -168,32 +178,44 @@ class Home extends React.Component {
               January 26-27, 2019 @ the University of British Columbia
             </p>
             {
-              isApplicationEnabled
+              isApplicationEnabled || isVolunteerApplicationEnabled || isMentorApplicationEnabled
                 ? (
                   <div className="flex ai-end pad-bottom-s scale-row-phablet">
-                    <Link to="/application/hacker" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
-                      <PrimaryButton
-                        text="Apply now"
-                        className="scale-width-phablet"
-                      />
-                    </Link>
-                    <Link to="/application/volunteer" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
-                      <SecondaryButton
-                        text="Become a volunteer"
-                        className="scale-width-phablet"
-                      />
-                    </Link>
-                    <a
-                      target="_blank"
-                      href="https://goo.gl/forms/qHweO1xJxF1wua4G3"
-                      rel="noopener noreferrer"
-                      className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s"
-                    >
-                      <SecondaryButton
-                        text="Become a mentor"
-                        className="scale-width-phablet"
-                      />
-                    </a>
+                    {
+                      isApplicationEnabled ? (
+                        <Link to="/application/hacker" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
+                          <PrimaryButton
+                            text="Apply now"
+                            className="scale-width-phablet"
+                          />
+                        </Link>
+                      ) : null
+                    }
+                    {
+                      isVolunteerApplicationEnabled ? (
+                        <Link to="/application/volunteer" className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s">
+                          <SecondaryButton
+                            text="Become a volunteer"
+                            className="scale-width-phablet"
+                          />
+                        </Link>
+                      ) : null
+                    }
+                    {
+                      isMentorApplicationEnabled ? (
+                        <a
+                          target="_blank"
+                          href="https://goo.gl/forms/qHweO1xJxF1wua4G3"
+                          rel="noopener noreferrer"
+                          className="scale-width-phablet margin-right-s scale-margin-sides-phablet-none scale-margin-bottom-phablet-s"
+                        >
+                          <SecondaryButton
+                            text="Become a mentor"
+                            className="scale-width-phablet"
+                          />
+                        </a>
+                      ) : null
+                    }
                   </div>
                 )
                 : (
