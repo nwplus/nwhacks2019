@@ -154,13 +154,13 @@ class Home extends React.Component {
 
     const {
       application: {
-        enabled: isApplicationEnabled
+        enabled: isApplicationEnabled,
       },
       volunteer_application: {
-        enabled: isVolunteerApplicationEnabled
+        enabled: isVolunteerApplicationEnabled,
       },
       mentor_application: {
-        enabled: isMentorApplicationEnabled
+        enabled: isMentorApplicationEnabled,
       },
     } = featureFlagsData;
 
