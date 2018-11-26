@@ -7,6 +7,7 @@ const AssessmentPanel = ({
   applicantType,
   applicants,
   selectedApplicantId,
+  switchApplicantType,
   onApplicantClick,
 }) => (
   <div className="dashboard">
@@ -15,6 +16,7 @@ const AssessmentPanel = ({
     <div className="toolbar pad-sides-s pad-top-s fill-width">
       <i>TODO: Toolbar component</i> <br />
         Collection: {applicantType}
+      <button type="button" onClick={() => switchApplicantType('mentor')}>Mentor</button>
     </div>
 
     <div className="applicant-view flex">
@@ -51,6 +53,8 @@ AssessmentPanel.propTypes = {
   applicants: PropTypes.object,
   // the id of the applicant that's currrently selected
   selectedApplicantId: PropTypes.string,
+  // handler for switching between applicant types
+  switchApplicantType: PropTypes.func,
   // handler for applicant click
   onApplicantClick: PropTypes.func,
 };

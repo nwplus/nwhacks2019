@@ -4,11 +4,11 @@ const applicantCollections = {
     longInfo: 'hacker_long_info',
   },
   mentor: {
-    shortInfo: 'hacker_short_info',
+    shortInfo: 'mentor_short_info',
     longInfo: 'mentor_long_info',
   },
   volunteer: {
-    shortInfo: 'hacker_short_info',
+    shortInfo: 'volunteer_short_info',
     longInfo: 'volunteer_long_info',
   },
 };

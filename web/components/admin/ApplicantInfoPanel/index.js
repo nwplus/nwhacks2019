@@ -16,12 +16,18 @@ const mapPropsToQueries = (props) => {
 class ApplicantInfoPanel extends React.Component {
   getApplicantShortInfo() {
     const { firestore, applicantId, applicantType } = this.props;
+    if (!applicantId || !applicantType) {
+      return null;
+    }
     const shortInfo = firestore.data[applicantCollections[applicantType].shortInfo][applicantId];
     return shortInfo;
   }
 
   getApplicantLongInfo() {
     const { firestore, applicantId, applicantType } = this.props;
+    if (!applicantId || !applicantType) {
+      return null;
+    }
     const longInfo = firestore.data[applicantCollections[applicantType].longInfo][applicantId];
     return longInfo;
   }

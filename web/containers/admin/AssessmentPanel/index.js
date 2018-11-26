@@ -36,7 +36,7 @@ class AssessmentPanelContainer extends React.Component {
   }
 
   // Fills state.firestore.data.applicants by listening to <applicantType>_main_info collection
-  loadApplicants() {
+  loadApplicants = () => {
     const { store } = this.context;
     const { firestore } = store;
     const { applicantType } = this.state;
@@ -47,17 +47,23 @@ class AssessmentPanelContainer extends React.Component {
   }
 
   // Clears state.firestore.data.applicants by unlistening to <applicantType>_main_info collection
-  unloadApplicants() {
+  unloadApplicants = () => {
     const { store } = this.context;
     const { firestore } = store;
     const { applicantType } = this.state;
-    firestore.unsetListener(applicantCollections[applicantType].shortInfo);
+    firestore.unsetListener({
+      collection: applicantCollections[applicantType].shortInfo,
+      orderBy: 'timestamp',
+    });
   }
 
   // switches applicant types (hacker, mentor, volunteer)
-  switchApplicantType(newApplicantType) {
+  switchApplicantType = (newApplicantType) => {
     this.unloadApplicants(); // remove listener for old applicantType's collections
-    this.setState({ applicantType: newApplicantType }, () => {
+    this.setState({
+      applicantType: newApplicantType,
+      selectedApplicantId: null,
+    }, () => {
       this.loadApplicants(); // add listener for new applicantType's collections
     });
   }
