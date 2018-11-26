@@ -19,7 +19,7 @@ class ApplicantInfo extends React.Component {
     if (!applicantId || !applicantType) {
       return null;
     }
-    const shortInfo = firestore.data[applicantCollections[applicantType].shortInfo][applicantId];
+    const shortInfo = firestore.ordered[applicantCollections[applicantType].shortInfo][applicantId];
     return shortInfo;
   }
 
