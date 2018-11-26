@@ -6,6 +6,8 @@ class ApplicantList extends React.Component {
     const { applicants, selectedApplicantId, onApplicantClick, className } = this.props;
     let applicantNumber = 0;
 
+    if (!applicants) return null;
+
     return (
       <div className={`applicant-list ${className}`}>
         {Object.keys(applicants).map((key) => {
