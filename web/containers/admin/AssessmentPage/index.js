@@ -4,10 +4,10 @@ import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebas
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import AssessmentPanel from '../../../components/admin/AssessmentPanel';
+import AssessmentPage from '../../../components/admin/AssessmentPage';
 import applicantCollections from '../../../util/applicantCollections';
 
-class AssessmentPanelContainer extends React.Component {
+class AssessmentPageContainer extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired,
   }
@@ -83,7 +83,7 @@ class AssessmentPanelContainer extends React.Component {
     }
     return (
       <div>
-        <AssessmentPanel
+        <AssessmentPage
           applicantType={applicantType}
           applicants={applicants}
           selectedApplicantId={selectedApplicantId}
@@ -95,7 +95,7 @@ class AssessmentPanelContainer extends React.Component {
   }
 }
 
-AssessmentPanelContainer.propTypes = {
+AssessmentPageContainer.propTypes = {
   firestore: PropTypes.object,
 };
 
@@ -107,4 +107,4 @@ export default compose(
       firestore: state.firestore,
     };
   }),
-)(AssessmentPanelContainer);
+)(AssessmentPageContainer);

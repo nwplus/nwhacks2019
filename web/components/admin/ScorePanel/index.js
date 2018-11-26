@@ -9,12 +9,11 @@ const mapPropsToQueries = (props) => {
   const { applicantType, applicantId } = props;
   return [
     { collection: applicantCollections[applicantType].shortInfo, doc: applicantId },
-    { collection: applicantCollections[applicantType].longInfo, doc: applicantId },
   ];
 };
 
-class ApplicantInfoPanel extends React.Component {
-  getApplicantShortInfo() {
+class ScorePanel extends React.Component {
+  getApplicantShortInfo = () => {
     const { firestore, applicantId, applicantType } = this.props;
     if (!applicantId || !applicantType) {
       return null;
@@ -23,31 +22,23 @@ class ApplicantInfoPanel extends React.Component {
     return shortInfo;
   }
 
-  getApplicantLongInfo() {
-    const { firestore, applicantId, applicantType } = this.props;
-    if (!applicantId || !applicantType) {
-      return null;
-    }
-    const longInfo = firestore.data[applicantCollections[applicantType].longInfo][applicantId];
-    return longInfo;
-  }
-
   render() {
+    const { className } = this.props;
+    const shortInfo = this.getApplicantShortInfo();
     return (
-      <div>
-        <h5>Short info</h5>
-        {JSON.stringify(this.getApplicantShortInfo())}
-        <h5>Long info</h5>
-        {JSON.stringify(this.getApplicantLongInfo())}
+      <div className={`score-panel pad-sides-s pad-top-s ${className}`}>
+        <i>TODO: Score panel component</i><br />
+        ID: {shortInfo ? shortInfo.id : ''}
       </div>
     );
   }
 }
 
-ApplicantInfoPanel.propTypes = {
+ScorePanel.propTypes = {
   firestore: PropTypes.object,
   applicantType: PropTypes.string,
   applicantId: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default compose(
@@ -58,4 +49,4 @@ export default compose(
       firestore: state.firestore,
     };
   }),
-)(ApplicantInfoPanel);
+)(ScorePanel);
