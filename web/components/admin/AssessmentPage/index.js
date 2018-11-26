@@ -46,7 +46,7 @@ AssessmentPage.propTypes = {
   // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string,
   // documents from <applicantType>_main_info
-  applicants: PropTypes.object,
+  applicants: PropTypes.array,
   // the id of the applicant that's currrently selected
   selectedApplicantId: PropTypes.string,
   // handler for switching between applicant types

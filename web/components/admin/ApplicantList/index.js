@@ -7,17 +7,16 @@ class ApplicantList extends React.Component {
     let applicantNumber = 0;
 
     if (!applicants) return null;
-
     return (
       <div className={`applicant-list ${className}`}>
-        {Object.keys(applicants).map((key) => {
-          const { firstName, lastName, email, finalScore } = applicants[key];
+        {applicants.map((applicant) => {
+          const { id, firstName, lastName, email, finalScore } = applicant;
           applicantNumber += 1;
           return (
             <div
-              className={`applicant flex ${selectedApplicantId === key ? 'selected' : ''}`}
-              key={key}
-              data-applicant-id={key}
+              className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
+              key={id}
+              data-applicant-id={id}
               onClick={onApplicantClick}
             >
               <div className="pad-left-s">
@@ -41,7 +40,7 @@ ApplicantList.defaultProps = {
 };
 
 ApplicantList.propTypes = {
-  applicants: PropTypes.object,
+  applicants: PropTypes.array,
   selectedApplicantId: PropTypes.string,
   onApplicantClick: PropTypes.func,
   className: PropTypes.string,

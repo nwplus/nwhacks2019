@@ -77,7 +77,7 @@ class AssessmentPageContainer extends React.Component {
     const {
       firestore,
     } = this.props;
-    const applicants = firestore.data[applicantCollections[applicantType].shortInfo];
+    const applicants = firestore.ordered[applicantCollections[applicantType].shortInfo];
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
