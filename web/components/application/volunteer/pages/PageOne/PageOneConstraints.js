@@ -20,10 +20,7 @@ export const constraints = {
   city: atLeastOneCharacter,
   school: atLeastOneCharacter,
   gender: atLeastOneCharacter,
-  birthday: {
-    date: {
-      message: '^Please enter a valid birthday.',
-    },
+  over19: {
     presence: true,
   },
   education: atLeastOneCharacter,

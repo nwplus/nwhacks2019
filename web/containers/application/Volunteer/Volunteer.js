@@ -72,20 +72,20 @@ class VolunteerApplicationContainer extends React.Component {
   }
 
   render() {
-    // const {
-    //   featureFlags: {
-    //     isLoaded: isFeatureFlagsLoaded,
-    //     data: featureFlagsData,
-    //   },
-    // } = this.props;
-    //
-    // if (!isFeatureFlagsLoaded) return null;
+    const {
+      featureFlags: {
+        isLoaded: isFeatureFlagsLoaded,
+        data: featureFlagsData,
+      },
+    } = this.props;
+
+    if (!isFeatureFlagsLoaded) return null;
 
     const { isSubmitted } = this.state;
     if (isSubmitted) return (<Redirect to="/success" />);
 
-    // const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
-    // if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
+    const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
+    if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
 
     const {
       volunteerApplication,
