@@ -1,21 +1,22 @@
 import React from 'react';
 
-import { TextInput, TextArea } from '../../../../input/text';
+import { TextArea } from '../../../../input/text';
 import { HackerApplicationPageTemplate } from '../PageTemplate';
 import { Page } from '../../../Page';
 import { RadioButton, RadioGroup } from '../../../../input/buttons/RadioGroup';
 import { Checkbox, CheckboxGroup } from '../../../../input/buttons/CheckboxGroup';
+import { constraints } from './PageTwoConstraints';
 
 // Emojis
 import crane from '../../../../../assets/emoji/crane.svg';
-import medal from '../../../../../assets/emoji/medal.svg';
-import {Select} from "../../../../input/select";
-import {sources} from "../../../sources";
-import robot from "../../../../../assets/emoji/robot.svg";
+import { Select } from '../../../../input/select';
+import { sources } from '../../../sources';
+import robot from '../../../../../assets/emoji/robot.svg';
 
 class PageTwo extends Page {
   constructor(props) {
     super(props);
+    this.constraints = constraints;
   }
 
   render() {
@@ -23,9 +24,13 @@ class PageTwo extends Page {
       application: {
         firstName,
         interestForNwHacks,
-        hours,
-        day1Availability,
-        day2Availability,
+        freeHours,
+        day1_830_to_1,
+        day1_1_to_6,
+        day1_6_to_11,
+        day1_overnight,
+        day2_8_to_12,
+        day2_12_to_6,
         source,
         isPrivacyPolicyChecked,
         isCodeOfConductChecked,
@@ -56,127 +61,153 @@ class PageTwo extends Page {
           label="How many hours would you like to volunteer for?"
           className="dir-row margin-ends-giga"
           onChange={(newhours) => {
-            this.updateApplication({ hours: newhours });
+            this.updateApplication({ freeHours: newhours });
           }}>
           <RadioButton
             label="5-8"
-            value="true"
-            selected={hours === '5-8'}
+            value="5-8"
+            selected={freeHours === '5-8'}
               />
           <RadioButton
             label="8-12"
-            value="false"
-            selected={hours === '8-12'}
+            value="8-12"
+            selected={freeHours === '8-12'}
               />
           <RadioButton
             label="12-16"
-            value="false"
-            selected={hours === '12-16'}
+            value="12-16"
+            selected={freeHours === '12-16'}
             />
           <RadioButton
             label="16-20"
-            value="false"
-            selected={hours === '16-20'}
+            value="16-20"
+            selected={freeHours === '16-20'}
             />
           <RadioButton
-            label="fullevent"
-            value="false"
-            selected={hours === 'fullevent'}
+            label="full event"
+            value="full event"
+            selected={freeHours === 'full event'}
             />
         </RadioGroup>
-              <CheckboxGroup
-          name="interested-role-checkbox"
-          label="Check all time slots that you are available for:"
+          <p> Check all time slots that you are available for: </p>
+        <CheckboxGroup
+          name="timeslotday1-checkbox"
+          label="Saturday January 26th"
           className="dir-row margin-ends-s"
-        >
-        <Checkbox
-            label="8:30AM"
-            value="8:30AM"
-            checked={isDeveloper}
+         >
+          <Checkbox
+            label="8:30AM to 1PM"
+            value="False"
+            checked={day1_830_to_1}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day1Availability: e.target.checked });
+              this.updateApplication({ day1_830_to_1: e.target.checked });
             }}
-          />
+         />
 
           <Checkbox
-            label="Designer"
-            value="designer"
-            checked={isDesigner}
+            label="1PM to 6PM"
+            value="False"
+            checked={day1_1_to_6}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ isDesigner: e.target.checked });
+              this.updateApplication({ day1_1_to_6: e.target.checked });
             }}
-          />
+         />
           <Checkbox
-            label="Hardware/Robotics"
-            value="hardware"
-            checked={isHardware}
+            label="6PM to 11PM"
+            value="False"
+            checked={day1_6_to_11}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ isHardware: e.target.checked });
+              this.updateApplication({ day1_6_to_11: e.target.checked });
             }}
-          />
+         />
           <Checkbox
-            label="Other"
-            value="other"
-            checked={isOther}
+            label="Overnight"
+            value="False"
+            checked={day1_overnight}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ isOther: e.target.checked });
+              this.updateApplication({ day1_overnight: e.target.checked });
             }}
-          />
+         />
         </CheckboxGroup>
-              <Select
-                  options={sources}
-                  value={source}
-                  name="source"
-                  label="How did you hear about nwHacks?"
-                  placeholder="Enter an option or choose from the dropdown"
-                  className="margin-top-mega margin-bottom-xxl"
-                  onChange={({ value: newSource }) => this.updateApplication({ source: newSource })}
-                  onBlur={() => this.setFieldAsBlurred('source')}
-                  error={this.getErrorIfBlurred('source')}
-                  isSearchable
-                  allowNewOption
+        <CheckboxGroup
+          name="timeslotday2-checkbox"
+          label="Sunday January 27th"
+          className="dir-row margin-ends-s"
+         >
+          <Checkbox
+            label="8AM to 12PM"
+            value="False"
+            checked={day2_8_to_12}
+            className="margin-left-none"
+            onChange={(e) => {
+              this.updateApplication({ day2_8_to_12: e.target.checked });
+            }}
+         />
+
+          <Checkbox
+            label="12PM to 6PM"
+            value="False"
+            checked={day2_12_to_6}
+            className="margin-left-none"
+            onChange={(e) => {
+              this.updateApplication({ day2_12_to_6: e.target.checked });
+            }}
+         />
+        </CheckboxGroup>
+        <Select
+          options={sources}
+          value={source}
+          name="source"
+          label="How did you hear about nwHacks?"
+          placeholder="Enter an option or choose from the dropdown"
+          className="margin-top-mega margin-bottom-xxl"
+          onChange={({ value: newSource }) => this.updateApplication({ source: newSource })}
+          onBlur={() => this.setFieldAsBlurred('source')}
+          error={this.getErrorIfBlurred('source')}
+          isSearchable
+          allowNewOption
               />
-          <CheckboxGroup
-              name="MLH-checkbox"
-              label={(
-                  <div><img className="vertical-align-top emoji" alt="🏅" src={robot} /> We participate
+        <CheckboxGroup
+          name="MLH-checkbox"
+          label={(
+            <div><img className="vertical-align-top emoji" alt="🏅" src={robot} /> We participate
                       in Major League Hacking (MLH) as a MLH Member Event. You authorize us to share
                       certain application/registration information for event administration, ranking,
                       MLH administration, and occasional messages about hackathons in line with
                       the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" rel="noopener noreferrer">MLH Code of Conduct.</a>
-                  </div>)}
-              className="margin-top-s dir-row margin-bottom-giga"
+            </div>)}
+          className="margin-top-s dir-row margin-bottom-giga"
           >
-              <Checkbox
-                  label={(
-                      <div className="bold">I authorize nwPlus to share certain application/registration information
+          <Checkbox
+            label={(
+              <div className="bold">I authorize nwPlus to share certain application/registration information
                           for event administration, ranking, MLH administration, and occasional messages
                           about hackathons in line with
                           the <a href="https://mlh.io/privacy" target="_blank" rel="noopener noreferrer"> MLH Privacy Policy.</a>
-                      </div>)}
-                  value="isPrivacyPolicyChecked"
-                  checked={isPrivacyPolicyChecked}
-                  onChange={(e) => {
-                      this.updateApplication({ isPrivacyPolicyChecked: e.target.checked });
-                  }}
+              </div>)}
+            value="isPrivacyPolicyChecked"
+            checked={isPrivacyPolicyChecked}
+            onChange={(e) => {
+              this.updateApplication({ isPrivacyPolicyChecked: e.target.checked });
+            }}
               />
-              <Checkbox
-                  label={(
-                      <div className="bold">I have read and agree to
+          <Checkbox
+            label={(
+              <div className="bold">I have read and agree to
                           the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" rel="noopener noreferrer"> Major League Hacking Code of Conduct.</a>
-                      </div>
+              </div>
                   )}
-                  value="isCodeOfConductChecked"
-                  checked={isCodeOfConductChecked}
-                  onChange={(e) => {
-                      this.updateApplication({ isCodeOfConductChecked: e.target.checked });
-                  }}
+            value="isCodeOfConductChecked"
+            checked={isCodeOfConductChecked}
+            onChange={(e) => {
+              this.updateApplication({ isCodeOfConductChecked: e.target.checked });
+            }}
               />
-          </CheckboxGroup>
+        </CheckboxGroup>
       </HackerApplicationPageTemplate>
     );
   }

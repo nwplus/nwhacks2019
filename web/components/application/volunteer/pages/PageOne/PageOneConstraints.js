@@ -31,9 +31,6 @@ export const constraints = {
       message: 'has to be a valid year.',
     },
   },
-  travel: {
-    presence: true,
-  },
   email: {
     presence: true,
     email: {

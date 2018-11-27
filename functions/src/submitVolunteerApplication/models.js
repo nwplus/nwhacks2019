@@ -1,0 +1,50 @@
+const cleaner = require('deep-cleaner');
+
+exports.Volunteer = function Volunteer(data) {
+  const volunteer = {
+    // contains all info about a hacker
+    volunteer_full_info: {
+      id: data.id,
+      timestamp: data.timestamp,
+      // PAGE ONE
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      city: data.city,
+      school: data.school,
+      gender: data.gender,
+      over19: data.over19,
+      education: data.education,
+      gradYear: data.gradYear,
+      major: data.major,
+      phoneNumber: data.phoneNumber,
+      ethnicity: data.ethnicity,
+      // PAGE TWO
+      interestForNwHacks: data.interestForNwHacks,
+      freeHours: data.freeHours,
+      day1_830_to_1: data.day1_830_to_1,
+      day1_1_to_6: data.day1_1_to_6,
+      day1_6_to_11: data.day1_6_to_11,
+      day1_overnight: data.day1_overnight,
+      day2_8_to_12: data.day2_8_to_12,
+      day2_12_to_6: data.day2_12_to_6,
+      source: data.source,
+      isPrivacyPolicyChecked: data.isPrivacyPolicyChecked,
+      isCodeOfConductChecked: data.isCodeOfConductChecked,
+    },
+    // contains a subset of frequently used fields from hacker_full_info
+    volunteer_quick_info: {
+      id: data.id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      timestamp: data.timestamp,
+    },
+  };
+
+  // remove any empty values
+  cleaner(volunteer.volunteer_quick_info);
+  cleaner(volunteer.volunteer_full_info);
+
+  return volunteer;
+};

@@ -11,7 +11,12 @@ export const initialState = {
   over19: null,
   gradYear: '',
   education: null,
-  travel: null,
+  day1_830_to_1: false,
+  day1_1_to_6: false,
+  day1_6_to_11: false,
+  day1_overnight: false,
+  day2_8_to_12: false,
+  day2_12_to_6: false,
 };
 
 const volunteerApplication = (state = initialState, action) => {

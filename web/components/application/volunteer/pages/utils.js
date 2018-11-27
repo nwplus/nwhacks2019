@@ -1,6 +1,6 @@
 export const getPrimaryButtonText = (activeIndex, count) => {
   if (activeIndex === count - 1) {
-    return 'Submit hackerApplcation';
+    return 'Submit volunteerApplication';
   }
   if (activeIndex === count - 2) {
     return 'One last step';
