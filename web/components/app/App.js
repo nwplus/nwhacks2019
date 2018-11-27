@@ -8,7 +8,6 @@ import { compose } from 'redux';
 import Home from '../home/Home';
 import Navbar from '../../containers/navbar';
 import { Login } from '../../containers/auth';
-import VolunteerApplicationContainer from "../../containers/application/Volunteer/Volunteer";
 
 // Components
 import { Logout } from '../auth';
