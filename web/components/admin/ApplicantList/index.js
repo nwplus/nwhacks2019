@@ -16,8 +16,7 @@ class ApplicantList extends React.Component {
             <div
               className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
               key={id}
-              data-applicant-id={id}
-              onClick={onApplicantClick}
+              onClick={() => onApplicantClick(id)}
             >
               <div className="pad-left-s">
                 <div className="name">{firstName} {lastName}</div>
