@@ -80,7 +80,7 @@ export class Select extends React.Component {
     }
 
     return (
-      <div className={`${className}`}>
+      <div className={`select-input ${className}`}>
         <h5 className="body-text">{label}</h5>
         <Creatable
           {...inputProps}
@@ -106,6 +106,7 @@ Select.defaultProps = {
   placeholder: 'Select an option',
   isSearchable: false,
   allowNewOption: false,
+  className: '',
 };
 
 Select.propTypes = {

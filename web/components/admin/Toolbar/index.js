@@ -1,20 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Select } from '../../input/select';
 
 class Toolbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.collectionSelectLabels = {
+      hacker: { value: 'hacker', label: 'Hacker' },
+      mentor: { value: 'mentor', label: 'Mentor' },
+      volunteer: { value: 'volunteer', label: 'Volunteer' },
+    };
+  }
+
   render() {
     const { applicantType, switchApplicantType, className } = this.props;
     return (
-      <div className={`toolbar pad-sides-s pad-top-s fill-width ${className}`}>
-        <i>TODO: Toolbar component</i> <br />
-        Collection: {applicantType}
-        <button type="button" onClick={() => switchApplicantType('hacker')}>Hacker</button>
-        <button type="button" onClick={() => switchApplicantType('mentor')}>Mentor</button>
-        <button type="button" onClick={() => switchApplicantType('volunteer')}>Volunteer</button>
+      <div className={`toolbar fill-width ${className}`}>
+        <Select
+          onChange={option => switchApplicantType(option.value)}
+          label="Form:"
+          name="collection-input"
+          value={this.collectionSelectLabels[applicantType].label}
+          options={Object.values(this.collectionSelectLabels)} />
       </div>
     );
   }
 }
+
+Toolbar.defaultProps = {
+  className: '',
+};
 
 Toolbar.propTypes = {
   // 'hacker', 'mentor', 'volunteer'
