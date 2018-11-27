@@ -14,7 +14,7 @@ describe('AfterLoginContainer', () => {
   let wrapper;
   const getWrapper = () => shallow(<AfterLoginContainer {...props} />);
 
-  describe('when hacker hackerApplcation is loaded', () => {
+  describe('when hacker application is loaded', () => {
     describe('when data is not undefined', () => {
       beforeEach(() => {
         const hackerApplication = { isLoaded: true, data: { a: 'b' } };
@@ -85,7 +85,7 @@ describe('AfterLoginContainer', () => {
     });
   });
 
-  describe('when hacker hackerApplcation is not loaded', () => {
+  describe('when hacker application is not loaded', () => {
     beforeEach(() => {
       const hackerApplication = { isLoaded: false, data: undefined };
 

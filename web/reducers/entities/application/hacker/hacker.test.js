@@ -2,7 +2,7 @@ import rootReducers from '../../..';
 import hackerApplication, { initialState } from '.';
 import ACTION_TYPES from '../../../../actions/action_types';
 
-describe('hacker hackerApplcation reducer', () => {
+describe('hacker application reducer', () => {
   describe('when state is undefined', () => {
     it('returns the initial state', () => {
       expect(hackerApplication(undefined, {})).toEqual(initialState);

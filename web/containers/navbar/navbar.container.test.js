@@ -55,7 +55,7 @@ describe('Navbar container', () => {
       featureFlags.isLoaded = true;
     });
 
-    describe('when hackerApplcation feature flag is enabled', () => {
+    describe('when application feature flag is enabled', () => {
       beforeEach(() => {
         const { featureFlags } = props;
         featureFlags.data.application.enabled = true;
@@ -191,7 +191,7 @@ describe('Navbar container', () => {
       });
     });
 
-    describe('when hackerApplcation feature flag is disabled', () => {
+    describe('when application feature flag is disabled', () => {
       beforeEach(() => {
         const { featureFlags } = props;
         featureFlags.data.application.enabled = false;
