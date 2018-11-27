@@ -81,7 +81,7 @@ export class ApplicationContainer extends React.Component {
 }
 
 ApplicationContainer.propTypes = {
-  // application contains the hackerApplcation itself.
+  // application contains the application itself.
   application: PropTypes.object.isRequired,
 
   // changePage is called whenever the user changes pages with an argument for the new active index.
