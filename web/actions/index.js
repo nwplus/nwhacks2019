@@ -1,5 +1,5 @@
 import { addHackerApplication, changeHackerApplicationPage, changeHackerApplicationLastValidIndex } from './hackerApplcation';
-import { addVolunteerApplication, changeVolunteerApplicationLastValidIndex, changeVolunteerApplicationPage } from './volunteerApplcation';
+import { addVolunteerApplication, changeVolunteerApplicationLastValidIndex, changeVolunteerApplicationPage } from './volunteerApplication';
 import ACTION_TYPES from './action_types';
 
 export {
