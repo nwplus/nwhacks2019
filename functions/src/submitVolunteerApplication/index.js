@@ -4,7 +4,7 @@ const { validateRecaptcha } = require('../utils/recaptcha');
 const { constraints } = require('./constraints');
 const { Volunteer } = require('./models');
 
-// cloud function for submitting volunteer application
+// cloud function for submitting hacker application
 exports.submitApplicationVolunteer = functions.https.onRequest((request, response) => {
   // set origin and headers to allow CORS for local testing
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -14,7 +14,7 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
   // this function only allows POST requests
   response.set('Access-Control-Allow-Methods', 'POST');
   if (request.method !== 'POST') {
-    return response.status(400).send(); // database error
+    return response.status(400).send('Unrecognized method'); // database error
   }
 
   // ensure request.body is an object, not a string
@@ -30,31 +30,54 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
   //    if token verified successfully, write hacker application to firestore
   //    else return error response
   validateRecaptcha(data.recaptchaResponse, (isHuman) => {
-    if (isHuman && !errors) {
-      // create a batch job
-      const batch = db.batch();
-
-      // create a new document reference in hacker_full_info and hacker_quick_info with the same ID
-      const VolunteerFullInfoRef = db.collection('volunteer_full_info').doc();
-      const volunteerId = VolunteerFullInfoRef.id; // use same ID for all of this hacker's documents
-      const VolunteerQuickInfoRef = db.collection('volunteer_quick_info').doc(volunteerId);
-
-      // also store the ID in a data field to make querying easier
-      data.id = volunteerId;
-
-      // build hacker data object
-      const volunteer = Volunteer(data);
-
-      // write data fields to each document
-      batch.set(VolunteerFullInfoRef, volunteer.volunteer_full_info);
-      batch.set(VolunteerQuickInfoRef, volunteer.volunteer_quick_info);
-
-      // commit the batch (either the above two documents are successfully created, or not at all)
-      batch.commit()
-        .then(() => response.status(200).send()) // success
-        .catch(() => response.status(500).send()); // database error
+    if (!isHuman) {
+      response.status(400).send('Recaptcha validation failed');
+    } else if (errors) {
+      response.status(400).send('Data constraint check failed');
     } else {
-      response.status(400).send(); // bad request
+      try {
+        // create a batch job
+        const batch = db.batch();
+
+        // create a new document reference in hacker_full_info
+        // and hacker_quick_info with the same ID
+        const volunteerFullInfoRef = db.collection('volunteer_full_info').doc();
+        const volunteerId = volunteerFullInfoRef.id; // use same ID for all volunteer documents
+
+        const volunteerShortInfoRef = db.collection('volunteer_short_info').doc(hackerId);
+        const volunteerLongInfoRef = db.collection('volunteer_long_info').doc(hackerId);
+
+        // also store the ID in a data field to make querying easier
+        data.id = volunteerId;
+
+        // build hacker data object
+        const volunteer = Volunteer(data);
+
+        // write data fields to each document
+
+        const errorsFull = validate(Volunteer.volunteer_full_info, constraints.volunteer_full_info);
+        const errorsShort = validate(Volunteer.volunteer_short_info,
+          constraints.volunteer_short_info);
+        const errorsLong = validate(Volunteer.volunteer_long_info, constraints.volunteer_long_info);
+
+        // validation error
+        if (errorsFull || errorsShort || errorsLong) {
+          response.status(500).send('Internal Server Error');
+        } else {
+          batch.set(volunteerFullInfoRef, volunteer.volunteer_full_info);
+          batch.set(volunteerShortInfoRef, volunteer.volunteer_short_info);
+          batch.set(volunteerLongInfoRef, volunteer.volunteer_long_info);
+
+          // commit the batch (either the above three documents are
+          // successfully created, or not at all)
+          batch.commit()
+            .then(() => response.status(200).send()) // success
+            .catch(() => response.status(500).send('Internal Server Error')); // database error
+        }
+      } catch (e) {
+        console.log(e);
+        response.status(500).send('Internal Server Error');
+      }
     }
   });
 });
