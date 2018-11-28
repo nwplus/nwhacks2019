@@ -50,7 +50,7 @@ class PageTwo extends Page {
           placeholder="Max 250 characters"
           value={interestForNwHacks}
           maxLength={250}
-          rows={4}
+          rows={5}
           onChange={newInterestForNwHacks => this.updateApplication({
             interestForNwHacks: newInterestForNwHacks })}
           onBlur={() => this.setFieldAsBlurred('interestForNwHacks')}
