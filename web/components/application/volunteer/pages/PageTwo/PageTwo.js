@@ -89,7 +89,7 @@ class PageTwo extends Page {
             selected={freeHours === 'full event'}
             />
         </RadioGroup>
-          <p> Check all time slots that you are available for: </p>
+        <p> Check all time slots that you are available for: </p>
         <CheckboxGroup
           name="timeslotday1-checkbox"
           label="Saturday January 26th"

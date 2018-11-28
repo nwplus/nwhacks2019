@@ -164,7 +164,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(addVolunteerApplication(app));
     },
     cancelApplication: () => {
-      dispatch({ type: ACTION_TYPES.CANCEL_VOLUNTEER_APPLICATION});
+      dispatch({ type: ACTION_TYPES.CANCEL_VOLUNTEER_APPLICATION });
     },
     resetApplicationUI: () => {
       dispatch({ type: ACTION_TYPES.RESET_VOLUNTEER_UI });

@@ -13,7 +13,7 @@ import { Login } from '../../containers/auth';
 import { Logout } from '../auth';
 import { AdminPanel, AdminGate } from '../admin';
 
-import { HackerApplication, VolunteerApplication} from '../../containers/application';
+import { HackerApplication, VolunteerApplication } from '../../containers/application';
 
 import SuccessPage from '../application/hacker/pages/SuccessPage/SuccessPage';
 import NotFound from '../errors/NotFound';
