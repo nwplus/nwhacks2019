@@ -19,19 +19,12 @@ export class HackerApplicationPageTemplate extends React.Component {
   }
 
   onSubmitButtonClick() {
-    const { submitFailed } = this.state;
-    const { submitApplication } = this.props;
-    if (submitFailed) { // if user has previously failed a submit
-      this.setState({ isSubmitting: true, submitFailed: false });
-      const { token } = this.state; // still-valid token from the last time user clicked submit
-      submitApplication(null, token, this.onSubmitFail);
-    } else {
-      this.setState({ submitFailed: false });
-      this.captcha.execute();
-    }
+    this.setState({ isSubmitting: true, submitFailed: false });
+    this.captcha.execute();
   }
 
   onSubmitFail() {
+    this.captcha.reset();
     this.setState({ isSubmitting: false, submitFailed: true });
   }
 
@@ -80,7 +73,6 @@ export class HackerApplicationPageTemplate extends React.Component {
               sitekey={recaptchaConfig[process.env.NODE_ENV].sitekey}
               onVerify={(token) => {
                 this.setState({ isSubmitting: true });
-                this.setState({ token });
                 submitApplication(null, token, this.onSubmitFail);
               }}
               size="invisible"

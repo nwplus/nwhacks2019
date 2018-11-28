@@ -34,6 +34,9 @@ $mobile-s:  320px
       &-rev
         @media screen and (max-width: $tablet)
           flex-direction: column-reverse !important
+    &-phablet
+      @media screen and (max-width: $phablet)
+        flex-direction: column !important
     &-mobile
       @media screen and (max-width: $mobile)
         flex-direction: column !important
@@ -71,12 +74,21 @@ $mobile-s:  320px
         @media screen and (max-width: $tablet)
           margin-right: $spacing-s !important
           margin-left: $spacing-s !important
+      &-phablet
+        &-none
+          @media screen and (max-width: $phablet)
+            margin-right: 0 !important
+            margin-left: 0 !important
       &-mobile
         &-none
           @media screen and (max-width: $mobile)
             margin-right: 0 !important
             margin-left: 0 !important
     &-bottom, &-ends
+      &-phablet
+        &-s
+          @media screen and (max-width: $phablet)
+            margin-bottom: $spacing-s !important
       &-mobile
         &-s
           @media screen and (max-width: $mobile)
