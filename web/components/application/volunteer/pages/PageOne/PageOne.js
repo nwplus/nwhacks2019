@@ -48,7 +48,7 @@ class PageOne extends Page {
         city,
         school,
         gender,
-        over19,
+        isOver19,
         education,
         gradYear,
         major,
@@ -166,22 +166,22 @@ class PageOne extends Page {
           allowNewOption
           />
         <RadioGroup
-          name="over19"
+          name="isOver19"
           label="Are you over 19?"
           className="dir-row margin-ends-giga"
-          onChange={(newOver19) => {
-            newOver19 = newOver19 === 'true';
-            this.updateApplication({ over19: newOver19 });
+          onChange={(newIsOver19) => {
+            newIsOver19 = newIsOver19 === 'true';
+            this.updateApplication({ isOver19: newIsOver19 });
           }}>
           <RadioButton
             label="Yes"
             value="true"
-            selected={over19 === true}
+            selected={isOver19 === true}
               />
           <RadioButton
             label="No"
             value="false"
-            selected={over19 === false}
+            selected={isOver19 === false}
               />
         </RadioGroup>
         <Select

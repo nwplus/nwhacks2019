@@ -25,12 +25,12 @@ class PageTwo extends Page {
         firstName,
         interestForNwHacks,
         freeHours,
-        day1_830_to_1,
-        day1_1_to_6,
-        day1_6_to_11,
-        day1_overnight,
-        day2_8_to_12,
-        day2_12_to_6,
+        dayOne0830To1300,
+        dayOne1300To1800,
+        dayOne1800To2300,
+        dayOneOvernight,
+        dayTwo0800To1200,
+        dayTwo1200To1800,
         source,
         isPrivacyPolicyChecked,
         isCodeOfConductChecked,
@@ -98,38 +98,38 @@ class PageTwo extends Page {
           <Checkbox
             label="8:30AM to 1PM"
             value="False"
-            checked={day1_830_to_1}
+            checked={dayOne0830To1300}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day1_830_to_1: e.target.checked });
+              this.updateApplication({ dayOne0830To1300: e.target.checked });
             }}
          />
 
           <Checkbox
             label="1PM to 6PM"
             value="False"
-            checked={day1_1_to_6}
+            checked={dayOne1300To1800}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day1_1_to_6: e.target.checked });
+              this.updateApplication({ dayOne1300To1800: e.target.checked });
             }}
          />
           <Checkbox
             label="6PM to 11PM"
             value="False"
-            checked={day1_6_to_11}
+            checked={dayOne1800To2300}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day1_6_to_11: e.target.checked });
+              this.updateApplication({ dayOne1800To2300: e.target.checked });
             }}
          />
           <Checkbox
             label="Overnight"
             value="False"
-            checked={day1_overnight}
+            checked={dayOneOvernight}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day1_overnight: e.target.checked });
+              this.updateApplication({ dayOneOvernight: e.target.checked });
             }}
          />
         </CheckboxGroup>
@@ -141,20 +141,20 @@ class PageTwo extends Page {
           <Checkbox
             label="8AM to 12PM"
             value="False"
-            checked={day2_8_to_12}
+            checked={dayTwo0800To1200}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day2_8_to_12: e.target.checked });
+              this.updateApplication({ dayTwo0800To1200: e.target.checked });
             }}
          />
 
           <Checkbox
             label="12PM to 6PM"
             value="False"
-            checked={day2_12_to_6}
+            checked={dayTwo1200To1800}
             className="margin-left-none"
             onChange={(e) => {
-              this.updateApplication({ day2_12_to_6: e.target.checked });
+              this.updateApplication({ dayTwo1200To1800: e.target.checked });
             }}
          />
         </CheckboxGroup>

@@ -8,15 +8,15 @@ export const initialState = {
   city: null,
   school: null,
   gender: null,
-  over19: null,
+  isOver19: null,
   gradYear: '',
   education: null,
-  day1_830_to_1: false,
-  day1_1_to_6: false,
-  day1_6_to_11: false,
-  day1_overnight: false,
-  day2_8_to_12: false,
-  day2_12_to_6: false,
+  dayOne0830To1300: false,
+  dayOne1300To1800: false,
+  dayOne1800To2300: false,
+  dayOneOvernight: false,
+  dayTwo0800To1200: false,
+  dayTwo1200To1800: false,
 };
 
 const volunteerApplication = (state = initialState, action) => {
