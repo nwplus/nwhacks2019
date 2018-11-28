@@ -52,7 +52,7 @@ class VolunteerApplicationContainer extends React.Component {
     volunteerApplication.recaptchaResponse = recaptchaResponse;
 
     if (!volunteerApplication.isSubmitted) {
-      // POST hackerApplcation data to cloud function for submission
+      // POST application data to cloud function for submission
       Axios.post(
         firebase.nwUtils.getFunctionUrl('submitApplicationVolunteer'),
         volunteerApplication,

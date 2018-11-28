@@ -1,8 +1,8 @@
 import { addHackerApplication } from '.';
 import ACTION_TYPES from '../action_types';
 
-describe('add hacker hackerApplcation', () => {
-  it('creates an action to add hacker hackerApplcation', () => {
+describe('add hacker application', () => {
+  it('creates an action to add hacker application', () => {
     const hackerApplication = {
       isLoaded: true,
       data: {

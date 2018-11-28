@@ -60,7 +60,7 @@ class HackerApplicationContainer extends React.Component {
         { headers: { 'Content-Type': 'text/plain' } }
       ).then((res) => {
         if (res.status === 200) {
-          console.log('Submitted hackerApplcation!');
+          console.log('Submitted hacker application!');
           this.setState({ isSubmitted: true });
           cancelApplication();
         } else {
