@@ -69,7 +69,7 @@ class PageOne extends Page {
           <img className="emoji" alt="⛰️" src={mountain} />
         </p>
         <TextInput
-          label="What is your full legal name?"
+          label="What is your first name?"
           placeholder="First Name"
           name="first-name"
           className="margin-ends-giga"
@@ -84,6 +84,7 @@ class PageOne extends Page {
           />
         <TextInput
           placeholder="Last Name"
+          label="What is your last name?"
           name="last-name"
           className="margin-ends-giga"
           value={lastName}
