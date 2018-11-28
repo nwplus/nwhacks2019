@@ -175,9 +175,11 @@ class PageTwo extends Page {
           name="MLH-checkbox"
           label={(
             <div><img className="vertical-align-top emoji" alt="🏅" src={robot} /> We participate
-                      in Major League Hacking (MLH) as a MLH Member Event. You authorize us to share
-                      certain application/registration information for event administration, ranking,
-                      MLH administration, and occasional messages about hackathons in line with
+                      in Major League Hacking (MLH) as a MLH Member Event.
+                      You authorize us to share
+                      certain application/registration information for event administration,
+                      ranking, MLH administration,
+                      and occasional messages about hackathons in line with
                       the <a href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf" target="_blank" rel="noopener noreferrer">MLH Code of Conduct.</a>
             </div>)}
           className="margin-top-s dir-row margin-bottom-giga"
@@ -185,7 +187,8 @@ class PageTwo extends Page {
           <Checkbox
             label={(
               <div className="bold">I authorize nwPlus to share certain application/registration information
-                          for event administration, ranking, MLH administration, and occasional messages
+                          for event administration, ranking.
+                          MLH administration, and occasional messages
                           about hackathons in line with
                           the <a href="https://mlh.io/privacy" target="_blank" rel="noopener noreferrer"> MLH Privacy Policy.</a>
               </div>)}
