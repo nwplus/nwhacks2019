@@ -19,8 +19,9 @@ class ApplicantInfo extends React.Component {
     if (!applicantId || !applicantType) {
       return null;
     }
-    const shortInfo = firestore.data[applicantCollections[applicantType].shortInfo][applicantId];
-    return shortInfo;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const applicantShortInfo = firestore.data[shortInfoCollectionName][applicantId];
+    return applicantShortInfo;
   }
 
   getApplicantLongInfo = () => {
@@ -28,8 +29,9 @@ class ApplicantInfo extends React.Component {
     if (!applicantId || !applicantType) {
       return null;
     }
-    const longInfo = firestore.data[applicantCollections[applicantType].longInfo][applicantId];
-    return longInfo;
+    const longInfoCollectionName = applicantCollections[applicantType].longInfo;
+    const applicantLongInfo = firestore.data[longInfoCollectionName][applicantId];
+    return applicantLongInfo;
   }
 
   render() {

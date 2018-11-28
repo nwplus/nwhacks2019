@@ -18,8 +18,9 @@ class ScorePanel extends React.Component {
     if (!applicantId || !applicantType) {
       return null;
     }
-    const shortInfo = firestore.data[applicantCollections[applicantType].shortInfo][applicantId];
-    return shortInfo;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const applicantShortInfo = firestore.data[shortInfoCollectionName][applicantId];
+    return applicantShortInfo;
   }
 
   render() {
