@@ -5,7 +5,7 @@ import { SecondaryButton } from '../../../../input/buttons';
 import mountain from '../../../../../assets/circle-mountain.svg';
 import praise from '../../../../../assets/emoji/praise.svg';
 
-const SuccessPage = () => (
+const VolunteerSuccessPage = () => (
   <div className="pad-nav fill-min-height flex dir-col ai-center jc-center pad-sides-l">
     <img alt="Success!" className="pad-ends-s" max-height="25%" src={mountain} />
     <br />
@@ -21,4 +21,4 @@ const SuccessPage = () => (
   </div>
 );
 
-export default SuccessPage;
+export default VolunteerSuccessPage;

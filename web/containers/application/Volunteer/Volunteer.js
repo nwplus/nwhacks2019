@@ -82,7 +82,7 @@ class VolunteerApplicationContainer extends React.Component {
     if (!isFeatureFlagsLoaded) return null;
 
     const { isSubmitted } = this.state;
-    if (isSubmitted) return (<Redirect to="/success" />);
+    if (isSubmitted) return (<Redirect to="/successVolunteer" />);
 
     const { application: { enabled: isApplicationEnabled } } = featureFlagsData;
     if (!isApplicationEnabled) return (<Redirect to="page_not_found" />);
