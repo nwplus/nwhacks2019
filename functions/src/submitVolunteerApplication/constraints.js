@@ -87,7 +87,7 @@ exports.constraints = {
     city: atLeastOneCharacter,
     school: atLeastOneCharacter,
     gender: atLeastOneCharacter,
-    over19: {
+    isOver19: {
       presence: true,
     },
     education: atLeastOneCharacter,
@@ -105,17 +105,6 @@ exports.constraints = {
         message: '^Please enter a valid email.',
       },
     },
-    confirmEmail: {
-      presence: true,
-      email: {
-        attribute: true,
-        message: '^Please enter a valid email.',
-      },
-      equality: {
-        attribute: 'email',
-        message: '^Please enter the same email.',
-      },
-    },
     major: atLeastOneCharacter,
     phoneNumber: atLeastOneCharacter,
     ethnicity: atLeastOneCharacter,
@@ -129,7 +118,7 @@ exports.constraints = {
         maximum: 250,
       },
     },
-    hours: {
+    freeHours: {
       presence: true,
     },
     source: atLeastOneCharacter,
@@ -155,7 +144,7 @@ exports.constraints = {
     city: atLeastOneCharacter,
     school: atLeastOneCharacter,
     gender: atLeastOneCharacter,
-    over19: {
+    isOver19: {
       presence: true,
     },
     education: atLeastOneCharacter,
@@ -173,24 +162,13 @@ exports.constraints = {
         message: '^Please enter a valid email.',
       },
     },
-    confirmEmail: {
-      presence: true,
-      email: {
-        attribute: true,
-        message: '^Please enter a valid email.',
-      },
-      equality: {
-        attribute: 'email',
-        message: '^Please enter the same email.',
-      },
-    },
     major: atLeastOneCharacter,
     phoneNumber: atLeastOneCharacter,
     ethnicity: atLeastOneCharacter,
     // =========
     //  PAGE TWO
     // =========
-    hours: {
+    freeHours: {
       presence: true,
     },
     source: atLeastOneCharacter,
