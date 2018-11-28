@@ -20,7 +20,7 @@ class Toolbar extends React.Component {
           onChange={option => switchApplicantType(option.value)}
           label="Form:"
           name="collection-input"
-          value={this.collectionSelectLabels[applicantType].label}
+          value={this.collectionSelectLabels[applicantType]}
           options={Object.values(this.collectionSelectLabels)} />
       </div>
     );

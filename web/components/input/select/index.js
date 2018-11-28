@@ -73,9 +73,10 @@ export class Select extends React.Component {
       onMenuScrollToTop,
       onMenuScrollToBottom,
       inputValue,
+      value,
     };
 
-    if (value) {
+    if (value && typeof value !== 'object') {
       inputProps.value = { value, label: value };
     }
 
