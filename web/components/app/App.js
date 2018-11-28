@@ -12,6 +12,7 @@ import { Login } from '../../containers/auth';
 // Components
 import { Logout } from '../auth';
 import { AdminPanel, AdminGate } from '../admin';
+import AssessmentPageContainer from '../../containers/admin/AssessmentPage';
 
 import { HackerApplication } from '../../containers/application';
 
@@ -41,6 +42,9 @@ class App extends React.Component {
               <Route path="*">
                 <AdminGate>
                   <Switch>
+                    <Route path="/admin/assessment">
+                      <AssessmentPageContainer />
+                    </Route>
                     {/* These routes are just for demo only, to be finalized later */}
                     <Route path="/admin/home">
                       <AdminPanel />

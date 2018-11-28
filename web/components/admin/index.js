@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AdminGate from './AdminGate';
+import AssessmentPage from './AssessmentPage';
 
 // Just for demo for now
 const AdminPanel = () => (
@@ -10,6 +11,7 @@ const AdminPanel = () => (
 );
 
 export {
-  AdminPanel,
   AdminGate,
+  AdminPanel,
+  AssessmentPage,
 };

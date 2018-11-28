@@ -1,0 +1,22 @@
+.dashboard
+  font-family: 'Apercu Pro'
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  background: $white
+
+  .applicant-view
+    height: calc(100vh - #{$toolbar-height})
+    .applicant-list
+      width: 33%
+      border-right: 1px solid #E0E0E0
+
+    .score-panel
+      width: 21%
+      border-right: 1px solid #E0E0E0
+
+    .applicant-info
+      width: 46%
+      flex: 1
+      word-wrap: break-word
+
