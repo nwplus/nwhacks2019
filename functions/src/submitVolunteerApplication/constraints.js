@@ -19,7 +19,7 @@ exports.constraints = {
     city: atLeastOneCharacter,
     school: atLeastOneCharacter,
     gender: atLeastOneCharacter,
-    over19: {
+    isOver19: {
       presence: true,
     },
     education: atLeastOneCharacter,
