@@ -73,14 +73,15 @@ export class Select extends React.Component {
       onMenuScrollToTop,
       onMenuScrollToBottom,
       inputValue,
+      value,
     };
 
-    if (value) {
+    if (value && typeof value !== 'object') {
       inputProps.value = { value, label: value };
     }
 
     return (
-      <div className={`${className}`}>
+      <div className={`select-input ${className}`}>
         <h5 className="body-text">{label}</h5>
         <Creatable
           {...inputProps}
@@ -106,6 +107,7 @@ Select.defaultProps = {
   placeholder: 'Select an option',
   isSearchable: false,
   allowNewOption: false,
+  className: '',
 };
 
 Select.propTypes = {
