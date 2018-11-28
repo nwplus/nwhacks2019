@@ -1,20 +1,20 @@
 import rootReducers from '../../..';
-import hackerApplication, { initialState } from '.';
+import volunteerApplication, { initialState } from '.';
 import ACTION_TYPES from '../../../../actions/action_types';
 
-describe('hacker application reducer', () => {
+describe('volunteer application reducer', () => {
   describe('when state is undefined', () => {
     it('returns the initial state', () => {
-      expect(hackerApplication(undefined, {})).toEqual(initialState);
+      expect(volunteerApplication(undefined, {})).toEqual(initialState);
     });
   });
 
-  describe('when type is ADD_HACKER_APPLICATION', () => {
+  describe('when type is ADD_Volunteer_APPLICATION', () => {
     it('handles the action', () => {
       expect(
-        hackerApplication({}, {
-          type: ACTION_TYPES.ADD_HACKER_APPLICATION,
-          hackerApplication: {
+        volunteerApplication({}, {
+          type: ACTION_TYPES.ADD_VOLUNTEER_APPLICATION,
+          volunteerApplication: {
             name: 'John Doe',
             school: 'UBC',
           },
@@ -26,10 +26,10 @@ describe('hacker application reducer', () => {
     });
   });
 
-  describe('when type is not ADD_HACKER_APPLICATION and state is not undefined', () => {
+  describe('when type is not ADD_VOLUNTEER_APPLICATION and state is not undefined', () => {
     it('returns the state', () => {
       expect(
-        hackerApplication(
+        volunteerApplication(
           { beforeState: 'before state' },
           { type: 'some action type', data: '1234' }
         )
@@ -39,9 +39,9 @@ describe('hacker application reducer', () => {
 });
 
 describe('when action type is RESET', () => {
-  it('resets hackerApplication to default state', () => {
+  it('resets volunteerApplication to default state', () => {
     const state = {
-      hackerApplication: {
+      volunteerApplication: {
         isLoaded: true,
         data: {
           name: 'John Doe',
@@ -59,10 +59,10 @@ describe('when action type is RESET', () => {
   });
 });
 
-describe('when action type is CANCEL_HACKER_APPLICATION', () => {
+describe('when action type is CANCEL_VOLUNTEER_APPLICATION', () => {
   it('resets hackerApplication to default state', () => {
     const state = {
-      hackerApplication: {
+      volunteerApplication: {
         isLoaded: true,
         data: {
           name: 'John Doe',
@@ -71,7 +71,7 @@ describe('when action type is CANCEL_HACKER_APPLICATION', () => {
       },
     };
 
-    const action = { type: ACTION_TYPES.CANCEL_HACKER_APPLICATION };
+    const action = { type: ACTION_TYPES.CANCEL_VOLUNTEER_APPLICATION };
     expect(rootReducers(state, action).entities).toEqual({
       application: {
         hacker: initialState,

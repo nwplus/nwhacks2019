@@ -9,11 +9,11 @@ describe('active index reducer', () => {
     });
   });
 
-  describe('when type is CHANGE_HACKER_APPLICATION_PAGE', () => {
+  describe('when type is CHANGE_VOLUNTEER_APPLICATION_PAGE', () => {
     it('handles the action', () => {
       expect(
         activeIndexReducer({}, {
-          type: ACTION_TYPES.CHANGE_HACKER_APPLICATION_PAGE,
+          type: ACTION_TYPES.CHANGE_VOLUNTEER_APPLICATION_PAGE,
           page: 99,
         })
       ).toEqual(99);
