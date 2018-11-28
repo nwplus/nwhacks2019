@@ -30,8 +30,8 @@ class AssessmentPageContainer extends React.Component {
   }
 
   // handles selecting an applicant
-  selectApplicant = (id) => {
-    this.setState({ selectedApplicantId: id });
+  selectApplicant = (applicantId) => {
+    this.setState({ selectedApplicantId: applicantId });
   }
 
   // Fills state.firestore.data.applicants by listening to <applicantType>_main_info collection
