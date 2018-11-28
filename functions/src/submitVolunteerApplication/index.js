@@ -44,8 +44,8 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
         const volunteerFullInfoRef = db.collection('volunteer_full_info').doc();
         const volunteerId = volunteerFullInfoRef.id; // use same ID for all volunteer documents
 
-        const volunteerShortInfoRef = db.collection('volunteer_short_info').doc(hackerId);
-        const volunteerLongInfoRef = db.collection('volunteer_long_info').doc(hackerId);
+        const volunteerShortInfoRef = db.collection('volunteer_short_info').doc(volunteerId);
+        const volunteerLongInfoRef = db.collection('volunteer_long_info').doc(volunteerId);
 
         // also store the ID in a data field to make querying easier
         data.id = volunteerId;
@@ -55,10 +55,10 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
 
         // write data fields to each document
 
-        const errorsFull = validate(Volunteer.volunteer_full_info, constraints.volunteer_full_info);
-        const errorsShort = validate(Volunteer.volunteer_short_info,
+        const errorsFull = validate(volunteer.volunteer_full_info, constraints.volunteer_full_info);
+        const errorsShort = validate(volunteer.volunteer_short_info,
           constraints.volunteer_short_info);
-        const errorsLong = validate(Volunteer.volunteer_long_info, constraints.volunteer_long_info);
+        const errorsLong = validate(volunteer.volunteer_long_info, constraints.volunteer_long_info);
 
         // validation error
         if (errorsFull || errorsShort || errorsLong) {
