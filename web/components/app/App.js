@@ -14,9 +14,10 @@ import { Logout } from '../auth';
 import { AdminPanel, AdminGate } from '../admin';
 import AssessmentPageContainer from '../../containers/admin/AssessmentPage';
 
-import { HackerApplication } from '../../containers/application';
+import { HackerApplication, VolunteerApplication } from '../../containers/application';
 
 import SuccessPage from '../application/hacker/pages/SuccessPage/SuccessPage';
+import volunteerSuccessPage from '../application/volunteer/pages/SuccessPage/SuccessPage';
 import NotFound from '../errors/NotFound';
 import DashBoard from '../dashboard';
 
@@ -66,9 +67,10 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/application/hacker" component={HackerApplication} />
+                <Route path="/application/volunteer" component={VolunteerApplication} />
                 <Route path="/success" component={SuccessPage} />
+                <Route path="/successVolunteer" component={volunteerSuccessPage} />
                 <Route path="/dashboard" component={DashBoard} />
-
                 <Route path="/ui_demo" component={UIDemo} />
                 <Route path="/page_not_found" component={NotFound} />
                 {/* Default is page not found */}
