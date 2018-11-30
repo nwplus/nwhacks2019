@@ -19,7 +19,8 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
 
         if (data) {
           console.log(shortInfoDoc.id, ' doesn\'t need backfilling');
-          fulfill()
+          fulfill();
+          return;
         }
 
         console.log(fullInfoDoc.id, 'needs backfilling');
@@ -29,8 +30,8 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
         const errors = validate(hackerShortInfo, constraints.hacker_short_info);
 
         if (errors) {
-          console.log('validate errors: ', errors);
           reject(errors);
+          return;
         }
 
         cleaner(hackerShortInfo);
@@ -45,41 +46,22 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
   });
 
   Promise.all(promises).then(() => {
-    console.log('promises success');
-    response.status(200).send();
     hackerShortInfoList.forEach((hackerShortInfo) => {
-      console.log(hackerShortInfo);
-    })
+      const id = hackerShortInfo.id;
+      const ref = db.collection('hacker_short_info').doc(id);
+
+      batch.set(ref, hackerShortInfo);
+    });
+
+    return batch.commit().then(() => {
+      response.status(200).send();
+    }).catch((e) => {
+      response.status(500).send(e);
+    });
   }).catch((e) => {
-    console.log('promises error: ', e);
-    response.status(500).send();
+    response.status(500).send(e);
   });
-
-
-  // return batch.commit().then(() => console.log('success!'));
 }
-
-// const hackerShortInfoCallback = (shortInfoDoc, fullInfoDoc) => {
-//   const data = shortInfoDoc.data();
-//   if (data) {
-//     console.log(shortInfoDoc.id, ' doesn\'t need backfilling');
-//     return;
-//   }
-
-//   console.log(fullInfoDoc.id, 'needs backfilling');
-
-//   const hackerShortInfo = buildHackerShortInfo(fullInfoDoc);
-
-//   const errors = validate(hackerShortInfo, constraints.hacker_short_info);
-
-//   if (errors) {
-//     console.log('validate errors: ', errors);
-//   }
-
-//   cleaner(hackerShortInfo);
-
-//   return hackerShortInfo;
-// }
 
 const buildHackerShortInfo = (fullInfoDoc) => {
   const fields = Object.keys(constraints.hacker_short_info);
@@ -89,11 +71,10 @@ const buildHackerShortInfo = (fullInfoDoc) => {
     hackerShortInfo[field] = hackerFullInfoDoc[field];
   });
 
-  // console.log('hacker short info: ', hackerShortInfo);
   return hackerShortInfo;
 }
 
-exports.backfillShortAndLongInfo = functions.https.onRequest((request, response) => {
+exports.backfillShortInfo = functions.https.onRequest((request, response) => {
   // set origin and headers to allow CORS for local testing
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
   response.set('Access-Control-Allow-Origin', '*');
