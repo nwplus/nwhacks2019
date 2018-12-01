@@ -4,6 +4,19 @@ const cleaner = require('deep-cleaner');
 const { constraints } = require('../../submitApplication/constraints');
 const { db, functions } = require('../../utils/firestore');
 
+const buildHackerShortInfo = (fullInfoDoc) => {
+  const fields = Object.keys(constraints.hacker_short_info);
+  const hackerFullInfoDoc = fullInfoDoc.data();
+  const hackerShortInfo = {};
+  fields.forEach((field) => {
+    hackerShortInfo[field] = hackerFullInfoDoc[field];
+  });
+
+  cleaner(hackerShortInfo);
+
+  return hackerShortInfo;
+};
+
 const hackerFullInfoCallback = (querySnapshot, response) => {
   const batch = db.batch();
 
@@ -12,7 +25,7 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
   const hackerShortInfoList = [];
 
   querySnapshot.forEach((fullInfoDoc) => {
-    const id = fullInfoDoc.id;
+    const { id } = fullInfoDoc;
     const promise = new Promise((fulfill, reject) => {
       db.collection('hacker_short_info').doc(id).get().then((shortInfoDoc) => {
         const data = shortInfoDoc.data();
@@ -40,6 +53,8 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
         hackerShortInfoList.push(hackerShortInfo);
 
         fulfill();
+      }).catch((e) => {
+        reject(e);
       });
     });
 
@@ -48,7 +63,7 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
 
   Promise.all(promises).then(() => {
     hackerShortInfoList.forEach((hackerShortInfo) => {
-      const id = hackerShortInfo.id;
+      const { id } = hackerShortInfo;
       const ref = db.collection('hacker_short_info').doc(id);
 
       batch.set(ref, hackerShortInfo);
@@ -62,19 +77,6 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
   }).catch((e) => {
     response.status(500).send(e);
   });
-};
-
-const buildHackerShortInfo = (fullInfoDoc) => {
-  const fields = Object.keys(constraints.hacker_short_info);
-  const hackerFullInfoDoc = fullInfoDoc.data();
-  const hackerShortInfo = {};
-  fields.forEach((field) => {
-    hackerShortInfo[field] = hackerFullInfoDoc[field];
-  });
-
-  cleaner(hackerShortInfo);
-
-  return hackerShortInfo;
 };
 
 exports.backfillShortInfo = functions.https.onRequest((request, response) => {
