@@ -17,14 +17,10 @@ const buildHackerShortInfo = (fullInfoDoc) => {
   return hackerShortInfo;
 };
 
-const hackerFullInfoCallback = (querySnapshot, response) => {
-  const batch = db.batch();
-
+const getHackerShortInfosToBackfill = (snapShot) => {
   const promises = [];
 
-  const hackerShortInfoList = [];
-
-  querySnapshot.forEach((fullInfoDoc) => {
+  snapShot.forEach((fullInfoDoc) => {
     const { id } = fullInfoDoc;
     const promise = new Promise((fulfill, reject) => {
       db.collection('hacker_short_info').doc(id).get().then((shortInfoDoc) => {
@@ -32,8 +28,8 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
 
         if (data) {
           console.log(shortInfoDoc.id, ' doesn\'t need backfilling');
-          fulfill();
-          return;
+          // fulfill null if doesn't need backfilling
+          return fulfill();
         }
 
         console.log(fullInfoDoc.id, 'needs backfilling');
@@ -46,37 +42,20 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
         const errors = validate(hackerShortInfo, hackerShortInfoConstraints);
 
         if (errors) {
-          reject(errors);
-          return;
+          return reject(errors);
         }
 
-        hackerShortInfoList.push(hackerShortInfo);
-
-        fulfill();
-      }).catch((e) => {
-        reject(e);
-      });
+        return fulfill(hackerShortInfo);
+      })
+        .catch((e) => {
+          reject(e);
+        });
     });
 
     promises.push(promise);
   });
 
-  Promise.all(promises).then(() => {
-    hackerShortInfoList.forEach((hackerShortInfo) => {
-      const { id } = hackerShortInfo;
-      const ref = db.collection('hacker_short_info').doc(id);
-
-      batch.set(ref, hackerShortInfo);
-    });
-
-    return batch.commit().then(() => {
-      response.status(200).send();
-    }).catch((e) => {
-      response.status(500).send(e);
-    });
-  }).catch((e) => {
-    response.status(500).send(e);
-  });
+  return Promise.all(promises);
 };
 
 exports.backfillShortInfo = functions.https.onRequest((request, response) => {
@@ -92,9 +71,24 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
     return response.status(400).send('Unrecognized method'); // database error
   }
 
-  db.collection('hacker_full_info').get().then((querySnapshot) => {
-    hackerFullInfoCallback(querySnapshot, response);
-  }).catch((e) => {
-    response.status(500).send(e);
-  });
+  const batch = db.batch();
+
+  db.collection('hacker_full_info').get().then(snapShot => getHackerShortInfosToBackfill(snapShot))
+    .then((hackerShortInfoList) => {
+      hackerShortInfoList.forEach((hackerShortInfo) => {
+        // if we get null, it means we don't need to backfill this
+        if (hackerShortInfo) {
+          const { id } = hackerShortInfo;
+          const ref = db.collection('hacker_short_info').doc(id);
+
+          batch.set(ref, hackerShortInfo);
+        }
+      });
+
+      return batch.commit();
+    })
+    .then(() => response.status(200).send())
+    .catch((e) => {
+      response.status(500).send(e.message);
+    });
 });
