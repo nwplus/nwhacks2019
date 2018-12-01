@@ -1,7 +1,7 @@
 const { validate } = require('validate.js');
 const cleaner = require('deep-cleaner');
 
-const { constraints } = require('./constraints');
+const { constraints } = require('../../submitApplication/constraints');
 const { db, functions } = require('../../utils/firestore');
 
 const hackerFullInfoCallback = (querySnapshot, response) => {
@@ -27,14 +27,15 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
 
         const hackerShortInfo = buildHackerShortInfo(fullInfoDoc);
 
-        const errors = validate(hackerShortInfo, constraints.hacker_short_info);
+        const hackerShortInfoConstraints = Object.assign({}, constraints.hacker_short_info);
+        delete hackerShortInfoConstraints.birthdate.presence;
+        delete hackerShortInfoConstraints.isPrivacyPolicyChecked.presence;
+        const errors = validate(hackerShortInfo, hackerShortInfoConstraints);
 
         if (errors) {
           reject(errors);
           return;
         }
-
-        cleaner(hackerShortInfo);
 
         hackerShortInfoList.push(hackerShortInfo);
 
@@ -70,6 +71,8 @@ const buildHackerShortInfo = (fullInfoDoc) => {
   fields.forEach((field) => {
     hackerShortInfo[field] = hackerFullInfoDoc[field];
   });
+
+  cleaner(hackerShortInfo);
 
   return hackerShortInfo;
 }

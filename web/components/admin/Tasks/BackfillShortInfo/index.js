@@ -35,11 +35,11 @@ class BackfillShortInfo extends React.Component {
             error: res.data,
           });
         }
-      }).catch(() => {
+      }).catch((err) => {
         this.setState({
           didSucceed: false,
           didFail: true,
-          error: res.data,
+          error: JSON.stringify(err.response.data),
         });
       }).finally(() => {
         this.setState({ isButtonEnabled: true });
