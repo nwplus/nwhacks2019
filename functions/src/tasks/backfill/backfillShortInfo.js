@@ -73,6 +73,8 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
 
   const batch = db.batch();
 
+  let count = 0;
+
   db.collection('hacker_full_info').get().then(snapShot => getHackerShortInfosToBackfill(snapShot))
     .then((hackerShortInfoList) => {
       hackerShortInfoList.forEach((hackerShortInfo) => {
@@ -82,12 +84,13 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
           const ref = db.collection('hacker_short_info').doc(id);
 
           batch.set(ref, hackerShortInfo);
+          count += 1;
         }
       });
 
       return batch.commit();
     })
-    .then(() => response.status(200).send())
+    .then(() => response.status(200).send(`${count}`))
     .catch((e) => {
       response.status(500).send(e.message);
     });

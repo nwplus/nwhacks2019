@@ -11,7 +11,6 @@ class BackfillShortInfo extends React.Component {
       isButtonEnabled: true,
       didSucceed: false,
       didFail: false,
-      error: null,
     };
   }
 
@@ -27,6 +26,7 @@ class BackfillShortInfo extends React.Component {
           this.setState({
             didSucceed: true,
             didFail: false,
+            message: res.data,
             error: null,
           });
         } else {
@@ -54,11 +54,12 @@ class BackfillShortInfo extends React.Component {
       didSucceed,
       didFail,
       error,
+      message,
     } = this.state;
 
     const displayMessage = () => {
       if (didSucceed) {
-        return (<p>Success!</p>);
+        return (<p>Success! Wrote {message} docs to hacker_short_info collection!</p>);
       } if (didFail) {
         return (<p>{error}</p>);
       }
