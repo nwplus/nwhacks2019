@@ -5,7 +5,7 @@ const AdminTasks = () => (
   <div
     className="pad-ends-xxl margin-sides-xxl"
     >
-      <BackfillShortInfo />
+    <BackfillShortInfo />
   </div>
 );
 

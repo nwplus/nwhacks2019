@@ -62,7 +62,7 @@ const hackerFullInfoCallback = (querySnapshot, response) => {
   }).catch((e) => {
     response.status(500).send(e);
   });
-}
+};
 
 const buildHackerShortInfo = (fullInfoDoc) => {
   const fields = Object.keys(constraints.hacker_short_info);
@@ -75,7 +75,7 @@ const buildHackerShortInfo = (fullInfoDoc) => {
   cleaner(hackerShortInfo);
 
   return hackerShortInfo;
-}
+};
 
 exports.backfillShortInfo = functions.https.onRequest((request, response) => {
   // set origin and headers to allow CORS for local testing

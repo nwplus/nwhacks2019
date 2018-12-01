@@ -1,7 +1,8 @@
 import React from 'react';
-import { PrimaryButton } from '../../../input/buttons';
 import Axios from 'axios';
+import PropTypes from 'prop-types';
 import { withFirebase } from 'react-redux-firebase';
+import { PrimaryButton } from '../../../input/buttons';
 
 class BackfillShortInfo extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class BackfillShortInfo extends React.Component {
           this.setState({
             didSucceed: true,
             didFail: false,
-            error: null
+            error: null,
           });
         } else {
           this.setState({
@@ -52,8 +53,18 @@ class BackfillShortInfo extends React.Component {
       isButtonEnabled,
       didSucceed,
       didFail,
-      error
+      error,
     } = this.state;
+
+    const displayMessage = () => {
+      if (didSucceed) {
+        return (<p>Success!</p>);
+      } if (didFail) {
+        return (<p>{error}</p>);
+      }
+      return null;
+    };
+
     return (
       <div>
         <PrimaryButton
@@ -62,19 +73,15 @@ class BackfillShortInfo extends React.Component {
           disabled={!isButtonEnabled}
           />
         <div>
-          {
-            didSucceed ?
-              <p>Success!</p>
-              :
-              didFail ?
-                <p>{error}</p>
-                :
-                null
-          }
+          { displayMessage() }
         </div>
       </div>
     );
   }
+}
+
+BackfillShortInfo.propTypes = {
+  firebase: PropTypes.object.isRequired,
 };
 
 export default withFirebase(BackfillShortInfo);
