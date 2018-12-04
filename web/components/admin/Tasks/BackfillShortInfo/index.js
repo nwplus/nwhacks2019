@@ -19,9 +19,11 @@ class BackfillShortInfo extends React.Component {
       const { firebase } = this.props;
       this.setState({ isButtonEnabled: false });
 
-      Axios.post(
-        firebase.nwUtils.getFunctionUrl('backfillShortInfo')
-      ).then((res) => {
+      firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(idToken => Axios.post(
+        firebase.nwUtils.getFunctionUrl('backfillShortInfo'),
+        idToken,
+        { headers: { 'Content-Type': 'text/plain' } }
+      )).then((res) => {
         if (res.status === 200) {
           this.setState({
             didSucceed: true,
@@ -42,9 +44,10 @@ class BackfillShortInfo extends React.Component {
           didFail: true,
           error: JSON.stringify(err.response.data),
         });
-      }).finally(() => {
-        this.setState({ isButtonEnabled: true });
-      });
+      })
+        .finally(() => {
+          this.setState({ isButtonEnabled: true });
+        });
     }
   }
 

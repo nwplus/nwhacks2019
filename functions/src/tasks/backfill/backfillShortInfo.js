@@ -2,7 +2,7 @@ const { validate } = require('validate.js');
 const cleaner = require('deep-cleaner');
 
 const { constraints } = require('../../submitApplication/constraints');
-const { db, functions } = require('../../utils/firestore');
+const { db, functions, admin } = require('../../utils/firestore');
 
 const buildHackerShortInfo = (fullInfoDoc) => {
   const fields = Object.keys(constraints.hacker_short_info);
@@ -75,7 +75,18 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
 
   let count = 0;
 
-  db.collection('hacker_full_info').get().then(snapShot => getHackerShortInfosToBackfill(snapShot))
+  const clientToken = request.body;
+  admin.auth().verifyIdToken(clientToken).then((decodedToken) => {
+    const { uid } = decodedToken;
+    return db.collection('admins').doc(uid).get();
+  }).then((adminDoc) => {
+    if (!adminDoc) {
+      throw new Error('Not an admin');
+    }
+
+    return db.collection('hacker_full_info').get();
+  })
+    .then(snapShot => getHackerShortInfosToBackfill(snapShot))
     .then((hackerShortInfoList) => {
       hackerShortInfoList.forEach((hackerShortInfo) => {
         // if we get null, it means we don't need to backfill this
