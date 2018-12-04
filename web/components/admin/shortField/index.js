@@ -7,9 +7,7 @@ class ShortField extends React.Component {
     return (
       <div className="applicant-info-field">
         <div className="applicant-info-label">{label}</div>
-        <div className="applicant-short-info">
-          {value}
-        </div>
+        <div className="applicant-short-info">{value}</div>
       </div>
     );
   }
