@@ -42,7 +42,6 @@ class ApplicantInfo extends React.Component {
     const longInfo = this.getApplicantLongInfo();
     return (
       <div className={`applicant-info pad-sides-s pad-ends-s ${className}`}>
-        <i>TODO: Applicant info component</i>
         <ShortField label="First name" value={shortInfo ? shortInfo.firstName : ''} />
         <ShortField label="Last name" value={shortInfo ? shortInfo.lastName : ''} />
         <ShortField label="Email" value={shortInfo ? shortInfo.email : ''} />
