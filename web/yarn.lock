@@ -6453,6 +6453,11 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-collapsible@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/react-collapsible/-/react-collapsible-2.3.2.tgz#fb5593f6601c0a255319a8dedc678e56dd122411"
+  integrity sha512-mi8pHO01wvflliqByXUqGqhJlCe2jk4CaKPL4zbMONx2F+RZk0VWdT3s5veqwvzJ5Qj7YYRNJZCIgw4ZKUhHUA==
+
 react-dom@16.4.2:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
