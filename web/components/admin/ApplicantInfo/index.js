@@ -40,9 +40,9 @@ class ApplicantInfo extends React.Component {
       <div className={`applicant-info pad-sides-s pad-ends-s ${className}`}>
         <i>TODO: Applicant info component</i>
         <h5>Short info</h5>
-        {JSON.stringify(this.getApplicantShortInfo())}
+        {/* {JSON.stringify(this.getApplicantShortInfo())} */}
         <h5>Long info</h5>
-        {JSON.stringify(this.getApplicantLongInfo())}
+        {/* {JSON.stringify(this.getApplicantLongInfo())} */}
       </div>
     );
   }

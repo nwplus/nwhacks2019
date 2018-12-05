@@ -26,7 +26,7 @@ const AssessmentPage = ({
         onApplicantClick={onApplicantClick}
         className={`${!selectedApplicantId ? 'fill-min-width' : ''}`}
       />
-      {/* TODO: SCORE PANEL */}
+      {/* SCORE PANEL */}
       <ScorePanel
         applicantId={selectedApplicantId}
         applicantType={applicantType}
