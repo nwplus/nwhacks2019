@@ -49,10 +49,10 @@ class ApplicantInfo extends React.Component {
     return (
       <div className={`applicant-info pad-sides-s pad-ends-s ${className}`}>
         <ShortField label="First Hackathon?" value={shortInfo ? convertTruthy(shortInfo.isFirstHackathon) : ''} />
-        <ShortField isurl label="Github" value={shortInfo ? shortInfo.githubLink : ''} />
-        <ShortField isurl label="Personal Website" value={shortInfo ? shortInfo.personalWebsiteLink : ''} />
-        <ShortField isurl label="LinkedIn" value={shortInfo ? shortInfo.linkedInLink : ''} />
-        <ShortField isurl label="Resume" value={shortInfo ? shortInfo.resumeLink : ''} />
+        <ShortField isUrl label="Github" value={shortInfo ? shortInfo.githubLink : ''} />
+        <ShortField isUrl label="Personal Website" value={shortInfo ? shortInfo.personalWebsiteLink : ''} />
+        <ShortField isUrl label="LinkedIn" value={shortInfo ? shortInfo.linkedInLink : ''} />
+        <ShortField isUrl label="Resume" value={shortInfo ? shortInfo.resumeLink : ''} />
         <LongField label="Interest in NwHacks" value={longInfo ? longInfo.interestForNwHacks : ''} />
         <LongField label="Recent Projects" value={longInfo ? longInfo.recentProject : ''} />
       </div>
