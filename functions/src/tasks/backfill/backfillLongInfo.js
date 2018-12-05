@@ -100,6 +100,6 @@ exports.backfillLongInfo = functions.https.onRequest((request, response) => {
     })
     .then(() => response.status(200).send(`${count}`))
     .catch((e) => {
-      response.status(500).send(e.message);
+      response.status(500).send(e);
     });
 });
