@@ -126,7 +126,7 @@ class ScorePanel extends React.Component {
   }
 
   // returns a map containing criteria names as keys
-  // and criteria scores as values
+  // and applicant's criteria scores as values
   getAllCriteriaScores = () => criteria.reduce((map, obj) => {
     map[obj.name] = this.getCriteriaScoreValue(obj.name);
     return map;
@@ -151,7 +151,7 @@ class ScorePanel extends React.Component {
     }
   }
 
-  // returns true if all criteria have been scored, false otherwise
+  // returns true if all criteria have been scored for the applicant, false otherwise
   isAllCriteriaScored = () => {
     for (let i = 0; i < criteria.length; i += 1) {
       const criteriaScore = this.getCriteriaScoreValue(criteria[i].name);
@@ -162,7 +162,7 @@ class ScorePanel extends React.Component {
     return true;
   }
 
-  // calculates and sets applicant's score.finalScore based on criteria scores
+  // calculates and sets applicant's score.finalScore based on applicant's criteria scores
   updateFinalScore = () => {
     if (this.isAllCriteriaScored()) {
       // only calculate final score if all criteria are scored
@@ -173,7 +173,6 @@ class ScorePanel extends React.Component {
   }
 
   render() {
-    // this.setCriteriaScore('testcriteria', 3);
     const { className, applicantType } = this.props;
     const finalScore = this.getFinalScore();
 
