@@ -17,7 +17,7 @@ class ShortField extends React.Component {
 
 ShortField.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   isUrl: PropTypes.bool,
 };
 
