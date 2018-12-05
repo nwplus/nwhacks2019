@@ -4,7 +4,7 @@ import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { ScoreButtonGroup } from './ScoreButtonGroup';
-import applicantCollections from '../../../util/applicantCollections';
+import applicantCollections from '../../../../util/applicantCollections';
 import { criteria, calculateFinalScore } from './Criteria';
 
 const mapPropsToQueries = (props) => {

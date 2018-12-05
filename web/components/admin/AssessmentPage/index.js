@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ApplicantList from '../ApplicantList';
 import ApplicantInfo from '../ApplicantInfo';
-import ScorePanel from '../ScorePanel';
+import ScorePanel from './ScorePanel';
 import Toolbar from '../Toolbar';
 
 const AssessmentPage = ({
