@@ -40,12 +40,17 @@ class ApplicantInfo extends React.Component {
     const longInfoCollectionName = applicantCollections[applicantType].longInfo;
     const applicantLongInfo = firestore.data[longInfoCollectionName][applicantId];
     return applicantLongInfo;
-  }
+  };
 
   render() {
-    const { className } = this.props;
+    const { applicantType, className } = this.props;
     const shortInfo = this.getApplicantShortInfo();
     const longInfo = this.getApplicantLongInfo();
+    if (applicantType !== 'hacker') {
+      return (
+        <i>TODO: Applicant info component</i>
+      );
+    }
     return (
       <div className={`applicant-info pad-sides-s pad-ends-s ${className}`}>
         <ShortField label="First Hackathon?" value={shortInfo ? convertTruthy(shortInfo.isFirstHackathon) : ''} />

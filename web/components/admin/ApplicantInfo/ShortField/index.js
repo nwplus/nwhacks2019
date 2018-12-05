@@ -8,7 +8,7 @@ class ShortField extends React.Component {
       <div className="pad-sides-xs pad-ends-xs">
         <div className="applicant-info-label pad-bottom-m">{label}</div>
         <div className="applicant-short-info">
-          {isUrl ? (<div className="link"><a href={value}>{value}</a></div>) : value}
+          {isUrl ? (<div className="link"><a href={value && value.startsWith('http') ? value : '//' + value}> {value}</a></div>) : value}
         </div>
       </div>
     );
