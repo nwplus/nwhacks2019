@@ -4,48 +4,45 @@ const cleaner = require('deep-cleaner');
 const { constraints } = require('../../submitApplication/constraints');
 const { db, functions, admin } = require('../../utils/firestore');
 
-const buildHackerShortInfo = (fullInfoDoc) => {
-  const fields = Object.keys(constraints.hacker_short_info);
+const buildHackerLongInfo = (fullInfoDoc) => {
+  const fields = Object.keys(constraints.hacker_long_info);
   const hackerFullInfoDoc = fullInfoDoc.data();
-  const hackerShortInfo = {};
+  const hackerLongInfo = {};
   fields.forEach((field) => {
-    hackerShortInfo[field] = hackerFullInfoDoc[field];
+    hackerLongInfo[field] = hackerFullInfoDoc[field];
   });
 
-  cleaner(hackerShortInfo);
+  cleaner(hackerLongInfo);
 
-  return hackerShortInfo;
+  return hackerLongInfo;
 };
 
-const getHackerShortInfosToBackfill = (snapShot) => {
+const getHackerLongInfosToBackfill = (snapShot) => {
   const promises = [];
 
   snapShot.forEach((fullInfoDoc) => {
     const { id } = fullInfoDoc;
     const promise = new Promise((fulfill, reject) => {
-      db.collection('hacker_short_info').doc(id).get().then((shortInfoDoc) => {
-        const data = shortInfoDoc.data();
+      db.collection('hacker_long_info').doc(id).get().then((longInfoDoc) => {
+        const data = longInfoDoc.data();
 
         if (data) {
-          console.log(shortInfoDoc.id, ' doesn\'t need backfilling');
+          console.log(longInfoDoc.id, ' doesn\'t need backfilling');
           // fulfill null if doesn't need backfilling
           return fulfill();
         }
 
         console.log(fullInfoDoc.id, 'needs backfilling');
 
-        const hackerShortInfo = buildHackerShortInfo(fullInfoDoc);
+        const hackerLongInfo = buildHackerLongInfo(fullInfoDoc);
 
-        const hackerShortInfoConstraints = Object.assign({}, constraints.hacker_short_info);
-        delete hackerShortInfoConstraints.birthdate.presence;
-        delete hackerShortInfoConstraints.isPrivacyPolicyChecked.presence;
-        const errors = validate(hackerShortInfo, hackerShortInfoConstraints);
+        const errors = validate(hackerLongInfo, constraints.hacker_long_info);
 
         if (errors) {
           return reject(errors);
         }
 
-        return fulfill(hackerShortInfo);
+        return fulfill(hackerLongInfo);
       })
         .catch((e) => {
           reject(e);
@@ -58,7 +55,7 @@ const getHackerShortInfosToBackfill = (snapShot) => {
   return Promise.all(promises);
 };
 
-exports.backfillShortInfo = functions.https.onRequest((request, response) => {
+exports.backfillLongInfo = functions.https.onRequest((request, response) => {
   // set origin and headers to allow CORS for local testing
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
   response.set('Access-Control-Allow-Origin', '*');
@@ -86,15 +83,15 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
 
     return db.collection('hacker_full_info').get();
   })
-    .then(snapShot => getHackerShortInfosToBackfill(snapShot))
-    .then((hackerShortInfoList) => {
-      hackerShortInfoList.forEach((hackerShortInfo) => {
+    .then(snapShot => getHackerLongInfosToBackfill(snapShot))
+    .then((hackerLongInfoList) => {
+      hackerLongInfoList.forEach((hackerLongInfo) => {
         // if we get null, it means we don't need to backfill this
-        if (hackerShortInfo) {
-          const { id } = hackerShortInfo;
-          const ref = db.collection('hacker_short_info').doc(id);
+        if (hackerLongInfo) {
+          const { id } = hackerLongInfo;
+          const ref = db.collection('hacker_long_info').doc(id);
 
-          batch.set(ref, hackerShortInfo);
+          batch.set(ref, hackerLongInfo);
           count += 1;
         }
       });

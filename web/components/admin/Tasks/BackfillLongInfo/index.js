@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withFirebase } from 'react-redux-firebase';
 import { PrimaryButton } from '../../../input/buttons';
 
-class BackfillShortInfo extends React.Component {
+class BackfillLongInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,13 +14,13 @@ class BackfillShortInfo extends React.Component {
     };
   }
 
-  backfillShortInfo = () => {
+  backfillLongInfo = () => {
     if (window.confirm('Are you sure you want to backfill?')) {
       const { firebase } = this.props;
       this.setState({ isButtonEnabled: false });
 
       firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(idToken => Axios.post(
-        firebase.nwUtils.getFunctionUrl('backfillShortInfo'),
+        firebase.nwUtils.getFunctionUrl('backfillLongInfo'),
         idToken,
         { headers: { 'Content-Type': 'text/plain' } }
       )).then((res) => {
@@ -62,7 +62,7 @@ class BackfillShortInfo extends React.Component {
 
     const displayMessage = () => {
       if (didSucceed) {
-        return (<p>Success! Wrote {message} docs to hacker_short_info collection!</p>);
+        return (<p>Success! Wrote {message} docs to hacker_long_info collection!</p>);
       } if (didFail) {
         return (<p>{error}</p>);
       }
@@ -72,8 +72,8 @@ class BackfillShortInfo extends React.Component {
     return (
       <div>
         <PrimaryButton
-          text="Backfill short info"
-          onClick={this.backfillShortInfo}
+          text="Backfill long info"
+          onClick={this.backfillLongInfo}
           disabled={!isButtonEnabled}
           className="margin-top-xxl"
           />
@@ -85,8 +85,8 @@ class BackfillShortInfo extends React.Component {
   }
 }
 
-BackfillShortInfo.propTypes = {
+BackfillLongInfo.propTypes = {
   firebase: PropTypes.object.isRequired,
 };
 
-export default withFirebase(BackfillShortInfo);
+export default withFirebase(BackfillLongInfo);
