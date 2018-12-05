@@ -15,7 +15,7 @@ class LongField extends React.Component {
 
 LongField.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
 };
 
 export default LongField;
