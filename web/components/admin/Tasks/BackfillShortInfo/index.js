@@ -75,6 +75,7 @@ class BackfillShortInfo extends React.Component {
           text="Backfill short info"
           onClick={this.backfillShortInfo}
           disabled={!isButtonEnabled}
+          className="margin-top-xxl"
           />
         <div>
           { displayMessage() }
