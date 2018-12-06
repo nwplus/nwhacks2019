@@ -9,7 +9,8 @@ class ApplicantList extends React.Component {
     if (!applicants) return null;
     return (
       <div className={`applicant-list ${className}`}>
-        {applicants.map((applicant) => {
+        {applicants.filter(applicant => applicant.firstName === 'Carol').map((applicant) => {
+          // console.log(applicant.firstName);
           const { id, firstName, lastName, email, finalScore } = applicant;
           applicantNumber += 1;
           return (
