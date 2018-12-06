@@ -5,12 +5,12 @@ class ApplicantList extends React.Component {
   render() {
     const { applicants, selectedApplicantId, onApplicantClick, className } = this.props;
     let applicantNumber = 0;
-
+    // applicant => applicant.education === 'Undergraduate' && applicant.isFirstHackathon === false
     if (!applicants) return null;
     return (
       <div className={`applicant-list ${className}`}>
-        {applicants.filter(applicant => applicant.firstName === 'Carol').map((applicant) => {
-          // console.log(applicant.firstName);
+        {applicants.filter(applicant => applicant.city.includes('Vancouver')).map((applicant) => {
+          console.log(applicant);
           const { id, firstName, lastName, email, finalScore } = applicant;
           applicantNumber += 1;
           return (
