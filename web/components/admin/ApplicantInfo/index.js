@@ -4,6 +4,8 @@ import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import applicantCollections from '../../../util/applicantCollections';
+import ShortField from './ShortField';
+import LongField from './LongField';
 
 const mapPropsToQueries = (props) => {
   const { applicantType, applicantId } = props;
@@ -11,6 +13,12 @@ const mapPropsToQueries = (props) => {
     { collection: applicantCollections[applicantType].shortInfo, doc: applicantId },
     { collection: applicantCollections[applicantType].longInfo, doc: applicantId },
   ];
+};
+
+// converts boolean values to strings
+const convertTruthy = (bool) => {
+  if (bool) return 'Yes';
+  return 'No';
 };
 
 class ApplicantInfo extends React.Component {
@@ -32,17 +40,26 @@ class ApplicantInfo extends React.Component {
     const longInfoCollectionName = applicantCollections[applicantType].longInfo;
     const applicantLongInfo = firestore.data[longInfoCollectionName][applicantId];
     return applicantLongInfo;
-  }
+  };
 
   render() {
-    const { className } = this.props;
+    const { applicantType, className } = this.props;
+    const shortInfo = this.getApplicantShortInfo();
+    const longInfo = this.getApplicantLongInfo();
+    if (applicantType !== 'hacker') {
+      return (
+        <i>TODO: Applicant info component</i>
+      );
+    }
     return (
       <div className={`applicant-info pad-sides-s pad-ends-s ${className}`}>
-        <i>TODO: Applicant info component</i>
-        <h5>Short info</h5>
-        {JSON.stringify(this.getApplicantShortInfo())}
-        <h5>Long info</h5>
-        {JSON.stringify(this.getApplicantLongInfo())}
+        <ShortField label="First Hackathon?" value={shortInfo ? convertTruthy(shortInfo.isFirstHackathon) : ''} />
+        <ShortField isUrl label="Github" value={shortInfo ? shortInfo.githubLink : ''} />
+        <ShortField isUrl label="Personal Website" value={shortInfo ? shortInfo.personalWebsiteLink : ''} />
+        <ShortField isUrl label="LinkedIn" value={shortInfo ? shortInfo.linkedInLink : ''} />
+        <ShortField isUrl label="Resume" value={shortInfo ? shortInfo.resumeLink : ''} />
+        <LongField label="Interest in NwHacks" value={longInfo ? longInfo.interestForNwHacks : ''} />
+        <LongField label="Recent Projects" value={longInfo ? longInfo.recentProject : ''} />
       </div>
     );
   }
