@@ -15,9 +15,8 @@
     font-size: 16px
     color: $light-grey
   .score-history
-    position: absolute
-    width: -webkit-fill-available
     bottom: 0
+    width: -webkit-fill-available
     background-color: $admin-history-bg
     .score-value
       color: $light-grey
@@ -26,3 +25,6 @@
     .clear-btn
       color: $solid-blue
       float: right
+  
+  @media (max-height: 1080px)
+    overflow-y: scroll

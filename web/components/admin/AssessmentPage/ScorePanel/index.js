@@ -177,7 +177,7 @@ class ScorePanel extends React.Component {
     const finalScore = this.getFinalScore();
 
     return (applicantType === 'hacker') ? (
-      <div className={`score-panel ${className}`}>
+      <div className={`score-panel flex jc-between dir-col ${className}`} zoom="50%">
         <div className="score-buttons">
           <div className="score-panel-title">Scoring</div>
           {criteria.map(c => (
@@ -199,12 +199,14 @@ class ScorePanel extends React.Component {
             </span>
             <div className="clear-btn clickable" onClick={this.clearScoreInfo}>Clear</div>
           </div>
-          {criteria.map(c => (
-            <div className="pad-bottom-s" key={c.name}>
-              <div className="score-panel-primary-text">{c.title}</div>
-              <div className="score-panel-secondary-text">{this.getScoreHistory(c.name)}</div>
-            </div>
-          ))}
+          <div className="criteria-history">
+            {criteria.map(c => (
+              <div className="pad-bottom-s" key={c.name}>
+                <div className="score-panel-primary-text">{c.title}</div>
+                <div className="score-panel-secondary-text">{this.getScoreHistory(c.name)}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ) : (
