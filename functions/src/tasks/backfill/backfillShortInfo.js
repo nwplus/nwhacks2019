@@ -71,8 +71,6 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
     return response.status(400).send('Unrecognized method'); // database error
   }
 
-  const batch = db.batch();
-
   let count = 0;
 
   const clientToken = request.body;
@@ -88,6 +86,11 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
   })
     .then(snapShot => getHackerShortInfosToBackfill(snapShot))
     .then((hackerShortInfoList) => {
+      let batch = db.batch();
+      const BATCH_LIMIT = 500;
+
+      const promises = [];
+
       hackerShortInfoList.forEach((hackerShortInfo) => {
         // if we get null, it means we don't need to backfill this
         if (hackerShortInfo) {
@@ -96,10 +99,17 @@ exports.backfillShortInfo = functions.https.onRequest((request, response) => {
 
           batch.set(ref, hackerShortInfo);
           count += 1;
+
+          // every 500 docs
+          if (count % BATCH_LIMIT === 0) {
+            promises.push(batch.commit()); // commit current batch
+            batch = db.batch(); // create new batch
+          }
         }
       });
 
-      return batch.commit();
+      promises.push(batch.commit()); // commit the remaining docs in the batch
+      return Promise.all(promises);
     })
     .then(() => response.status(200).send(`${count}`))
     .catch((e) => {
