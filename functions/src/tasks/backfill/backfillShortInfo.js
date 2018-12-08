@@ -1,18 +1,13 @@
 const { validate } = require('validate.js');
-const cleaner = require('deep-cleaner');
+const _ = require('lodash');
 
 const { constraints } = require('../../submitApplication/constraints');
 const { db, functions, admin } = require('../../utils/firestore');
 
 const buildHackerShortInfo = (fullInfoDoc) => {
-  const fields = Object.keys(constraints.hacker_short_info);
-  const hackerFullInfoDoc = fullInfoDoc.data();
-  const hackerShortInfo = {};
-  fields.forEach((field) => {
-    hackerShortInfo[field] = hackerFullInfoDoc[field];
-  });
-
-  cleaner(hackerShortInfo);
+  const hackerShortInfo = fullInfoDoc.data();
+  delete hackerShortInfo.interestForNwHacks;
+  delete hackerShortInfo.recentProject;
 
   return hackerShortInfo;
 };
@@ -26,15 +21,15 @@ const getHackerShortInfosToBackfill = (snapShot) => {
       db.collection('hacker_short_info').doc(id).get().then((shortInfoDoc) => {
         const data = shortInfoDoc.data();
 
-        if (data) {
+        const hackerShortInfo = buildHackerShortInfo(fullInfoDoc);
+
+        if (data && _.isEqual(data, hackerShortInfo)) {
           console.log(shortInfoDoc.id, ' doesn\'t need backfilling');
           // fulfill null if doesn't need backfilling
           return fulfill();
         }
 
         console.log(fullInfoDoc.id, 'needs backfilling');
-
-        const hackerShortInfo = buildHackerShortInfo(fullInfoDoc);
 
         const hackerShortInfoConstraints = Object.assign({}, constraints.hacker_short_info);
         delete hackerShortInfoConstraints.birthdate.presence;
