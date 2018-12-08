@@ -1,0 +1,30 @@
+@import ./ScoreButtonGroup/index
+
+.score-panel
+  font-family: 'Apercu Pro'
+  position: relative
+  .score-buttons
+    padding: 20px 17px 0px 17px
+  .score-panel-title
+    margin-bottom: 11px
+  &-primary-text
+    font-size: 16px
+    color: $charcoal
+    font-weight: 500
+  &-secondary-text
+    font-size: 16px
+    color: $light-grey
+  .score-history
+    bottom: 0
+    width: -webkit-fill-available
+    background-color: $admin-history-bg
+    .score-value
+      color: $light-grey
+      &.exists
+        color: $solid-blue
+    .clear-btn
+      color: $solid-blue
+      float: right
+  
+  @media (max-height: 1080px)
+    overflow-y: auto

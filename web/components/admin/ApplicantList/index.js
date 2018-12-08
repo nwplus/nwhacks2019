@@ -10,7 +10,8 @@ class ApplicantList extends React.Component {
     return (
       <div className={`applicant-list ${className}`}>
         {applicants.map((applicant) => {
-          const { id, firstName, lastName, email, finalScore } = applicant;
+          const { id, firstName, lastName, email, score } = applicant;
+          const finalScore = score ? score.finalScore : null;
           applicantNumber += 1;
           return (
             <div
@@ -24,7 +25,7 @@ class ApplicantList extends React.Component {
               </div>
               <div className="right margin-ends-s flex-no-shrink">
                 <div className="order">{applicantNumber}</div>
-                <div className="score">{finalScore}/10</div>
+                <div className={`score ${finalScore ? 'exists' : ''}`}>{finalScore}/10</div>
               </div>
             </div>
           );

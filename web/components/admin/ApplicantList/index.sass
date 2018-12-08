@@ -5,8 +5,8 @@
     padding-top: 10px
     height: 56px
     &:hover
-      background-color: $admin-hover-bg
       cursor: pointer
+      background-color: $admin-hover-bg
     .right
       padding-right: 10px
       margin-left: auto
@@ -15,15 +15,21 @@
         float: right
       .score
         opacity: 0.3
+        &.exists
+          opacity: 1
+          color: $admin-highlight
     .name
       font-size: 16px
-      color: #4F4F4F
+      color: $charcoal
     .email
       font-size: 16px
-      color: #828282
+      color: $light-grey
     &.selected
-      .score, .name, .email
+      background-color: $admin-selected-bg
+      .name, .email
         color: $admin-highlight
       .score
-        opacity: 1
+        &.exists
+          opacity: 1
+          color: $admin-highlight
   
