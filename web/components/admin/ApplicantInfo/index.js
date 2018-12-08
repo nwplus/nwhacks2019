@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import applicantCollections from '../../../util/applicantCollections';
@@ -28,8 +28,11 @@ class ApplicantInfo extends React.Component {
       return null;
     }
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicantShortInfo = firestore.data[shortInfoCollectionName][applicantId];
-    return applicantShortInfo;
+    const shortInfoCollection = firestore.data[shortInfoCollectionName];
+    if (isLoaded(shortInfoCollection)) {
+      return shortInfoCollection[applicantId];
+    }
+    return {};
   }
 
   getApplicantLongInfo = () => {
@@ -38,8 +41,11 @@ class ApplicantInfo extends React.Component {
       return null;
     }
     const longInfoCollectionName = applicantCollections[applicantType].longInfo;
-    const applicantLongInfo = firestore.data[longInfoCollectionName][applicantId];
-    return applicantLongInfo;
+    const longInfoCollection = firestore.data[longInfoCollectionName];
+    if (isLoaded(longInfoCollection)) {
+      return longInfoCollection[applicantId];
+    }
+    return {};
   };
 
   render() {
