@@ -35,7 +35,7 @@ class Toolbar extends React.Component {
           name="sort-input"
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
-        <button onClick={reverseSort}>{reverse ? 'reverse' : 'unreverse'}</button>
+        <button onClick={reverseSort}>{!reverse ? 'reverse' : 'unreverse'}</button>
       </div>
     );
   }
