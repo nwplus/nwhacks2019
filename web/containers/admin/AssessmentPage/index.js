@@ -78,13 +78,13 @@ class AssessmentPageContainer extends React.Component {
   sortApplicants = (sortType, applicants) => {
     switch (sortType) {
       case 'name':
-        return null;
+        return applicants.sort((a, b) => a.firstName > b.firstName);
       case 'email':
-        return null;
+        return applicants.sort((a, b) => a.email > b.email);
       case 'score':
-        return null;
+        return applicants.sort((a, b) => a.score.finalScore > b.score.finalScore);
       case 'timestamp':
-        return null;
+        return applicants.sort((a, b) => a.timestamp > b.timestamp);
       default:
         return applicants;
     }
