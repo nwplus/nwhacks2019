@@ -19,6 +19,7 @@ class AssessmentPageContainer extends React.Component {
       applicantType: 'hacker',
       selectedApplicantId: null,
       sortType: 'timestamp',
+      reverse: false,
     };
   }
 
@@ -114,11 +115,18 @@ class AssessmentPageContainer extends React.Component {
     }
   };
 
+  reverseSort = () => {
+    const { reverse } = this.state;
+    const newReverse = !reverse;
+    this.setState({ reverse: newReverse });
+  };
+
   render() {
     const {
       applicantType,
       selectedApplicantId,
       sortType,
+      reverse,
     } = this.state;
 
     const {
@@ -126,13 +134,8 @@ class AssessmentPageContainer extends React.Component {
     } = this.props;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
     const applicants = firestore.ordered[shortInfoCollectionName];
-    let sortedApplicants = null;
-    if (sortType) {
-      sortedApplicants = this.sortApplicants(sortType, applicants);
-    } else {
-      sortedApplicants = null;
-    }
-
+    let sortedApplicants = this.sortApplicants(sortType, applicants);
+    if (reverse) sortedApplicants = applicants.reverse();
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
@@ -140,12 +143,14 @@ class AssessmentPageContainer extends React.Component {
       <div>
         <AssessmentPage
           applicantType={applicantType}
-          applicants={sortedApplicants || applicants}
+          applicants={sortedApplicants}
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
           sortType={sortType}
           switchSortType={this.switchSortType}
+          reverseSort={this.reverseSort}
+          reverse={reverse}
         />
       </div>
     );
