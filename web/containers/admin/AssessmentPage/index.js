@@ -95,10 +95,10 @@ class AssessmentPageContainer extends React.Component {
         });
       case 'score':
         return applicants.sort((a, b) => {
-          if (!a.score) return -1;
-          if (!b.score) return 1;
-          if (a.score > b.score) return 1;
-          if (a.score < b.score) return -1;
+          if (!a.score || !a.score.finalScore) return -1;
+          if (!b.score || !b.score.finalScore) return 1;
+          if (a.score.finalScore > b.score.finalScore) return 1;
+          if (a.score.finalScore < b.score.finalScore) return -1;
           return 0;
         });
       case 'timestamp':
