@@ -14,7 +14,7 @@ const AssessmentPage = ({
   sortType,
   switchSortType,
   reverseSort,
-  reverse
+  reverse,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
