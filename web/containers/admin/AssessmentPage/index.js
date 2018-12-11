@@ -18,6 +18,7 @@ class AssessmentPageContainer extends React.Component {
     this.state = {
       applicantType: 'hacker',
       selectedApplicantId: null,
+      sortType: null,
     };
   }
 
@@ -67,18 +68,46 @@ class AssessmentPageContainer extends React.Component {
     });
   }
 
+  switchSortType = (newSortType) => {
+    this.setState({
+      sortType: newSortType,
+      selectedApplicantId: null,
+    });
+  };
+
+  sortApplicants = (sortType, applicants) => {
+    switch (sortType) {
+      case 'name':
+        return null;
+      case 'email':
+        return null;
+      case 'score':
+        return null;
+      case 'timestamp':
+        return null;
+      default:
+        return applicants;
+    }
+  };
+
   render() {
     const {
       applicantType,
       selectedApplicantId,
+      sortType,
     } = this.state;
 
     const {
       firestore,
     } = this.props;
-
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
     const applicants = firestore.ordered[shortInfoCollectionName];
+    let sortedApplicants = null;
+    if (sortType) {
+      sortedApplicants = this.sortApplicants(sortType, applicants);
+    } else {
+      sortedApplicants = null;
+    }
 
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
@@ -87,7 +116,7 @@ class AssessmentPageContainer extends React.Component {
       <div>
         <AssessmentPage
           applicantType={applicantType}
-          applicants={applicants}
+          applicants={sortedApplicants || applicants}
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
