@@ -18,7 +18,7 @@ class AssessmentPageContainer extends React.Component {
     this.state = {
       applicantType: 'hacker',
       selectedApplicantId: null,
-      sortType: null,
+      sortType: 'timestamp',
     };
   }
 
@@ -78,13 +78,37 @@ class AssessmentPageContainer extends React.Component {
   sortApplicants = (sortType, applicants) => {
     switch (sortType) {
       case 'name':
-        return applicants.sort((a, b) => a.firstName > b.firstName);
+        return applicants.sort((a, b) => {
+          if (!a.lastName) return -1;
+          if (!b.lastName) return 1;
+          if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) return 1;
+          if (a.lastName.toUpperCase() < b.lastName.toUpperCase()) return -1;
+          return 0;
+        });
       case 'email':
-        return applicants.sort((a, b) => a.email > b.email);
+        return applicants.sort((a, b) => {
+          if (!a.email) return -1;
+          if (!b.email) return 1;
+          if (a.email.toUpperCase() > b.email.toUpperCase()) return 1;
+          if (a.email.toUpperCase() < b.email.toUpperCase()) return -1;
+          return 0;
+        });
       case 'score':
-        return applicants.sort((a, b) => a.score.finalScore > b.score.finalScore);
+        return applicants.sort((a, b) => {
+          if (!a.score) return -1;
+          if (!b.score) return 1;
+          if (a.score > b.score) return 1;
+          if (a.score < b.score) return -1;
+          return 0;
+        });
       case 'timestamp':
-        return applicants.sort((a, b) => a.timestamp > b.timestamp);
+        return applicants.sort((a, b) => {
+          if (!a.timestamp) return -1;
+          if (!b.timestamp) return 1;
+          if (a.timestamp > b.timestamp) return 1;
+          if (a.timestamp < b.timestamp) return -1;
+          return 0;
+        });
       default:
         return applicants;
     }
@@ -120,6 +144,8 @@ class AssessmentPageContainer extends React.Component {
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
+          sortType={sortType}
+          switchSortType={this.switchSortType}
         />
       </div>
     );

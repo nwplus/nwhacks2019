@@ -10,10 +10,16 @@ class Toolbar extends React.Component {
       mentor: { value: 'mentor', label: 'Mentor' },
       volunteer: { value: 'volunteer', label: 'Volunteer' },
     };
+    this.sortSelectLabels = {
+      name: { value: 'name', label: 'Name' },
+      email: { value: 'email', label: 'Email' },
+      score: { value: 'score', label: 'Score' },
+      timestamp: { value: 'timestamp', label: 'Timestamp' },
+    };
   }
 
   render() {
-    const { applicantType, switchApplicantType, className } = this.props;
+    const { applicantType, switchApplicantType, className, switchSortType, sortType } = this.props;
     return (
       <div className={`toolbar fill-width ${className}`}>
         <Select
@@ -22,6 +28,12 @@ class Toolbar extends React.Component {
           name="collection-input"
           value={this.collectionSelectLabels[applicantType]}
           options={Object.values(this.collectionSelectLabels)} />
+        <Select
+          onChange={option => switchSortType(option.value)}
+          label="Sort:"
+          name="sort-input"
+          value={this.sortSelectLabels[sortType]}
+          options={Object.values(this.sortSelectLabels)} />
       </div>
     );
   }
@@ -38,6 +50,10 @@ Toolbar.propTypes = {
   switchApplicantType: PropTypes.func,
   // additional styles
   className: PropTypes.string,
+  // handler for switching sort type
+  switchSortType: PropTypes.func,
+  // type to sort by
+  sortType: PropTypes.string,
 };
 
 export default Toolbar;

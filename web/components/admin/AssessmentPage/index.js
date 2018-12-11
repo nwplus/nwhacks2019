@@ -11,12 +11,16 @@ const AssessmentPage = ({
   selectedApplicantId,
   switchApplicantType,
   onApplicantClick,
+  sortType,
+  switchSortType,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
     <Toolbar
       applicantType={applicantType}
       switchApplicantType={switchApplicantType}
+      sortType={sortType}
+      switchSortType={switchSortType}
     />
     <div className="applicant-view flex">
       {/* APPLICANT LIST */}
@@ -53,6 +57,10 @@ AssessmentPage.propTypes = {
   switchApplicantType: PropTypes.func,
   // handler for applicant click
   onApplicantClick: PropTypes.func,
+  // what to sort bye
+  sortType: PropTypes.string,
+  // Sort type handler
+  switchSortType: PropTypes.func,
 };
 
 export default AssessmentPage;
