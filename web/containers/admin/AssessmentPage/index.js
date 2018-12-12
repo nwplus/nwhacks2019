@@ -142,11 +142,11 @@ class AssessmentPageContainer extends React.Component {
     } = this.props;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
     const applicants = firestore.ordered[shortInfoCollectionName];
-    let sortedApplicants = this.sortApplicants(sortType, applicants);
-    if (reverse) sortedApplicants = applicants.reverse();
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
+    let sortedApplicants = this.sortApplicants(sortType, applicants);
+    if (reverse) sortedApplicants = applicants.reverse();
     return (
       <div>
         <AssessmentPage
