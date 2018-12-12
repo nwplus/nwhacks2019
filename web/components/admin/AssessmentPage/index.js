@@ -61,7 +61,7 @@ AssessmentPage.propTypes = {
   switchApplicantType: PropTypes.func,
   // handler for applicant click
   onApplicantClick: PropTypes.func,
-  // what to sort bye
+  // what to sort by
   sortType: PropTypes.string,
   // Sort type handler
   switchSortType: PropTypes.func,

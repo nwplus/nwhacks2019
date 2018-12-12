@@ -22,7 +22,7 @@ class Toolbar extends React.Component {
     const { applicantType, switchApplicantType, className,
       switchSortType, sortType, reverseSort, reverse } = this.props;
     return (
-      <div className={`toolbar fill-width ${className}`}>
+      <div className={`toolbar flex fill-width ${className}`}>
         <Select
           onChange={option => switchApplicantType(option.value)}
           label="Form:"
@@ -30,6 +30,7 @@ class Toolbar extends React.Component {
           value={this.collectionSelectLabels[applicantType]}
           options={Object.values(this.collectionSelectLabels)} />
         <Select
+          className={'margin-left-s'}
           onChange={option => switchSortType(option.value)}
           label="Sort:"
           name="sort-input"
