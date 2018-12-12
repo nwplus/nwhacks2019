@@ -38,7 +38,7 @@ class Toolbar extends React.Component {
           name="sort-input"
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
-        <img src={sortArrow} className={sortDirection === 'asc' ? 'flip' : 'flip-vertical'} onClick={switchSortDirection}/>
+        <img src={sortArrow} alt="sort arrow" className={`pad-left-s ${sortDirection === 'asc' ? '' : 'flip-vertical'}`} onClick={switchSortDirection} />
       </div>
     );
   }
