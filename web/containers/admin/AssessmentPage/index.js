@@ -78,7 +78,15 @@ class AssessmentPageContainer extends React.Component {
 
   sortApplicants = (sortType, applicants) => {
     switch (sortType) {
-      case 'name':
+      case 'firstName':
+        return applicants.sort((a, b) => {
+          if (!a.firstName) return -1;
+          if (!b.firstName) return 1;
+          if (a.firstName.toUpperCase() > b.firstName.toUpperCase()) return 1;
+          if (a.firstName.toUpperCase() < b.firstName.toUpperCase()) return -1;
+          return 0;
+        });
+      case 'lastName':
         return applicants.sort((a, b) => {
           if (!a.lastName) return -1;
           if (!b.lastName) return 1;

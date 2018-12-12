@@ -11,7 +11,8 @@ class Toolbar extends React.Component {
       volunteer: { value: 'volunteer', label: 'Volunteer' },
     };
     this.sortSelectLabels = {
-      name: { value: 'name', label: 'Name' },
+      lastName: { value: 'lastName', label: 'Last Name' },
+      firstName: { value: 'firstName', label: 'First Name' },
       email: { value: 'email', label: 'Email' },
       score: { value: 'score', label: 'Score' },
       timestamp: { value: 'timestamp', label: 'Timestamp' },
@@ -30,7 +31,7 @@ class Toolbar extends React.Component {
           value={this.collectionSelectLabels[applicantType]}
           options={Object.values(this.collectionSelectLabels)} />
         <Select
-          className={'margin-left-s'}
+          className="margin-left-s"
           onChange={option => switchSortType(option.value)}
           label="Sort:"
           name="sort-input"
