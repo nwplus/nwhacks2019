@@ -13,8 +13,8 @@ const AssessmentPage = ({
   onApplicantClick,
   sortType,
   switchSortType,
-  reverseSort,
-  reverse,
+  switchSortDirection,
+  sortDirection,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -23,8 +23,8 @@ const AssessmentPage = ({
       switchApplicantType={switchApplicantType}
       sortType={sortType}
       switchSortType={switchSortType}
-      reverseSort={reverseSort}
-      reverse={reverse}
+      switchSortDirection={switchSortDirection}
+      sortDirection={sortDirection}
     />
     <div className="applicant-view flex">
       {/* APPLICANT LIST */}
@@ -65,10 +65,10 @@ AssessmentPage.propTypes = {
   sortType: PropTypes.string,
   // Sort type handler
   switchSortType: PropTypes.func,
-  // reverse the array of applicants
-  reverseSort: PropTypes.func,
-  // check whether its reversed
-  reverse: PropTypes.bool,
+  // Change the direction for sorting
+  switchSortDirection: PropTypes.func,
+  // Current sort direction
+  sortDirection: PropTypes.string,
 
 };
 

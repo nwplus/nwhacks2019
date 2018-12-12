@@ -19,7 +19,7 @@ class AssessmentPageContainer extends React.Component {
       applicantType: 'hacker',
       selectedApplicantId: null,
       sortType: 'timestamp',
-      reverse: false,
+      sortDirection: 'asc',
     };
   }
 
@@ -123,10 +123,10 @@ class AssessmentPageContainer extends React.Component {
     }
   };
 
-  reverseSort = () => {
-    const { reverse } = this.state;
-    const newReverse = !reverse;
-    this.setState({ reverse: newReverse });
+  switchSortDirection = () => {
+    const { sortDirection } = this.state;
+    const newSortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+    this.setState({ sortDirection: newSortDirection });
   };
 
   render() {
@@ -134,7 +134,7 @@ class AssessmentPageContainer extends React.Component {
       applicantType,
       selectedApplicantId,
       sortType,
-      reverse,
+      sortDirection,
     } = this.state;
 
     const {
@@ -146,7 +146,7 @@ class AssessmentPageContainer extends React.Component {
       return (<span>Loading...</span>);
     }
     let sortedApplicants = this.sortApplicants(sortType, applicants);
-    if (reverse) sortedApplicants = applicants.reverse();
+    if (sortDirection === 'desc') sortedApplicants = applicants.reverse();
     return (
       <div>
         <AssessmentPage
@@ -157,8 +157,8 @@ class AssessmentPageContainer extends React.Component {
           onApplicantClick={this.selectApplicant}
           sortType={sortType}
           switchSortType={this.switchSortType}
-          reverseSort={this.reverseSort}
-          reverse={reverse}
+          switchSortDirection={this.switchSortDirection}
+          sortDirection={sortDirection}
         />
       </div>
     );

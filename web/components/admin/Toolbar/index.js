@@ -21,7 +21,7 @@ class Toolbar extends React.Component {
 
   render() {
     const { applicantType, switchApplicantType, className,
-      switchSortType, sortType, reverseSort, reverse } = this.props;
+      switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -37,7 +37,7 @@ class Toolbar extends React.Component {
           name="sort-input"
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
-        <button onClick={reverseSort}>{!reverse ? 'reverse' : 'unreverse'}</button>
+        <button onClick={switchSortDirection}>{sortDirection === 'asc' ? 'desc' : 'asc'}</button>
       </div>
     );
   }
@@ -58,10 +58,10 @@ Toolbar.propTypes = {
   switchSortType: PropTypes.func,
   // type to sort by
   sortType: PropTypes.string,
-  // reverse the sort
-  reverseSort: PropTypes.func,
-  // check whether its reversed
-  reverse: PropTypes.bool,
+  // Switch sort direction
+  switchSortDirection: PropTypes.func,
+  // Check sort direction
+  sortDirection: PropTypes.string,
 };
 
 export default Toolbar;
