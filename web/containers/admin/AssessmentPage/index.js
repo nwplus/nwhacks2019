@@ -18,6 +18,8 @@ class AssessmentPageContainer extends React.Component {
     this.state = {
       applicantType: 'hacker',
       selectedApplicantId: null,
+      sortType: 'timestamp',
+      sortDirection: 'asc',
     };
   }
 
@@ -67,30 +69,96 @@ class AssessmentPageContainer extends React.Component {
     });
   }
 
+  switchSortType = (newSortType) => {
+    this.setState({
+      sortType: newSortType,
+      selectedApplicantId: null,
+    });
+  };
+
+  sortApplicants = (sortType, applicants) => {
+    switch (sortType) {
+      case 'firstName':
+        return applicants.sort((a, b) => {
+          if (!a.firstName) return -1;
+          if (!b.firstName) return 1;
+          if (a.firstName.toUpperCase() > b.firstName.toUpperCase()) return 1;
+          if (a.firstName.toUpperCase() < b.firstName.toUpperCase()) return -1;
+          return 0;
+        });
+      case 'lastName':
+        return applicants.sort((a, b) => {
+          if (!a.lastName) return -1;
+          if (!b.lastName) return 1;
+          if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) return 1;
+          if (a.lastName.toUpperCase() < b.lastName.toUpperCase()) return -1;
+          return 0;
+        });
+      case 'email':
+        return applicants.sort((a, b) => {
+          if (!a.email) return -1;
+          if (!b.email) return 1;
+          if (a.email.toUpperCase() > b.email.toUpperCase()) return 1;
+          if (a.email.toUpperCase() < b.email.toUpperCase()) return -1;
+          return 0;
+        });
+      case 'score':
+        return applicants.sort((a, b) => {
+          if (!a.score || !a.score.finalScore) return -1;
+          if (!b.score || !b.score.finalScore) return 1;
+          if (a.score.finalScore > b.score.finalScore) return 1;
+          if (a.score.finalScore < b.score.finalScore) return -1;
+          return 0;
+        });
+      case 'timestamp':
+        return applicants.sort((a, b) => {
+          if (!a.timestamp) return -1;
+          if (!b.timestamp) return 1;
+          if (a.timestamp > b.timestamp) return 1;
+          if (a.timestamp < b.timestamp) return -1;
+          return 0;
+        });
+      default:
+        return applicants;
+    }
+  };
+
+  switchSortDirection = () => {
+    const { sortDirection } = this.state;
+    const newSortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+    this.setState({ sortDirection: newSortDirection });
+  };
+
   render() {
     const {
       applicantType,
       selectedApplicantId,
+      sortType,
+      sortDirection,
     } = this.state;
 
     const {
       firestore,
     } = this.props;
-
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
     const applicants = firestore.ordered[shortInfoCollectionName];
-
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
+    let sortedApplicants = this.sortApplicants(sortType, applicants);
+    if (sortDirection === 'desc') sortedApplicants = applicants.reverse();
     return (
       <div>
         <AssessmentPage
           applicantType={applicantType}
-          applicants={applicants}
+          applicants={sortedApplicants}
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
+          sortType={sortType}
+          switchSortType={this.switchSortType}
+          switchSortDirection={this.switchSortDirection}
+          sortDirection={sortDirection}
         />
       </div>
     );

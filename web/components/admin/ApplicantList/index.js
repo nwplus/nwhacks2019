@@ -5,7 +5,6 @@ class ApplicantList extends React.Component {
   render() {
     const { applicants, selectedApplicantId, onApplicantClick, className } = this.props;
     let applicantNumber = 0;
-
     if (!applicants) return null;
     return (
       <div className={`applicant-list ${className}`}>
