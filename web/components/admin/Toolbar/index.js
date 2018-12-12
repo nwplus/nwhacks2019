@@ -34,7 +34,7 @@ class Toolbar extends React.Component {
         <Select
           className="margin-left-s"
           onChange={option => switchSortType(option.value)}
-          label="Sort:"
+          label="Sort By:"
           name="sort-input"
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
