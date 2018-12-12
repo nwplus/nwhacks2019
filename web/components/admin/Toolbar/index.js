@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from '../../input/select';
+import sortArrow from '../../../assets/sort-arrow.svg';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Toolbar extends React.Component {
           name="sort-input"
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
-        <button onClick={switchSortDirection}>{sortDirection === 'asc' ? 'desc' : 'asc'}</button>
+        <img src={sortArrow} className={sortDirection === 'asc' ? 'flip' : 'flip-vertical'} onClick={switchSortDirection}/>
       </div>
     );
   }
