@@ -10,7 +10,7 @@ import { TextInput } from '../input/text';
 // SecondaryButton lint error so had to put it here
 import { PrimaryButton, SecondaryButton } from '../input/buttons';
 import { ShowHideTextView } from '../view';
-import { Sponsors } from './Sponsors';
+import { Sponsors, Partners } from './Sponsors';
 import { Footer } from '../footer';
 
 import { getFromFirestore } from '../../services/firestore';
@@ -359,6 +359,7 @@ class Home extends React.Component {
 
         <div ref={node => this.sponsorsDiv = node}>
           <Sponsors />
+          <Partners />
         </div>
 
         <Footer />
