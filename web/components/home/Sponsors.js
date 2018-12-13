@@ -14,10 +14,15 @@ import deloitte from '../../assets/sponsors/kilo/deloitte.png';
 // in-kind
 import wolfram from '../../assets/sponsors/in-kind/wolfram.png';
 import stickermule from '../../assets/sponsors/in-kind/stickermule.png';
-import davidsTea from '../../assets/sponsors/in-kind/davidstea.svg';
+import davidstea from '../../assets/sponsors/in-kind/davidstea.svg';
 import grounds from '../../assets/sponsors/in-kind/grounds.png';
-import sparkingIce from '../../assets/sponsors/in-kind/sparkling-ice.svg';
+import sparkingice from '../../assets/sponsors/in-kind/sparkling-ice.svg';
 import zoho from '../../assets/sponsors/in-kind/zoho.svg';
+// partners
+import nwplus from '../../assets/partners/nwplus.png';
+import mlh from '../../assets/partners/mlh.svg';
+import bctech from '../../assets/partners/bctech.png';
+
 
 const getSponsor = (alt, src, href, className) => (
   <a href={href}>
@@ -48,13 +53,22 @@ const Sponsors = () => (
     <br />
     {/* in-kind */}
     {getSponsor('Grounds For Coffee', grounds, 'https://groundsforcoffee.ca/locations/', 'in-kind')}
-    {getSponsor('DAVIDsTEA', davidsTea, 'https://www.davidstea.com/', 'in-kind')}
+    {getSponsor('DAVIDsTEA', davidstea, 'https://www.davidstea.com/', 'in-kind')}
     {getSponsor('Sticker Mule', stickermule, 'https://hackp.ac/mlh-stickermule-hackathons', 'in-kind')}
     <br />
     {getSponsor('Wolfram Research', wolfram, 'https://www.wolfram.com/', 'in-kind')}
     {getSponsor('Zoho', zoho, 'https://www.zoho.com/', 'in-kind')}
-    {getSponsor('Sparkling Ice', sparkingIce, 'https://www.sparklingice.ca/', 'in-kind')}
+    {getSponsor('Sparkling Ice', sparkingice, 'https://www.sparklingice.ca/', 'in-kind')}
   </div>
 );
 
-export { Sponsors };
+const Partners = () => (
+  <div className="partners">
+    <h2 className="margin-top-giga margin-bottom-m">Partners</h2>
+    {/* {getSponsor('nwPlus', nwplus, 'http://facebook.com/nwplusubc', 'partner')} */}
+    {getSponsor('MLH', mlh, 'https://mlh.io/', 'partner')}
+    {getSponsor('BC Tech', bctech, 'https://wearebctech.com/', 'partner')}
+  </div>
+);
+
+export { Sponsors, Partners };
