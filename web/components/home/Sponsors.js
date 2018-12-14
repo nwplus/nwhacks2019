@@ -21,7 +21,7 @@ import grounds from '../../assets/sponsors/in-kind/grounds.png';
 import sparkingice from '../../assets/sponsors/in-kind/sparkling-ice.svg';
 import zoho from '../../assets/sponsors/in-kind/zoho.svg';
 // partners
-// import nwplus from '../../assets/partners/nwplus.png';
+import nwplus from '../../assets/partners/nwplus.png';
 import mlh from '../../assets/partners/mlh.svg';
 import bctech from '../../assets/partners/bctech.png';
 
@@ -70,7 +70,7 @@ const Sponsors = () => (
 const Partners = () => (
   <div className="partners">
     <h2 className="margin-top-giga margin-bottom-m">Partners</h2>
-    {/* {getSponsor('nwPlus', nwplus, 'http://facebook.com/nwplusubc', 'partner')} */}
+    {getSponsor('nwPlus', nwplus, 'http://facebook.com/nwplusubc', 'partner')}
     {getSponsor('MLH', mlh, 'https://mlh.io/', 'partner')}
     {getSponsor('BC Tech', bctech, 'https://wearebctech.com/', 'partner')}
   </div>
