@@ -28,7 +28,7 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
 
   db.collection('feature_flags').doc('volunteer_application').get().then((doc) => {
     const { enabled: isHackerApplicationEnabled } = doc.data();
-    if (!isHackerApplicationEnabled) return response.status(400).send('hacker application is not enabled');
+    if (!isHackerApplicationEnabled) return response.status(400).send('volunteer application is not enabled');
     // validate user's one-time recaptcha token with google servers
     //    if token verified successfully, write hacker application to firestore
     //    else return error response
