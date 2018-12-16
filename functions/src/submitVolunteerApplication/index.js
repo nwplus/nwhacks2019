@@ -26,16 +26,18 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
   // store server timestamp so we can sort the applications later
   data.timestamp = Date.now();
 
-  // validate user's one-time recaptcha token with google servers
-  //    if token verified successfully, write hacker application to firestore
-  //    else return error response
-  validateRecaptcha(data.recaptchaResponse, (isHuman) => {
-    if (!isHuman) {
-      response.status(400).send('Recaptcha validation failed');
-    } else if (errors) {
-      response.status(400).send('Data constraint check failed');
-    } else {
-      try {
+  db.collection('feature_flags').doc('volunteer_application').get().then((doc) => {
+    const { enabled: isHackerApplicationEnabled } = doc.data();
+    if (!isHackerApplicationEnabled) return response.status(400).send('volunteer application is not enabled');
+    // validate user's one-time recaptcha token with google servers
+    //    if token verified successfully, write hacker application to firestore
+    //    else return error response
+    return validateRecaptcha(data.recaptchaResponse, (isHuman) => {
+      if (!isHuman) {
+        response.status(400).send('Recaptcha validation failed');
+      } else if (errors) {
+        response.status(400).send('Data constraint check failed');
+      } else {
         // create a batch job
         const batch = db.batch();
 
@@ -55,10 +57,11 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
 
         // write data fields to each document
 
+        /* eslint-disable */
         const errorsFull = validate(volunteer.volunteer_full_info, constraints.volunteer_full_info);
-        const errorsShort = validate(volunteer.volunteer_short_info,
-          constraints.volunteer_short_info);
+        const errorsShort = validate(volunteer.volunteer_short_info, constraints.volunteer_short_info);
         const errorsLong = validate(volunteer.volunteer_long_info, constraints.volunteer_long_info);
+        /* eslint-enable */
 
         // validation error
         if (errorsFull || errorsShort || errorsLong) {
@@ -74,10 +77,10 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
             .then(() => response.status(200).send()) // success
             .catch(() => response.status(500).send('Internal Server Error')); // database error
         }
-      } catch (e) {
-        console.log(e);
-        response.status(500).send('Internal Server Error');
       }
-    }
-  });
+    });
+  })
+    .catch((e) => {
+      response.status(500).send(e);
+    });
 });
