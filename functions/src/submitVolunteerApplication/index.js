@@ -26,58 +26,66 @@ exports.submitApplicationVolunteer = functions.https.onRequest((request, respons
   // store server timestamp so we can sort the applications later
   data.timestamp = Date.now();
 
-  // validate user's one-time recaptcha token with google servers
-  //    if token verified successfully, write hacker application to firestore
-  //    else return error response
-  validateRecaptcha(data.recaptchaResponse, (isHuman) => {
-    if (!isHuman) {
-      response.status(400).send('Recaptcha validation failed');
-    } else if (errors) {
-      response.status(400).send('Data constraint check failed');
-    } else {
-      try {
-        // create a batch job
-        const batch = db.batch();
+  db.collection('feature_flags').doc('volunteer_application').get().then((doc) => {
+    const { enabled: isHackerApplicationEnabled } = doc.data();
+    if (!isHackerApplicationEnabled) return response.status(400).send('hacker application is not enabled');
+    // validate user's one-time recaptcha token with google servers
+    //    if token verified successfully, write hacker application to firestore
+    //    else return error response
+    return validateRecaptcha(data.recaptchaResponse, (isHuman) => {
+      if (!isHuman) {
+        response.status(400).send('Recaptcha validation failed');
+      } else if (errors) {
+        response.status(400).send('Data constraint check failed');
+      } else {
+        try {
+          // create a batch job
+          const batch = db.batch();
 
-        // create a new document reference in hacker_full_info
-        // and hacker_quick_info with the same ID
-        const volunteerFullInfoRef = db.collection('volunteer_full_info').doc();
-        const volunteerId = volunteerFullInfoRef.id; // use same ID for all volunteer documents
+          // create a new document reference in hacker_full_info
+          // and hacker_quick_info with the same ID
+          const volunteerFullInfoRef = db.collection('volunteer_full_info').doc();
+          const volunteerId = volunteerFullInfoRef.id; // use same ID for all volunteer documents
 
-        const volunteerShortInfoRef = db.collection('volunteer_short_info').doc(volunteerId);
-        const volunteerLongInfoRef = db.collection('volunteer_long_info').doc(volunteerId);
+          const volunteerShortInfoRef = db.collection('volunteer_short_info').doc(volunteerId);
+          const volunteerLongInfoRef = db.collection('volunteer_long_info').doc(volunteerId);
 
-        // also store the ID in a data field to make querying easier
-        data.id = volunteerId;
+          // also store the ID in a data field to make querying easier
+          data.id = volunteerId;
 
-        // build hacker data object
-        const volunteer = Volunteer(data);
+          // build hacker data object
+          const volunteer = Volunteer(data);
 
-        // write data fields to each document
+          // write data fields to each document
 
-        const errorsFull = validate(volunteer.volunteer_full_info, constraints.volunteer_full_info);
-        const errorsShort = validate(volunteer.volunteer_short_info,
-          constraints.volunteer_short_info);
-        const errorsLong = validate(volunteer.volunteer_long_info, constraints.volunteer_long_info);
+          /* eslint-disable */
+          const errorsFull = validate(volunteer.volunteer_full_info, constraints.volunteer_full_info);
+          const errorsShort = validate(volunteer.volunteer_short_info, constraints.volunteer_short_info);
+          const errorsLong = validate(volunteer.volunteer_long_info, constraints.volunteer_long_info);
+          /* eslint-enable */
 
-        // validation error
-        if (errorsFull || errorsShort || errorsLong) {
+          // validation error
+          if (errorsFull || errorsShort || errorsLong) {
+            response.status(500).send('Internal Server Error');
+          } else {
+            batch.set(volunteerFullInfoRef, volunteer.volunteer_full_info);
+            batch.set(volunteerShortInfoRef, volunteer.volunteer_short_info);
+            batch.set(volunteerLongInfoRef, volunteer.volunteer_long_info);
+
+            // commit the batch (either the above three documents are
+            // successfully created, or not at all)
+            batch.commit()
+              .then(() => response.status(200).send()) // success
+              .catch(() => response.status(500).send('Internal Server Error')); // database error
+          }
+        } catch (e) {
+          console.log(e);
           response.status(500).send('Internal Server Error');
-        } else {
-          batch.set(volunteerFullInfoRef, volunteer.volunteer_full_info);
-          batch.set(volunteerShortInfoRef, volunteer.volunteer_short_info);
-          batch.set(volunteerLongInfoRef, volunteer.volunteer_long_info);
-
-          // commit the batch (either the above three documents are
-          // successfully created, or not at all)
-          batch.commit()
-            .then(() => response.status(200).send()) // success
-            .catch(() => response.status(500).send('Internal Server Error')); // database error
         }
-      } catch (e) {
-        console.log(e);
-        response.status(500).send('Internal Server Error');
       }
-    }
-  });
+    });
+  })
+    .catch((e) => {
+      response.status(500).send(e);
+    });
 });
