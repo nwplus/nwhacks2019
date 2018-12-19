@@ -47,13 +47,6 @@ class App extends React.Component {
                       <AssessmentPageContainer />
                     </Route>
                     <Route path="/admin/tasks" component={AdminTasks} />
-                    {/* These routes are just for demo only, to be finalized later */}
-                    <Route path="/admin/home">
-                      <AdminPanel />
-                    </Route>
-                    <Route path="/admin/home2">
-                      <AdminPanel />
-                    </Route>
                     <Route component={() => <Redirect to="/page_not_found" />} />
                   </Switch>
                 </AdminGate>
