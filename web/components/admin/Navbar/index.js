@@ -32,8 +32,8 @@ class AdminNavbar extends React.Component {
                 <a
                   key={`admin-navbar-${index}`} // eslint-disable-line react/no-array-index-key
                   onClick={() => this.changeTab(index)}
-                  className={`flex ai-center margin-sides-l
-                      ${tabIndex === index ? 'active-tab' : 'inactive-tab'}
+                  className={`flex ai-center margin-sides-l tab
+                      ${tabIndex === index ? 'active' : ''}
                     `}
                   >
                   {label}
