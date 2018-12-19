@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { AdminNavbar } from './Navbar';
 import AdminTasks from './Tasks';
 import AdminGate from './AdminGate';
@@ -30,7 +32,13 @@ const Admin = ({ location: { pathname } }) => {
         />
     </AdminGate>
   );
-}
+};
+
+Admin.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }),
+};
 
 export {
   Admin,

@@ -48,6 +48,7 @@ AdminNavbar.propTypes = {
     label: PropTypes.string.isRequired,
     component: PropTypes.func.isRequired,
   })),
+  activeIndex: PropTypes.number.isRequired,
 };
 
 export {
