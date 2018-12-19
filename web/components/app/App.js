@@ -36,15 +36,9 @@ class App extends React.Component {
               <Route path="/admin/login">
                 <Login redirectUrl="/admin/home" />
               </Route>
-              <Route path="/admin/logout">
-                <Logout />
-              </Route>
-              <Route path="*">
-                <Switch>
-                  <Route path="/admin/home" component={Admin} />
-                  <Route component={() => <Redirect to="/page_not_found" />} />
-                </Switch>
-              </Route>
+              <Route path="/admin/logout" component={Logout} />
+              <Route path="/admin/home" component={Admin} />
+              <Route component={() => <Redirect to="/page_not_found" />} />
             </Switch>
           </Route>
           {/* Everything else */}
