@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
+import { SecondaryButton } from '../../input/buttons';
 import logo from '../../../assets/logo.svg';
 
 class AdminNavbar extends React.Component {
@@ -19,7 +21,7 @@ class AdminNavbar extends React.Component {
     return (
       <div>
         <nav className="fill-width flex">
-          <div className="flex ai-center jc-start margin-sides-l scale-margin-sides-tablet">
+          <div className="flex ai-center jc-start margin-sides-l">
             <div className="flex ai-center">
               <img alt="nwHacks" src={logo} />
             </div>
@@ -30,13 +32,21 @@ class AdminNavbar extends React.Component {
                 <a
                   key={`admin-navbar-${index}`} // eslint-disable-line react/no-array-index-key
                   onClick={() => this.changeTab(index)}
-                  className={`flex ai-center margin-sides-l scale-margin-sides-tablet
+                  className={`flex ai-center margin-sides-l
                       ${tabIndex === index ? 'active-tab' : 'inactive-tab'}
                     `}
                   >
                   {label}
                 </a>
-              ))
+              )).concat([
+                <Link
+                  to="/admin/logout"
+                  key="admin-logout"
+                  className="flex ai-center jc-start margin-left-l"
+                  >
+                  <SecondaryButton text="Logout" />
+                </Link>
+              ])
             }
           </div>
         </nav>
