@@ -45,7 +45,7 @@ class AdminNavbar extends React.Component {
                   className="flex ai-center jc-start margin-left-l"
                   >
                   <SecondaryButton text="Logout" />
-                </Link>
+                </Link>,
               ])
             }
           </div>
