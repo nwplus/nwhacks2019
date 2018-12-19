@@ -35,7 +35,7 @@ class App extends React.Component {
           <Route path="/admin">
             <Switch>
               <Route path="/admin/login">
-                <Login />
+                <Login redirectUrl="/admin/assessment" />
               </Route>
               <Route path="/admin/logout">
                 <Logout />
