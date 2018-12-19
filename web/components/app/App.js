@@ -11,7 +11,7 @@ import { Login } from '../../containers/auth';
 
 // Components
 import { Logout } from '../auth';
-import { Admin } from '../admin';
+import { Admin, adminRoutes } from '../admin';
 
 import { HackerApplication, VolunteerApplication } from '../../containers/application';
 
@@ -33,11 +33,11 @@ class App extends React.Component {
           {/* Admin */}
           <Route path="/admin">
             <Switch>
-              <Route path="/admin/login">
-                <Login redirectUrl="/admin/home" />
+              <Route exact path="/admin/login">
+                <Login redirectUrl="/admin/assessment" />
               </Route>
-              <Route path="/admin/logout" component={Logout} />
-              <Route path="/admin/home" component={Admin} />
+              <Route exact path="/admin/logout" component={Logout} />
+              <Route exact path={adminRoutes} component={Admin} />
               <Route component={() => <Redirect to="/page_not_found" />} />
             </Switch>
           </Route>
