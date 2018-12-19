@@ -11,8 +11,7 @@ import { Login } from '../../containers/auth';
 
 // Components
 import { Logout } from '../auth';
-import { AdminPanel, AdminGate, AdminTasks } from '../admin';
-import AssessmentPageContainer from '../../containers/admin/AssessmentPage';
+import { Admin } from '../admin';
 
 import { HackerApplication, VolunteerApplication } from '../../containers/application';
 
@@ -35,21 +34,16 @@ class App extends React.Component {
           <Route path="/admin">
             <Switch>
               <Route path="/admin/login">
-                <Login redirectUrl="/admin/assessment" />
+                <Login redirectUrl="/admin/home" />
               </Route>
               <Route path="/admin/logout">
                 <Logout />
               </Route>
               <Route path="*">
-                <AdminGate>
-                  <Switch>
-                    <Route path="/admin/assessment">
-                      <AssessmentPageContainer />
-                    </Route>
-                    <Route path="/admin/tasks" component={AdminTasks} />
-                    <Route component={() => <Redirect to="/page_not_found" />} />
-                  </Switch>
-                </AdminGate>
+                <Switch>
+                  <Route path="/admin/home" component={Admin} />
+                  <Route component={() => <Redirect to="/page_not_found" />} />
+                </Switch>
               </Route>
             </Switch>
           </Route>

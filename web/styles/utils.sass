@@ -160,3 +160,13 @@
 
 .error-border
   border-color: $error !important
+
+.active-tab
+  border-bottom: 4px solid $primary
+
+  @media (hover:hover)
+    &:hover
+      border-bottom-color: $secondary-highlight
+
+.inactive-tab
+  border-bottom: 4px solid white

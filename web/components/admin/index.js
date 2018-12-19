@@ -1,19 +1,26 @@
 import React from 'react';
-
-import AdminGate from './AdminGate';
-import AssessmentPage from './AssessmentPage';
+import { AdminNavbar } from './Navbar';
 import AdminTasks from './Tasks';
+import AdminGate from './AdminGate';
+import AssessmentPageContainer from '../../containers/admin/AssessmentPage';
 
-// Just for demo for now
-const AdminPanel = () => (
-  <div>
-    <p>Hello admin!</p>
-  </div>
+const Admin = () => (
+  <AdminGate>
+    <AdminNavbar
+      pages={[
+        {
+          label: 'Assessment',
+          component: AssessmentPageContainer,
+        },
+        {
+          label: 'Tasks (Dev only)',
+          component: AdminTasks,
+        },
+      ]}
+      />
+  </AdminGate>
 );
 
 export {
-  AdminGate,
-  AdminPanel,
-  AssessmentPage,
-  AdminTasks,
+  Admin,
 };
