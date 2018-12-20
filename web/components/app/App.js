@@ -11,8 +11,7 @@ import { Login } from '../../containers/auth';
 
 // Components
 import { Logout } from '../auth';
-import { AdminPanel, AdminGate, AdminTasks } from '../admin';
-import AssessmentPageContainer from '../../containers/admin/AssessmentPage';
+import { Admin, adminRoutes } from '../admin';
 
 import { HackerApplication, VolunteerApplication } from '../../containers/application';
 
@@ -34,30 +33,12 @@ class App extends React.Component {
           {/* Admin */}
           <Route path="/admin">
             <Switch>
-              <Route path="/admin/login">
-                <Login />
+              <Route exact path="/admin/login">
+                <Login redirectUrl="/admin/assessment" />
               </Route>
-              <Route path="/admin/logout">
-                <Logout />
-              </Route>
-              <Route path="*">
-                <AdminGate>
-                  <Switch>
-                    <Route path="/admin/assessment">
-                      <AssessmentPageContainer />
-                    </Route>
-                    <Route path="/admin/tasks" component={AdminTasks} />
-                    {/* These routes are just for demo only, to be finalized later */}
-                    <Route path="/admin/home">
-                      <AdminPanel />
-                    </Route>
-                    <Route path="/admin/home2">
-                      <AdminPanel />
-                    </Route>
-                    <Route component={() => <Redirect to="/page_not_found" />} />
-                  </Switch>
-                </AdminGate>
-              </Route>
+              <Route exact path="/admin/logout" component={Logout} />
+              <Route exact path={adminRoutes} component={Admin} />
+              <Route component={() => <Redirect to="/page_not_found" />} />
             </Switch>
           </Route>
           {/* Everything else */}

@@ -43,6 +43,7 @@ class LoginContainer extends React.Component {
         isLoaded: isAuthLoaded,
         isEmpty: needLogin,
       },
+      redirectUrl,
     } = this.props;
 
     const {
@@ -66,7 +67,7 @@ class LoginContainer extends React.Component {
       );
     }
 
-    return (<Redirect to="/admin/home" />);
+    return (<Redirect to={redirectUrl} />);
   }
 }
 
@@ -75,6 +76,7 @@ LoginContainer.propTypes = {
     login: PropTypes.func.isRequired,
   }),
   auth: PropTypes.object,
+  redirectUrl: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({ firebase: { auth } }) => {
