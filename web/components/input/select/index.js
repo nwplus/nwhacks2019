@@ -43,6 +43,7 @@ export class Select extends React.Component {
       disabled,
       formatNewOptionLabel,
       placeholder,
+      allowNewOption,
       isSearchable,
       isMulti,
       onBlur,
@@ -60,7 +61,6 @@ export class Select extends React.Component {
     } = this.props;
 
     const inputProps = {
-      placeholder,
       isSearchable,
       isMulti,
       onBlur,
@@ -80,6 +80,15 @@ export class Select extends React.Component {
       inputProps.value = { value, label: value };
     }
 
+    let placeholderText = placeholder;
+    if (!placeholder) {
+      if (isSearchable || allowNewOption) {
+        placeholderText = 'Enter or select an option';
+      } else {
+        placeholderText = 'Select an option';
+      }
+    }
+
     return (
       <div className={`select-input ${className}`}>
         <h5 className="body-text">{label}</h5>
@@ -92,6 +101,7 @@ export class Select extends React.Component {
           formatCreateLabel={formatNewOptionLabel}
           isValidNewOption={this.isValidNewOption}
           isDisabled={disabled}
+          placeholder={placeholderText}
         />
         <div>{error ? (<p className="error-message">{error.message}</p>) : null}</div>
       </div>
@@ -104,7 +114,6 @@ Select.defaultProps = {
   newOptionMinCharNumber: 1,
   isValidNewOption: () => true,
   formatNewOptionLabel: label => `Use "${label}"`,
-  placeholder: 'Select an option',
   isSearchable: false,
   allowNewOption: false,
   className: '',

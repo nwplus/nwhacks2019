@@ -18,6 +18,9 @@ class AssessmentPageContainer extends React.Component {
     this.state = {
       applicantType: 'hacker',
       selectedApplicantId: null,
+      isSelectingFilters: false,
+      appliedFilters: {},
+      areFiltersApplied: false,
       sortType: 'timestamp',
       sortDirection: 'asc',
     };
@@ -29,6 +32,12 @@ class AssessmentPageContainer extends React.Component {
 
   componentWillUnmount() {
     this.unloadApplicants();
+  }
+
+  // returns the currently applied filters
+  getAppliedFilters = () => {
+    const { appliedFilters } = this.state;
+    return appliedFilters;
   }
 
   // handles selecting an applicant
@@ -66,6 +75,30 @@ class AssessmentPageContainer extends React.Component {
       selectedApplicantId: null,
     }, () => {
       this.loadApplicants(); // add listener for new applicantType's collections
+    });
+  }
+
+  // shows filter modal
+  showFilterOptions = () => {
+    this.setState({
+      isSelectingFilters: true,
+    });
+  }
+
+  // hides filter modal
+  hideFilterOptions = () => {
+    this.setState({
+      isSelectingFilters: false,
+    });
+  }
+
+  // applies a new set of filters
+  applyFilterOptions = (newFilters) => {
+    this.setState({
+      isSelectingFilters: false,
+      areFiltersApplied: true,
+      appliedFilters: newFilters,
+      // TODO: add active filters
     });
   }
 
@@ -133,6 +166,8 @@ class AssessmentPageContainer extends React.Component {
     const {
       applicantType,
       selectedApplicantId,
+      isSelectingFilters,
+      areFiltersApplied,
       sortType,
       sortDirection,
     } = this.state;
@@ -155,6 +190,12 @@ class AssessmentPageContainer extends React.Component {
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
+          isSelectingFilters={isSelectingFilters}
+          areFiltersApplied={areFiltersApplied}
+          getAppliedFilters={this.getAppliedFilters}
+          showFilterOptions={this.showFilterOptions}
+          hideFilterOptions={this.hideFilterOptions}
+          applyFilterOptions={this.applyFilterOptions}
           sortType={sortType}
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from '../../input/select';
-import sortArrow from '../../../assets/sort-arrow.svg';
+import sortIcon from '../../../assets/sort-arrow.svg';
+import filterIcon from '../../../assets/filter-icon.svg';
+import filterIconSelected from '../../../assets/filter-icon-selected.svg';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -21,7 +23,11 @@ class Toolbar extends React.Component {
   }
 
   render() {
-    const { applicantType, switchApplicantType, className,
+    const { applicantType,
+      switchApplicantType,
+      className,
+      areFiltersApplied,
+      showFilterOptions,
       switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
@@ -39,13 +45,24 @@ class Toolbar extends React.Component {
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
         <div
-          className="pad-left-s sortArrowDiv"
+          className="pad-left-l toolbar-icon"
           role="button"
           onClick={switchSortDirection}
           tabIndex={0}>
-          <img src={sortArrow} alt="sort arrow" className={`sortArrow ${sortDirection === 'asc' ? '' : 'flip-vertical'}`} />
+          <img
+            src={sortIcon}
+            alt="sort arrow"
+            className={`${sortDirection === 'asc' ? '' : 'flip-vertical'}`} />
         </div>
-
+        <div
+          className="pad-left-l toolbar-icon"
+          role="button"
+          onClick={showFilterOptions}
+          tabIndex={0}>
+          <img
+            src={areFiltersApplied ? filterIconSelected : filterIcon}
+            alt="filter button" />
+        </div>
       </div>
     );
   }
@@ -62,7 +79,17 @@ Toolbar.propTypes = {
   switchApplicantType: PropTypes.func,
   // additional styles
   className: PropTypes.string,
-  // handler for switching sort type
+  // // is the user currently selecting filters
+  // isSelectingFilters: PropTypes.bool,
+  // has the user applied any filters
+  areFiltersApplied: PropTypes.bool,
+  // handler for hiding filter options
+  showFilterOptions: PropTypes.func,
+  // handler for hiding filter options
+  // hideFilterOptions: PropTypes.func,
+  // // handler for applying filter options
+  // applyFilterOptions: PropTypes.func,
+  // // handler for switching sort type
   switchSortType: PropTypes.func,
   // type to sort by
   sortType: PropTypes.string,
