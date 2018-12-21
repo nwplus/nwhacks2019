@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import update from 'immutability-helper';
-import { isPlainObject } from 'lodash';
+import { isPlainObject, isEqual } from 'lodash';
 import { capitalizeFirstLetter } from '../../../util/string';
 import { PrimaryButton, SecondaryButton } from '../../input/buttons';
 import FilterSelect from './FilterSelect';
@@ -16,7 +16,7 @@ class FilterModal extends React.Component {
     this.defaultFilterOptions = {
       selectedAttribute: 'property',
       selectedField: null,
-      selectedOperator: 'is',
+      selectedOperator: '==',
       selectedValue: null,
       filterCompleted: false,
     };
@@ -34,8 +34,8 @@ class FilterModal extends React.Component {
       },
     };
     this.operatorLabels = {
-      is: { value: '==', label: 'IS' },
-      isNot: { value: '!=', label: 'IS NOT' },
+      '==': { value: '==', label: 'IS' },
+      '!=': { value: '!=', label: 'IS NOT' },
     };
     this.valueLabels = {
       property: {
@@ -54,13 +54,17 @@ class FilterModal extends React.Component {
     const { getAppliedFilters } = this.props;
     this.state = {
       filters: getAppliedFilters(),
+      applyButtonDisabled: true,
     };
   }
 
   // on modal open
   onOpen = () => {
     const { getAppliedFilters } = this.props;
-    this.setState({ filters: getAppliedFilters() });
+    this.setState(
+      { filters: getAppliedFilters() },
+      this.onFiltersChange()
+    );
   }
 
   // when the user cancels adding new filters
@@ -68,15 +72,32 @@ class FilterModal extends React.Component {
     const { getAppliedFilters, hideFilterOptions } = this.props;
     hideFilterOptions();
     this.setState(
-      { filters: getAppliedFilters() },
+      {
+        filters: getAppliedFilters(),
+        applyButtonDisabled: true,
+      },
     );
   }
 
-  // returns filterOptions {ATTRIBUTE, FIELD, OPERATOR, VALUE} for a specific filter
-  getFilterOptions = (filterId) => {
+  // when the user presses the apply button
+  onApply = () => {
     const { filters } = this.state;
-    const filter = filters[filterId];
-    return filter.filterOptions;
+    const { applyFilters } = this.props;
+    this.setState(
+      { applyButtonDisabled: true },
+      () => applyFilters(filters)
+    );
+  }
+
+  // called whenever filters change and apply button should be enabled/disabled
+  onFiltersChange = () => {
+    this.setState({ applyButtonDisabled: !this.shouldApplyButtonBeEnabled() });
+  }
+
+  // returns a specific filter
+  getFilter = (filterId) => {
+    const { filters } = this.state;
+    return filters[filterId];
   }
 
   // returns possible values for ATTRIBUTE
@@ -106,17 +127,25 @@ class FilterModal extends React.Component {
   createNewFilter = () => {
     const { filters } = this.state;
     const index = filters.length.toString();
-    const filter = {
-      filterOptions: this.defaultFilterOptions,
-    };
-    const newState = update(this.state, { filters: { [index]: { $set: filter } } });
+    const filter = this.defaultFilterOptions;
+    filter.filterCompleted = false;
+    const newState = update(this.state, {
+      filters: {
+        [index]: {
+          $set: filter,
+        },
+      },
+      applyButtonDisabled: {
+        $set: true,
+      },
+    });
     this.setState(newState);
   }
 
   // remove a specific filter by id (position of filter in filters array)
   deleteFilterById = (filterId) => {
     const newState = update(this.state, { filters: { $splice: [[filterId, 1]] } });
-    this.setState(newState);
+    this.setState(newState, this.onFiltersChange);
   }
 
   // reset field and value dropdown for a specific filter
@@ -148,8 +177,7 @@ class FilterModal extends React.Component {
 
   // select value for VALUE dropdown for a specific filter
   selectValue = (filterId, newValue) => {
-    // const { selectedAttribute, selectedField } = this.state;
-    const { selectedAttribute, selectedField } = this.getFilterOptions(filterId);
+    const { selectedAttribute, selectedField } = this.getFilter(filterId);
     const values = this.valueLabels[selectedAttribute][selectedField];
     if (isPlainObject(values)) {
       const { label } = values[newValue];
@@ -163,20 +191,38 @@ class FilterModal extends React.Component {
     const newState = update(this.state, {
       filters: {
         [filterId]: {
-          filterOptions: {
-            [filterOptionName]: {
-              $set: newValue,
-            },
+          [filterOptionName]: {
+            $set: newValue,
           },
+          filterCompleted: { $set: (newValue != null) },
         },
       },
     });
-    this.setState(newState, callback);
+    this.setState(newState, () => {
+      if (callback) callback();
+      this.onFiltersChange();
+    });
+  }
+
+  // returns whether or not the apply button should be enabled
+  //   - Disabled when filters are not completed
+  //     or filters == appliedFilters (in AssessmentContainer)
+  shouldApplyButtonBeEnabled = () => {
+    const { filters } = this.state;
+    const { getAppliedFilters } = this.props;
+    const appliedFilters = getAppliedFilters();
+    if (isEqual(filters, appliedFilters)) return false;
+    let i = 0;
+    while (i < filters.length) {
+      if (!filters[i].filterCompleted) return false;
+      i += 1;
+    }
+    return true;
   }
 
   render() {
-    const { isOpen, applyFilterOptions, applicantType } = this.props;
-    const { filters } = this.state;
+    const { isOpen, applicantType } = this.props;
+    const { filters, applyButtonDisabled } = this.state;
     return (
       <div>
         <Modal
@@ -191,7 +237,7 @@ class FilterModal extends React.Component {
           <div className="filters margin-top-l margin-bottom-m">
             {filters.map((filter, index) => (
               <FilterSelect
-                currentFilterOptions={filter.filterOptions}
+                currentFilterOptions={filter}
                 key={index.toString()}
                 id={index.toString()}
                 deleteFilterById={this.deleteFilterById}
@@ -201,7 +247,6 @@ class FilterModal extends React.Component {
                 selectField={this.selectField}
                 selectOperator={this.selectOperator}
                 selectValue={this.selectValue}
-                getFilterOptions={this.getFilterOptions}
                 getFilterAttributeLabels={this.getFilterAttributeLabels}
                 getFilterFieldLabels={this.getFilterFieldLabels}
                 getFilterOperatorLabels={this.getFilterOperatorLabels}
@@ -216,8 +261,16 @@ class FilterModal extends React.Component {
           </div>
 
           <div className="confirm-buttons pos-abs pad-sides-l pad-ends-l">
-            <SecondaryButton text="Cancel" onClick={this.onCancel} />
-            <PrimaryButton text="Apply" onClick={() => applyFilterOptions(filters)} className="margin-left-xs" />
+            <SecondaryButton
+              text="Cancel"
+              onClick={this.onCancel}
+            />
+            <PrimaryButton
+              text="Apply"
+              onClick={this.onApply}
+              className="margin-left-xs"
+              disabled={applyButtonDisabled}
+            />
           </div>
         </Modal>
       </div>
@@ -237,7 +290,7 @@ FilterModal.propTypes = {
   // handler for applying filter options
   hideFilterOptions: PropTypes.func,
   // handler for applying filter options
-  applyFilterOptions: PropTypes.func,
+  applyFilters: PropTypes.func,
   // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string.isRequired,
   // additional styles

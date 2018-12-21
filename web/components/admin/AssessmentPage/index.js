@@ -16,7 +16,7 @@ const AssessmentPage = ({
   areFiltersApplied,
   getAppliedFilters,
   showFilterOptions,
-  applyFilterOptions,
+  applyFilters,
   hideFilterOptions,
   sortType,
   switchSortType,
@@ -39,7 +39,7 @@ const AssessmentPage = ({
       isOpen={isSelectingFilters}
       getAppliedFilters={getAppliedFilters}
       hideFilterOptions={hideFilterOptions}
-      applyFilterOptions={applyFilterOptions}
+      applyFilters={applyFilters}
       applicantType={applicantType}
     />
     <div className="applicant-view flex">
@@ -88,7 +88,7 @@ AssessmentPage.propTypes = {
   // handler for hiding filter options
   hideFilterOptions: PropTypes.func,
   // handler for applying filter options
-  applyFilterOptions: PropTypes.func,
+  applyFilters: PropTypes.func,
   // what to sort by
   sortType: PropTypes.string,
   // Sort type handler

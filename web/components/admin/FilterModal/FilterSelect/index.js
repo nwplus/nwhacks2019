@@ -1,27 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from '../../../input/select';
-import deleteIcon from '../../../../assets/delete-icon.svg'
+import deleteIcon from '../../../../assets/delete-icon.svg';
 
 class FilterSelect extends React.Component {
   // returns the filter expression derived from selected attribute, field, operator, and value
   // returned value is a string that's later passed into filtrex.js
-  compileFilter = () => {
-    const { selectedAttribute, selectedOperator, selectedField } = this.state;
-    let { selectedValue } = this.state;
-    if (selectedAttribute === 'property') {
-      // TODO error check;
-      if (selectedValue != null && typeof selectedValue === 'object') {
-        // if selectedValue is of form {label: ..., value: ...}, use the value
-        selectedValue = selectedValue.value;
-      }
-      return `${selectedField} ${selectedOperator} ${selectedValue}`;
-    }
-    if (selectedAttribute === 'tag') {
-      // TODO
-    }
-    return 'true';
-  }
 
   render() {
     const {
@@ -41,6 +25,7 @@ class FilterSelect extends React.Component {
     const fieldLabels = getFilterFieldLabels(selectedAttribute);
     const operatorLabels = getFilterOperatorLabels();
     const valueLabels = getFilterValueLabels(selectedAttribute, selectedField);
+    const noValuesAvailable = valueLabels.length === 0;
     return (
       <div className={`filter flex ${className}`}>
         <Select
@@ -71,15 +56,16 @@ class FilterSelect extends React.Component {
         <Select
           label=""
           name="value"
-          className="value"
+          className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
           onChange={option => selectValue(id, option.value)}
           options={valueLabels}
           value={selectedValue}
           placeholder="Enter or select a value"
           isSearchable
+          disabled={noValuesAvailable}
         />
-        <div onClick={() => deleteFilterById(id)}>
-          <img src={deleteIcon} alt="delete" className="delete clickable user-select-none" />
+        <div onClick={() => deleteFilterById(id)} className="delete">
+          <img src={deleteIcon} alt="delete" className="clickable user-select-none" />
         </div>
       </div>
     );
@@ -101,7 +87,6 @@ FilterSelect.propTypes = {
   selectField: PropTypes.func.isRequired,
   selectOperator: PropTypes.func.isRequired,
   selectValue: PropTypes.func.isRequired,
-  getFilterOptions: PropTypes.func.isRequired,
   getFilterAttributeLabels: PropTypes.func.isRequired,
   getFilterFieldLabels: PropTypes.func.isRequired,
   getFilterOperatorLabels: PropTypes.func.isRequired,

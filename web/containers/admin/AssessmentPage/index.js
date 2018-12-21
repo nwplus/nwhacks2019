@@ -14,7 +14,6 @@ class AssessmentPageContainer extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       applicantType: 'hacker',
       selectedApplicantId: null,
@@ -93,13 +92,31 @@ class AssessmentPageContainer extends React.Component {
   }
 
   // applies a new set of filters
-  applyFilterOptions = (newFilters) => {
+  applyFilters = (newFilters) => {
+    console.log(newFilters);
+    // this.compileFilter(newFilters);
     this.setState({
       isSelectingFilters: false,
-      areFiltersApplied: true,
+      areFiltersApplied: (newFilters.length > 0),
       appliedFilters: newFilters,
-      // TODO: add active filters
     });
+  }
+
+  compileFilter = () => {
+    const { selectedAttribute, selectedOperator, selectedField } = this.state;
+    let { selectedValue } = this.state;
+    if (selectedAttribute === 'property') {
+      // TODO error check;
+      if (selectedValue != null && typeof selectedValue === 'object') {
+        // if selectedValue is of form {label: ..., value: ...}, use the value
+        selectedValue = selectedValue.value;
+      }
+      return `${selectedField} ${selectedOperator} ${selectedValue}`;
+    }
+    if (selectedAttribute === 'tag') {
+      // TODO
+    }
+    return 'true';
   }
 
   switchSortType = (newSortType) => {
@@ -195,7 +212,7 @@ class AssessmentPageContainer extends React.Component {
           getAppliedFilters={this.getAppliedFilters}
           showFilterOptions={this.showFilterOptions}
           hideFilterOptions={this.hideFilterOptions}
-          applyFilterOptions={this.applyFilterOptions}
+          applyFilters={this.applyFilters}
           sortType={sortType}
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
