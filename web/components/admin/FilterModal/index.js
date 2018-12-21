@@ -105,15 +105,19 @@ class FilterModal extends React.Component {
   // creates a new filter
   createNewFilter = () => {
     const { filters } = this.state;
-    const id = Object.keys(filters).length.toString();
+    const index = filters.length.toString();
     const filter = {
       filterOptions: this.defaultFilterOptions,
-      id,
     };
-    const newState = update(this.state, { filters: { $merge: { [id]: filter } } });
+    const newState = update(this.state, { filters: { [index]: { $set: filter } } });
     this.setState(newState);
   }
 
+  // remove a specific filter by id (position of filter in filters array)
+  deleteFilterById = (filterId) => {
+    const newState = update(this.state, { filters: { $splice: [[filterId, 1]] } });
+    this.setState(newState);
+  }
 
   // reset field and value dropdown for a specific filter
   resetFieldAndValue = (filterId) => {
@@ -181,15 +185,16 @@ class FilterModal extends React.Component {
           onClose={this.onCancel}
           center
           classNames={{
-            modal: 'modal pad-sides-l pad-ends-l',
+            modal: 'modal pad-sides-l pad-top-l',
           }}>
           <h4 className="">{`Filter ${capitalizeFirstLetter(applicantType)}s`}</h4>
           <div className="filters margin-top-l margin-bottom-m">
-            {Object.values(filters).map(filter => (
+            {filters.map((filter, index) => (
               <FilterSelect
                 currentFilterOptions={filter.filterOptions}
-                key={filter.id}
-                id={filter.id}
+                key={index.toString()}
+                id={index.toString()}
+                deleteFilterById={this.deleteFilterById}
                 resetFieldAndValue={this.resetFieldAndValue}
                 resetValue={this.resetValue}
                 selectAttribute={this.selectAttribute}
@@ -205,14 +210,14 @@ class FilterModal extends React.Component {
             ))}
           </div>
 
-          <span className="add-filter clickable user-select-none m" onClick={this.createNewFilter}>
+          <div className="add-filter clickable user-select-none m" onClick={this.createNewFilter}>
             <img src={plusIcon} className="icon margin-right-xs" alt="plus-icon" />
             <div className="label">Add a filter</div>
-          </span>
+          </div>
 
           <div className="confirm-buttons pos-abs pad-sides-l pad-ends-l">
-            <PrimaryButton text="Apply" onClick={() => applyFilterOptions(filters)} />
-            <SecondaryButton text="Cancel" onClick={this.onCancel} className="margin-left-xs" />
+            <SecondaryButton text="Cancel" onClick={this.onCancel} />
+            <PrimaryButton text="Apply" onClick={() => applyFilterOptions(filters)} className="margin-left-xs" />
           </div>
         </Modal>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from '../../../input/select';
+import deleteIcon from '../../../../assets/delete-icon.svg'
 
 class FilterSelect extends React.Component {
   // returns the filter expression derived from selected attribute, field, operator, and value
@@ -27,6 +28,7 @@ class FilterSelect extends React.Component {
       className,
       getFilterAttributeLabels, getFilterFieldLabels, getFilterOperatorLabels, getFilterValueLabels,
       selectAttribute, selectField, selectOperator, selectValue,
+      deleteFilterById,
       currentFilterOptions, id,
     } = this.props;
     const {
@@ -41,7 +43,6 @@ class FilterSelect extends React.Component {
     const valueLabels = getFilterValueLabels(selectedAttribute, selectedField);
     return (
       <div className={`filter flex ${className}`}>
-        {id}
         <Select
           label=""
           name="attribute"
@@ -77,6 +78,9 @@ class FilterSelect extends React.Component {
           placeholder="Enter or select a value"
           isSearchable
         />
+        <div onClick={() => deleteFilterById(id)}>
+          <img src={deleteIcon} alt="delete" className="delete clickable user-select-none" />
+        </div>
       </div>
     );
   }
@@ -90,6 +94,7 @@ FilterSelect.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string.isRequired,
   currentFilterOptions: PropTypes.object.isRequired,
+  deleteFilterById: PropTypes.func.isRequired,
   resetFieldAndValue: PropTypes.func.isRequired,
   resetValue: PropTypes.func.isRequired,
   selectAttribute: PropTypes.func.isRequired,

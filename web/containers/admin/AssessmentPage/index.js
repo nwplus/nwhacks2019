@@ -19,7 +19,7 @@ class AssessmentPageContainer extends React.Component {
       applicantType: 'hacker',
       selectedApplicantId: null,
       isSelectingFilters: false,
-      appliedFilters: {},
+      appliedFilters: [],
       areFiltersApplied: false,
       sortType: 'timestamp',
       sortDirection: 'asc',
