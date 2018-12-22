@@ -212,10 +212,8 @@ class FilterModal extends React.Component {
     const { getAppliedFilters } = this.props;
     const appliedFilters = getAppliedFilters();
     if (isEqual(filters, appliedFilters)) return false;
-    let i = 0;
-    while (i < filters.length) {
+    for (let i = 0; i < filters.length; i += 1) {
       if (!filters[i].filterCompleted) return false;
-      i += 1;
     }
     return true;
   }

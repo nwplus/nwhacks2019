@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { isObject } from 'lodash';
+import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
 import applicantCollections from '../../../util/applicantCollections';
@@ -93,30 +95,65 @@ class AssessmentPageContainer extends React.Component {
 
   // applies a new set of filters
   applyFilters = (newFilters) => {
-    console.log(newFilters);
-    // this.compileFilter(newFilters);
+    const newFiltersExist = newFilters.length > 0;
     this.setState({
       isSelectingFilters: false,
-      areFiltersApplied: (newFilters.length > 0),
+      areFiltersApplied: newFiltersExist,
       appliedFilters: newFilters,
+      filterExpression: this.compileFilters(newFilters),
     });
   }
 
-  compileFilter = () => {
-    const { selectedAttribute, selectedOperator, selectedField } = this.state;
-    let { selectedValue } = this.state;
-    if (selectedAttribute === 'property') {
-      // TODO error check;
-      if (selectedValue != null && typeof selectedValue === 'object') {
-        // if selectedValue is of form {label: ..., value: ...}, use the value
-        selectedValue = selectedValue.value;
+  // handles filtering a list of applicants based on a filter expression
+  filterApplicants = (applicants) => {
+    const { filterExpression } = this.state;
+    if (filterExpression) {
+      applicants = applicants.filter((applicant) => {
+        // convert values in object to strings
+        applicant = convertObjectPrimitivesToStrings(applicant);
+        return filterExpression(applicant);
+      });
+    }
+    return applicants;
+  }
+
+  compileFilters = (filters) => {
+    const conditionals = [];
+    // 1. Build array of conditionals
+    for (let i = 0; i < filters.length; i += 1) {
+      const filter = filters[i];
+      const { selectedAttribute, selectedField, selectedOperator } = filter;
+      let { selectedValue } = filter;
+      if (selectedAttribute === 'property') {
+        if (isObject(selectedValue)) {
+          // selectedValue is of form {label: ..., value: ...}, we only want value
+          selectedValue = selectedValue.value;
+        }
+        const conditional = `applicant.${selectedField}${selectedOperator}"${selectedValue}"`;
+        conditionals.push(conditional);
+      } else if (selectedAttribute === 'tag') {
+        // TODO
       }
-      return `${selectedField} ${selectedOperator} ${selectedValue}`;
     }
-    if (selectedAttribute === 'tag') {
-      // TODO
+    // 2. Combine array of condtionals into final conditional
+    let finalConditional = '';
+    for (let i = 0; i < conditionals.length; i += 1) {
+      const conditional = conditionals[i];
+      if (finalConditional.length === 0) {
+        finalConditional += conditional;
+      } else {
+        finalConditional += '&&' + conditional;
+      }
     }
-    return 'true';
+    // 3. Build and return a filter expression based on final conditional
+    if (finalConditional.length > 0) {
+      // eslint-disable-next-line no-new-func
+      return new Function(
+        'applicant', // args
+        `return ${finalConditional};` // body
+      );
+    }
+    return null; // filter expression not defined if no filters exist
   }
 
   switchSortType = (newSortType) => {
@@ -197,7 +234,8 @@ class AssessmentPageContainer extends React.Component {
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
-    let sortedApplicants = this.sortApplicants(sortType, applicants);
+    const filteredApplicants = this.filterApplicants(applicants);
+    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
     if (sortDirection === 'desc') sortedApplicants = applicants.reverse();
     return (
       <div>
