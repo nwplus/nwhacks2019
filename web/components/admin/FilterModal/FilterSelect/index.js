@@ -4,9 +4,6 @@ import { Select } from '../../../input/select';
 import deleteIcon from '../../../../assets/delete-icon.svg';
 
 class FilterSelect extends React.Component {
-  // returns the filter expression derived from selected attribute, field, operator, and value
-  // returned value is a string that's later passed into filtrex.js
-
   render() {
     const {
       className,
@@ -26,49 +23,97 @@ class FilterSelect extends React.Component {
     const operatorLabels = getFilterOperatorLabels();
     const valueLabels = getFilterValueLabels(selectedAttribute, selectedField);
     const noValuesAvailable = valueLabels.length === 0;
-    return (
-      <div className={`filter flex ${className}`}>
-        <Select
-          label=""
-          name="attribute"
-          className="attribute"
-          onChange={option => selectAttribute(id, option.value)}
-          options={Object.values(attributeLabels)}
-          value={attributeLabels[selectedAttribute]} />
-        <Select
-          label=""
-          name="field"
-          className="field"
-          onChange={option => selectField(id, option.value)}
-          options={Object.values(fieldLabels)}
-          value={fieldLabels[selectedField] || ''}
-          placeholder="Enter or select a field"
-          isSearchable
-        />
-        <Select
-          label=""
-          name="operator"
-          className="operator"
-          onChange={option => selectOperator(id, option.value)}
-          options={Object.values(operatorLabels)}
-          value={operatorLabels[selectedOperator]}
-        />
-        <Select
-          label=""
-          name="value"
-          className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
-          onChange={option => selectValue(id, option.value)}
-          options={Object.values(valueLabels)}
-          value={valueLabels[selectedValue]}
-          placeholder="Enter or select a value"
-          isSearchable
-          disabled={noValuesAvailable}
-        />
-        <div onClick={() => deleteFilterById(id)} className="delete">
-          <img src={deleteIcon} alt="delete" className="clickable user-select-none" />
+    if (selectedAttribute === 'property') {
+      return (
+        <div className={`filter flex ${className}`}>
+          <Select
+            label=""
+            name="attribute"
+            className="attribute"
+            onChange={option => selectAttribute(id, option.value)}
+            options={Object.values(attributeLabels)}
+            value={attributeLabels[selectedAttribute]} />
+          <Select
+            label=""
+            name="field"
+            className="field"
+            onChange={option => selectField(id, option.value)}
+            options={Object.values(fieldLabels)}
+            value={fieldLabels[selectedField]}
+            placeholder="Enter or select a field"
+            isSearchable
+          />
+          <Select
+            label=""
+            name="operator"
+            className="operator"
+            onChange={option => selectOperator(id, option.value)}
+            options={Object.values(operatorLabels)}
+            value={operatorLabels[selectedOperator]}
+          />
+          <Select
+            label=""
+            name="value"
+            className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
+            onChange={option => selectValue(id, option.value)}
+            options={Object.values(valueLabels)}
+            value={valueLabels[selectedValue]}
+            placeholder="Enter or select a value"
+            isSearchable
+            disabled={noValuesAvailable}
+          />
+          <div onClick={() => deleteFilterById(id)} className="delete">
+            <img src={deleteIcon} alt="delete" className="clickable user-select-none" />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    if (selectedAttribute === 'tag') {
+      return (
+        <div className={`filter flex ${className}`}>
+          <Select
+            label=""
+            name="attribute"
+            className="attribute"
+            onChange={option => selectAttribute(id, option.value)}
+            options={Object.values(attributeLabels)}
+            value={attributeLabels[selectedAttribute]} />
+          <Select
+            label=""
+            name="operator"
+            className="operator"
+            onChange={option => selectOperator(id, option.value)}
+            options={Object.values(operatorLabels)}
+            value={operatorLabels[selectedOperator]}
+          />
+          <Select
+            label=""
+            name="field"
+            className="field tag"
+            onChange={option => selectField(id, option.value)}
+            options={Object.values(fieldLabels)}
+            value={fieldLabels[selectedField]}
+            placeholder="Enter or select a field"
+            isSearchable
+          />
+          {/* <Select
+            label=""
+            name="value"
+            className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
+            onChange={option => selectValue(id, option.value)}
+            options={Object.values(valueLabels)}
+            value={valueLabels[selectedValue]}
+            placeholder="Enter or select a value"
+            isSearchable
+            disabled={noValuesAvailable}
+          /> */}
+          <div onClick={() => deleteFilterById(id)} className="delete">
+            <img src={deleteIcon} alt="delete" className="clickable user-select-none" />
+          </div>
+        </div>
+      );
+    }
+    return null;
   }
 }
 

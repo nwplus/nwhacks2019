@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import update from 'immutability-helper';
+import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { isEqual } from 'lodash';
 import { capitalizeFirstLetter } from '../../../util/string';
 import { PrimaryButton, SecondaryButton } from '../../input/buttons';
@@ -9,10 +12,16 @@ import FilterSelect from './FilterSelect';
 import plusIcon from '../../../assets/plus-icon.svg';
 
 class FilterModal extends React.Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props);
     // the default filterOptions for a single FilterSelect
     // FILTER = ATTRIBUTE + FIELD + OPERATOR + VALUE
+    //   - ATTRIBUTE is one of 'property' or 'tags'
+    //   - VALUE is always 'true' when ATTRIBUTE = 'tag'
     this.defaultFilterOptions = {
       selectedAttribute: 'property',
       selectedField: null,
@@ -67,6 +76,12 @@ class FilterModal extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { store } = this.context;
+    const { firestore } = store;
+    firestore.get('todos');
+  }
+
   // on modal open
   onOpen = () => {
     const { getAppliedFilters } = this.props;
@@ -118,7 +133,15 @@ class FilterModal extends React.Component {
       return this.fieldLabels[selectedAttribute];
     }
     if (selectedAttribute === 'tag') {
-      // GET TAGS
+      let { firestore: { data: { tags } } } = this.props;
+      tags = Object.keys(tags);
+      const fieldLabels = {};
+      for (let i = 0; i < tags.length; i += 1) {
+        const tag = tags[i];
+        const flattenedName = 'tag_' + tag;
+        fieldLabels[flattenedName] = { value: flattenedName, label: tag };
+      }
+      return fieldLabels;
     }
     return null;
   };
@@ -133,7 +156,7 @@ class FilterModal extends React.Component {
         return this.valueLabels[selectedAttribute][selectedField];
       }
       if (selectedAttribute === 'tag') {
-        return ['true'];
+        return { true: { value: 'true', label: 'true' } };
       }
     }
     return [];
@@ -183,7 +206,13 @@ class FilterModal extends React.Component {
 
   // select value for FIELD dropdown for a specific filter
   selectField = (filterId, newValue) => {
-    this.updateFilterOption(filterId, 'selectedField', newValue, () => this.resetValue(filterId));
+    const { selectedAttribute } = this.getFilter(filterId);
+    if (selectedAttribute === 'property') {
+      this.updateFilterOption(filterId, 'selectedField', newValue, () => this.resetValue(filterId));
+    } else if (selectedAttribute === 'tag') {
+      // instead of resetting VALUE, set VALUE to 'true' when ATTRIBUTE = tag
+      this.updateFilterOption(filterId, 'selectedField', newValue, () => this.selectValue(filterId, 'true'));
+    }
   }
 
   // select value for OPERATOR dropdown for a specific filter
@@ -215,8 +244,7 @@ class FilterModal extends React.Component {
   }
 
   // returns whether or not the apply button should be enabled
-  //   - Disabled when filters are not completed
-  //     or filters == appliedFilters (in AssessmentContainer)
+  // false when filters are unchanged or not completed
   shouldApplyButtonBeEnabled = () => {
     const { filters } = this.state;
     const { getAppliedFilters } = this.props;
@@ -303,7 +331,15 @@ FilterModal.propTypes = {
   applicantType: PropTypes.string.isRequired,
   // additional styles
   className: PropTypes.string,
-  // handler for switching sort type
+  firestore: PropTypes.object,
 };
 
-export default FilterModal;
+export default compose(
+  firebaseConnect(),
+  firestoreConnect(['tags']),
+  connect((state) => {
+    return {
+      firestore: state.firestore,
+    };
+  }),
+)(FilterModal);

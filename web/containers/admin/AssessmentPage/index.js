@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { isObject } from 'lodash';
+import flat from 'flat';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
@@ -109,6 +109,8 @@ class AssessmentPageContainer extends React.Component {
     const { filterExpression } = this.state;
     if (filterExpression) {
       applicants = applicants.filter((applicant) => {
+        // flatten applicant object
+        applicant = flat(applicant, { delimiter: '_' });
         // convert values in object to strings
         applicant = convertObjectPrimitivesToStrings(applicant);
         return filterExpression(applicant);
@@ -117,18 +119,15 @@ class AssessmentPageContainer extends React.Component {
     return applicants;
   }
 
+  // returns filter expression generated from filters
   compileFilters = (filters) => {
     const conditionals = [];
     // 1. Build array of conditionals
     for (let i = 0; i < filters.length; i += 1) {
       const filter = filters[i];
-      const { selectedAttribute, selectedField, selectedOperator, selectedValue } = filter;
-      if (selectedAttribute === 'property') {
-        const conditional = `applicant.${selectedField}${selectedOperator}"${selectedValue}"`;
-        conditionals.push(conditional);
-      } else if (selectedAttribute === 'tag') {
-        // TODO
-      }
+      const { selectedField, selectedOperator, selectedValue } = filter;
+      const conditional = `applicant.${selectedField}${selectedOperator}"${selectedValue}"`;
+      conditionals.push(conditional);
     }
     // 2. Combine array of condtionals into final conditional
     let finalConditional = '';
