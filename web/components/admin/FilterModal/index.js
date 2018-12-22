@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import update from 'immutability-helper';
-import { isPlainObject, isEqual } from 'lodash';
+import { isEqual } from 'lodash';
 import { capitalizeFirstLetter } from '../../../util/string';
 import { PrimaryButton, SecondaryButton } from '../../input/buttons';
 import FilterSelect from './FilterSelect';
@@ -22,7 +22,7 @@ class FilterModal extends React.Component {
     };
     this.attributeLabels = {
       property: { value: 'property', label: 'Property' },
-      // tag: { value: 'tag', label: 'Tag' },
+      tag: { value: 'tag', label: 'Tag' },
     };
     this.fieldLabels = {
       property: {
@@ -39,17 +39,26 @@ class FilterModal extends React.Component {
     };
     this.valueLabels = {
       property: {
-        education: ['High School', 'Undergraduate', 'Graduate'],
-        isDesigner: ['true', 'false'],
-        isDeveloper: ['true', 'false'],
-        isFirstHackathon: ['true', 'false'],
+        education: {
+          'High School': { value: 'High School', label: 'High School' },
+          Undergraduate: { value: 'Undergraduate', label: 'Undergraduate' },
+          Graduate: { value: 'Graduate', label: 'Graduate' },
+        },
+        isDesigner: {
+          true: { value: 'true', label: 'true' },
+        },
+        isDeveloper: {
+          true: { value: 'true', label: 'true' },
+        },
+        isFirstHackathon: {
+          true: { value: 'true', label: 'true' },
+        },
         travel: {
           0: { value: '0', label: 'no reimbursement' },
           1: { value: '1', label: 'wants reimbursement' },
           2: { value: '2', label: 'wants bus seat' },
         },
       },
-      // tags : {}, // TODO, dynamically load
     };
     const { getAppliedFilters } = this.props;
     this.state = {
@@ -104,21 +113,28 @@ class FilterModal extends React.Component {
   getFilterAttributeLabels = () => this.attributeLabels;
 
   // returns possible values for FIELD given a selection of ATTRIBUTE
-  getFilterFieldLabels = selectedAttribute => (
-    selectedAttribute ? this.fieldLabels[selectedAttribute] : []
-  );
+  getFilterFieldLabels = (selectedAttribute) => {
+    if (selectedAttribute === 'property') {
+      return this.fieldLabels[selectedAttribute];
+    }
+    if (selectedAttribute === 'tag') {
+      // GET TAGS
+    }
+    return null;
+  };
 
   // returns possible values for OPERATOR
   getFilterOperatorLabels = () => this.operatorLabels;
 
-  // returns possible values for VALUES given a selection of ATTRIBUTE and FIELD
+  // returns array of possible values for VALUES given a selection of ATTRIBUTE and FIELD
   getFilterValueLabels = (selectedAttribute, selectedField) => {
-    if (selectedAttribute && selectedField) {
-      const values = this.valueLabels[selectedAttribute][selectedField];
-      if (Array.isArray(values)) {
+    if (selectedField) {
+      if (selectedAttribute === 'property') {
         return this.valueLabels[selectedAttribute][selectedField];
       }
-      return Object.values(values);
+      if (selectedAttribute === 'tag') {
+        return ['true'];
+      }
     }
     return [];
   }
@@ -177,12 +193,6 @@ class FilterModal extends React.Component {
 
   // select value for VALUE dropdown for a specific filter
   selectValue = (filterId, newValue) => {
-    const { selectedAttribute, selectedField } = this.getFilter(filterId);
-    const values = this.valueLabels[selectedAttribute][selectedField];
-    if (isPlainObject(values)) {
-      const { label } = values[newValue];
-      newValue = { label, value: newValue };
-    }
     this.updateFilterOption(filterId, 'selectedValue', newValue, null);
   }
 

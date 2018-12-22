@@ -80,6 +80,9 @@ export class Select extends React.Component {
       inputProps.value = { value, label: value };
     }
 
+    // react-select only recognizes null as meaning "no value"
+    if (value === undefined) inputProps.value = null;
+
     let placeholderText = placeholder;
     if (!placeholder) {
       if (isSearchable || allowNewOption) {

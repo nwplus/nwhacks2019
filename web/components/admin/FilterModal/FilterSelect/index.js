@@ -58,8 +58,8 @@ class FilterSelect extends React.Component {
           name="value"
           className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
           onChange={option => selectValue(id, option.value)}
-          options={valueLabels}
-          value={selectedValue}
+          options={Object.values(valueLabels)}
+          value={valueLabels[selectedValue]}
           placeholder="Enter or select a value"
           isSearchable
           disabled={noValuesAvailable}
