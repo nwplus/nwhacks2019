@@ -38,6 +38,7 @@ class FilterModal extends React.Component {
         education: { value: 'education', label: 'education level' },
         isDesigner: { value: 'isDesigner', label: 'designer?' },
         isDeveloper: { value: 'isDeveloper', label: 'developer?' },
+        isHardware: { value: 'isHardware', label: 'hardware?' },
         isFirstHackathon: { value: 'isFirstHackathon', label: 'first hackathon?' },
         travel: { value: 'travel', label: 'travel' },
       },
@@ -57,6 +58,9 @@ class FilterModal extends React.Component {
           true: { value: 'true', label: 'true' },
         },
         isDeveloper: {
+          true: { value: 'true', label: 'true' },
+        },
+        isHardware: {
           true: { value: 'true', label: 'true' },
         },
         isFirstHackathon: {
@@ -153,7 +157,7 @@ class FilterModal extends React.Component {
   getFilterValueLabels = (selectedAttribute, selectedField) => {
     if (selectedField) {
       if (selectedAttribute === 'property') {
-        return this.valueLabels[selectedAttribute][selectedField];
+        return this.valueLabels[selectedAttribute][selectedField] || {};
       }
       if (selectedAttribute === 'tag') {
         return { true: { value: 'true', label: 'true' } };

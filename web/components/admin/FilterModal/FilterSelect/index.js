@@ -39,8 +39,9 @@ class FilterSelect extends React.Component {
             className="field"
             onChange={option => selectField(id, option.value)}
             options={Object.values(fieldLabels)}
-            value={fieldLabels[selectedField]}
+            value={fieldLabels[selectedField] || selectedField}
             placeholder="Enter or select a field"
+            allowNewOption
             isSearchable
           />
           <Select
@@ -57,9 +58,10 @@ class FilterSelect extends React.Component {
             className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
             onChange={option => selectValue(id, option.value)}
             options={Object.values(valueLabels)}
-            value={valueLabels[selectedValue]}
+            value={valueLabels[selectedValue] || selectedValue}
             placeholder="Enter or select a value"
             isSearchable
+            allowNewOption
             disabled={noValuesAvailable}
           />
           <div onClick={() => deleteFilterById(id)} className="delete">
@@ -96,17 +98,6 @@ class FilterSelect extends React.Component {
             placeholder="Enter or select a field"
             isSearchable
           />
-          {/* <Select
-            label=""
-            name="value"
-            className={`value ${noValuesAvailable ? 'opacity-40' : ''}`}
-            onChange={option => selectValue(id, option.value)}
-            options={Object.values(valueLabels)}
-            value={valueLabels[selectedValue]}
-            placeholder="Enter or select a value"
-            isSearchable
-            disabled={noValuesAvailable}
-          /> */}
           <div onClick={() => deleteFilterById(id)} className="delete">
             <img src={deleteIcon} alt="delete" className="clickable user-select-none" />
           </div>
