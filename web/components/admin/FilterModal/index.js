@@ -142,7 +142,7 @@ class FilterModal extends React.Component {
       const fieldLabels = {};
       for (let i = 0; i < tags.length; i += 1) {
         const tag = tags[i];
-        const flattenedName = 'tag_' + tag;
+        const flattenedName = 'tags_' + tag;
         fieldLabels[flattenedName] = { value: flattenedName, label: tag };
       }
       return fieldLabels;
