@@ -50,7 +50,7 @@ class FilterModal extends React.Component {
     this.valueLabels = {
       property: {
         education: {
-          'High School': { value: 'High School', label: 'High School' },
+          'High school': { value: 'High school', label: 'High school' },
           Undergraduate: { value: 'Undergraduate', label: 'Undergraduate' },
           Graduate: { value: 'Graduate', label: 'Graduate' },
         },
