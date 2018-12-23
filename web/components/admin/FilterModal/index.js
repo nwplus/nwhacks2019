@@ -80,12 +80,6 @@ class FilterModal extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { store } = this.context;
-    const { firestore } = store;
-    firestore.get('todos');
-  }
-
   // on modal open
   onOpen = () => {
     const { getAppliedFilters } = this.props;
