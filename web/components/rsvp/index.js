@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { withFirebase } from 'react-redux-firebase';
 import Axios from 'axios';
+import PropTypes from 'prop-types';
 
 import { TextInput } from '../input/text';
 import { Select } from '../input/select';
@@ -12,26 +13,29 @@ import { dietRestrictions } from './dietRestrictions';
 
 import praise from '../../assets/emoji/praise.svg';
 import sparkle from '../../assets/emoji/sparkle.svg';
+import celebrate from '../../assets/emoji/celebrate.svg';
+
 import rsvpSuccessGraphic from '../../assets/rsvpSuccess.svg';
 
 class RSVP extends React.Component {
-
   constructor(props) {
     super(props);
-    this.state = { 
-      firstName: "",
+    this.state = {
+      firstName: '',
       isIDValid: true,
       isSubmitted: false,
-      emergencyContactName: "",
-      emergencyContactNumber: "",
-      tShirtSize: "",
-      dietRestriction: "",
-      wouldLikeToSee: "",
+      emergencyContactName: '',
+      emergencyContactNumber: '',
+      tShirtSize: '',
+      dietRestriction: '',
+      wouldLikeToSee: '',
     };
   }
 
-  componentDidMount () {
-    const { id } = this.props.match.params;
+  componentDidMount() {
+    const { match } = this.props;
+    const { params } = match;
+    const { id } = params;
     const { firebase } = this.props;
 
     Axios.post(
@@ -40,26 +44,29 @@ class RSVP extends React.Component {
       { headers: { 'Content-Type': 'text/plain' } }
     ).then((res) => {
       if (res.status === 200) {
-        if (res.data === "") {
+        if (res.data === '') {
           console.log('Did not find ID');
-          this.setState({validID: false});
+          this.setState({ isIDValid: false });
         } else {
-          console.log("Found ID: " + res.data);
-          this.setState({validID: true});
-          this.setState({firstName: res.data});
+          console.log('Found ID: ' + res.data);
+          this.setState({ isIDValid: true });
+          this.setState({ firstName: res.data });
         }
       }
-    })
+    });
   }
 
-  render () {
-    if (!this.state.isIDValid) return (<Redirect to="/page_not_found" />);
-    if (this.state.isSubmitted) return (
-      <div className="pad-nav fill-min-height flex dir-col ai-center jc-center pad-sides-l">
+  render() {
+    const { isIDValid, isSubmitted } = this.state;
+
+    if (!isIDValid) return (<Redirect to="/page_not_found" />);
+    if (isSubmitted) {
+      return (
+        <div className="pad-nav fill-min-height flex dir-col ai-center jc-center pad-sides-l">
           <img alt="Success!" className="pad-ends-s" max-height="25%" src={rsvpSuccessGraphic} />
           <br />
           <h2 className="text-align-center">Thanks for confirming your attendance! <img className="emoji" alt="✨" src={sparkle} /></h2>
-          <p className="text-align-center" style={{ maxWidth: 680 }}>You’ve successfully secured your spot. 
+          <p className="text-align-center" style={{ maxWidth: 680 }}>You’ve successfully secured your spot.
             We’ll see you bright and early on January 26th. We’re so excited to have you at nwHacks!
           </p>
           <br />
@@ -67,38 +74,52 @@ class RSVP extends React.Component {
             <SecondaryButton text="<- Take me back home" />
           </Link>
         </div>
-    );
+      );
+    }
 
     const { firebase } = this.props;
-    const { id } = this.props.match.params;
-    
+    const { match } = this.props;
+    const { params } = match;
+    const { id } = params;
+    const {
+      firstName,
+      emergencyContactName,
+      emergencyContactNumber,
+      tShirtSize,
+      dietRestriction,
+      wouldLikeToSee,
+    } = this.state;
+
     return (
       <div className="pad-nav application fill-width flex jc-center">
         <div className="pad-top-mega pad-bottom-tera">
-          <h2>Hi {this.state.firstName}, please RSVP <img className="emoji" alt="🙌" src={praise} /></h2>
-          <p>Congrats, we choose you! 🎉 Please complete this form by 11:59PM on 
-            January 5th, 2019 so we can get straight to scheduling you for nwHacks 2019. 
-            If we don’t hear from you by the deadline, your spot will be given to 
-            someone else and you will be moved to our waitlist.</p>
+          <h2>Hi {firstName}, please RSVP <img className="emoji" alt="🙌" src={praise} /></h2>
+          <p>Congrats, we choose you! <img className="emoji" alt="🎉" src={celebrate} /> Please complete this form by 11:59PM on
+            January 5th, 2019 so we can get straight to scheduling you for nwHacks 2019.
+            If we don’t hear from you by the deadline, your spot will be given to
+            someone else and you will be moved to our waitlist.
+          </p>
           <TextInput
             label="What is the name of your emergency contact?"
             name="emergencyContactName"
             className="margin-top-mega margin-bottom-xxl margin-ends-giga"
             placeholder="Enter emergency contact name"
-            onChange={newEmergencyContactName => this.setState({ emergencyContactName: newEmergencyContactName })}
+            onChange={newEmergencyContactName => this.setState({
+              emergencyContactName: newEmergencyContactName })}
             // value={emergencyContactName}
             // onBlur={() => this.setFieldAsBlurred('githubLink')}
-            //error={this.getErrorIfBlurred('githubLink')}
+            // error={this.getErrorIfBlurred('githubLink')}
           />
           <TextInput
             label="What is the number of your emergency contact?"
             name="emergencyContactNumber"
             className="margin-top-mega margin-bottom-xxl margin-ends-giga"
             placeholder="123-456-7890"
-            onChange={newEmergencyContactNumber => this.setState({ emergencyContactNumber: newEmergencyContactNumber })}
-            //value={emergencyContactNumber}
-            //onBlur={() => this.setFieldAsBlurred('githubLink')}
-            //error={this.getErrorIfBlurred('githubLink')}
+            onChange={newEmergencyContactNumber => this.setState({
+              emergencyContactNumber: newEmergencyContactNumber })}
+            // value={emergencyContactNumber}
+            // onBlur={() => this.setFieldAsBlurred('githubLink')}
+            // error={this.getErrorIfBlurred('githubLink')}
           />
           <Select
             options={tShirtSizes}
@@ -106,9 +127,9 @@ class RSVP extends React.Component {
             label="What is your t-shirt size? (note: these are unisex clothing sizes)"
             className="margin-top-mega margin-bottom-xxl"
             onChange={({ value: newTShirtSize }) => this.setState({ tShirtSize: newTShirtSize })}
-            //value={tShirtSize}
-            //onBlur={() => this.setFieldAsBlurred('source')}
-            //error={this.getErrorIfBlurred('source')}
+            // value={tShirtSize}
+            // onBlur={() => this.setFieldAsBlurred('source')}
+            // error={this.getErrorIfBlurred('source')}
           />
           <Select
             options={dietRestrictions}
@@ -116,10 +137,11 @@ class RSVP extends React.Component {
             label="Do you have any dietary restrictions or allergies?"
             placeholder="Enter an option or choose from the dropdown"
             className="margin-top-mega margin-bottom-xxl"
-            onChange={({ value: newDietRestriction }) => this.setState({ dietRestriction: newDietRestriction })}
-            //value={dietRestriction}
-            //onBlur={() => this.setFieldAsBlurred('source')}
-            //error={this.getErrorIfBlurred('source')}
+            onChange={({ value: newDietRestriction }) => this.setState({
+              dietRestriction: newDietRestriction })}
+            // value={dietRestriction}
+            // onBlur={() => this.setFieldAsBlurred('source')}
+            // error={this.getErrorIfBlurred('source')}
             isSearchable
             allowNewOption
           />
@@ -128,37 +150,37 @@ class RSVP extends React.Component {
             name="ideas"
             className="margin-top-mega margin-bottom-xxl margin-ends-giga"
             placeholder="Enter ideas here"
-            onChange={newIdea => this.setState({ wouldLikeToSee: newIdea })}
-            //value={githubLink}
-            //onBlur={() => this.setFieldAsBlurred('githubLink')}
-            //error={this.getErrorIfBlurred('githubLink')}
+            onChange={newIdea => this.setState({
+              wouldLikeToSee: newIdea })}
+            // value={githubLink}
+            // onBlur={() => this.setFieldAsBlurred('githubLink')}
+            // error={this.getErrorIfBlurred('githubLink')}
           />
           <PrimaryButton
             disabled={
-              this.state.emergencyContactName === "" || 
-              this.state.emergencyContactNumber === "" ||
-              this.state.tShirtSize === "" ||
-              this.state.dietRestriction === ""}
+              emergencyContactName === ''
+              || emergencyContactNumber === ''
+              || tShirtSize === ''
+              || dietRestriction === ''}
             text="Confirm my attendance"
-            onClick={() => 
-              Axios.post(
-                firebase.nwUtils.getFunctionUrl('submitRSVP'),
-                { id: id,
-                  rsvp: {
-                    emergencyContactName: this.state.emergencyContactName, 
-                    emergencyContactNumber: this.state.emergencyContactNumber,
-                    tShirtSize: this.state.tShirtSize,
-                    dietRestriction: this.state.dietRestriction,
-                    wouldLikeToSee: this.state.wouldLikeToSee,
-                  }                  
+            onClick={() => Axios.post(
+              firebase.nwUtils.getFunctionUrl('submitRSVP'),
+              { id,
+                rsvp: {
+                  emergencyContactName,
+                  emergencyContactNumber,
+                  tShirtSize,
+                  dietRestriction,
+                  wouldLikeToSee,
                 },
-                { headers: { 'Content-Type': 'text/plain' } }
-              ).then((res) => {
-                if (res.status === 200) {
-                  this.setState({isSubmitted: true});
-                  console.log("Submitted RSVP!");
-                }
-              })
+              },
+              { headers: { 'Content-Type': 'text/plain' } }
+            ).then((res) => {
+              if (res.status === 200) {
+                this.setState({ isSubmitted: true });
+                console.log('Submitted RSVP!');
+              }
+            })
             }
           />
         </div>
@@ -166,5 +188,10 @@ class RSVP extends React.Component {
     );
   }
 }
+
+RSVP.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
 
 export default withFirebase(RSVP);
