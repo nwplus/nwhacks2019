@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import flat from 'flat';
+import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
 import applicantCollections from '../../../util/applicantCollections';
@@ -14,10 +16,12 @@ class AssessmentPageContainer extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       applicantType: 'hacker',
       selectedApplicantId: null,
+      isSelectingFilters: false,
+      appliedFilters: [],
+      areFiltersApplied: false,
       sortType: 'timestamp',
       sortDirection: 'asc',
     };
@@ -29,6 +33,12 @@ class AssessmentPageContainer extends React.Component {
 
   componentWillUnmount() {
     this.unloadApplicants();
+  }
+
+  // returns the currently applied filters
+  getAppliedFilters = () => {
+    const { appliedFilters } = this.state;
+    return appliedFilters;
   }
 
   // handles selecting an applicant
@@ -67,6 +77,77 @@ class AssessmentPageContainer extends React.Component {
     }, () => {
       this.loadApplicants(); // add listener for new applicantType's collections
     });
+  }
+
+  // shows filter modal
+  showFilterOptions = () => {
+    this.setState({
+      isSelectingFilters: true,
+    });
+  }
+
+  // hides filter modal
+  hideFilterOptions = () => {
+    this.setState({
+      isSelectingFilters: false,
+    });
+  }
+
+  // applies a new set of filters
+  applyFilters = (newFilters) => {
+    const newFiltersExist = newFilters.length > 0;
+    this.setState({
+      isSelectingFilters: false,
+      areFiltersApplied: newFiltersExist,
+      appliedFilters: newFilters,
+      filterExpression: this.compileFilters(newFilters),
+    });
+  }
+
+  // handles filtering a list of applicants based on a filter expression
+  filterApplicants = (applicants) => {
+    const { filterExpression } = this.state;
+    if (filterExpression) {
+      applicants = applicants.filter((applicant) => {
+        // flatten applicant object
+        applicant = flat(applicant, { delimiter: '_' });
+        // convert values in object to strings
+        applicant = convertObjectPrimitivesToStrings(applicant);
+        return filterExpression(applicant);
+      });
+    }
+    return applicants;
+  }
+
+  // returns filter expression generated from filters
+  compileFilters = (filters) => {
+    const conditionals = [];
+    // 1. Build array of conditionals
+    for (let i = 0; i < filters.length; i += 1) {
+      const filter = filters[i];
+      const { selectedField, selectedOperator, selectedValue } = filter;
+      const conditional = `applicant.${selectedField}${selectedOperator}"${selectedValue}"`;
+      conditionals.push(conditional);
+    }
+    // 2. Combine array of condtionals into final conditional
+    let finalConditional = '';
+    for (let i = 0; i < conditionals.length; i += 1) {
+      const conditional = conditionals[i];
+      if (finalConditional.length === 0) {
+        finalConditional += conditional;
+      } else {
+        finalConditional += '&&' + conditional;
+      }
+    }
+    // 3. Build and return a filter expression based on final conditional
+    if (finalConditional.length > 0) {
+      // eslint-disable-next-line no-new-func
+      return new Function(
+        'applicant', // args
+        `return ${finalConditional};` // body
+      );
+    }
+    return null; // filter expression not defined if no filters exist
   }
 
   switchSortType = (newSortType) => {
@@ -133,6 +214,8 @@ class AssessmentPageContainer extends React.Component {
     const {
       applicantType,
       selectedApplicantId,
+      isSelectingFilters,
+      areFiltersApplied,
       sortType,
       sortDirection,
     } = this.state;
@@ -145,8 +228,9 @@ class AssessmentPageContainer extends React.Component {
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
-    let sortedApplicants = this.sortApplicants(sortType, applicants);
-    if (sortDirection === 'desc') sortedApplicants = applicants.reverse();
+    const filteredApplicants = this.filterApplicants(applicants);
+    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
+    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
     return (
       <div>
         <AssessmentPage
@@ -155,6 +239,12 @@ class AssessmentPageContainer extends React.Component {
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
+          isSelectingFilters={isSelectingFilters}
+          areFiltersApplied={areFiltersApplied}
+          getAppliedFilters={this.getAppliedFilters}
+          showFilterOptions={this.showFilterOptions}
+          hideFilterOptions={this.hideFilterOptions}
+          applyFilters={this.applyFilters}
           sortType={sortType}
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}

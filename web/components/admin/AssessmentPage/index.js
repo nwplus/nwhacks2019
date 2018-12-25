@@ -4,6 +4,7 @@ import ApplicantList from '../ApplicantList';
 import ApplicantInfo from '../ApplicantInfo';
 import ScorePanel from './ScorePanel';
 import Toolbar from '../Toolbar';
+import FilterModal from '../FilterModal';
 
 const AssessmentPage = ({
   applicantType,
@@ -11,6 +12,12 @@ const AssessmentPage = ({
   selectedApplicantId,
   switchApplicantType,
   onApplicantClick,
+  isSelectingFilters,
+  areFiltersApplied,
+  getAppliedFilters,
+  showFilterOptions,
+  applyFilters,
+  hideFilterOptions,
   sortType,
   switchSortType,
   switchSortDirection,
@@ -21,10 +28,19 @@ const AssessmentPage = ({
     <Toolbar
       applicantType={applicantType}
       switchApplicantType={switchApplicantType}
+      areFiltersApplied={areFiltersApplied}
+      showFilterOptions={showFilterOptions}
       sortType={sortType}
       switchSortType={switchSortType}
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
+    />
+    <FilterModal
+      isOpen={isSelectingFilters}
+      getAppliedFilters={getAppliedFilters}
+      hideFilterOptions={hideFilterOptions}
+      applyFilters={applyFilters}
+      applicantType={applicantType}
     />
     <div className="applicant-view flex">
       {/* APPLICANT LIST */}
@@ -61,6 +77,18 @@ AssessmentPage.propTypes = {
   switchApplicantType: PropTypes.func,
   // handler for applicant click
   onApplicantClick: PropTypes.func,
+  // is the user currently selecting filters
+  isSelectingFilters: PropTypes.bool,
+  // has the user applied any filters
+  areFiltersApplied: PropTypes.bool,
+  // handler for hiding filter options
+  showFilterOptions: PropTypes.func,
+  // get list of currently applied filters
+  getAppliedFilters: PropTypes.func,
+  // handler for hiding filter options
+  hideFilterOptions: PropTypes.func,
+  // handler for applying filter options
+  applyFilters: PropTypes.func,
   // what to sort by
   sortType: PropTypes.string,
   // Sort type handler
