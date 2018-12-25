@@ -8,20 +8,20 @@ exports.checkValidID = functions.https.onRequest((request, response) => {
   response.set('Access-Control-Allow-Origin', '*');
   response.set('Access-Control-Allow-Headers', 'Content-Type, crossDomain');
 
-  const id = JSON.parse(request.body).id;
+  const { id } = JSON.parse(request.body);
 
   getDoc = db.collection('hacker_short_info').doc(id).get()
     .then((doc) => {
       if (!doc.exists) {
-        console.log(id + ' has no doc');
-        return "";
+        console.log('Doc not found');
+        return '';
       }
       if ('tags' in doc.data() && 'accepted' in doc.data().tags && doc.data().tags.accepted) {
-        console.log(doc.data().firstName + ' was found and is accepted');
+        console.log('Found doc and is valid');
         return JSON.stringify(doc.data().firstName);
       }
-      console.log(id + ' has doc, but was not accepted');
-      return "";
+      console.log('Found doc but is not valid');
+      return '';
     });
   getDoc.then(value => response.send(value)).catch(error => error);
 });

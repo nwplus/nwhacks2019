@@ -126,8 +126,8 @@ class RSVP extends React.Component {
             name="t-shirt-size"
             label="What is your t-shirt size? (note: these are unisex clothing sizes)"
             className="margin-top-mega margin-bottom-xxl"
-            onChange={({ value: newTShirtSize }) => this.setState({ tShirtSize: newTShirtSize })}
-            // value={tShirtSize}
+            onChange={({ value: newTShirtSize }) => console.log(newTShirtSize)}
+            // value={newTShirtSize}
             // onBlur={() => this.setFieldAsBlurred('source')}
             // error={this.getErrorIfBlurred('source')}
           />
@@ -180,8 +180,7 @@ class RSVP extends React.Component {
                 this.setState({ isSubmitted: true });
                 console.log('Submitted RSVP!');
               }
-            })
-            }
+            })}
           />
         </div>
       </div>
