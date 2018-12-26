@@ -213,10 +213,8 @@ class AssessmentPageContainer extends React.Component {
   };
 
   exportApplicants = () => {
-    console.log('show export options');
     const {
       applicantType,
-      sortType,
     } = this.state;
 
     const {
@@ -224,26 +222,29 @@ class AssessmentPageContainer extends React.Component {
     } = this.props;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
     const applicants = firestore.ordered[shortInfoCollectionName];
-
-    // const json2csv = require('json2csv').parse;
-
-    // const json2csvParser = new Json2csvParser({ fields });
     const filteredApplicants = this.filterApplicants(applicants);
-    // const sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
-    // console.log(filteredApplicants);
-
     const fields = ['firstName', 'lastName', 'email', 'id'];
+    // https://www.npmjs.com/package/json2csv
     const json2csvParser = new Json2csvParser({ fields, quote: '' });
     const csv = json2csvParser.parse(filteredApplicants);
-    console.log(csv);
-    //   exports.csvJsonReport = functions.https.onRequest((request, response) => {
-    //   response.setHeader(
-    //     'Content-disposition',
-    //     'attachment; filename=report.csv'
-    //   );
-    //   response.set('Content-Type', 'text/csv');
-    //   response.status(200).send(csv);
-    // })
+    const exportedFilename = 'applicants.csv';
+    // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side/14966131#14966131
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    if (navigator.msSaveBlob) { // IE 10+
+      navigator.msSaveBlob(blob, exportedFilename);
+    } else {
+      const link = document.createElement('a');
+      if (link.download !== undefined) { // feature detection
+        // Browsers that support HTML5 download attribute
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', exportedFilename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
   }
 
   render() {
