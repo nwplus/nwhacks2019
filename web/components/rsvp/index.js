@@ -25,6 +25,7 @@ class RSVP extends React.Component {
       isIDValid: true,
       isSubmitted: false,
       isSubmitting: false,
+      submitFailed: false,
       emergencyContactName: '',
       emergencyContactNumber: '',
       tShirtSize: '',
@@ -63,7 +64,7 @@ class RSVP extends React.Component {
   }
 
   render() {
-    const { isIDValid, isSubmitted, isSubmitting } = this.state;
+    const { isIDValid, isSubmitted, isSubmitting, submitFailed } = this.state;
 
     if (!isIDValid) return (<Redirect to="/page_not_found" />);
     if (isSubmitted) {
@@ -186,12 +187,18 @@ class RSVP extends React.Component {
                 { headers: { 'Content-Type': 'text/plain' } }
               ).then((res) => {
                 if (res.status === 200) {
-                  this.setState({ isSubmitted: true });
+                  this.setState({ isSubmitted: true, submitFailed: false });
                   console.log('Submitted RSVP!');
+                } else {
+                  this.setState({ submitFailed: true, isSubmitting: false });
                 }
+              }).catch((e) => {
+                console.log(e);
+                this.setState({ submitFailed: true, isSubmitting: false });
               });
             }}
           />
+          {submitFailed ? (<p>Failed to submit application, please try again!</p>) : null}
         </div>
       </div>
     );
