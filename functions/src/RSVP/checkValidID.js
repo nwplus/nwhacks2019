@@ -12,16 +12,33 @@ exports.checkValidID = functions.https.onRequest((request, response) => {
 
   getDoc = db.collection('hacker_short_info').doc(id).get()
     .then((doc) => {
+      const data = { 
+        accepted: false,
+        rsvped: false,
+        firstName: '',
+      }
+
       if (!doc.exists) {
         console.log('Doc not found');
-        return '';
+        return data;
       }
+
       if ('tags' in doc.data() && 'accepted' in doc.data().tags && doc.data().tags.accepted) {
-        console.log('Found doc and is valid');
-        return JSON.stringify(doc.data().firstName);
+        data.accepted = true;
+        if ('rsvp' in doc.data()) {
+          console.log('Found doc but already RSVPed');
+          data.rsvped = true;
+        }
+        else {
+          console.log('Found doc!');
+          data.firstName = doc.data().firstName;
+        }
+      } 
+      else {
+        console.log('Found doc but was not accepted');
       }
-      console.log('Found doc but is not valid');
-      return '';
+      
+      return data;
     });
   getDoc.then(value => response.send(value)).catch(error => error);
 });

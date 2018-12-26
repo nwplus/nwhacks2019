@@ -45,13 +45,18 @@ class RSVP extends React.Component {
       { headers: { 'Content-Type': 'text/plain' } }
     ).then((res) => {
       if (res.status === 200) {
-        if (res.data === '') {
-          console.log('Did not find ID');
+        const { accepted, rsvped, firstName } = res.data;
+
+        if (!accepted) {
+          console.log('Did not find valid ID');
           this.setState({ isIDValid: false });
+        } else if (rsvped) {
+          console.log('already RSVPed');
+          this.setState({ isSubmitted: true });
         } else {
-          console.log('Found ID: ' + res.data);
-          this.setState({ isIDValid: true });
-          this.setState({ firstName: res.data });
+          console.log('Found ID: ' + firstName);
+          // this.setState({ isIDValid: true });
+          this.setState({ firstName });
         }
       }
     });
