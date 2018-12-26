@@ -126,8 +126,11 @@ class RSVP extends React.Component {
             name="t-shirt-size"
             label="What is your t-shirt size? (note: these are unisex clothing sizes)"
             className="margin-top-mega margin-bottom-xxl"
-            onChange={({ value: newTShirtSize }) => console.log(newTShirtSize)}
-            // value={newTShirtSize}
+            onChange={({ value: newTShirtSize }) => {
+              console.log(newTShirtSize); this.setState({
+                tShirtSize: newTShirtSize });
+            }}
+            value={tShirtSize}
             // onBlur={() => this.setFieldAsBlurred('source')}
             // error={this.getErrorIfBlurred('source')}
           />
@@ -137,9 +140,11 @@ class RSVP extends React.Component {
             label="Do you have any dietary restrictions or allergies?"
             placeholder="Enter an option or choose from the dropdown"
             className="margin-top-mega margin-bottom-xxl"
-            onChange={({ value: newDietRestriction }) => this.setState({
-              dietRestriction: newDietRestriction })}
-            // value={dietRestriction}
+            onChange={({ value: newDietRestriction }) => {
+              console.log(newDietRestriction); this.setState({
+                dietRestriction: newDietRestriction });
+            }}
+            value={dietRestriction}
             // onBlur={() => this.setFieldAsBlurred('source')}
             // error={this.getErrorIfBlurred('source')}
             isSearchable
@@ -166,7 +171,7 @@ class RSVP extends React.Component {
             onClick={() => Axios.post(
               firebase.nwUtils.getFunctionUrl('submitRSVP'),
               { id,
-                rsvp: {
+                data: {
                   emergencyContactName,
                   emergencyContactNumber,
                   tShirtSize,
