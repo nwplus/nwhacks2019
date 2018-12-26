@@ -9,6 +9,8 @@ import { convertObjectPrimitivesToStrings } from '../../../util/object';
 import AssessmentPage from '../../../components/admin/AssessmentPage';
 import applicantCollections from '../../../util/applicantCollections';
 
+const Json2csvParser = require('json2csv').Parser;
+
 class AssessmentPageContainer extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired,
@@ -210,6 +212,33 @@ class AssessmentPageContainer extends React.Component {
     this.setState({ sortDirection: newSortDirection });
   };
 
+  exportApplicants = () => {
+    console.log('show export options');
+    const {
+      applicantType,
+      sortType,
+    } = this.state;
+
+    const {
+      firestore,
+    } = this.props;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const applicants = firestore.ordered[shortInfoCollectionName];
+
+    // const json2csv = require('json2csv').parse;
+
+    // const json2csvParser = new Json2csvParser({ fields });
+    const filteredApplicants = this.filterApplicants(applicants);
+    const sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
+    // console.log(sortedApplicants);
+
+    const fields = ['email', 'city'];
+    const json2csvParser = new Json2csvParser({ fields });
+    const csv = json2csvParser.parse(sortedApplicants);
+    console.log(csv);
+
+  }
+
   render() {
     const {
       applicantType,
@@ -249,11 +278,13 @@ class AssessmentPageContainer extends React.Component {
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
+          exportApplicants={this.exportApplicants}
         />
       </div>
     );
   }
 }
+
 
 AssessmentPageContainer.propTypes = {
   firestore: PropTypes.object,
