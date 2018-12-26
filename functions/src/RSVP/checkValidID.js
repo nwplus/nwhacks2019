@@ -12,11 +12,11 @@ exports.checkValidID = functions.https.onRequest((request, response) => {
 
   getDoc = db.collection('hacker_short_info').doc(id).get()
     .then((doc) => {
-      const data = { 
+      const data = {
         accepted: false,
         rsvped: false,
         firstName: '',
-      }
+      };
 
       if (!doc.exists) {
         console.log('Doc not found');
@@ -28,16 +28,14 @@ exports.checkValidID = functions.https.onRequest((request, response) => {
         if ('rsvp' in doc.data()) {
           console.log('Found doc but already RSVPed');
           data.rsvped = true;
-        }
-        else {
+        } else {
           console.log('Found doc!');
           data.firstName = doc.data().firstName;
         }
-      } 
-      else {
+      } else {
         console.log('Found doc but was not accepted');
       }
-      
+
       return data;
     });
   getDoc.then(value => response.send(value)).catch(error => error);
