@@ -107,7 +107,7 @@ class RSVP extends React.Component {
             placeholder="Enter emergency contact name"
             onChange={newEmergencyContactName => this.setState({
               emergencyContactName: newEmergencyContactName })}
-            // value={emergencyContactName}
+            value={emergencyContactName}
             // onBlur={() => this.setFieldAsBlurred('githubLink')}
             // error={this.getErrorIfBlurred('githubLink')}
           />
@@ -118,7 +118,7 @@ class RSVP extends React.Component {
             placeholder="123-456-7890"
             onChange={newEmergencyContactNumber => this.setState({
               emergencyContactNumber: newEmergencyContactNumber })}
-            // value={emergencyContactNumber}
+            value={emergencyContactNumber}
             // onBlur={() => this.setFieldAsBlurred('githubLink')}
             // error={this.getErrorIfBlurred('githubLink')}
           />
@@ -127,10 +127,8 @@ class RSVP extends React.Component {
             name="t-shirt-size"
             label="What is your t-shirt size? (note: these are unisex clothing sizes)"
             className="margin-top-mega margin-bottom-xxl"
-            onChange={({ value: newTShirtSize }) => {
-              console.log(newTShirtSize); this.setState({
-                tShirtSize: newTShirtSize });
-            }}
+            onChange={({ value: newTShirtSize }) => this.setState({
+              tShirtSize: newTShirtSize })}
             value={tShirtSize}
             // onBlur={() => this.setFieldAsBlurred('source')}
             // error={this.getErrorIfBlurred('source')}
@@ -141,10 +139,8 @@ class RSVP extends React.Component {
             label="Do you have any dietary restrictions or allergies?"
             placeholder="Enter an option or choose from the dropdown"
             className="margin-top-mega margin-bottom-xxl"
-            onChange={({ value: newDietRestriction }) => {
-              console.log(newDietRestriction); this.setState({
-                dietRestriction: newDietRestriction });
-            }}
+            onChange={({ value: newDietRestriction }) => this.setState({
+              dietRestriction: newDietRestriction })}
             value={dietRestriction}
             // onBlur={() => this.setFieldAsBlurred('source')}
             // error={this.getErrorIfBlurred('source')}
@@ -156,9 +152,8 @@ class RSVP extends React.Component {
             name="ideas"
             className="margin-top-mega margin-bottom-xxl margin-ends-giga"
             placeholder="Enter ideas here"
-            onChange={newIdea => this.setState({
-              wouldLikeToSee: newIdea })}
-            // value={githubLink}
+            onChange={newIdea => this.setState({ wouldLikeToSee: newIdea })}
+            value={wouldLikeToSee}
             // onBlur={() => this.setFieldAsBlurred('githubLink')}
             // error={this.getErrorIfBlurred('githubLink')}
           />
@@ -169,27 +164,28 @@ class RSVP extends React.Component {
               || emergencyContactNumber === ''
               || tShirtSize === ''
               || dietRestriction === ''}
-            text={isSubmitting ? 'Submitting...' : "Confirm my attendance"}
+            text={isSubmitting ? 'Submitting...' : 'Confirm my attendance'}
             onClick={() => {
               this.setState({ isSubmitting: true });
               Axios.post(
-              firebase.nwUtils.getFunctionUrl('submitRSVP'),
-              { id,
-                data: {
-                  emergencyContactName,
-                  emergencyContactNumber,
-                  tShirtSize,
-                  dietRestriction,
-                  wouldLikeToSee,
+                firebase.nwUtils.getFunctionUrl('submitRSVP'),
+                { id,
+                  data: {
+                    emergencyContactName,
+                    emergencyContactNumber,
+                    tShirtSize,
+                    dietRestriction,
+                    wouldLikeToSee,
+                  },
                 },
-              },
-              { headers: { 'Content-Type': 'text/plain' } }
-            ).then((res) => {
-              if (res.status === 200) {
-                this.setState({ isSubmitted: true });
-                console.log('Submitted RSVP!');
-              }
-            })}}
+                { headers: { 'Content-Type': 'text/plain' } }
+              ).then((res) => {
+                if (res.status === 200) {
+                  this.setState({ isSubmitted: true });
+                  console.log('Submitted RSVP!');
+                }
+              });
+            }}
           />
         </div>
       </div>
