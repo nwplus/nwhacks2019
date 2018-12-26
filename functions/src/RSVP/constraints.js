@@ -7,10 +7,10 @@ const atLeastOneCharacter = {
 };
 
 exports.constraints = {
-  rsvp : {
+  rsvp: {
     emergencyContactName: atLeastOneCharacter,
     emergencyContactNumber: atLeastOneCharacter,
     tShirtSize: atLeastOneCharacter,
     dietRestriction: atLeastOneCharacter,
-  }
-}
+  },
+};

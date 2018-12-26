@@ -1,5 +1,6 @@
 const { db, functions } = require('../utils/firestore');
 const { constraints } = require('./constraints');
+const { validate } = require('validate.js');
 
 exports.submitRSVP = functions.https.onRequest((request, response) => {
   response.set('Access-Control-Allow-Origin', '*');
@@ -7,25 +8,26 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
 
   const { id } = JSON.parse(request.body);
 
-  const { 
+  const {
     emergencyContactName,
     emergencyContactNumber,
     tShirtSize,
     dietRestriction,
-    wouldLikeToSee } = JSON.parse(request.body).data;
-  
+    wouldLikeToSee 
+  } = JSON.parse(request.body).data;
+
   const rsvpData = {
     rsvp: {
-      emergencyContactName: emergencyContactName,
-      emergencyContactNumber: emergencyContactNumber,
-      tShirtSize: tShirtSize,
-      dietRestriction: dietRestriction,
-      wouldLikeToSee: wouldLikeToSee,
+      emergencyContactName,
+      emergencyContactNumber,
+      tShirtSize,
+      dietRestriction,
+      wouldLikeToSee,
     },
     tags: { 
-      going: true 
-    }
-  }
+      going: true,
+    },
+  };
 
   const errors = validate(rsvpData.rsvp, constraints.rsvp);
   if (errors) {
@@ -33,7 +35,7 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
   }
 
   const userRef = db.collection('hacker_short_info').doc(id);
-  userRef.set( rsvpData, { merge: true })
+  userRef.set(rsvpData,{ merge: true })
     .then(value => response.send(value))
     .catch(error => error);
 });

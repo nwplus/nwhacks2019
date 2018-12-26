@@ -24,6 +24,7 @@ class RSVP extends React.Component {
       firstName: '',
       isIDValid: true,
       isSubmitted: false,
+      isSubmitting: false,
       emergencyContactName: '',
       emergencyContactNumber: '',
       tShirtSize: '',
@@ -57,7 +58,7 @@ class RSVP extends React.Component {
   }
 
   render() {
-    const { isIDValid, isSubmitted } = this.state;
+    const { isIDValid, isSubmitted, isSubmitting } = this.state;
 
     if (!isIDValid) return (<Redirect to="/page_not_found" />);
     if (isSubmitted) {
@@ -163,12 +164,15 @@ class RSVP extends React.Component {
           />
           <PrimaryButton
             disabled={
-              emergencyContactName === ''
+              isSubmitting
+              || emergencyContactName === ''
               || emergencyContactNumber === ''
               || tShirtSize === ''
               || dietRestriction === ''}
-            text="Confirm my attendance"
-            onClick={() => Axios.post(
+            text={isSubmitting ? 'Submitting...' : "Confirm my attendance"}
+            onClick={() => {
+              this.setState({ isSubmitting: true });
+              Axios.post(
               firebase.nwUtils.getFunctionUrl('submitRSVP'),
               { id,
                 data: {
@@ -185,7 +189,7 @@ class RSVP extends React.Component {
                 this.setState({ isSubmitted: true });
                 console.log('Submitted RSVP!');
               }
-            })}
+            })}}
           />
         </div>
       </div>
