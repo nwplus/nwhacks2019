@@ -4,6 +4,7 @@ import { Select } from '../../input/select';
 import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
+import downloadIcon from '../../../assets/download-icon.svg';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class Toolbar extends React.Component {
           onClick={exportApplicants}
           tabIndex={0}>
           <img
-            src={areFiltersApplied ? filterIconSelected : filterIcon}
+            src={downloadIcon}
             alt="export emails" />
         </div>
       </div>
