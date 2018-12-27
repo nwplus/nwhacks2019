@@ -1,33 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import deleteIconLight from '../../../assets/tag/delete-icon-light.svg';
-import deleteIconDark from '../../../assets/tag/delete-icon-dark.svg';
+import { randomColor } from 'randomcolor';
+import deleteIcon from '../../../assets/tag/delete-icon.svg';
 
-// generates a unique background color and text color for a tag
-// based on https://stackoverflow.com/a/16348977/5179469
+// generates a text color and unique background color for a tag
 const generateTagColor = (tagName) => {
-  let hash = 0;
-  for (let i = 0; i < tagName.length; i += 1) {
-    hash = tagName.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let backgroundColor = '';
-  for (let i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xFF;
-    backgroundColor += ('00' + value.toString(16)).substr(-2);
-  }
-  const textColor = backgroundColor < '888888' ? 'FFFFFF' : '000000';
+  const backgroundColor = randomColor({ seed: tagName, luminosity: 'dark' });
+  const textColor = '#FFFFFF';
   return {
-    backgroundColor: '#' + backgroundColor,
-    color: '#' + textColor,
+    backgroundColor,
+    color: textColor,
   };
-};
-
-// returns the correct delete icon (light or dark) given tagColor
-const getDeleteIcon = (tagColor) => {
-  if (tagColor.color === '#000000') {
-    return deleteIconDark;
-  }
-  return deleteIconLight;
 };
 
 const Tag = ({ tagName, deleteTag, allowDelete }) => {
@@ -43,7 +26,7 @@ const Tag = ({ tagName, deleteTag, allowDelete }) => {
             <img
               className="clickable margin-left-xs"
               alt="X"
-              src={getDeleteIcon(tagColor)}
+              src={deleteIcon}
             />
           </div>
         ) : null
