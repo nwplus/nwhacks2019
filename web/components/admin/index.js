@@ -13,6 +13,11 @@ const adminPages = [
     route: '/admin/assessment',
   },
   {
+    label: 'Applicants',
+    component: () => <GenericApplicantContainer pageType="applicants" />,
+    route: '/admin/applicants',
+  },
+  {
     label: 'Tasks (Dev only)',
     component: AdminTasks,
     route: '/admin/tasks',

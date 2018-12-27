@@ -7,6 +7,7 @@ import flat from 'flat';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
+import ApplicantsPage from '../../../components/admin/ApplicantsPage';
 import applicantCollections from '../../../util/applicantCollections';
 
 // contains logic for pages that involve managing applicants
@@ -235,6 +236,50 @@ class GenericApplicantContainer extends React.Component {
     return (
       <div>
         <AssessmentPage
+          applicantType={applicantType}
+          applicants={sortedApplicants}
+          selectedApplicantId={selectedApplicantId}
+          switchApplicantType={this.switchApplicantType}
+          onApplicantClick={this.selectApplicant}
+          isSelectingFilters={isSelectingFilters}
+          areFiltersApplied={areFiltersApplied}
+          getAppliedFilters={this.getAppliedFilters}
+          showFilterOptions={this.showFilterOptions}
+          hideFilterOptions={this.hideFilterOptions}
+          applyFilters={this.applyFilters}
+          sortType={sortType}
+          switchSortType={this.switchSortType}
+          switchSortDirection={this.switchSortDirection}
+          sortDirection={sortDirection}
+        />
+      </div>
+    );
+  }
+
+  renderApplicantsPage = () => {
+    const {
+      applicantType,
+      selectedApplicantId,
+      isSelectingFilters,
+      areFiltersApplied,
+      sortType,
+      sortDirection,
+    } = this.state;
+
+    const {
+      firestore,
+    } = this.props;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const applicants = firestore.ordered[shortInfoCollectionName];
+    if (!isLoaded(applicants)) {
+      return (<span>Loading...</span>);
+    }
+    const filteredApplicants = this.filterApplicants(applicants);
+    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
+    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+    return (
+      <div>
+        <ApplicantsPage
           applicantType={applicantType}
           applicants={sortedApplicants}
           selectedApplicantId={selectedApplicantId}
