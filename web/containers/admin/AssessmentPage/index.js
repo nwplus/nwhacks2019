@@ -4,12 +4,11 @@ import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebas
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import flat from 'flat';
+import { Parser } from 'json2csv';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
 import applicantCollections from '../../../util/applicantCollections';
-
-const Json2csvParser = require('json2csv').Parser;
 
 class AssessmentPageContainer extends React.Component {
   static contextTypes = {
@@ -225,7 +224,7 @@ class AssessmentPageContainer extends React.Component {
     const filteredApplicants = this.filterApplicants(applicants);
     const fields = ['firstName', 'lastName', 'email', 'id'];
     // https://www.npmjs.com/package/json2csv
-    const json2csvParser = new Json2csvParser({ fields, quote: '' });
+    const json2csvParser = new Parser({ fields, quote: '' });
     const csv = json2csvParser.parse(filteredApplicants);
     const exportedFilename = 'applicants.csv';
     // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side/14966131#14966131
