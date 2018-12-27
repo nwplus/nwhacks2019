@@ -22,6 +22,7 @@ const AssessmentPage = ({
   switchSortType,
   switchSortDirection,
   sortDirection,
+  exportApplicants,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -34,6 +35,7 @@ const AssessmentPage = ({
       switchSortType={switchSortType}
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
+      exportApplicants={exportApplicants}
     />
     <FilterModal
       isOpen={isSelectingFilters}
@@ -97,6 +99,9 @@ AssessmentPage.propTypes = {
   switchSortDirection: PropTypes.func,
   // Current sort direction
   sortDirection: PropTypes.string,
+  // Exports all applicants into a csv
+  exportApplicants: PropTypes.func,
+
 
 };
 
