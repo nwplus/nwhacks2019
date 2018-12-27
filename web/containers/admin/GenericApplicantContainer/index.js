@@ -9,7 +9,8 @@ import { convertObjectPrimitivesToStrings } from '../../../util/object';
 import AssessmentPage from '../../../components/admin/AssessmentPage';
 import applicantCollections from '../../../util/applicantCollections';
 
-class AssessmentPageContainer extends React.Component {
+// contains logic for pages that involve managing applicants
+class GenericApplicantContainer extends React.Component {
   static contextTypes = {
     store: PropTypes.object.isRequired,
   }
@@ -210,7 +211,7 @@ class AssessmentPageContainer extends React.Component {
     this.setState({ sortDirection: newSortDirection });
   };
 
-  render() {
+  renderAssessmentPage = () => {
     const {
       applicantType,
       selectedApplicantId,
@@ -253,10 +254,22 @@ class AssessmentPageContainer extends React.Component {
       </div>
     );
   }
+
+  render() {
+    const { pageType } = this.props;
+    switch (pageType) {
+      case 'assessment':
+        return this.renderAssessmentPage();
+      default:
+      case 'applicants':
+        return this.renderApplicantsPage();
+    }
+  }
 }
 
-AssessmentPageContainer.propTypes = {
+GenericApplicantContainer.propTypes = {
   firestore: PropTypes.object,
+  pageType: PropTypes.string, // 'assessment' or 'applicants'
 };
 
 export default compose(
@@ -267,4 +280,4 @@ export default compose(
       firestore: state.firestore,
     };
   }),
-)(AssessmentPageContainer);
+)(GenericApplicantContainer);
