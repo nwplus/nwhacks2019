@@ -56,7 +56,7 @@ const ApplicantsPage = ({
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}
       />
-      {/* TODO: APPLICANT INFO PANEL */}
+      {/* APPLICANT INFO PANEL */}
       <ApplicantInfo
         applicantId={selectedApplicantId}
         applicantType={applicantType}

@@ -56,8 +56,9 @@ const AssessmentPage = ({
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}
       />
-      {/* TODO: APPLICANT INFO PANEL */}
+      {/* APPLICANT INFO PANEL */}
       <ApplicantInfo
+        showAssessmentFieldsOnly
         applicantId={selectedApplicantId}
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}
