@@ -104,7 +104,7 @@ class ApplicantInfo extends React.Component {
       ? this.getAssessmentFieldNamesOnly()
       : this.getAllFieldNames();
     return (
-      <div className={`applicant-info pad-sides-m pad-ends-m ${className}`}>
+      <div className={`applicant-info ${className}`}>
         {applicantFields.shortInfo.map((fieldName) => {
           const label = FIELDS[fieldName];
           let value = shortInfo ? shortInfo[fieldName] : '';
@@ -122,13 +122,6 @@ class ApplicantInfo extends React.Component {
             label={FIELDS[fieldName]}
             value={longInfo ? longInfo[fieldName] : ''} />
         ))}
-        {/* <ShortField label={FieldLabels.isFirstHackathon} value={shortInfo ? shortInfo.isFirstHackathon : ''} />
-        <ShortField isUrl label={FieldLabels.githubLink} value={shortInfo ? shortInfo.githubLink : ''} />
-        <ShortField isUrl label={FieldLabels.personalWebsiteLink} value={shortInfo ? shortInfo.personalWebsiteLink : ''} />
-        <ShortField isUrl label={FieldLabels.linkedInLink} value={shortInfo ? shortInfo.linkedInLink : ''} />
-        <ShortField isUrl label={FieldLabels.resumeLink} value={shortInfo ? shortInfo.resumeLink : ''} />
-        <LongField label={FieldLabels.interestForNwHacks} value={longInfo ? longInfo.interestForNwHacks : ''} />
-        <LongField label={FieldLabels.recentProject} value={longInfo ? longInfo.recentProject : ''} /> */}
       </div>
     );
   }
