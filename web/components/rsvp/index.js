@@ -56,7 +56,6 @@ class RSVP extends React.Component {
           this.setState({ isSubmitted: true });
         } else {
           console.log('Found ID: ' + firstName);
-          // this.setState({ isIDValid: true });
           this.setState({ firstName });
         }
       }
@@ -100,7 +99,7 @@ class RSVP extends React.Component {
     return (
       <div className="pad-nav application fill-width flex jc-center">
         <div className="pad-top-mega pad-bottom-tera">
-          <h2>Hi {firstName}, please RSVP <img className="emoji" alt="🙌" src={praise} /></h2>
+          <h2>Hi{firstName ? ' ' + firstName : null}, please RSVP <img className="emoji" alt="🙌" src={praise} /></h2>
           <p>Congrats, we choose you! <img className="emoji" alt="🎉" src={celebrate} /> Please complete this form by 11:59PM on
             January 5th, 2019 so we can get straight to scheduling you for nwHacks 2019.
             If we don’t hear from you by the deadline, your spot will be given to
@@ -114,8 +113,6 @@ class RSVP extends React.Component {
             onChange={newEmergencyContactName => this.setState({
               emergencyContactName: newEmergencyContactName })}
             value={emergencyContactName}
-            // onBlur={() => this.setFieldAsBlurred('githubLink')}
-            // error={this.getErrorIfBlurred('githubLink')}
           />
           <TextInput
             label="What is the number of your emergency contact?"
@@ -125,8 +122,6 @@ class RSVP extends React.Component {
             onChange={newEmergencyContactNumber => this.setState({
               emergencyContactNumber: newEmergencyContactNumber })}
             value={emergencyContactNumber}
-            // onBlur={() => this.setFieldAsBlurred('githubLink')}
-            // error={this.getErrorIfBlurred('githubLink')}
           />
           <Select
             options={tShirtSizes}
@@ -136,8 +131,6 @@ class RSVP extends React.Component {
             onChange={({ value: newTShirtSize }) => this.setState({
               tShirtSize: newTShirtSize })}
             value={tShirtSize}
-            // onBlur={() => this.setFieldAsBlurred('source')}
-            // error={this.getErrorIfBlurred('source')}
           />
           <Select
             options={dietRestrictions}
@@ -148,8 +141,6 @@ class RSVP extends React.Component {
             onChange={({ value: newDietRestriction }) => this.setState({
               dietRestriction: newDietRestriction })}
             value={dietRestriction}
-            // onBlur={() => this.setFieldAsBlurred('source')}
-            // error={this.getErrorIfBlurred('source')}
             isSearchable
             allowNewOption
           />
@@ -160,8 +151,6 @@ class RSVP extends React.Component {
             placeholder="Enter ideas here"
             onChange={newIdea => this.setState({ wouldLikeToSee: newIdea })}
             value={wouldLikeToSee}
-            // onBlur={() => this.setFieldAsBlurred('githubLink')}
-            // error={this.getErrorIfBlurred('githubLink')}
           />
           <PrimaryButton
             disabled={
