@@ -7,6 +7,8 @@ const { submitApplicationHacker } = require('./src/submitApplication/index');
 const { submitApplicationVolunteer } = require('./src/submitVolunteerApplication/index');
 const { backfillShortInfo } = require('./src/tasks/backfill/backfillShortInfo');
 const { backfillLongInfo } = require('./src/tasks/backfill/backfillLongInfo');
+const { checkValidID } = require('./src/RSVP/checkValidID');
+const { submitRSVP } = require('./src/RSVP/submitRSVP');
 // export functions
 exports.exampleHelloWorld = exampleHelloWorld;
 exports.exampleGetData = exampleGetData;
@@ -14,3 +16,5 @@ exports.submitApplicationHacker = submitApplicationHacker;
 exports.submitApplicationVolunteer = submitApplicationVolunteer;
 exports.backfillShortInfo = backfillShortInfo;
 exports.backfillLongInfo = backfillLongInfo;
+exports.checkValidID = checkValidID;
+exports.submitRSVP = submitRSVP;
