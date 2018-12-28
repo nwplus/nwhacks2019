@@ -4,6 +4,7 @@ import { Select } from '../../input/select';
 import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
+import downloadIcon from '../../../assets/download-icon.svg';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Toolbar extends React.Component {
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
+      switchSortType, sortType, switchSortDirection, sortDirection, exportApplicants } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -62,6 +63,15 @@ class Toolbar extends React.Component {
           <img
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
+        </div>
+        <div
+          className="pad-left-l toolbar-icon"
+          role="button"
+          onClick={exportApplicants}
+          tabIndex={0}>
+          <img
+            src={downloadIcon}
+            alt="export emails" />
         </div>
       </div>
     );
@@ -97,6 +107,9 @@ Toolbar.propTypes = {
   switchSortDirection: PropTypes.func,
   // Check sort direction
   sortDirection: PropTypes.string,
+  // Exports all applicants into a csv
+  exportApplicants: PropTypes.func,
+
 };
 
 export default Toolbar;
