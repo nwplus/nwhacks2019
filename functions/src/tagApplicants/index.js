@@ -35,6 +35,18 @@ exports.tagApplicants = functions.https.onRequest((request, response) => {
     return response.status(400).send('Unrecognized applicant type');
   }
 
+  if (!tagsToAdd || tagsToAdd.constructor !== Array) {
+    return response.status(400).send('tagsToAdd field is missing/not an array');
+  }
+
+  if (!tagsToRemove || tagsToRemove.constructor !== Array) {
+    return response.status(400).send('tagsToRemove field is missing/not an array');
+  }
+
+  if (!applicants || applicants.constructor !== Array) {
+    return response.status(400).send('applicants field is missing/not an array');
+  }
+
   // eslint-disable-next-line max-len
   return Promise.all(applicants.map(applicantId => db.collection(collection).doc(applicantId).get()))
     .then((applicantDocs) => {
