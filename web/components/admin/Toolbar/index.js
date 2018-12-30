@@ -4,6 +4,8 @@ import { Select } from '../../input/select';
 import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
+import tagIcon from '../../../assets/internal/tag-icon.svg';
+import { Checkbox } from '../../input/buttons';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class Toolbar extends React.Component {
     };
   }
 
-  render() {
+  renderToolbar = () => {
     const { applicantType,
       switchApplicantType,
       className,
@@ -66,6 +68,28 @@ class Toolbar extends React.Component {
       </div>
     );
   }
+
+  renderAdditionalTools = () => {
+    const { className } = this.props;
+    return (
+      <div className={`extra-toolbar flex ai-center fill-width ${className}`}>
+        <Checkbox value="select-all-applicants" className="checkbox select-all" label="Select all" />
+        <div className="tag-button flex ai-center clickable user-select-none"><img alt="tag" src={tagIcon} />Tag</div>
+      </div>
+    );
+  }
+
+  render() {
+    const { pageType } = this.props;
+    const toolbar = this.renderToolbar();
+    const extraToolbar = this.renderAdditionalTools();
+    return (
+      <div>
+        {toolbar}
+        {pageType === 'applicants' ? extraToolbar : null}
+      </div>
+    );
+  }
 }
 
 Toolbar.defaultProps = {
@@ -79,16 +103,10 @@ Toolbar.propTypes = {
   switchApplicantType: PropTypes.func,
   // additional styles
   className: PropTypes.string,
-  // // is the user currently selecting filters
-  // isSelectingFilters: PropTypes.bool,
   // has the user applied any filters
   areFiltersApplied: PropTypes.bool,
   // handler for hiding filter options
   showFilterOptions: PropTypes.func,
-  // handler for hiding filter options
-  // hideFilterOptions: PropTypes.func,
-  // // handler for applying filter options
-  // applyFilterOptions: PropTypes.func,
   // // handler for switching sort type
   switchSortType: PropTypes.func,
   // type to sort by
@@ -97,6 +115,8 @@ Toolbar.propTypes = {
   switchSortDirection: PropTypes.func,
   // Check sort direction
   sortDirection: PropTypes.string,
+  // 'assessment' or 'applicants'
+  pageType: PropTypes.string,
 };
 
 export default Toolbar;

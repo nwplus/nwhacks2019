@@ -26,6 +26,7 @@ const ApplicantsPage = ({
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
     <Toolbar
+      pageType="applicants"
       applicantType={applicantType}
       switchApplicantType={switchApplicantType}
       areFiltersApplied={areFiltersApplied}
@@ -45,6 +46,7 @@ const ApplicantsPage = ({
     <div className="applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
+        pageType="applicants"
         applicants={applicants}
         selectedApplicantId={selectedApplicantId}
         onApplicantClick={onApplicantClick}

@@ -26,6 +26,7 @@ const AssessmentPage = ({
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
     <Toolbar
+      pageType="assessment"
       applicantType={applicantType}
       switchApplicantType={switchApplicantType}
       areFiltersApplied={areFiltersApplied}
@@ -45,6 +46,7 @@ const AssessmentPage = ({
     <div className="applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
+        pageType="assessment"
         applicants={applicants}
         selectedApplicantId={selectedApplicantId}
         onApplicantClick={onApplicantClick}

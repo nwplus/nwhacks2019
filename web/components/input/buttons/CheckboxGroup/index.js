@@ -10,7 +10,7 @@ const Checkbox = ({ name, value, label, className, checked, disabled, onChange }
       (context) => {
         const contextOnChange = event => context.onChange(event.target.value);
         return (
-          <div className={`checkbox user-select-none margin-bottom-s margin-top-s${className}`}>
+          <div className={`checkbox user-select-none margin-bottom-s margin-top-s ${className}`}>
             <label className="clickable flex">
               <input
                 type="checkbox"
@@ -44,7 +44,7 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   // determines if checkbox is disabled
   disabled: PropTypes.bool,
-  // onChange functional
+  // onChange function
   onChange: PropTypes.func,
 };
 
