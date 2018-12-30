@@ -105,23 +105,16 @@ class ScorePanel extends React.Component {
         lastScoredBy: uid,
         lastScoredAt: Date.now(),
       };
-      applicantRef.update({
+      const applicantScore = {
         [fieldPath]: scoreInfo,
-      }).then(() => this.updateFinalScore());
-    }
-  }
-
-  // sets an applicant's finalScore to given value
-  setFinalScore = (finalScore) => {
-    const { store } = this.context;
-    const { firestore } = store;
-    const { applicantId } = this.props;
-    if (typeof finalScore === 'number') {
-      const collectionName = this.getApplicantShortInfoCollectionName();
-      const applicantRef = firestore.collection(collectionName).doc(applicantId);
-      applicantRef.update({
-        'score.finalScore': finalScore,
-      });
+      };
+      const scores = { ...this.getAllCriteriaScores(), [criteriaName]: score };
+      // only calculate final score if all criteria are scored
+      if (this.isAllCriteriaScored(scores)) {
+        const finalScore = calculateFinalScore(scores);
+        applicantScore['score.finalScore'] = finalScore;
+      }
+      applicantRef.update(applicantScore);
     }
   }
 
@@ -152,24 +145,15 @@ class ScorePanel extends React.Component {
   }
 
   // returns true if all criteria have been scored for the applicant, false otherwise
-  isAllCriteriaScored = () => {
+  isAllCriteriaScored = (scores) => {
     for (let i = 0; i < criteria.length; i += 1) {
-      const criteriaScore = this.getCriteriaScoreValue(criteria[i].name);
-      if (criteriaScore === null) {
+      const criteriaName = criteria[i].name;
+      const criteriaScore = scores[criteriaName];
+      if (criteriaScore == null) {
         return false;
       }
     }
     return true;
-  }
-
-  // calculates and sets applicant's score.finalScore based on applicant's criteria scores
-  updateFinalScore = () => {
-    if (this.isAllCriteriaScored()) {
-      // only calculate final score if all criteria are scored
-      const scores = this.getAllCriteriaScores();
-      const finalScore = calculateFinalScore(scores);
-      this.setFinalScore(finalScore);
-    }
   }
 
   render() {
