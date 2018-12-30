@@ -3,6 +3,7 @@ const { db, functions, admin } = require('../utils/firestore');
 const mapApplicantTypeToCollection = {
   hacker: 'hacker_short_info',
   volunteer: 'volunteer_short_info',
+  mentor: 'mentor_short_info',
 };
 
 const BATCH_LIMIT = 500;
