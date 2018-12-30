@@ -81,9 +81,9 @@ exports.tagApplicants = functions.https.onRequest((request, response) => {
           delete tags[tagToRemove];
         });
 
-        applicant.tags = tags;
         const ref = db.collection(collection).doc(applicantId);
-        batch.set(ref, applicant);
+        console.log(tags);
+        batch.set(ref, { tags }, { mergeFields: ["tags"] });
 
         // every 500 docs
         if (index % BATCH_LIMIT === BATCH_LIMIT - 1) {
