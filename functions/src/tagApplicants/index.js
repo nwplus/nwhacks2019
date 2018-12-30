@@ -1,4 +1,4 @@
-const { db, functions } = require('../utils/firestore');
+const { db, functions, admin } = require('../utils/firestore');
 
 const mapApplicantTypeToCollection = {
   'hacker': 'hacker_short_info',
@@ -22,6 +22,8 @@ exports.tagApplicants = functions.https.onRequest((request, response) => {
 
   // ensure request.body is an object, not a string
   const data = typeof request.body !== 'object' ? JSON.parse(request.body) : request.body;
+
+  const clientToken = request.header('Authorization');
 
   const {
     applicantType,
@@ -47,8 +49,17 @@ exports.tagApplicants = functions.https.onRequest((request, response) => {
     return response.status(400).send('applicants field is missing/not an array');
   }
 
-  // eslint-disable-next-line max-len
-  return Promise.all(applicants.map(applicantId => db.collection(collection).doc(applicantId).get()))
+  return admin.auth().verifyIdToken(clientToken).then((decodedToken) => {
+    const { uid } = decodedToken;
+    return db.collection('admins').doc(uid).get();
+  }).then((adminDoc) => {
+    if (!adminDoc) {
+      throw new Error('Not an admin');
+    }
+
+    // eslint-disable-next-line max-len
+    return Promise.all(applicants.map(applicantId => db.collection(collection).doc(applicantId).get()));
+  })
     .then((applicantDocs) => {
       let batch = db.batch();
 
