@@ -1,8 +1,8 @@
 const { db, functions, admin } = require('../utils/firestore');
 
 const mapApplicantTypeToCollection = {
-  'hacker': 'hacker_short_info',
-  'volunteer': 'volunteer_short_info',
+  hacker: 'hacker_short_info',
+  volunteer: 'volunteer_short_info',
 };
 
 const BATCH_LIMIT = 500;
@@ -83,7 +83,7 @@ exports.tagApplicants = functions.https.onRequest((request, response) => {
 
         const ref = db.collection(collection).doc(applicantId);
         console.log(tags);
-        batch.set(ref, { tags }, { mergeFields: ["tags"] });
+        batch.set(ref, { tags }, { mergeFields: ['tags'] });
 
         // every 500 docs
         if (index % BATCH_LIMIT === BATCH_LIMIT - 1) {
