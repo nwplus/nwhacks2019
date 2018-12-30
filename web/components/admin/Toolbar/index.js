@@ -30,7 +30,10 @@ class Toolbar extends React.Component {
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
+      switchSortType, sortType, switchSortDirection, sortDirection,
+      checkAllApplicants, uncheckAllApplicants, checkApplicant, uncheckApplicant,
+      checkedApplicants, applicants,
+    } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -70,10 +73,24 @@ class Toolbar extends React.Component {
   }
 
   renderAdditionalTools = () => {
-    const { className } = this.props;
+    const {
+      className,
+      checkAllApplicants, uncheckAllApplicants, checkApplicant, uncheckApplicant,
+      checkedApplicants, applicants,
+    } = this.props;
+    // a checkbox is indeterminate when it's checked value only applies to some applicants
+    const numCheckedApplicants = Object.keys(checkedApplicants).length;
+    const checkboxIsIndeterminate = checkedApplicants
+      && numCheckedApplicants > 0
+      && numCheckedApplicants !== applicants.length;
     return (
       <div className={`extra-toolbar flex ai-center fill-width ${className}`}>
-        <Checkbox value="select-all-applicants" className="checkbox select-all" label="Select all" />
+        <Checkbox
+          value="select-all-applicants"
+          className="checkbox select-all"
+          onChange={e => ((e.target.checked) ? checkAllApplicants() : uncheckAllApplicants())}
+          isIndeterminate={checkboxIsIndeterminate}
+          label="Select all" />
         <div className="tag-button flex ai-center clickable user-select-none"><img alt="tag" src={tagIcon} />Tag</div>
       </div>
     );
@@ -115,6 +132,14 @@ Toolbar.propTypes = {
   switchSortDirection: PropTypes.func,
   // Check sort direction
   sortDirection: PropTypes.string,
+  // checks all applicants
+  checkAllApplicants: PropTypes.func,
+  // unchecks all applicants
+  uncheckAllApplicants: PropTypes.func,
+  // currently checked applicants
+  checkedApplicants: PropTypes.object,
+  // all applicants (after filters are applied)
+  applicants: PropTypes.array,
   // 'assessment' or 'applicants'
   pageType: PropTypes.string,
 };

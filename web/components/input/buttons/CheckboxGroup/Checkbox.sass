@@ -5,6 +5,8 @@
   input[type="checkbox"]
     &:checked ~ .checkmark
       background-image: url('../assets/checkbox/checked.svg')
+      &.indeterminate
+        background-image: url('../assets/checkbox/indeterminate.svg')
 
     &:disabled
       @extend .unclickable

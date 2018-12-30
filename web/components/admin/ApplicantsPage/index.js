@@ -22,6 +22,11 @@ const ApplicantsPage = ({
   switchSortType,
   switchSortDirection,
   sortDirection,
+  checkAllApplicants,
+  uncheckAllApplicants,
+  checkApplicant,
+  uncheckApplicant,
+  checkedApplicants,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -35,14 +40,18 @@ const ApplicantsPage = ({
       switchSortType={switchSortType}
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
-    />
+      checkAllApplicants={checkAllApplicants}
+      uncheckAllApplicants={uncheckAllApplicants}
+      checkedApplicants={checkedApplicants}
+      applicants={applicants}
+      />
     <FilterModal
       isOpen={isSelectingFilters}
       getAppliedFilters={getAppliedFilters}
       hideFilterOptions={hideFilterOptions}
       applyFilters={applyFilters}
       applicantType={applicantType}
-    />
+      />
     <div className="applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
@@ -50,6 +59,9 @@ const ApplicantsPage = ({
         applicants={applicants}
         selectedApplicantId={selectedApplicantId}
         onApplicantClick={onApplicantClick}
+        checkApplicant={checkApplicant}
+        uncheckApplicant={uncheckApplicant}
+        checkedApplicants={checkedApplicants}
         className={`${!selectedApplicantId ? 'fill-min-width' : ''}`}
         />
       {/* APPLICANT TAG INFO & SCORE HISTORY */}
@@ -71,7 +83,7 @@ const ApplicantsPage = ({
 ApplicantsPage.propTypes = {
   // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string,
-  // documents from <applicantType>_main_info
+  // documents from <applicantType>_short_info
   applicants: PropTypes.array,
   // the id of the applicant that's currrently selected
   selectedApplicantId: PropTypes.string,
@@ -99,7 +111,16 @@ ApplicantsPage.propTypes = {
   switchSortDirection: PropTypes.func,
   // Current sort direction
   sortDirection: PropTypes.string,
-
+  // checks all applicants
+  checkAllApplicants: PropTypes.func,
+  // unchecks all applicants
+  uncheckAllApplicants: PropTypes.func,
+  // checks a specific applicant
+  checkApplicant: PropTypes.func,
+  // unchecks a specific applicant
+  uncheckApplicant: PropTypes.func,
+  // currently checked applicants
+  checkedApplicants: PropTypes.object,
 };
 
 export default ApplicantsPage;

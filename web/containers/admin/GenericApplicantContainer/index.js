@@ -4,6 +4,7 @@ import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebas
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import flat from 'flat';
+import update from 'immutability-helper';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
@@ -26,6 +27,8 @@ class GenericApplicantContainer extends React.Component {
       areFiltersApplied: false,
       sortType: 'timestamp',
       sortDirection: 'asc',
+      // applicants with their checkbox checked
+      checkedApplicants: {},
     };
   }
 
@@ -212,6 +215,58 @@ class GenericApplicantContainer extends React.Component {
     this.setState({ sortDirection: newSortDirection });
   };
 
+  // checks all applicants (adds all applicants to this.state.checkedApplicants)
+  checkAllApplicants = () => {
+    const applicants = this.getAllApplicants() || [];
+    const checkedApplicants = {};
+    for (let i = 0; i < applicants.length; i += 1) {
+      const applicantId = applicants[i].id;
+      checkedApplicants[applicantId] = true;
+    }
+    this.setState({ checkedApplicants }, () => console.log(this.state.checkedApplicants));
+  }
+
+  // unchecks all applicants (empties this.state.checkedApplicants)
+  uncheckAllApplicants = () => {
+    this.setState({ checkedApplicants: {} }, () => console.log(this.state.checkedApplicants));
+  }
+
+  // checks a given applicant (adds applicant to this.state.checkedApplicants)
+  checkApplicant = (applicantId) => {
+    const newState = update(this.state, {
+      checkedApplicants: {
+        [applicantId]: {
+          $set: true,
+        },
+      },
+    });
+    this.setState(newState, () => console.log(this.state.checkedApplicants));
+  }
+
+  // unchecks a given applicant (removes applicant from this.state.checkedApplicants)
+  uncheckApplicant = (applicantId) => {
+    const { checkedApplicants: { [applicantId]: deletedValue, ...rest } } = this.state;
+    this.setState({ checkedApplicants: rest }, () => console.log(this.state.checkedApplicants));
+  }
+
+  // retrieves filtered and sorted array of applicants
+  getAllApplicants = () => {
+    const {
+      applicantType,
+      sortType,
+      sortDirection,
+    } = this.state;
+    const {
+      firestore,
+    } = this.props;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const applicants = firestore.ordered[shortInfoCollectionName];
+    const filteredApplicants = this.filterApplicants(applicants);
+    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
+    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+    return sortedApplicants;
+  }
+
   renderAssessmentPage = () => {
     const {
       applicantType,
@@ -222,22 +277,17 @@ class GenericApplicantContainer extends React.Component {
       sortDirection,
     } = this.state;
 
-    const {
-      firestore,
-    } = this.props;
-    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicants = firestore.ordered[shortInfoCollectionName];
+    const applicants = this.getAllApplicants();
+
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
-    const filteredApplicants = this.filterApplicants(applicants);
-    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
-    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+
     return (
       <div>
         <AssessmentPage
           applicantType={applicantType}
-          applicants={sortedApplicants}
+          applicants={applicants}
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
@@ -264,24 +314,20 @@ class GenericApplicantContainer extends React.Component {
       areFiltersApplied,
       sortType,
       sortDirection,
+      checkedApplicants,
     } = this.state;
 
-    const {
-      firestore,
-    } = this.props;
-    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicants = firestore.ordered[shortInfoCollectionName];
+    const applicants = this.getAllApplicants();
+
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
-    const filteredApplicants = this.filterApplicants(applicants);
-    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
-    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+
     return (
       <div>
         <ApplicantsPage
           applicantType={applicantType}
-          applicants={sortedApplicants}
+          applicants={applicants}
           selectedApplicantId={selectedApplicantId}
           switchApplicantType={this.switchApplicantType}
           onApplicantClick={this.selectApplicant}
@@ -295,6 +341,11 @@ class GenericApplicantContainer extends React.Component {
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
+          checkAllApplicants={this.checkAllApplicants}
+          uncheckAllApplicants={this.uncheckAllApplicants}
+          checkApplicant={this.checkApplicant}
+          uncheckApplicant={this.uncheckApplicant}
+          checkedApplicants={checkedApplicants}
         />
       </div>
     );
