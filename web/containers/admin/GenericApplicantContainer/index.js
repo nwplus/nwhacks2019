@@ -197,7 +197,7 @@ class GenericApplicantContainer extends React.Component {
     for (let i = 0; i < filters.length; i += 1) {
       const filter = filters[i];
       const { selectedField, selectedOperator, selectedValue } = filter;
-      const conditional = `applicant.${selectedField}${selectedOperator}"${selectedValue}"`;
+      const conditional = `applicant["${selectedField}"]${selectedOperator}"${selectedValue}"`;
       conditionals.push(conditional);
     }
     // 2. Combine array of condtionals into final conditional
