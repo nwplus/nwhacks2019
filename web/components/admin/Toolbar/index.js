@@ -123,11 +123,11 @@ class Toolbar extends React.Component {
   render() {
     const { pageType } = this.props;
     const toolbar = this.renderToolbar();
-    const extraToolbar = this.renderAdditionalTools();
+    const extraToolbar = pageType === 'applicants' ? this.renderAdditionalTools() : null;
     return (
       <div>
         {toolbar}
-        {pageType === 'applicants' ? extraToolbar : null}
+        {extraToolbar}
       </div>
     );
   }
