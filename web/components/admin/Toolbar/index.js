@@ -7,6 +7,7 @@ import filterIconSelected from '../../../assets/filter-icon-selected.svg';
 import tagIcon from '../../../assets/internal/tag-icon.svg';
 import { Checkbox } from '../../input/buttons';
 import TagMenu from './TagMenu';
+import downloadIcon from '../../../assets/download-icon.svg';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -31,8 +32,7 @@ class Toolbar extends React.Component {
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection,
-    } = this.props;
+      switchSortType, sortType, switchSortDirection, sortDirection, exportApplicants } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -66,6 +66,15 @@ class Toolbar extends React.Component {
           <img
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
+        </div>
+        <div
+          className="pad-left-l toolbar-icon"
+          role="button"
+          onClick={exportApplicants}
+          tabIndex={0}>
+          <img
+            src={downloadIcon}
+            alt="export emails" />
         </div>
       </div>
     );
@@ -167,6 +176,8 @@ Toolbar.propTypes = {
   applicants: PropTypes.array,
   // 'assessment' or 'applicants'
   pageType: PropTypes.string,
+  // Exports all applicants into a csv
+  exportApplicants: PropTypes.func,
 };
 
 export default Toolbar;
