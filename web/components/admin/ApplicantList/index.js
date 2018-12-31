@@ -57,7 +57,9 @@ class ApplicantList extends React.Component {
               <Checkbox
                 value={id}
                 checked={checkedApplicantIds[id] != null}
-                onChange={() => (checkedApplicantIds[id] ? uncheckApplicant(id) : checkApplicant(id))}
+                onChange={() => (
+                  checkedApplicantIds[id] ? uncheckApplicant(id) : checkApplicant(id)
+                )}
                 isControlled
                 className="checkbox" />
               <div className="pad-left-m">
