@@ -2,14 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import update from 'immutability-helper';
-import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { isEqual } from 'lodash';
-import { PrimaryButton, SecondaryButton, Checkbox } from '../../../input/buttons';
+import { SecondaryButton, Checkbox } from '../../../input/buttons';
 import { TextInput } from '../../../input/text/TextInput';
-import { areAllObjectValuesNull } from '../../../../util/object';
-// import plusIcon from '../../../assets/plus-icon.svg';
 
 class TagMenu extends React.Component {
   static contextTypes = {
