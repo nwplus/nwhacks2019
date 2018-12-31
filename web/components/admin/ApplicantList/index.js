@@ -37,7 +37,7 @@ class ApplicantList extends React.Component {
   renderForApplicantsPage() {
     const {
       applicants, selectedApplicantId, onApplicantClick,
-      checkApplicant, uncheckApplicant, checkedApplicants,
+      checkApplicant, uncheckApplicant, checkedApplicantIds,
       className,
     } = this.props;
     let applicantNumber = 0;
@@ -56,8 +56,8 @@ class ApplicantList extends React.Component {
             >
               <Checkbox
                 value={id}
-                checked={checkedApplicants[id] != null}
-                onChange={() => (checkedApplicants[id] ? uncheckApplicant(id) : checkApplicant(id))}
+                checked={checkedApplicantIds[id] != null}
+                onChange={() => (checkedApplicantIds[id] ? uncheckApplicant(id) : checkApplicant(id))}
                 isControlled
                 className="checkbox" />
               <div className="pad-left-m">
@@ -109,7 +109,7 @@ ApplicantList.propTypes = {
   // when an applicant's checkbox is checked
   onApplicantCheck: PropTypes.func,
   // currently checked applicants
-  checkedApplicants: PropTypes.object,
+  checkedApplicantIds: PropTypes.object,
 };
 
 export default ApplicantList;

@@ -3,7 +3,17 @@ import PropTypes from 'prop-types';
 
 const InputContext = React.createContext({});
 
-const Checkbox = ({ name, value, label, className, checked, disabled, onChange, isControlled, isIndeterminate }) => (
+const Checkbox = ({
+  name,
+  value,
+  label,
+  className,
+  checked,
+  disabled,
+  onChange,
+  isControlled,
+  isIndeterminate,
+}) => (
   <InputContext.Consumer>
     {
       (context) => {

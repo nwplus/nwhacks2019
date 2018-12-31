@@ -267,7 +267,7 @@ class FilterModal extends React.Component {
           classNames={{
             modal: 'modal pad-sides-l pad-top-l',
           }}>
-          <h4 className="">{`Filter ${capitalizeFirstLetter(applicantType)}s`}</h4>
+          <h4>{`Filter ${capitalizeFirstLetter(applicantType)}s`}</h4>
           <div className="filters margin-top-l margin-bottom-m">
             {filters.map((filter, index) => (
               <FilterSelect

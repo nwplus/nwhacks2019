@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import flat from 'flat';
 import update from 'immutability-helper';
+import Axios from 'axios';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
@@ -28,7 +29,8 @@ class GenericApplicantContainer extends React.Component {
       sortType: 'timestamp',
       sortDirection: 'asc',
       // applicants with their checkbox checked
-      checkedApplicants: {},
+      checkedApplicantIds: {},
+      isTagMenuOpen: false,
     };
   }
 
@@ -44,6 +46,60 @@ class GenericApplicantContainer extends React.Component {
   getAppliedFilters = () => {
     const { appliedFilters } = this.state;
     return appliedFilters;
+  }
+
+  // returns tag menu options based on the currently checked applicants
+  getTagMenuOptions = () => {
+    const { applicantType, checkedApplicantIds } = this.state;
+    const { firestore } = this.props;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const { tags, [shortInfoCollectionName]: applicants } = firestore.data;
+    const numCheckedApplicants = Object.keys(checkedApplicantIds).length;
+    const numTags = Object.keys(tags).length;
+    // build initial empty tag options
+    const tagOptions = {};
+    Object.keys(tags).map(
+      key => tagOptions[key] = null
+    );
+    // update tagOptions through the iteration of checked applicants
+    for (let i = 0; i < numCheckedApplicants; i += 1) {
+      const applicantId = Object.keys(checkedApplicantIds)[i];
+      const applicant = applicants[applicantId];
+      for (let j = 0; j < numTags; j += 1) {
+        const tagName = Object.keys(tagOptions)[j];
+        const applicantHasTag = applicant.tags ? applicant.tags[tagName] : false;
+        let tagOption = tagOptions[tagName];
+        if (tagOption === null) {
+          tagOption = { isChecked: applicantHasTag, isIndeterminate: false };
+        }
+        if (applicantHasTag && !tagOption.isChecked) {
+          tagOption.isChecked = true;
+          tagOption.isIndeterminate = true;
+        } else if (!applicantHasTag && tagOption.isChecked) {
+          tagOption.isIndeterminate = true;
+        }
+        tagOptions[tagName] = tagOption;
+      }
+    }
+    return tagOptions;
+  }
+
+  // retrieves filtered and sorted array of applicants
+  getAllApplicants = () => {
+    const {
+      applicantType,
+      sortType,
+      sortDirection,
+    } = this.state;
+    const {
+      firestore,
+    } = this.props;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const applicants = firestore.ordered[shortInfoCollectionName];
+    const filteredApplicants = this.filterApplicants(applicants);
+    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
+    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+    return sortedApplicants;
   }
 
   // handles selecting an applicant
@@ -215,56 +271,67 @@ class GenericApplicantContainer extends React.Component {
     this.setState({ sortDirection: newSortDirection });
   };
 
-  // checks all applicants (adds all applicants to this.state.checkedApplicants)
+  // checks all applicants (adds all applicants to this.state.checkedApplicantIds)
   checkAllApplicants = () => {
     const applicants = this.getAllApplicants() || [];
-    const checkedApplicants = {};
+    const checkedApplicantIds = {};
     for (let i = 0; i < applicants.length; i += 1) {
       const applicantId = applicants[i].id;
-      checkedApplicants[applicantId] = true;
+      checkedApplicantIds[applicantId] = true;
     }
-    this.setState({ checkedApplicants }, () => console.log(this.state.checkedApplicants));
+    this.setState({ checkedApplicantIds });
   }
 
-  // unchecks all applicants (empties this.state.checkedApplicants)
+  // unchecks all applicants (empties this.state.checkedApplicantIds)
   uncheckAllApplicants = () => {
-    this.setState({ checkedApplicants: {} }, () => console.log(this.state.checkedApplicants));
+    this.setState({ checkedApplicantIds: {} });
   }
 
-  // checks a given applicant (adds applicant to this.state.checkedApplicants)
+  // checks a given applicant (adds applicant to this.state.checkedApplicantIds)
   checkApplicant = (applicantId) => {
     const newState = update(this.state, {
-      checkedApplicants: {
+      checkedApplicantIds: {
         [applicantId]: {
           $set: true,
         },
       },
     });
-    this.setState(newState, () => console.log(this.state.checkedApplicants));
+    this.setState(newState);
   }
 
-  // unchecks a given applicant (removes applicant from this.state.checkedApplicants)
+  // unchecks a given applicant (removes applicant from this.state.checkedApplicantIds)
   uncheckApplicant = (applicantId) => {
-    const { checkedApplicants: { [applicantId]: deletedValue, ...rest } } = this.state;
-    this.setState({ checkedApplicants: rest }, () => console.log(this.state.checkedApplicants));
+    const { checkedApplicantIds: { [applicantId]: deletedValue, ...rest } } = this.state;
+    this.setState({ checkedApplicantIds: rest });
   }
 
-  // retrieves filtered and sorted array of applicants
-  getAllApplicants = () => {
-    const {
-      applicantType,
-      sortType,
-      sortDirection,
-    } = this.state;
-    const {
-      firestore,
-    } = this.props;
-    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicants = firestore.ordered[shortInfoCollectionName];
-    const filteredApplicants = this.filterApplicants(applicants);
-    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
-    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
-    return sortedApplicants;
+  // shows/hides tag menu
+  toggleTagMenu = () => {
+    const { isTagMenuOpen, isApplyingTags } = this.state;
+    this.setState({
+      isTagMenuOpen: !isTagMenuOpen,
+      isApplyingTags: !isApplyingTags,
+      tagOptions: null,
+    });
+  }
+
+  // creates a new tag, and returns the name of the tag if successfully created
+  createNewTag = (tagName) => {
+    const { store } = this.context;
+    const { firestore: db } = store;
+    const { firestore } = this.props;
+    const { tags } = firestore.data;
+    if (tagName !== '' && tagName != null && tags[tagName] === undefined) {
+      tagName = tagName.trim();
+      tagName = tagName.trim().replace(/ /g, '-');
+      db.collection('tags').doc(tagName).set({});
+      return tagName;
+    }
+    return null;
+  }
+
+  applyTags = (tagOptions) => {
+    // todo
   }
 
   renderAssessmentPage = () => {
@@ -314,7 +381,8 @@ class GenericApplicantContainer extends React.Component {
       areFiltersApplied,
       sortType,
       sortDirection,
-      checkedApplicants,
+      checkedApplicantIds,
+      isTagMenuOpen,
     } = this.state;
 
     const applicants = this.getAllApplicants();
@@ -345,7 +413,12 @@ class GenericApplicantContainer extends React.Component {
           uncheckAllApplicants={this.uncheckAllApplicants}
           checkApplicant={this.checkApplicant}
           uncheckApplicant={this.uncheckApplicant}
-          checkedApplicants={checkedApplicants}
+          toggleTagMenu={this.toggleTagMenu}
+          isTagMenuOpen={isTagMenuOpen}
+          getTagMenuOptions={this.getTagMenuOptions}
+          checkedApplicantIds={checkedApplicantIds}
+          createNewTag={this.createNewTag}
+          applyTags={this.applyTags}
         />
       </div>
     );
@@ -365,6 +438,7 @@ class GenericApplicantContainer extends React.Component {
 
 GenericApplicantContainer.propTypes = {
   firestore: PropTypes.object,
+  firebase: PropTypes.object,
   pageType: PropTypes.string, // 'assessment' or 'applicants'
 };
 

@@ -26,7 +26,12 @@ const ApplicantsPage = ({
   uncheckAllApplicants,
   checkApplicant,
   uncheckApplicant,
-  checkedApplicants,
+  checkedApplicantIds,
+  toggleTagMenu,
+  isTagMenuOpen,
+  getTagMenuOptions,
+  createNewTag,
+  applyTags,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -42,8 +47,13 @@ const ApplicantsPage = ({
       sortDirection={sortDirection}
       checkAllApplicants={checkAllApplicants}
       uncheckAllApplicants={uncheckAllApplicants}
-      checkedApplicants={checkedApplicants}
+      checkedApplicantIds={checkedApplicantIds}
       applicants={applicants}
+      toggleTagMenu={toggleTagMenu}
+      isTagMenuOpen={isTagMenuOpen}
+      getTagMenuOptions={getTagMenuOptions}
+      createNewTag={createNewTag}
+      applyTags={applyTags}
       />
     <FilterModal
       isOpen={isSelectingFilters}
@@ -61,7 +71,7 @@ const ApplicantsPage = ({
         onApplicantClick={onApplicantClick}
         checkApplicant={checkApplicant}
         uncheckApplicant={uncheckApplicant}
-        checkedApplicants={checkedApplicants}
+        checkedApplicantIds={checkedApplicantIds}
         className={`${!selectedApplicantId ? 'fill-min-width' : ''}`}
         />
       {/* APPLICANT TAG INFO & SCORE HISTORY */}
@@ -120,7 +130,17 @@ ApplicantsPage.propTypes = {
   // unchecks a specific applicant
   uncheckApplicant: PropTypes.func,
   // currently checked applicants
-  checkedApplicants: PropTypes.object,
+  checkedApplicantIds: PropTypes.object,
+  // shows/hides the tag menu
+  toggleTagMenu: PropTypes.func,
+  // is the tag menu currently open
+  isTagMenuOpen: PropTypes.bool,
+  // returns tag menu options
+  getTagMenuOptions: PropTypes.func,
+  // handler to create a new tag
+  createNewTag: PropTypes.func,
+  // handler to apply (add/remove) tags from an array of applicants
+  applyTags: PropTypes.func,
 };
 
 export default ApplicantsPage;

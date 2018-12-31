@@ -6,6 +6,7 @@ import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
 import tagIcon from '../../../assets/internal/tag-icon.svg';
 import { Checkbox } from '../../input/buttons';
+import TagMenu from './TagMenu';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -31,8 +32,6 @@ class Toolbar extends React.Component {
       areFiltersApplied,
       showFilterOptions,
       switchSortType, sortType, switchSortDirection, sortDirection,
-      checkAllApplicants, uncheckAllApplicants, checkApplicant, uncheckApplicant,
-      checkedApplicants, applicants,
     } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
@@ -75,14 +74,17 @@ class Toolbar extends React.Component {
   renderAdditionalTools = () => {
     const {
       className,
+      applicantType,
+      toggleTagMenu, isTagMenuOpen, getTagMenuOptions,
       checkAllApplicants, uncheckAllApplicants, checkApplicant, uncheckApplicant,
-      checkedApplicants, applicants,
+      checkedApplicantIds, applicants,
+      createNewTag, applyTags,
     } = this.props;
     // a checkbox is indeterminate when it's checked value only applies to some applicants
-    const numCheckedApplicants = Object.keys(checkedApplicants).length;
-    const checkboxIsIndeterminate = checkedApplicants
-      && numCheckedApplicants > 0
-      && numCheckedApplicants !== applicants.length;
+    const numcheckedApplicantIds = Object.keys(checkedApplicantIds).length;
+    const checkboxIsIndeterminate = checkedApplicantIds
+      && numcheckedApplicantIds > 0
+      && numcheckedApplicantIds !== applicants.length;
     return (
       <div className={`extra-toolbar flex ai-center fill-width ${className}`}>
         <Checkbox
@@ -91,7 +93,20 @@ class Toolbar extends React.Component {
           onChange={e => ((e.target.checked) ? checkAllApplicants() : uncheckAllApplicants())}
           isIndeterminate={checkboxIsIndeterminate}
           label="Select all" />
-        <div className="tag-button flex ai-center clickable user-select-none"><img alt="tag" src={tagIcon} />Tag</div>
+        <div
+          className="tag-button flex ai-center clickable user-select-none"
+          onClick={toggleTagMenu}>
+          <img alt="tag" src={tagIcon} />Tag
+        </div>
+        <TagMenu
+          applicantType={applicantType}
+          isOpen={isTagMenuOpen}
+          hideTagMenu={toggleTagMenu}
+          checkedApplicantIds={checkedApplicantIds}
+          getTagMenuOptions={getTagMenuOptions}
+          createNewTag={createNewTag}
+          applyTags={applyTags}
+        />
       </div>
     );
   }
@@ -137,7 +152,17 @@ Toolbar.propTypes = {
   // unchecks all applicants
   uncheckAllApplicants: PropTypes.func,
   // currently checked applicants
-  checkedApplicants: PropTypes.object,
+  checkedApplicantIds: PropTypes.object,
+  // shows/hides the tag menu
+  toggleTagMenu: PropTypes.func,
+  // is the tag menu currently open
+  isTagMenuOpen: PropTypes.bool,
+  // returns tag menu options
+  getTagMenuOptions: PropTypes.func,
+  // handler to create a new tag
+  createNewTag: PropTypes.func,
+  // handler to apply (add/remove) tags from an array of applicants
+  applyTags: PropTypes.func,
   // all applicants (after filters are applied)
   applicants: PropTypes.array,
   // 'assessment' or 'applicants'
