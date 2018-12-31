@@ -16,7 +16,7 @@ const generateTagColor = (tagName) => {
 const Tag = ({ tagName, deleteTag, allowDelete }) => {
   const tagColor = generateTagColor(tagName);
   return (
-    <div className="tag" style={tagColor}>
+    <div className="tag-label" style={tagColor}>
       <div className="tag-name">
         {tagName}
       </div>
