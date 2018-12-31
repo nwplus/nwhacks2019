@@ -20,7 +20,7 @@ import volunteerSuccessPage from '../application/volunteer/pages/SuccessPage/Suc
 import NotFound from '../errors/NotFound';
 import DashBoard from '../dashboard';
 import RSVP from '../rsvp';
-import volunteerRSVP from '../rsvp/volunteer.js';
+import volunteerRSVP from '../rsvp/volunteer';
 
 // Demo
 import UIDemo from '../demo';

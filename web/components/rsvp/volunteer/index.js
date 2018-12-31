@@ -4,18 +4,18 @@ import { withFirebase } from 'react-redux-firebase';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 
-import { TextInput } from '../input/text';
-import { Select } from '../input/select';
-import { SecondaryButton, PrimaryButton } from '../input/buttons';
+import { TextInput } from '../../input/text';
+import { Select } from '../../input/select';
+import { SecondaryButton, PrimaryButton } from '../../input/buttons';
 
-import { tShirtSizes } from './tShirtSizes';
-import { dietRestrictions } from './dietRestrictions';
+import { tShirtSizes } from '../tShirtSizes';
+import { dietRestrictions } from '../dietRestrictions';
 
-import praise from '../../assets/emoji/praise.svg';
-import sparkle from '../../assets/emoji/sparkle.svg';
-import celebrate from '../../assets/emoji/celebrate.svg';
+import praise from '../../../assets/emoji/praise.svg';
+import sparkle from '../../../assets/emoji/sparkle.svg';
+import celebrate from '../../../assets/emoji/celebrate.svg';
 
-import rsvpSuccessGraphic from '../../assets/rsvpSuccess.svg';
+import rsvpSuccessGraphic from '../../../assets/rsvpSuccess.svg';
 
 class volunteerRSVP extends React.Component {
   constructor(props) {
@@ -48,7 +48,6 @@ class volunteerRSVP extends React.Component {
       if (res.status === 200) {
         const { rsvped, firstName } = res.data;
 
-        // test the following boolean
         if (firstName === '') {
           console.log('Did not find valid ID');
           this.setState({ isIDValid: false });
