@@ -94,6 +94,7 @@ class Toolbar extends React.Component {
     const checkboxIsIndeterminate = checkedApplicantIds
       && numcheckedApplicantIds > 0
       && numcheckedApplicantIds !== applicants.length;
+    console.log(numcheckedApplicantIds);
     return (
       <div className={`extra-toolbar flex ai-center fill-width ${className}`}>
         <Checkbox
@@ -102,11 +103,14 @@ class Toolbar extends React.Component {
           onChange={e => ((e.target.checked) ? checkAllApplicants() : uncheckAllApplicants())}
           isIndeterminate={checkboxIsIndeterminate}
           label="Select all" />
-        <div
-          className="tag-button flex ai-center clickable user-select-none"
-          onClick={toggleTagMenu}>
-          <img alt="tag" src={tagIcon} />Tag
-        </div>
+        {numcheckedApplicantIds > 0
+          ? (
+            <div
+              className="tag-button flex ai-center clickable user-select-none"
+              onClick={toggleTagMenu}>
+              <img alt="tag" src={tagIcon} />Tag
+            </div>
+          ) : null}
         <TagMenu
           applicantType={applicantType}
           isOpen={isTagMenuOpen}
