@@ -26,7 +26,7 @@ exports.checkValidIDvolunteer = functions.https.onRequest((request, response) =>
         if ('rsvp' in doc.data()) {
           console.log('Found doc but already RSVPed');
           data.rsvped = true;
-        } 
+        }
       }
 
       return data;
