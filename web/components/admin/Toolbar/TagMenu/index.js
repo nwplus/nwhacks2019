@@ -21,6 +21,7 @@ class TagMenu extends React.Component {
     this.defaultState = {
       tagOptions: {},
       newTagName: '',
+      isApplyingTags: false,
     };
     this.state = this.defaultState;
   }
@@ -35,7 +36,8 @@ class TagMenu extends React.Component {
   // when tag menu is opened
   onOpen = () => {
     const { getTagMenuOptions } = this.props;
-    this.setState({ tagOptions: getTagMenuOptions() });
+    getTagMenuOptions(tagOptions => this.setState({ tagOptions }));
+    // this.setState({ tagOptions: getTagMenuOptions( });
   }
 
   // handler that's called when "Create New Tag" button is clicked
@@ -69,12 +71,35 @@ class TagMenu extends React.Component {
         },
       },
     });
-    console.log(tagOption);
     this.setState(newState);
   }
 
+  // when apply button is clicked
+  onApplyTags = (tagOptions) => {
+    this.setState({
+      isApplyingTags: true,
+    }, () => {
+      const { applyTags } = this.props;
+      applyTags(tagOptions, this.onApplyTagsSuccess, this.onApplyTagsFail);
+    });
+  }
+
+  // when tags are successfully applied
+  onApplyTagsSuccess = () => {
+    const { hideTagMenu } = this.props;
+    this.setState(this.defaultState);
+    hideTagMenu();
+  }
+
+  // when tags fail to apply successfully
+  onApplyTagsFail = () => {
+    // eslint-disable-next-line no-alert
+    window.alert('Failed to apply tags!');
+    this.setState({ isApplyingTags: false });
+  }
+
   render() {
-    const { isOpen, applyTags } = this.props;
+    const { isOpen } = this.props;
     const { tagOptions, newTagName } = this.state;
     return (
       <Modal
@@ -114,8 +139,8 @@ class TagMenu extends React.Component {
                 <Checkbox
                   value={tagName}
                   label={tagName}
-                  checked={isChecked}
-                  isIndeterminate={isIndeterminate}
+                  checked={isChecked || false}
+                  isIndeterminate={isIndeterminate || false}
                   onChange={() => this.onTagOptionChange(tagName, isChecked)}
                   isControlled
                 />
@@ -125,7 +150,7 @@ class TagMenu extends React.Component {
         </div>
         <div
           className="apply-button clickable user-select-none"
-          onClick={() => applyTags(tagOptions)}> Apply
+          onClick={() => this.onApplyTags(tagOptions)}> Apply
         </div>
       </Modal>
     );
@@ -151,7 +176,6 @@ TagMenu.propTypes = {
   getTagMenuOptions: PropTypes.func,
   // additional styles
   className: PropTypes.string,
-  firestore: PropTypes.object,
 };
 
 export default TagMenu;

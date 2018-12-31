@@ -85,7 +85,7 @@ class Toolbar extends React.Component {
       className,
       applicantType,
       toggleTagMenu, isTagMenuOpen, getTagMenuOptions,
-      checkAllApplicants, uncheckAllApplicants, checkApplicant, uncheckApplicant,
+      checkAllApplicants, uncheckAllApplicants,
       checkedApplicantIds, applicants,
       createNewTag, applyTags,
     } = this.props;

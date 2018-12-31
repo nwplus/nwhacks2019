@@ -50,11 +50,14 @@ class GenericApplicantContainer extends React.Component {
   }
 
   // returns tag menu options based on the currently checked applicants
-  getTagMenuOptions = () => {
+  // TODO: make this a cloud function to avoid local storage inconsistencies
+  // currently fetches directly from DB instead of local cache to avoid inconsistencies
+  getTagMenuOptions = (callback) => {
     const { applicantType, checkedApplicantIds } = this.state;
     const { firestore } = this.props;
+    const { store: { firestore: db } } = this.context;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const { tags, [shortInfoCollectionName]: applicants } = firestore.data;
+    const { tags } = firestore.data;
     const numCheckedApplicants = Object.keys(checkedApplicantIds).length;
     const numTags = Object.keys(tags).length;
     // build initial empty tag options
@@ -62,27 +65,31 @@ class GenericApplicantContainer extends React.Component {
     Object.keys(tags).map(
       key => tagOptions[key] = null
     );
-    // update tagOptions through the iteration of checked applicants
-    for (let i = 0; i < numCheckedApplicants; i += 1) {
-      const applicantId = Object.keys(checkedApplicantIds)[i];
-      const applicant = applicants[applicantId];
-      for (let j = 0; j < numTags; j += 1) {
-        const tagName = Object.keys(tagOptions)[j];
-        const applicantHasTag = applicant.tags ? applicant.tags[tagName] : false;
-        let tagOption = tagOptions[tagName];
-        if (tagOption === null) {
-          tagOption = { isChecked: applicantHasTag, isIndeterminate: false };
+    db.collection(shortInfoCollectionName).get().then((docs) => {
+      const applicants = {};
+      docs.forEach(doc => applicants[doc.id] = doc.data());
+      // update tagOptions through the iteration of checked applicants
+      for (let i = 0; i < numCheckedApplicants; i += 1) {
+        const applicantId = Object.keys(checkedApplicantIds)[i];
+        const applicant = applicants[applicantId];
+        for (let j = 0; j < numTags; j += 1) {
+          const tagName = Object.keys(tagOptions)[j];
+          const applicantHasTag = applicant.tags ? applicant.tags[tagName] : false;
+          let tagOption = tagOptions[tagName];
+          if (tagOption === null) {
+            tagOption = { isChecked: applicantHasTag, isIndeterminate: false };
+          }
+          if (applicantHasTag && !tagOption.isChecked) {
+            tagOption.isChecked = true;
+            tagOption.isIndeterminate = true;
+          } else if (!applicantHasTag && tagOption.isChecked) {
+            tagOption.isIndeterminate = true;
+          }
+          tagOptions[tagName] = tagOption;
         }
-        if (applicantHasTag && !tagOption.isChecked) {
-          tagOption.isChecked = true;
-          tagOption.isIndeterminate = true;
-        } else if (!applicantHasTag && tagOption.isChecked) {
-          tagOption.isIndeterminate = true;
-        }
-        tagOptions[tagName] = tagOption;
       }
-    }
-    return tagOptions;
+      callback(tagOptions);
+    });
   }
 
   // retrieves filtered and sorted array of applicants
@@ -136,6 +143,7 @@ class GenericApplicantContainer extends React.Component {
     this.setState({
       applicantType: newApplicantType,
       selectedApplicantId: null,
+      checkedApplicantIds: {},
     }, () => {
       this.loadApplicants(); // add listener for new applicantType's collections
     });
@@ -163,6 +171,7 @@ class GenericApplicantContainer extends React.Component {
       areFiltersApplied: newFiltersExist,
       appliedFilters: newFilters,
       filterExpression: this.compileFilters(newFilters),
+      checkedApplicantIds: {},
     });
   }
 
@@ -331,8 +340,42 @@ class GenericApplicantContainer extends React.Component {
     return null;
   }
 
-  applyTags = (tagOptions) => {
-    // todo
+  applyTags = (tagOptions, onSuccess, onFail) => {
+    const { firebase } = this.props;
+    const { applicantType, checkedApplicantIds } = this.state;
+    const tagsToAdd = [];
+    const tagsToRemove = [];
+    Object.keys(tagOptions).forEach((tagName) => {
+      const tagOption = tagOptions[tagName];
+      if (!tagOption.isIndeterminate) {
+        if (tagOption.isChecked) {
+          tagsToAdd.push(tagName);
+        } else {
+          tagsToRemove.push(tagName);
+        }
+      }
+    });
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(idToken => Axios.post(
+      firebase.nwUtils.getFunctionUrl('tagApplicants'),
+      {
+        applicantType,
+        applicants: Object.keys(checkedApplicantIds),
+        tagsToAdd,
+        tagsToRemove,
+      },
+      {
+        headers: {
+          'Content-Type': 'text/plain',
+          Authorization: idToken,
+        },
+      }
+    ).then((res) => {
+      if (res.status === 200) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    }).catch(() => onFail()));
   }
 
   exportApplicants = () => {
