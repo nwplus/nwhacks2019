@@ -7,6 +7,7 @@ import applicantCollections from '../../../util/applicantCollections';
 import { FIELDS, TRAVEL } from './FieldLabels';
 import ShortField from './ShortField';
 import LongField from './LongField';
+import { decodeUnixTimestamp } from '../../../util/date';
 
 const mapPropsToQueries = (props) => {
   const { applicantType, applicantId } = props;
@@ -64,6 +65,7 @@ class ApplicantInfo extends React.Component {
   getAllFieldNames = () => {
     return {
       shortInfo: [
+        'timestamp',
         'firstName',
         'lastName',
         'email',
@@ -109,6 +111,7 @@ class ApplicantInfo extends React.Component {
           const label = FIELDS[fieldName];
           let value = shortInfo ? shortInfo[fieldName] : '';
           if (fieldName === 'travel') value = TRAVEL[value];
+          if (fieldName === 'timestamp') value = decodeUnixTimestamp(value);
           return (
             <ShortField
               key={label}

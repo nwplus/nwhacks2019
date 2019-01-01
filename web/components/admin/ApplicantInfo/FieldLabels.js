@@ -1,4 +1,5 @@
 const FIELDS = {
+  timestamp: 'Submitted',
   firstName: 'First name',
   lastName: 'Last name',
   email: 'Email',

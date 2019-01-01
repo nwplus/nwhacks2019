@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import applicantCollections from '../../../../../util/applicantCollections';
 import { criteria } from '../../Criteria';
+import { decodeUnixTimestamp } from '../../../../../util/date';
 
 const mapPropsToQueries = (props) => {
   const { applicantType, applicantId } = props;
@@ -51,12 +52,7 @@ class ScoreHistory extends React.Component {
   }
 
   // converts unix timestamp to string of form 'HH:MM AM/PM SHORT_MONTH DAY YEAR'
-  getDateLastScored = (unixTimestamp) => {
-    const dateObj = new Date(unixTimestamp);
-    const time = dateObj.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    const date = dateObj.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    return `${time} ${date}`.replace(/,/, '');
-  }
+  getDateLastScored = unixTimestamp => decodeUnixTimestamp(unixTimestamp)
 
   // returns applicant's score info for a given criteria
   getCriteriaInfo = (criteriaName) => {
