@@ -103,6 +103,26 @@ class GenericApplicantContainer extends React.Component {
     });
   }
 
+  // refreshes a particular applicant in this.state.applicants
+  refreshApplicant = (applicantId) => {
+    const {
+      applicantType,
+      applicants,
+    } = this.state;
+    const { store: { firestore: db } } = this.context;
+    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const newApplicants = [];
+    db.collection(shortInfoCollectionName).doc(applicantId).get().then((doc) => {
+      const selectedApplicant = doc.data();
+      for (let i = 0; i < applicants.length; i += 1) {
+        let applicant = applicants[i];
+        if (applicants[i].id === applicantId) applicant = selectedApplicant;
+        newApplicants.push(applicant);
+      }
+      this.setState({ applicants: newApplicants });
+    });
+  }
+
   // handles selecting an applicant
   selectApplicant = (applicantId) => {
     this.setState({ selectedApplicantId: applicantId });
@@ -114,7 +134,7 @@ class GenericApplicantContainer extends React.Component {
       applicantType: newApplicantType,
       selectedApplicantId: null,
       checkedApplicantIds: {},
-    }, this.applyFilters([]));
+    }, this.refreshApplicants);
   }
 
   // shows filter modal
@@ -141,12 +161,6 @@ class GenericApplicantContainer extends React.Component {
       filterExpression: this.compileFilters(newFilters),
       checkedApplicantIds: {},
     }, this.refreshApplicants);
-  }
-
-  // reapply filters
-  reapplyFilters = () => {
-    const { appliedFilters } = this.state;
-    this.applyFilters(appliedFilters);
   }
 
   // handles filtering a list of applicants based on a filter expression
@@ -345,7 +359,6 @@ class GenericApplicantContainer extends React.Component {
       }
     ).then((res) => {
       if (res.status === 200) {
-        this.reapplyFilters();
         onSuccess();
       } else {
         onFail();
@@ -425,7 +438,7 @@ class GenericApplicantContainer extends React.Component {
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
-          reapplyFilters={this.reapplyFilters}
+          refreshApplicant={this.refreshApplicant}
         />
       </div>
     );
@@ -483,7 +496,6 @@ class GenericApplicantContainer extends React.Component {
           createNewTag={this.createNewTag}
           applyTags={this.applyTags}
           exportApplicants={this.exportApplicants}
-          reapplyFilters={this.reapplyFilters}
         />
       </div>
     );
