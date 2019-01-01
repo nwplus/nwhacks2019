@@ -103,7 +103,7 @@ class GenericApplicantContainer extends React.Component {
       firestore,
     } = this.props;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicants = firestore.ordered[shortInfoCollectionName];
+    const applicants = Object.values(firestore.data[shortInfoCollectionName]);
     const filteredApplicants = this.filterApplicants(applicants);
     let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
     if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
@@ -146,6 +146,7 @@ class GenericApplicantContainer extends React.Component {
       checkedApplicantIds: {},
     }, () => {
       this.loadApplicants(); // add listener for new applicantType's collections
+      this.resetFilters();
     });
   }
 
@@ -173,6 +174,17 @@ class GenericApplicantContainer extends React.Component {
       filterExpression: this.compileFilters(newFilters),
       checkedApplicantIds: {},
     });
+  }
+
+  // reapply applied filters
+  reapplyFilters = () => {
+    const { appliedFilters } = this.state;
+    this.applyFilters(appliedFilters);
+  }
+
+  // removes any applied filters
+  resetFilters = () => {
+    this.applyFilters([]);
   }
 
   // handles filtering a list of applicants based on a filter expression
@@ -371,6 +383,7 @@ class GenericApplicantContainer extends React.Component {
       }
     ).then((res) => {
       if (res.status === 200) {
+        this.reapplyFilters();
         onSuccess();
       } else {
         onFail();
@@ -379,8 +392,9 @@ class GenericApplicantContainer extends React.Component {
   }
 
   exportApplicants = () => {
-    const { applicants, checkedApplicantIds } = this.state;
+    const { checkedApplicantIds } = this.state;
     const checkedApplicants = [];
+    const applicants = this.getAllApplicants();
     applicants.forEach((applicant) => {
       if (checkedApplicantIds[applicant.id]) {
         checkedApplicants.push(applicant);
@@ -422,7 +436,6 @@ class GenericApplicantContainer extends React.Component {
     } = this.state;
 
     const applicants = this.getAllApplicants();
-
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }
