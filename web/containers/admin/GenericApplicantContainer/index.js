@@ -134,8 +134,7 @@ class GenericApplicantContainer extends React.Component {
       applicantType: newApplicantType,
       selectedApplicantId: null,
       checkedApplicantIds: {},
-    }, () => {
-    });
+    }, this.refreshApplicants);
   }
 
   // shows filter modal
