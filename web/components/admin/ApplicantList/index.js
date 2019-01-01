@@ -57,7 +57,6 @@ class ApplicantList extends React.Component {
               <Checkbox
                 value={id}
                 checked={checkedApplicantIds[id] != null}
-                onClick={(event) => { event.stopPropagation(); console.log(event, event.ctrlKey); if (event.ctrlKey) { console.log("Ctrl+click has just happened!"); } }}
                 onChange={() => (
                   checkedApplicantIds[id] ? uncheckApplicant(id) : checkApplicant(id)
                 )}

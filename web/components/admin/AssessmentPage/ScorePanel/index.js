@@ -59,7 +59,7 @@ class ScorePanel extends React.Component {
   setCriteriaInfo = (criteriaName, score) => {
     const { store } = this.context;
     const { firestore, firebase } = store;
-    const { applicantId, refreshApplicant } = this.props;
+    const { applicantId } = this.props;
     if (applicantId && criteriaName && typeof score === 'number') {
       const auth = firebase.auth();
       const { currentUser: { uid } } = auth;
@@ -80,7 +80,7 @@ class ScorePanel extends React.Component {
         const finalScore = calculateFinalScore(scores);
         applicantScore['score.finalScore'] = finalScore;
       }
-      applicantRef.update(applicantScore).then(refreshApplicant(applicantId));
+      applicantRef.update(applicantScore);
     }
   }
 
@@ -135,7 +135,6 @@ ScorePanel.propTypes = {
   firestore: PropTypes.object,
   applicantType: PropTypes.string,
   applicantId: PropTypes.string,
-  refreshApplicant: PropTypes,
   className: PropTypes.string,
 };
 

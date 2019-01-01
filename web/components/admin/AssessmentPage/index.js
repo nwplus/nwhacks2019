@@ -22,7 +22,6 @@ const AssessmentPage = ({
   switchSortType,
   switchSortDirection,
   sortDirection,
-  refreshApplicant,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -58,7 +57,6 @@ const AssessmentPage = ({
         applicantId={selectedApplicantId}
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}
-        refreshApplicant={refreshApplicant}
       />
       {/* APPLICANT INFO PANEL */}
       <ApplicantInfo
@@ -104,8 +102,8 @@ AssessmentPage.propTypes = {
   sortDirection: PropTypes.string,
   // Exports all applicants into a csv
   exportApplicants: PropTypes.func,
-  // Refreshes an applicant by applicantId
-  refreshApplicant: PropTypes,
+
+
 };
 
 export default AssessmentPage;

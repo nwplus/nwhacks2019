@@ -85,7 +85,7 @@ class GenericApplicantContainer extends React.Component {
   }
 
   // fills this.state.applicants with filtered and sorted array of applicants
-  refreshApplicants = () => {
+  populateApplicants = () => {
     const {
       applicantType,
       sortType,
@@ -100,26 +100,6 @@ class GenericApplicantContainer extends React.Component {
       let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
       if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
       this.setState({ applicants: sortedApplicants });
-    });
-  }
-
-  // refreshes a particular applicant in this.state.applicants
-  refreshApplicant = (applicantId) => {
-    const {
-      applicantType,
-      applicants,
-    } = this.state;
-    const { store: { firestore: db } } = this.context;
-    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const newApplicants = [];
-    db.collection(shortInfoCollectionName).doc(applicantId).get().then((doc) => {
-      const selectedApplicant = doc.data();
-      for (let i = 0; i < applicants.length; i += 1) {
-        let applicant = applicants[i];
-        if (applicants[i].id === applicantId) applicant = selectedApplicant;
-        newApplicants.push(applicant);
-      }
-      this.setState({ applicants: newApplicants });
     });
   }
 
@@ -161,7 +141,7 @@ class GenericApplicantContainer extends React.Component {
       appliedFilters: newFilters,
       filterExpression: this.compileFilters(newFilters),
       checkedApplicantIds: {},
-    }, this.refreshApplicants);
+    }, this.populateApplicants);
   }
 
   // handles filtering a list of applicants based on a filter expression
@@ -413,7 +393,7 @@ class GenericApplicantContainer extends React.Component {
     const { applicants } = this.state;
 
     if (applicants === undefined) {
-      this.refreshApplicants();
+      this.populateApplicants();
       return (<span>Fetching applicants...</span>);
     }
 
@@ -439,7 +419,6 @@ class GenericApplicantContainer extends React.Component {
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
-          refreshApplicant={this.refreshApplicant}
         />
       </div>
     );
@@ -460,7 +439,7 @@ class GenericApplicantContainer extends React.Component {
     const { applicants } = this.state;
 
     if (applicants === undefined) {
-      this.refreshApplicants();
+      this.populateApplicants();
       return (<span>Fetching applicants...</span>);
     }
 
