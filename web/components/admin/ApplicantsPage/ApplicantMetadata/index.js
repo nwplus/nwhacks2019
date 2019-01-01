@@ -56,12 +56,13 @@ class ApplicantMetadata extends React.Component {
     const { className } = this.props;
     const applicantInfo = this.getApplicantShortInfo();
     const { tags } = applicantInfo || {};
+    const applicantHasTags = tags && Object.keys(tags).length > 0;
     return (
       <div className={`applicant-metadata flex jc-between dir-col ${className}`} zoom="50%">
         <div className="tags">
           <div className="primary-text">Tags</div>
           <div className="flex wrap">
-            {tags ? Object.keys(tags).map(tagName => (
+            {applicantHasTags ? Object.keys(tags).map(tagName => (
               <Tag
                 tagName={tagName}
                 key={tagName}
