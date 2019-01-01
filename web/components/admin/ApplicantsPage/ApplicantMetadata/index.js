@@ -41,14 +41,14 @@ class ApplicantMetadata extends React.Component {
 
   // removes a tag from applicant
   removeTagFromApplicant = (tagName) => {
-    const { applicantId } = this.props;
+    const { applicantId, reapplyFilters } = this.props;
     const { store: { firestore: db } } = this.context;
     const { tags } = this.getApplicantShortInfo() || {};
     if (tags != null) {
       delete tags[tagName];
       const collectionName = this.getApplicantShortInfoCollectionName();
       const applicantRef = db.collection(collectionName).doc(applicantId);
-      applicantRef.update({ tags });
+      applicantRef.update({ tags }).then(() => reapplyFilters());
     }
   }
 
@@ -83,6 +83,7 @@ ApplicantMetadata.propTypes = {
   applicantId: PropTypes.string,
   applicantType: PropTypes.string,
   className: PropTypes.string,
+  reapplyFilters: PropTypes.func,
 };
 
 export default compose(

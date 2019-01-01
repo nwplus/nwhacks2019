@@ -33,6 +33,7 @@ const ApplicantsPage = ({
   createNewTag,
   applyTags,
   exportApplicants,
+  reapplyFilters,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -81,6 +82,7 @@ const ApplicantsPage = ({
         applicantId={selectedApplicantId}
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}
+        reapplyFilters={reapplyFilters}
       />
       {/* APPLICANT INFO PANEL */}
       <ApplicantInfo
@@ -145,6 +147,8 @@ ApplicantsPage.propTypes = {
   applyTags: PropTypes.func,
   // Exports all applicants into a csv
   exportApplicants: PropTypes.func,
+  // Reapplies filters
+  reapplyFilters: PropTypes.func,
 };
 
 export default ApplicantsPage;
