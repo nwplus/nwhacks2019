@@ -4,7 +4,7 @@ import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebas
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import applicantCollections from '../../../util/applicantCollections';
-import { FIELDS, TRAVEL } from './FieldLabels';
+import { fieldLabels, travelLabels } from './fieldLabels';
 import ShortField from './ShortField';
 import LongField from './LongField';
 import { decodeUnixTimestamp } from '../../../util/date';
@@ -45,73 +45,27 @@ class ApplicantInfo extends React.Component {
   };
 
   // returns field names needed for assessing applicants
-  getAssessmentFieldNamesOnly = () => {
-    return {
-      shortInfo: [
-        'isFirstHackathon',
-        'githubLink',
-        'personalWebsiteLink',
-        'linkedInLink',
-        'resumeLink',
-      ],
-      longInfo: [
-        'interestForNwHacks',
-        'recentProject',
-      ],
-    };
-  };
+  getAssessmentFieldNamesOnly = applicantType => fieldLabels[applicantType]['assessment-only'];
 
   // returns all field names for an applicant
-  getAllFieldNames = () => {
-    return {
-      shortInfo: [
-        'timestamp',
-        'firstName',
-        'lastName',
-        'email',
-        'birthdate',
-        'gender',
-        'ethnicity',
-        'city',
-        'travel',
-        'phoneNumber',
-        'school',
-        'education',
-        'major',
-        'gradYear',
-        'isFirstHackathon',
-        'githubLink',
-        'personalWebsiteLink',
-        'linkedInLink',
-        'resumeLink',
-        'source',
-      ],
-      longInfo: [
-        'interestForNwHacks',
-        'recentProject',
-      ],
-    };
-  }
+  getAllFieldNames = applicantType => fieldLabels[applicantType]['all-fields'];
 
   render() {
     const { applicantType, className, showAssessmentFieldsOnly } = this.props;
     const shortInfo = this.getApplicantShortInfo();
     const longInfo = this.getApplicantLongInfo();
-    if (applicantType !== 'hacker') {
-      return (
-        <i>TODO: Applicant info component</i>
-      );
-    }
+    if (applicantType === 'mentor'
+      || (applicantType === 'volunteer' && showAssessmentFieldsOnly)) return null;
     const applicantFields = showAssessmentFieldsOnly
-      ? this.getAssessmentFieldNamesOnly()
-      : this.getAllFieldNames();
+      ? this.getAssessmentFieldNamesOnly(applicantType)
+      : this.getAllFieldNames(applicantType);
     return (
       <div className={`applicant-info ${className}`}>
-        {applicantFields.shortInfo.map((fieldName) => {
-          const label = FIELDS[fieldName];
-          let value = shortInfo ? shortInfo[fieldName] : '';
-          if (fieldName === 'travel') value = TRAVEL[value];
-          if (fieldName === 'timestamp') value = decodeUnixTimestamp(value);
+        {applicantFields.shortInfo.map((field) => {
+          const { name, label } = field;
+          let value = shortInfo ? shortInfo[name] : '';
+          if (name === 'travel') value = travelLabels[value];
+          if (name === 'timestamp') value = decodeUnixTimestamp(value);
           return (
             <ShortField
               key={label}
@@ -119,12 +73,15 @@ class ApplicantInfo extends React.Component {
               value={value}
             />);
         })}
-        {applicantFields.longInfo.map(fieldName => (
-          <LongField
-            key={FIELDS[fieldName]}
-            label={FIELDS[fieldName]}
-            value={longInfo ? longInfo[fieldName] : ''} />
-        ))}
+        {applicantFields.longInfo.map((field) => {
+          const { name, label } = field;
+          return (
+            <LongField
+              key={name}
+              label={label}
+              value={longInfo ? longInfo[name] : ''} />
+          );
+        })}
       </div>
     );
   }

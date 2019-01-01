@@ -125,7 +125,9 @@ class ScorePanel extends React.Component {
       </div>
     ) : (
       <div className="pad-top-xs pad-left-xs">
-        Scoring not yet supported for {applicantType}.
+        Assessment not enabled for {applicantType}.<br />
+        Please manually select and tag accepted {applicantType}s
+        through the <i>Applicants</i> page.
       </div>
     );
   }
