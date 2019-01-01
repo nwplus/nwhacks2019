@@ -22,7 +22,6 @@ const AssessmentPage = ({
   switchSortType,
   switchSortDirection,
   sortDirection,
-  exportApplicants,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -36,7 +35,6 @@ const AssessmentPage = ({
       switchSortType={switchSortType}
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
-      exportApplicants={exportApplicants}
     />
     <FilterModal
       isOpen={isSelectingFilters}

@@ -32,7 +32,7 @@ class Toolbar extends React.Component {
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection, exportApplicants } = this.props;
+      switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -67,15 +67,6 @@ class Toolbar extends React.Component {
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
         </div>
-        <div
-          className="pad-left-l toolbar-icon"
-          role="button"
-          onClick={exportApplicants}
-          tabIndex={0}>
-          <img
-            src={downloadIcon}
-            alt="export emails" />
-        </div>
       </div>
     );
   }
@@ -88,6 +79,7 @@ class Toolbar extends React.Component {
       checkAllApplicants, uncheckAllApplicants,
       checkedApplicantIds, applicants,
       createNewTag, applyTags,
+      exportApplicants,
     } = this.props;
     // a checkbox is indeterminate when it's checked value only applies to some applicants
     const numcheckedApplicantIds = Object.keys(checkedApplicantIds).length;
@@ -108,6 +100,16 @@ class Toolbar extends React.Component {
               className="tag-button flex ai-center clickable user-select-none"
               onClick={toggleTagMenu}>
               <img alt="tag" src={tagIcon} />Tag
+            </div>
+          ) : null}
+        {numcheckedApplicantIds > 0
+          ? (
+            <div
+              className="export-email-button flex ai-center clickable user-select-none"
+              role="button"
+              onClick={exportApplicants}
+              tabIndex={0}>
+              <img src={downloadIcon} alt="export emails" />Export checked applicants
             </div>
           ) : null}
         <TagMenu

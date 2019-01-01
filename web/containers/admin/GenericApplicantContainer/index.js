@@ -348,9 +348,15 @@ class GenericApplicantContainer extends React.Component {
   }
 
   exportApplicants = () => {
-    const { applicants } = this.state;
-    const filteredApplicants = this.filterApplicants(applicants);
-    const fields = ['firstName', 'lastName', 'email', 'id'];
+    const { applicants, checkedApplicantIds } = this.state;
+    const checkedApplicants = [];
+    applicants.forEach((applicant) => {
+      if (checkedApplicantIds[applicant.id]) {
+        checkedApplicants.push(applicant);
+      }
+    });
+    const filteredApplicants = this.filterApplicants(checkedApplicants);
+    const fields = ['firstName', 'lastName', 'email', 'id', 'tags'];
     // https://www.npmjs.com/package/json2csv
     const json2csvParser = new Parser({ fields, quote: '' });
     const csv = json2csvParser.parse(filteredApplicants);

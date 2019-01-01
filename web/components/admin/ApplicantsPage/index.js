@@ -32,6 +32,7 @@ const ApplicantsPage = ({
   getTagMenuOptions,
   createNewTag,
   applyTags,
+  exportApplicants
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -54,6 +55,7 @@ const ApplicantsPage = ({
       getTagMenuOptions={getTagMenuOptions}
       createNewTag={createNewTag}
       applyTags={applyTags}
+      exportApplicants={exportApplicants}
       />
     <FilterModal
       isOpen={isSelectingFilters}
