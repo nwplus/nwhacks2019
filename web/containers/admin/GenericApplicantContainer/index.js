@@ -80,9 +80,9 @@ class GenericApplicantContainer extends React.Component {
             tagOption = { isChecked: applicantHasTag, isIndeterminate: false };
           }
           if (applicantHasTag && !tagOption.isChecked) {
-            tagOption.isChecked = true;
             tagOption.isIndeterminate = true;
           } else if (!applicantHasTag && tagOption.isChecked) {
+            tagOption.isChecked = false;
             tagOption.isIndeterminate = true;
           }
           tagOptions[tagName] = tagOption;

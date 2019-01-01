@@ -84,8 +84,9 @@ class Toolbar extends React.Component {
     // a checkbox is indeterminate when it's checked value only applies to some applicants
     const numcheckedApplicantIds = Object.keys(checkedApplicantIds).length;
     const checkboxIsIndeterminate = checkedApplicantIds
-      && numcheckedApplicantIds > 0
-      && numcheckedApplicantIds !== applicants.length;
+    && numcheckedApplicantIds > 0
+    && numcheckedApplicantIds !== applicants.length;
+    const checkboxisChecked = !checkboxIsIndeterminate && numcheckedApplicantIds > 0;
     const checkboxLabel = numcheckedApplicantIds > 0
       ? `${numcheckedApplicantIds} people selected`
       : 'Select all';
@@ -96,7 +97,7 @@ class Toolbar extends React.Component {
           className={`checkbox ${!numcheckedApplicantIds ? 'select-all' : null}`}
           onChange={e => ((e.target.checked) ? checkAllApplicants() : uncheckAllApplicants())}
           isIndeterminate={checkboxIsIndeterminate}
-          checked={numcheckedApplicantIds > 0}
+          checked={checkboxisChecked}
           isControlled
           label={checkboxLabel} />
         {numcheckedApplicantIds > 0
