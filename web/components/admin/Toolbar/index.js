@@ -96,6 +96,8 @@ class Toolbar extends React.Component {
           className={`checkbox ${!numcheckedApplicantIds ? 'select-all' : null}`}
           onChange={e => ((e.target.checked) ? checkAllApplicants() : uncheckAllApplicants())}
           isIndeterminate={checkboxIsIndeterminate}
+          checked={numcheckedApplicantIds > 0}
+          isControlled
           label={checkboxLabel} />
         {numcheckedApplicantIds > 0
           ? (
