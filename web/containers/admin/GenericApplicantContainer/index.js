@@ -80,7 +80,7 @@ class GenericApplicantContainer extends React.Component {
           tagOptions[tagName] = tagOption;
         }
       }
-      callback(tagOptions); this.setState({ selectedApplicantId: null });
+      callback(tagOptions);
     });
   }
 
