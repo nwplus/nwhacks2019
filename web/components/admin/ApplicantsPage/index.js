@@ -32,7 +32,7 @@ const ApplicantsPage = ({
   getTagMenuOptions,
   createNewTag,
   applyTags,
-  exportApplicants
+  exportApplicants,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -143,6 +143,8 @@ ApplicantsPage.propTypes = {
   createNewTag: PropTypes.func,
   // handler to apply (add/remove) tags from an array of applicants
   applyTags: PropTypes.func,
+  // Exports all applicants into a csv
+  exportApplicants: PropTypes.func,
 };
 
 export default ApplicantsPage;
