@@ -213,7 +213,7 @@ class GenericApplicantContainer extends React.Component {
     this.setState({
       sortType: newSortType,
       selectedApplicantId: null,
-    }, this.refreshApplicants());
+    });
   };
 
   sortApplicants = (sortType, applicants) => {
@@ -266,7 +266,7 @@ class GenericApplicantContainer extends React.Component {
   switchSortDirection = () => {
     const { sortDirection } = this.state;
     const newSortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-    this.setState({ sortDirection: newSortDirection }, this.refreshApplicants);
+    this.setState({ sortDirection: newSortDirection });
   };
 
   // checks all applicants (adds all applicants to this.state.checkedApplicantIds)
