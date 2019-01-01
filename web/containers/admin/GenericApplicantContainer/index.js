@@ -25,6 +25,7 @@ class GenericApplicantContainer extends React.Component {
       applicantType: 'hacker',
       selectedApplicantId: null,
       isSelectingFilters: false,
+      applicants: undefined,
       appliedFilters: [],
       areFiltersApplied: false,
       sortType: 'timestamp',
@@ -35,14 +36,6 @@ class GenericApplicantContainer extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.loadApplicants();
-  }
-
-  componentWillUnmount() {
-    this.unloadApplicants();
-  }
-
   // returns the currently applied filters
   getAppliedFilters = () => {
     const { appliedFilters } = this.state;
@@ -50,7 +43,6 @@ class GenericApplicantContainer extends React.Component {
   }
 
   // returns tag menu options based on the currently checked applicants
-  // TODO: make this a cloud function to avoid local storage inconsistencies
   // currently fetches directly from DB instead of local cache to avoid inconsistencies
   getTagMenuOptions = (callback) => {
     const { applicantType, checkedApplicantIds } = this.state;
@@ -88,26 +80,27 @@ class GenericApplicantContainer extends React.Component {
           tagOptions[tagName] = tagOption;
         }
       }
-      callback(tagOptions);
+      callback(tagOptions); this.setState({ selectedApplicantId: null });
     });
   }
 
-  // retrieves filtered and sorted array of applicants
-  getAllApplicants = () => {
+  // fills this.state.applicants with filtered and sorted array of applicants
+  populateApplicants = () => {
     const {
       applicantType,
       sortType,
       sortDirection,
     } = this.state;
-    const {
-      firestore,
-    } = this.props;
+    const { store: { firestore: db } } = this.context;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicants = firestore.ordered[shortInfoCollectionName];
-    const filteredApplicants = this.filterApplicants(applicants);
-    let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
-    if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
-    return sortedApplicants;
+    db.collection(shortInfoCollectionName).get().then((docs) => {
+      const applicants = [];
+      docs.forEach(doc => applicants.push(doc.data()));
+      const filteredApplicants = this.filterApplicants(applicants);
+      let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
+      if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+      this.setState({ applicants: sortedApplicants });
+    });
   }
 
   // handles selecting an applicant
@@ -115,37 +108,13 @@ class GenericApplicantContainer extends React.Component {
     this.setState({ selectedApplicantId: applicantId });
   }
 
-  // Fills state.firestore.data.applicants by listening to <applicantType>_main_info collection
-  loadApplicants = () => {
-    const { store } = this.context;
-    const { firestore } = store;
-    const { applicantType } = this.state;
-    firestore.setListener({
-      collection: applicantCollections[applicantType].shortInfo,
-      orderBy: 'timestamp',
-    });
-  }
-
-  // Clears state.firestore.data.applicants by unlistening to <applicantType>_main_info collection
-  unloadApplicants = () => {
-    const { store } = this.context;
-    const { firestore } = store;
-    const { applicantType } = this.state;
-    firestore.unsetListener({
-      collection: applicantCollections[applicantType].shortInfo,
-      orderBy: 'timestamp',
-    });
-  }
-
   // switches applicant types (hacker, mentor, volunteer)
   switchApplicantType = (newApplicantType) => {
-    this.unloadApplicants(); // remove listener for old applicantType's collections
     this.setState({
       applicantType: newApplicantType,
       selectedApplicantId: null,
       checkedApplicantIds: {},
     }, () => {
-      this.loadApplicants(); // add listener for new applicantType's collections
     });
   }
 
@@ -163,7 +132,7 @@ class GenericApplicantContainer extends React.Component {
     });
   }
 
-  // applies a new set of filters
+  // applies a new set of filters and refreshes this.state.applicants
   applyFilters = (newFilters) => {
     const newFiltersExist = newFilters.length > 0;
     this.setState({
@@ -172,7 +141,7 @@ class GenericApplicantContainer extends React.Component {
       appliedFilters: newFilters,
       filterExpression: this.compileFilters(newFilters),
       checkedApplicantIds: {},
-    });
+    }, this.populateApplicants);
   }
 
   // handles filtering a list of applicants based on a filter expression
@@ -283,7 +252,7 @@ class GenericApplicantContainer extends React.Component {
 
   // checks all applicants (adds all applicants to this.state.checkedApplicantIds)
   checkAllApplicants = () => {
-    const applicants = this.getAllApplicants() || [];
+    const { applicants } = this.state;
     const checkedApplicantIds = {};
     for (let i = 0; i < applicants.length; i += 1) {
       const applicantId = applicants[i].id;
@@ -379,15 +348,7 @@ class GenericApplicantContainer extends React.Component {
   }
 
   exportApplicants = () => {
-    const {
-      applicantType,
-    } = this.state;
-
-    const {
-      firestore,
-    } = this.props;
-    const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
-    const applicants = firestore.ordered[shortInfoCollectionName];
+    const { applicants } = this.state;
     const filteredApplicants = this.filterApplicants(applicants);
     const fields = ['firstName', 'lastName', 'email', 'id'];
     // https://www.npmjs.com/package/json2csv
@@ -423,7 +384,12 @@ class GenericApplicantContainer extends React.Component {
       sortDirection,
     } = this.state;
 
-    const applicants = this.getAllApplicants();
+    const { applicants } = this.state;
+
+    if (applicants === undefined) {
+      this.populateApplicants();
+      return (<span>Fetching applicants...</span>);
+    }
 
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
@@ -464,7 +430,12 @@ class GenericApplicantContainer extends React.Component {
       isTagMenuOpen,
     } = this.state;
 
-    const applicants = this.getAllApplicants();
+    const { applicants } = this.state;
+
+    if (applicants === undefined) {
+      this.populateApplicants();
+      return (<span>Fetching applicants...</span>);
+    }
 
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);

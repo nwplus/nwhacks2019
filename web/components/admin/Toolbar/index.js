@@ -94,7 +94,6 @@ class Toolbar extends React.Component {
     const checkboxIsIndeterminate = checkedApplicantIds
       && numcheckedApplicantIds > 0
       && numcheckedApplicantIds !== applicants.length;
-    console.log(numcheckedApplicantIds);
     return (
       <div className={`extra-toolbar flex ai-center fill-width ${className}`}>
         <Checkbox
