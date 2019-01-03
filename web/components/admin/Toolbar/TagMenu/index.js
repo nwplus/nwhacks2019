@@ -70,12 +70,15 @@ class TagMenu extends React.Component {
 
   // when apply button is clicked
   onApplyTags = (tagOptions) => {
-    this.setState({
-      isApplyingTags: true,
-    }, () => {
-      const { applyTags } = this.props;
-      applyTags(tagOptions, this.onApplyTagsSuccess, this.onApplyTagsFail);
-    });
+    const { isApplyingTags } = this.state;
+    if (!isApplyingTags) {
+      this.setState({
+        isApplyingTags: true,
+      }, () => {
+        const { applyTags } = this.props;
+        applyTags(tagOptions, this.onApplyTagsSuccess, this.onApplyTagsFail);
+      });
+    }
   }
 
   // when tags are successfully applied
@@ -94,7 +97,7 @@ class TagMenu extends React.Component {
 
   render() {
     const { isOpen } = this.props;
-    const { tagOptions, newTagName } = this.state;
+    const { tagOptions, newTagName, isApplyingTags } = this.state;
     return (
       <Modal
         open={isOpen}
@@ -143,8 +146,8 @@ class TagMenu extends React.Component {
           })}
         </div>
         <div
-          className="apply-button clickable user-select-none"
-          onClick={() => this.onApplyTags(tagOptions)}> Apply
+          className={`apply-button user-select-none ${isApplyingTags ? 'opacity-60' : 'clickable'}`}
+          onClick={() => this.onApplyTags(tagOptions)}> {isApplyingTags ? 'Applying...' : 'Apply'}
         </div>
       </Modal>
     );
