@@ -6,8 +6,8 @@ import { compose } from 'redux';
 import flat from 'flat';
 import update from 'immutability-helper';
 import Axios from 'axios';
-import { isNaN } from 'lodash';
 import { Parser } from 'json2csv';
+import { isNumeric } from '../../../util/string';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
 
 import AssessmentPage from '../../../components/admin/AssessmentPage';
@@ -211,7 +211,7 @@ class GenericApplicantContainer extends React.Component {
       const filter = filters[i];
       const { selectedField, selectedOperator } = filter;
       let { selectedValue } = filter;
-      selectedValue = !isNaN(selectedValue) ? Number(selectedValue) : `"${selectedValue}"`;
+      selectedValue = isNumeric(selectedValue) ? Number(selectedValue) : `"${selectedValue}"`;
       const conditional = `applicant["${selectedField}"]${selectedOperator}${selectedValue}`;
       conditionals.push(conditional);
     }
