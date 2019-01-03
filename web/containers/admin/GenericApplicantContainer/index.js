@@ -347,8 +347,7 @@ class GenericApplicantContainer extends React.Component {
     const { firestore } = this.props;
     const { tags } = firestore.data;
     if (tagName !== '' && tagName != null && tags[tagName] === undefined) {
-      tagName = tagName.trim();
-      tagName = tagName.trim().replace(/ /g, '-');
+      tagName = tagName.trim().replace(/ /g, '-').toLowerCase();
       db.collection('tags').doc(tagName).set({});
       return tagName;
     }
