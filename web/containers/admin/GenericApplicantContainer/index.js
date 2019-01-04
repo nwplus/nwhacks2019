@@ -104,6 +104,10 @@ class GenericApplicantContainer extends React.Component {
       firestore,
     } = this.props;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const shortInfo = firestore.data[shortInfoCollectionName];
+    if (shortInfo == null) {
+      return undefined;
+    }
     const applicants = Object.values(firestore.data[shortInfoCollectionName]);
     const filteredApplicants = this.filterApplicants(applicants);
     let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
