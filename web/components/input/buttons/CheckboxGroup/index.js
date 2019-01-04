@@ -3,25 +3,35 @@ import PropTypes from 'prop-types';
 
 const InputContext = React.createContext({});
 
-const Checkbox = ({ name, value, label, className, checked, disabled, onChange }) => (
+const Checkbox = ({
+  name,
+  value,
+  label,
+  className,
+  checked,
+  disabled,
+  onChange,
+  isControlled,
+  isIndeterminate,
+}) => (
   <InputContext.Consumer>
-
     {
       (context) => {
         const contextOnChange = event => context.onChange(event.target.value);
+        const checkedFieldName = isControlled || context.isControlled ? 'checked' : 'defaultChecked';
         return (
-          <div className={`checkbox user-select-none margin-bottom-s margin-top-s${className}`}>
+          <div className={`checkbox user-select-none margin-bottom-s margin-top-s ${className}`}>
             <label className="clickable flex">
               <input
                 type="checkbox"
                 name={name || context.name}
                 className="pos-abs opacity-0 wrap"
                 value={value}
-                defaultChecked={checked || context.checked}
                 disabled={disabled || context.disabled}
                 onChange={onChange || contextOnChange}
+                {... { [checkedFieldName]: checked }}
               />
-              <span className="checkmark size-icon pos-abs" />
+              <span className={`checkmark size-icon pos-abs ${isIndeterminate ? 'indeterminate' : ''}`} />
               <span className="label-text margin-left-l margin-right-l">{label}</span>
             </label>
           </div>
@@ -44,12 +54,17 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   // determines if checkbox is disabled
   disabled: PropTypes.bool,
-  // onChange functional
+  // onChange function
   onChange: PropTypes.func,
+  // whether or not the checkbox is a controlled component (checked vs. defaultChecked)
+  isControlled: PropTypes.bool,
+  // represents a third "uncertain" checked state, used when a checked value is only partially true
+  isIndeterminate: PropTypes.bool,
 };
 
 Checkbox.defaultProps = {
   className: '',
+  isControlled: false,
 };
 
 const CheckboxGroup = (props) => {

@@ -4,8 +4,10 @@ import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebas
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import applicantCollections from '../../../util/applicantCollections';
+import { fieldLabels, travelLabels } from './fieldLabels';
 import ShortField from './ShortField';
 import LongField from './LongField';
+import { decodeUnixTimestamp } from '../../../util/date';
 
 const mapPropsToQueries = (props) => {
   const { applicantType, applicantId } = props;
@@ -13,12 +15,6 @@ const mapPropsToQueries = (props) => {
     { collection: applicantCollections[applicantType].shortInfo, doc: applicantId },
     { collection: applicantCollections[applicantType].longInfo, doc: applicantId },
   ];
-};
-
-// converts boolean values to strings
-const convertTruthy = (bool) => {
-  if (bool) return 'Yes';
-  return 'No';
 };
 
 class ApplicantInfo extends React.Component {
@@ -48,24 +44,44 @@ class ApplicantInfo extends React.Component {
     return {};
   };
 
+  // returns field names needed for assessing applicants
+  getAssessmentFieldNamesOnly = applicantType => fieldLabels[applicantType]['assessment-only'];
+
+  // returns all field names for an applicant
+  getAllFieldNames = applicantType => fieldLabels[applicantType]['all-fields'];
+
   render() {
-    const { applicantType, className } = this.props;
+    const { applicantType, className, showAssessmentFieldsOnly } = this.props;
     const shortInfo = this.getApplicantShortInfo();
     const longInfo = this.getApplicantLongInfo();
-    if (applicantType !== 'hacker') {
-      return (
-        <i>TODO: Applicant info component</i>
-      );
-    }
+    if (applicantType === 'mentor'
+      || (applicantType === 'volunteer' && showAssessmentFieldsOnly)) return null;
+    const applicantFields = showAssessmentFieldsOnly
+      ? this.getAssessmentFieldNamesOnly(applicantType)
+      : this.getAllFieldNames(applicantType);
     return (
-      <div className={`applicant-info pad-sides-s pad-ends-s ${className}`}>
-        <ShortField label="First Hackathon?" value={shortInfo ? convertTruthy(shortInfo.isFirstHackathon) : ''} />
-        <ShortField isUrl label="Github" value={shortInfo ? shortInfo.githubLink : ''} />
-        <ShortField isUrl label="Personal Website" value={shortInfo ? shortInfo.personalWebsiteLink : ''} />
-        <ShortField isUrl label="LinkedIn" value={shortInfo ? shortInfo.linkedInLink : ''} />
-        <ShortField isUrl label="Resume" value={shortInfo ? shortInfo.resumeLink : ''} />
-        <LongField label="Interest in NwHacks" value={longInfo ? longInfo.interestForNwHacks : ''} />
-        <LongField label="Recent Projects" value={longInfo ? longInfo.recentProject : ''} />
+      <div className={`applicant-info ${className}`}>
+        {applicantFields.shortInfo.map((field) => {
+          const { name, label } = field;
+          let value = shortInfo ? shortInfo[name] : '';
+          if (name === 'travel') value = travelLabels[value];
+          if (name === 'timestamp') value = decodeUnixTimestamp(value);
+          return (
+            <ShortField
+              key={label}
+              label={label}
+              value={value}
+            />);
+        })}
+        {applicantFields.longInfo.map((field) => {
+          const { name, label } = field;
+          return (
+            <LongField
+              key={name}
+              label={label}
+              value={longInfo ? longInfo[name] : ''} />
+          );
+        })}
       </div>
     );
   }
@@ -75,6 +91,7 @@ ApplicantInfo.propTypes = {
   firestore: PropTypes.object,
   applicantType: PropTypes.string,
   applicantId: PropTypes.string,
+  showAssessmentFieldsOnly: PropTypes.bool,
   className: PropTypes.string,
 };
 

@@ -4129,7 +4129,7 @@ http-proxy@^1.16.2, http-proxy@^1.8.1:
     follow-redirects "^1.0.0"
     requires-port "^1.0.0"
 
-http-server@^0.11.1:
+http-server@0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/http-server/-/http-server-0.11.1.tgz#2302a56a6ffef7f9abea0147d838a5e9b6b6a79b"
   dependencies:
@@ -5055,7 +5055,7 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
-json2csv@^4.3.2:
+json2csv@4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/json2csv/-/json2csv-4.3.2.tgz#e766b5a81d408087ae25a72989cd8217641aa126"
   dependencies:
@@ -6480,6 +6480,10 @@ randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   dependencies:
     safe-buffer "^5.1.0"
 
+randomcolor@0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/randomcolor/-/randomcolor-0.5.3.tgz#7f90f2f2a7f6d5a52232161eeaeeaea9ac3b5815"
+
 randomfill@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/randomfill/-/randomfill-1.0.4.tgz#c92196fc86ab42be983f1bf31778224931d61458"
@@ -6566,7 +6570,7 @@ react-redux@5.0.7:
     loose-envify "^1.1.0"
     prop-types "^15.6.0"
 
-react-responsive-modal@^3.5.1:
+react-responsive-modal@3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/react-responsive-modal/-/react-responsive-modal-3.5.1.tgz#1503bec9d616b5c00074e793ebb24055205e194e"
   dependencies:

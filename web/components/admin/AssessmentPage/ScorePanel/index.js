@@ -4,8 +4,9 @@ import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { ScoreButtonGroup } from './ScoreButtonGroup';
+import ScoreHistory from './ScoreHistory';
 import applicantCollections from '../../../../util/applicantCollections';
-import { criteria, calculateFinalScore } from './Criteria';
+import { criteria, calculateFinalScore } from '../Criteria';
 
 const mapPropsToQueries = (props) => {
   const { applicantType, applicantId } = props;
@@ -39,26 +40,6 @@ class ScorePanel extends React.Component {
     return applicantCollections[applicantType].shortInfo;
   }
 
-  // returns an admin's full name given the admin's UID
-  getAdminFullName = (uid) => {
-    if (uid) {
-      const { firestore } = this.props;
-      const admin = firestore.data.admins[uid];
-      if (admin) {
-        return `${admin.firstName} ${admin.lastName}`;
-      }
-    }
-    return null;
-  }
-
-  // converts unix timestamp to string of form 'HH:MM AM/PM SHORT_MONTH DAY YEAR'
-  getDateLastScored = (unixTimestamp) => {
-    const dateObj = new Date(unixTimestamp);
-    const time = dateObj.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    const date = dateObj.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    return `${time} ${date}`.replace(/,/, '');
-  }
-
   // returns applicant's score info for a given criteria
   getCriteriaInfo = (criteriaName) => {
     const shortInfo = this.getApplicantShortInfo();
@@ -68,25 +49,10 @@ class ScorePanel extends React.Component {
     return null;
   }
 
-  // returns the applicant's final score
-  getFinalScore = () => this.getCriteriaInfo('finalScore');
-
   // returns the applicant's score for a given criteria
   getCriteriaScoreValue = (criteriaName) => {
     const criteriaInfo = this.getCriteriaInfo(criteriaName);
     return criteriaInfo ? criteriaInfo.value : null;
-  }
-
-  // returns the a string representing the name and timestamp
-  // of the person who last marked a given criteria for this applicant
-  getScoreHistory = (criteriaName) => {
-    const criteriaInfo = this.getCriteriaInfo(criteriaName);
-    if (criteriaInfo) {
-      const lastScoredBy = this.getAdminFullName(criteriaInfo.lastScoredBy);
-      const lastScoredAt = this.getDateLastScored(criteriaInfo.lastScoredAt);
-      return `${lastScoredBy} at ${lastScoredAt}`;
-    }
-    return 'Unscored';
   }
 
   // sets score info for an applicant's criteria
@@ -125,25 +91,6 @@ class ScorePanel extends React.Component {
     return map;
   }, {})
 
-  // clears applicant's score information
-  clearScoreInfo = () => {
-    if (window.confirm("Are you sure you want to clear this applicant's score?")) { // eslint-disable-line no-alert
-      const { store } = this.context;
-      const { firestore } = store;
-      const { applicantId } = this.props;
-      const collectionName = this.getApplicantShortInfoCollectionName();
-      const applicantRef = firestore.collection(collectionName).doc(applicantId);
-      // set field to null then delete field (otherwise store won't refresh https://github.com/prescottprue/redux-firestore/issues/45)
-      applicantRef.update({
-        score: null,
-      }).then(() => (
-        applicantRef.update({
-          score: firestore.FieldValue.delete(),
-        })
-      ));
-    }
-  }
-
   // returns true if all criteria have been scored for the applicant, false otherwise
   isAllCriteriaScored = (scores) => {
     for (let i = 0; i < criteria.length; i += 1) {
@@ -158,7 +105,6 @@ class ScorePanel extends React.Component {
 
   render() {
     const { className, applicantType } = this.props;
-    const finalScore = this.getFinalScore();
 
     return (applicantType === 'hacker') ? (
       <div className={`score-panel flex jc-between dir-col ${className}`} zoom="50%">
@@ -175,27 +121,13 @@ class ScorePanel extends React.Component {
             />
           ))}
         </div>
-        <div className="score-history pad-top-s pad-sides-s">
-          <div className="pad-bottom-s">
-            <span>
-              <span className="score-panel-primary-text pad-right-xs">Total score:</span>
-              <span className={`score-value ${finalScore ? 'exists' : ''}`}>{finalScore}/10</span>
-            </span>
-            <div className="clear-btn clickable" onClick={this.clearScoreInfo}>Clear</div>
-          </div>
-          <div className="criteria-history">
-            {criteria.map(c => (
-              <div className="pad-bottom-s" key={c.name}>
-                <div className="score-panel-primary-text">{c.title}</div>
-                <div className="score-panel-secondary-text">{this.getScoreHistory(c.name)}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <ScoreHistory {...this.props} />
       </div>
     ) : (
       <div className="pad-top-xs pad-left-xs">
-        Scoring not yet supported for {applicantType}.
+        Assessment not enabled for {applicantType}.<br />
+        Please manually select and tag accepted {applicantType}s
+        through the <i>Applicants</i> page.
       </div>
     );
   }

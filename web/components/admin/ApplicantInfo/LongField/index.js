@@ -5,8 +5,8 @@ class LongField extends React.Component {
   render() {
     const { label, value } = this.props;
     return (
-      <div className="pad-sides-xs pad-ends-xs">
-        <div className="applicant-info-label pad-bottom-m">{label}</div>
+      <div className="margin-bottom-m">
+        <div className="applicant-info-label">{label}</div>
         <div className="applicant-long-info pad-sides-xs pad-ends-xs">{value}</div>
       </div>
     );

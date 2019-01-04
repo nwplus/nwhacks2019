@@ -1,0 +1,24 @@
+
+@import ./ApplicantMetadata/index
+
+.dashboard
+  font-family: 'Apercu Pro'
+  min-height: calc(100vh - #{$admin-navbar-height}) 
+  display: flex
+  flex-direction: column
+  background: $white
+
+  .applicant-view
+    height: calc(100vh - #{$admin-navbar-height} - #{$admin-toolbar-height}  - #{$admin-extra-toolbar-height} )
+    .applicant-list
+      width: 33%
+      border-right: 1px solid #E0E0E0
+    .applicant-metadata
+      max-width: 21%
+      border-right: 1px solid #E0E0E0
+      overflow-wrap: normal
+    .applicant-info
+      width: 46%
+      flex: 1
+      word-wrap: break-word
+

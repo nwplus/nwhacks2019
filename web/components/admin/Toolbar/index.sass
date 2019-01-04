@@ -1,3 +1,5 @@
+@import ./TagMenu/index
+
 .toolbar
   padding: 12px 0px 12px $spacing-s
   .body-text
@@ -18,3 +20,36 @@
       height: 100%
     &:focus
       outline: none
+.extra-toolbar
+  padding: 1px 0 0 $spacing-s
+  border-bottom: 1px solid #E0E0E0
+  .checkbox
+    padding-left: 9px
+    .label-text
+      margin-left: 48px
+    &.select-all
+      .label-text
+        color: $light-grey
+  .tag-button
+    width: 90px
+    height: 32px
+    color: $light-grey
+    font-weight: 500
+    border-radius: 4px
+    &:hover
+      background: $admin-field-bg
+    img
+      margin-left: 18px
+      margin-right: $spacing-xs
+  .export-email-button
+    width: 258px
+    height: 32px
+    color: $light-grey
+    font-weight: 500
+    border-radius: 4px
+    padding-right: 18px
+    &:hover
+      background: $admin-field-bg
+    img
+      margin-left: 18px
+      margin-right: $spacing-xs

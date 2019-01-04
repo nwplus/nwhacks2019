@@ -29,6 +29,18 @@ class FilterModal extends React.Component {
       selectedValue: null,
       filterCompleted: false,
     };
+    this.numericOperatorLabels = {
+      '==': { value: '==', label: '==' },
+      '!=': { value: '!=', label: '!=' },
+      '<': { value: '<', label: '<' },
+      '<=': { value: '<=', label: '<=' },
+      '>': { value: '>', label: '>' },
+      '>=': { value: '>=', label: '>=' },
+    };
+    this.nonNumericOperatorLabels = {
+      '==': { value: '==', label: 'IS' },
+      '!=': { value: '!=', label: 'IS NOT' },
+    };
     this.attributeLabels = {
       property: { value: 'property', label: 'Property' },
       tag: { value: 'tag', label: 'Tag' },
@@ -41,11 +53,19 @@ class FilterModal extends React.Component {
         isHardware: { value: 'isHardware', label: 'hardware?' },
         isFirstHackathon: { value: 'isFirstHackathon', label: 'first hackathon?' },
         travel: { value: 'travel', label: 'travel' },
+        score_finalScore: { value: 'score_finalScore', label: 'final score' },
       },
     };
     this.operatorLabels = {
-      '==': { value: '==', label: 'IS' },
-      '!=': { value: '!=', label: 'IS NOT' },
+      property: {
+        education: this.nonNumericOperatorLabels,
+        isDesigner: this.nonNumericOperatorLabels,
+        isDeveloper: this.nonNumericOperatorLabels,
+        isHardware: this.nonNumericOperatorLabels,
+        isFirstHackathon: this.nonNumericOperatorLabels,
+        travel: this.nonNumericOperatorLabels,
+        score_finalScore: this.numericOperatorLabels,
+      },
     };
     this.valueLabels = {
       property: {
@@ -145,7 +165,19 @@ class FilterModal extends React.Component {
   };
 
   // returns possible values for OPERATOR
-  getFilterOperatorLabels = () => this.operatorLabels;
+  getFilterOperatorLabels = (selectedAttribute, selectedField) => {
+    let operatorLabels = {};
+    if (selectedField) {
+      if (selectedAttribute === 'property') {
+        operatorLabels = this.operatorLabels[selectedAttribute][selectedField];
+        if (!operatorLabels) operatorLabels = this.numericOperatorLabels;
+      }
+    }
+    if (selectedAttribute === 'tag') {
+      operatorLabels = this.nonNumericOperatorLabels;
+    }
+    return operatorLabels;
+  }
 
   // returns array of possible values for VALUES given a selection of ATTRIBUTE and FIELD
   getFilterValueLabels = (selectedAttribute, selectedField) => {
@@ -267,8 +299,8 @@ class FilterModal extends React.Component {
           classNames={{
             modal: 'modal pad-sides-l pad-top-l',
           }}>
-          <h4 className="">{`Filter ${capitalizeFirstLetter(applicantType)}s`}</h4>
-          <div className="filters margin-top-l margin-bottom-m">
+          <h4>{`Filter ${capitalizeFirstLetter(applicantType)}s`}</h4>
+          <div className="filters margin-bottom-m">
             {filters.map((filter, index) => (
               <FilterSelect
                 currentFilterOptions={filter}

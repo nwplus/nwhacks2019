@@ -3,13 +3,13 @@
 
 .dashboard
   font-family: 'Apercu Pro'
-  min-height: 100vh
+  min-height: calc(100vh - #{$admin-navbar-height}) 
   display: flex
   flex-direction: column
   background: $white
 
   .applicant-view
-    height: calc(100vh - #{$toolbar-height})
+    height: calc(100vh - #{$admin-navbar-height} - #{$admin-toolbar-height})
     .applicant-list
       width: 33%
       border-right: 1px solid #E0E0E0

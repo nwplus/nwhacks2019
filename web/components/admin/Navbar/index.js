@@ -7,7 +7,7 @@ import logo from '../../../assets/logo.svg';
 
 const AdminNavbar = ({ pages, activeIndex }) => (
   <div>
-    <nav className="fill-width flex">
+    <nav className="admin-navbar fill-width flex">
       <div className="flex ai-center jc-start margin-sides-l">
         <div className="flex ai-center">
           <img alt="nwHacks" src={logo} />
