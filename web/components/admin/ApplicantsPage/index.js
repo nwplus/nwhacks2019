@@ -64,7 +64,7 @@ const ApplicantsPage = ({
       applyFilters={applyFilters}
       applicantType={applicantType}
       />
-    <div className="applicant-view flex">
+    <div className="applicants-applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
         pageType="applicants"
