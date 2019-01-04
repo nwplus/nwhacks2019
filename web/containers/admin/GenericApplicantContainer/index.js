@@ -275,6 +275,13 @@ class GenericApplicantContainer extends React.Component {
           if (!b.score || !b.score.finalScore) return 1;
           if (a.score.finalScore > b.score.finalScore) return 1;
           if (a.score.finalScore < b.score.finalScore) return -1;
+          if (a.score.finalScore === b.score.finalScore) {
+            // if equal scores, break tie by timestamp
+            if (!a.timestamp) return -1;
+            if (!b.timestamp) return 1;
+            if (a.timestamp > b.timestamp) return 1;
+            if (a.timestamp < b.timestamp) return -1;
+          }
           return 0;
         });
       case 'timestamp':
