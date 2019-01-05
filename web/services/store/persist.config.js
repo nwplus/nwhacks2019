@@ -6,4 +6,5 @@ export const persistConfig = {
   key: 'root',
   storage: localStorage,
   stateReconciler: hardSet,
+  blacklist: ['firestore'],
 };
