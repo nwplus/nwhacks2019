@@ -75,6 +75,8 @@ const ApplicantsPage = ({
         uncheckApplicant={uncheckApplicant}
         checkedApplicantIds={checkedApplicantIds}
         className={`${!selectedApplicantId ? 'fill-min-width' : ''}`}
+        sortType={sortType}
+        sortDirection={sortDirection}
         />
       {/* APPLICANT TAG INFO & SCORE HISTORY */}
       <ApplicantMetadata
