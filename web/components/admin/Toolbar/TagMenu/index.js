@@ -23,15 +23,13 @@ class TagMenu extends React.Component {
   // when the user cancels adding/removing tags (by clicking out of the menu)
   onCancel = () => {
     const { hideTagMenu } = this.props;
-    this.setState(this.defaultState);
-    hideTagMenu();
+    this.setState(this.defaultState, hideTagMenu);
   }
 
   // when tag menu is opened
   onOpen = () => {
     const { getTagMenuOptions } = this.props;
     getTagMenuOptions(tagOptions => this.setState({ tagOptions }));
-    // this.setState({ tagOptions: getTagMenuOptions( });
   }
 
   // handler that's called when "Create New Tag" button is clicked
@@ -84,8 +82,7 @@ class TagMenu extends React.Component {
   // when tags are successfully applied
   onApplyTagsSuccess = () => {
     const { hideTagMenu } = this.props;
-    this.setState(this.defaultState);
-    hideTagMenu();
+    this.setState(this.defaultState, hideTagMenu);
   }
 
   // when tags fail to apply successfully

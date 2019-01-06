@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import flat from 'flat';
 import update from 'immutability-helper';
 import Axios from 'axios';
+import { isEqual } from 'lodash';
 import { Parser } from 'json2csv';
 import { isNumeric } from '../../../util/string';
 import { convertObjectPrimitivesToStrings } from '../../../util/object';
@@ -38,6 +39,42 @@ class GenericApplicantContainer extends React.Component {
 
   componentWillMount() {
     this.loadApplicants();
+  }
+
+  // choose when to rerender component
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldcomponentupdate');
+    // rerender if state changes (default)
+    if (!isEqual(nextState, this.state)) {
+      return true;
+    }
+    const { applicantType, selectedApplicantId } = this.state;
+    const { firestore, firebase, pageType } = this.props;
+    // rerender if props.firebase (used for auth) changes or props.pageType changes
+    if (!isEqual(firebase, nextProps.firebase) || !isEqual(pageType, nextProps.pageType)) {
+      return true;
+    }
+    // on props.firestore change, only rerender if
+    // - number of applicants change or
+    // - selected applicant's data changes
+    if (firestore && nextProps.firestore) {
+      const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+      const applicants = firestore.data[shortInfoCollectionName] || {};
+      const nextApplicants = nextProps.firestore.data[shortInfoCollectionName] || {};
+      if (selectedApplicantId) {
+        const applicant = applicants[selectedApplicantId];
+        const nextApplicant = nextApplicants[selectedApplicantId];
+        if (!isEqual(applicant, nextApplicant)) {
+          return true;
+        }
+      }
+      const applicantsKeys = Object.keys(applicants);
+      const nextApplicantsKeys = Object.keys(nextApplicants);
+      if (applicantsKeys.length !== nextApplicantsKeys.length) {
+        return true;
+      }
+    }
+    return false;
   }
 
   componentWillUnmount() {
@@ -104,6 +141,11 @@ class GenericApplicantContainer extends React.Component {
       firestore,
     } = this.props;
     const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+    const shortInfo = firestore.data[shortInfoCollectionName];
+    if (shortInfo == null) {
+      return undefined;
+    }
+    // this.setState({ applicantIndex: firestore.data[shortInfoCollectionName] });
     const applicants = Object.values(firestore.data[shortInfoCollectionName]);
     const filteredApplicants = this.filterApplicants(applicants);
     let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
@@ -166,7 +208,7 @@ class GenericApplicantContainer extends React.Component {
   }
 
   // applies a new set of filters
-  applyFilters = (newFilters) => {
+  applyFilters = (newFilters, callback) => {
     const newFiltersExist = newFilters.length > 0;
     this.setState({
       isSelectingFilters: false,
@@ -174,18 +216,18 @@ class GenericApplicantContainer extends React.Component {
       appliedFilters: newFilters,
       filterExpression: this.compileFilters(newFilters),
       checkedApplicantIds: {},
-    });
+    }, callback);
   }
 
   // reapply applied filters
   reapplyFilters = () => {
     const { appliedFilters } = this.state;
-    this.applyFilters(appliedFilters);
+    this.resetFilters(() => this.applyFilters(appliedFilters));
   }
 
   // removes any applied filters
-  resetFilters = () => {
-    this.applyFilters([]);
+  resetFilters = (callback) => {
+    this.applyFilters([], callback);
   }
 
   // handles filtering a list of applicants based on a filter expression
@@ -339,12 +381,20 @@ class GenericApplicantContainer extends React.Component {
 
   // shows/hides tag menu
   toggleTagMenu = () => {
-    const { isTagMenuOpen, isApplyingTags } = this.state;
-    this.setState({
-      isTagMenuOpen: !isTagMenuOpen,
-      isApplyingTags: !isApplyingTags,
-      tagOptions: null,
-    });
+    const { isTagMenuOpen, isApplyingTags, checkedApplicantIds } = this.state;
+    if (Object.keys(checkedApplicantIds).length !== 0) {
+      this.setState({
+        isTagMenuOpen: !isTagMenuOpen,
+        isApplyingTags: !isApplyingTags,
+        tagOptions: null,
+      });
+    } else {
+      this.setState({
+        isTagMenuOpen: false,
+        isApplyingTags: false,
+        tagOptions: null,
+      });
+    }
   }
 
   // creates a new tag, and returns the name of the tag if successfully created
@@ -445,6 +495,7 @@ class GenericApplicantContainer extends React.Component {
     } = this.state;
 
     const applicants = this.getAllApplicants();
+
     if (!isLoaded(applicants)) {
       return (<span>Loading...</span>);
     }

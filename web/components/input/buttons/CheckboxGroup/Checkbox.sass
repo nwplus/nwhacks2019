@@ -1,6 +1,8 @@
 .checkbox
   &:hover input:enabled ~ .checkmark
     background-image: url('../assets/checkbox/hover.svg')
+    &.indeterminate
+      background-image: url('../assets/checkbox/indeterminate.svg')
 
   input[type="checkbox"]
     &:checked ~ .checkmark

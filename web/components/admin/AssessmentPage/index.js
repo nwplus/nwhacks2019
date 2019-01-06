@@ -43,7 +43,7 @@ const AssessmentPage = ({
       applyFilters={applyFilters}
       applicantType={applicantType}
     />
-    <div className="applicant-view flex">
+    <div className="assessment-applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
         pageType="assessment"

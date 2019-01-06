@@ -64,7 +64,7 @@ const ApplicantsPage = ({
       applyFilters={applyFilters}
       applicantType={applicantType}
       />
-    <div className="applicant-view flex">
+    <div className="applicants-applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
         pageType="applicants"
@@ -75,6 +75,8 @@ const ApplicantsPage = ({
         uncheckApplicant={uncheckApplicant}
         checkedApplicantIds={checkedApplicantIds}
         className={`${!selectedApplicantId ? 'fill-min-width' : ''}`}
+        sortType={sortType}
+        sortDirection={sortDirection}
         />
       {/* APPLICANT TAG INFO & SCORE HISTORY */}
       <ApplicantMetadata
