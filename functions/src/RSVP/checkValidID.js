@@ -9,8 +9,16 @@ exports.checkValidID = functions.https.onRequest((request, response) => {
   response.set('Access-Control-Allow-Headers', 'Content-Type, crossDomain');
 
   const { id } = JSON.parse(request.body);
+  const { applicantType } = JSON.parse(request.body);
+  var collection = '';
 
-  getDoc = db.collection('hacker_short_info').doc(id).get()
+  if ( applicantType === 'volunteer') {
+    collection = 'volunteer_short_info';
+  } else if (applicantType === 'hacker') {
+    collection = 'hacker_short_info';
+  } 
+
+  getDoc = db.collection(collection).doc(id).get()
     .then((doc) => {
       const data = {
         accepted: false,

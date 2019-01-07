@@ -8,9 +8,7 @@ const { submitApplicationVolunteer } = require('./src/submitVolunteerApplication
 const { backfillShortInfo } = require('./src/tasks/backfill/backfillShortInfo');
 const { backfillLongInfo } = require('./src/tasks/backfill/backfillLongInfo');
 const { checkValidID } = require('./src/RSVP/checkValidID');
-const { checkValidIDvolunteer } = require('./src/RSVP/checkValidIDvolunteer');
 const { submitRSVP } = require('./src/RSVP/submitRSVP');
-const { submitRSVPvolunteer } = require('./src/RSVP/submitRSVPvolunteer');
 const { tagApplicants } = require('./src/tagApplicants/index');
 // export functions
 exports.exampleHelloWorld = exampleHelloWorld;
@@ -20,7 +18,5 @@ exports.submitApplicationVolunteer = submitApplicationVolunteer;
 exports.backfillShortInfo = backfillShortInfo;
 exports.backfillLongInfo = backfillLongInfo;
 exports.checkValidID = checkValidID;
-exports.checkValidIDvolunteer = checkValidIDvolunteer;
 exports.submitRSVP = submitRSVP;
-exports.submitRSVPvolunteer = submitRSVPvolunteer;
 exports.tagApplicants = tagApplicants;
