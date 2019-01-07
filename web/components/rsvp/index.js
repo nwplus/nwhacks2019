@@ -42,7 +42,7 @@ class RSVP extends React.Component {
 
     Axios.post(
       firebase.nwUtils.getFunctionUrl('checkValidID'),
-      { id },
+      { id, applicantType: 'hacker' },
       { headers: { 'Content-Type': 'text/plain' } }
     ).then((res) => {
       if (res.status === 200) {
@@ -100,10 +100,11 @@ class RSVP extends React.Component {
       <div className="pad-nav application fill-width flex jc-center">
         <div className="pad-top-mega pad-bottom-tera">
           <h2>Hi{firstName ? ' ' + firstName : null}, please RSVP <img className="emoji" alt="🙌" src={praise} /></h2>
-          <p>Congrats, we choose you! <img className="emoji" alt="🎉" src={celebrate} /> Please complete this form by 11:59PM on
-            January 5th, 2019 so we can get straight to scheduling you for nwHacks 2019.
-            If we don’t hear from you by the deadline, your spot will be given to
-            someone else and you will be moved to our waitlist.
+          <p>Congrats, we choose you! <img className="emoji" alt="🎉" src={celebrate} /> Please complete this form by the
+            deadline mentioned in your acceptance email so we can get straight to
+            scheduling you for nwHacks 2019. If we don’t hear from you by
+            the deadline, your spot will be given to someone else and you
+            will be moved to our waitlist.
           </p>
           <TextInput
             label="What is the name of your emergency contact?"
@@ -165,6 +166,7 @@ class RSVP extends React.Component {
               Axios.post(
                 firebase.nwUtils.getFunctionUrl('submitRSVP'),
                 { id,
+                  applicantType: 'hacker',
                   data: {
                     emergencyContactName,
                     emergencyContactNumber,

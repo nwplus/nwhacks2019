@@ -1,8 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import { Checkbox } from '../../input/buttons';
 
 class ApplicantList extends React.Component {
+  // choose when to rerender this component
+  shouldComponentUpdate(nextProps) {
+    const {
+      selectedApplicantId,
+      checkedApplicantIds,
+      applicants,
+      sortType,
+      sortDirection,
+    } = this.props;
+    // rerender if selected applicant has changed
+    if (selectedApplicantId !== nextProps.selectedApplicantId) {
+      return true;
+    }
+    // rerender if currently checked applicants have changed
+    if (checkedApplicantIds !== nextProps.checkedApplicantIds) {
+      return true;
+    }
+    // rerender if applicants array length has changed
+    if (applicants.length !== nextProps.applicants.length) {
+      return true;
+    }
+    // rerender if sorting direction/type has changed
+    if (sortType !== nextProps.sortType || sortDirection !== nextProps.sortDirection) {
+      return true;
+    }
+    // rerender if selected applicant's info has changed
+    for (let i = 0; i < nextProps.applicants.length; i += 1) {
+      const applicant = applicants[i];
+      const newApplicant = nextProps.applicants[i];
+      if (newApplicant.id === selectedApplicantId && !isEqual(applicant, newApplicant)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   renderForAssessmentPage() {
     const { applicants, selectedApplicantId, onApplicantClick, className } = this.props;
     let applicantNumber = 0;
@@ -112,6 +149,10 @@ ApplicantList.propTypes = {
   onApplicantCheck: PropTypes.func,
   // currently checked applicants
   checkedApplicantIds: PropTypes.object,
+  // what to sort by (used in shouldComponentUpdate)
+  sortType: PropTypes.string,
+  // sort direction (used in shouldComponentUpdate)
+  sortDirection: PropTypes.string,
 };
 
 export default ApplicantList;
