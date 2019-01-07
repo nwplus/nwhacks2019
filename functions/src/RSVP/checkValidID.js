@@ -10,13 +10,13 @@ exports.checkValidID = functions.https.onRequest((request, response) => {
 
   const { id } = JSON.parse(request.body);
   const { applicantType } = JSON.parse(request.body);
-  var collection = '';
+  let collection = '';
 
-  if ( applicantType === 'volunteer') {
+  if (applicantType === 'volunteer') {
     collection = 'volunteer_short_info';
   } else if (applicantType === 'hacker') {
     collection = 'hacker_short_info';
-  } 
+  }
 
   getDoc = db.collection(collection).doc(id).get()
     .then((doc) => {
