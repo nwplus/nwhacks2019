@@ -42,7 +42,7 @@ class RSVP extends React.Component {
 
     Axios.post(
       firebase.nwUtils.getFunctionUrl('checkValidID'),
-      { id, applicantType: 'hacker'},
+      { id, applicantType: 'hacker' },
       { headers: { 'Content-Type': 'text/plain' } }
     ).then((res) => {
       if (res.status === 200) {

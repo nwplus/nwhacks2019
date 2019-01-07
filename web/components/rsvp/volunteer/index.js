@@ -42,7 +42,7 @@ class volunteerRSVP extends React.Component {
 
     Axios.post(
       firebase.nwUtils.getFunctionUrl('checkValidID'),
-      { id , applicantType: 'volunteer'},
+      { id, applicantType: 'volunteer' },
       { headers: { 'Content-Type': 'text/plain' } }
     ).then((res) => {
       if (res.status === 200) {
