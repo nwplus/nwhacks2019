@@ -6,8 +6,7 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
   response.set('Access-Control-Allow-Origin', '*');
   response.set('Access-Control-Allow-Headers', 'Content-Type, crossDomain');
 
-  const { id } = JSON.parse(request.body);
-  const { applicantType } = JSON.parse(request.body);
+  const { id, applicantType } = JSON.parse(request.body);
   let collection = '';
 
   if (applicantType === 'volunteer') {
