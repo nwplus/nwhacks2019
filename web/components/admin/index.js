@@ -4,13 +4,18 @@ import PropTypes from 'prop-types';
 import { AdminNavbar } from './Navbar';
 import AdminTasks from './Tasks';
 import AdminGate from './AdminGate';
-import AssessmentPageContainer from '../../containers/admin/AssessmentPage';
+import GenericApplicantContainer from '../../containers/admin/GenericApplicantContainer';
 
 const adminPages = [
   {
     label: 'Assessment',
-    component: AssessmentPageContainer,
+    component: () => <GenericApplicantContainer pageType="assessment" />,
     route: '/admin/assessment',
+  },
+  {
+    label: 'Applicants',
+    component: () => <GenericApplicantContainer pageType="applicants" />,
+    route: '/admin/applicants',
   },
   {
     label: 'Tasks (Dev only)',
@@ -29,7 +34,7 @@ const Admin = ({ location: { pathname } }) => {
       <AdminNavbar
         pages={adminPages}
         activeIndex={activeIndex}
-        />
+      />
     </AdminGate>
   );
 };

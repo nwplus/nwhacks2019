@@ -22,11 +22,11 @@ const AssessmentPage = ({
   switchSortType,
   switchSortDirection,
   sortDirection,
-  exportApplicants,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
     <Toolbar
+      pageType="assessment"
       applicantType={applicantType}
       switchApplicantType={switchApplicantType}
       areFiltersApplied={areFiltersApplied}
@@ -35,7 +35,6 @@ const AssessmentPage = ({
       switchSortType={switchSortType}
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
-      exportApplicants={exportApplicants}
     />
     <FilterModal
       isOpen={isSelectingFilters}
@@ -44,9 +43,10 @@ const AssessmentPage = ({
       applyFilters={applyFilters}
       applicantType={applicantType}
     />
-    <div className="applicant-view flex">
+    <div className="assessment-applicant-view flex">
       {/* APPLICANT LIST */}
       <ApplicantList
+        pageType="assessment"
         applicants={applicants}
         selectedApplicantId={selectedApplicantId}
         onApplicantClick={onApplicantClick}
@@ -58,8 +58,9 @@ const AssessmentPage = ({
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}
       />
-      {/* TODO: APPLICANT INFO PANEL */}
+      {/* APPLICANT INFO PANEL */}
       <ApplicantInfo
+        showAssessmentFieldsOnly
         applicantId={selectedApplicantId}
         applicantType={applicantType}
         className={`${!selectedApplicantId ? 'display-none' : ''}`}

@@ -20,7 +20,7 @@ class FilterSelect extends React.Component {
     } = currentFilterOptions;
     const attributeLabels = getFilterAttributeLabels();
     const fieldLabels = getFilterFieldLabels(selectedAttribute);
-    const operatorLabels = getFilterOperatorLabels();
+    const operatorLabels = getFilterOperatorLabels(selectedAttribute, selectedField);
     const valueLabels = getFilterValueLabels(selectedAttribute, selectedField);
     const noValuesAvailable = valueLabels.length === 0;
     if (selectedAttribute === 'property') {

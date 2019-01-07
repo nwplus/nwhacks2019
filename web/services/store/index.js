@@ -53,10 +53,7 @@ export default (initialState = {}) => {
       { key: 'firepersist', storage: localStorage, stateReconciler: hardSet },
       firebaseReducer
     ),
-    firestore: persistReducer(
-      { key: 'firestorepersist', storage: localStorage, stateReconciler: hardSet },
-      firestoreReducer
-    ),
+    firestore: firestoreReducer,
     root: persistReducer(
       { key: 'app', storage: localStorage, stateReconciler: hardSet },
       Reducers

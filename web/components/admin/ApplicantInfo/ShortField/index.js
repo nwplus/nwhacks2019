@@ -2,11 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ShortField extends React.Component {
+  // converts boolean values to strings
+  convertTruthy = (bool) => {
+    if (bool) return 'Yes';
+    return 'No';
+  };
+
   render() {
-    const { label, value, isUrl } = this.props;
+    const { label, isUrl } = this.props;
+    let { value } = this.props;
+    value = typeof value === 'boolean' ? this.convertTruthy(value) : value;
     return (
-      <div className="pad-sides-xs pad-ends-xs">
-        <div className="applicant-info-label pad-bottom-m">{label}</div>
+      <div className="margin-bottom-m">
+        <div className="applicant-info-label">{label}</div>
         <div className="applicant-short-info">
           {isUrl ? (<div className="link"><a target="_blank" rel="noopener noreferrer" href={value && value.startsWith('http') ? value : '//' + value}> {value}</a></div>) : value}
         </div>
@@ -17,7 +25,10 @@ class ShortField extends React.Component {
 
 ShortField.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
   isUrl: PropTypes.bool,
 };
 
