@@ -6,7 +6,14 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
   response.set('Access-Control-Allow-Origin', '*');
   response.set('Access-Control-Allow-Headers', 'Content-Type, crossDomain');
 
-  const { id } = JSON.parse(request.body);
+  const { id, applicantType } = JSON.parse(request.body);
+  let collection = '';
+
+  if (applicantType === 'volunteer') {
+    collection = 'volunteer_short_info';
+  } else if (applicantType === 'hacker') {
+    collection = 'hacker_short_info';
+  }
 
   const {
     emergencyContactName,
@@ -34,7 +41,7 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
     response.status(400).send('Data validation failed');
   }
 
-  const userRef = db.collection('hacker_short_info').doc(id);
+  const userRef = db.collection(collection).doc(id);
   userRef.set(rsvpData, { merge: true })
     .then(value => response.send(value))
     .catch(error => error);

@@ -20,6 +20,7 @@ import volunteerSuccessPage from '../application/volunteer/pages/SuccessPage/Suc
 import NotFound from '../errors/NotFound';
 import DashBoard from '../dashboard';
 import RSVP from '../rsvp';
+import volunteerRSVP from '../rsvp/volunteer';
 
 // Demo
 import UIDemo from '../demo';
@@ -57,6 +58,7 @@ class App extends React.Component {
                 <Route path="/ui_demo" component={UIDemo} />
                 <Route path="/page_not_found" component={NotFound} />
                 <Route path="/rsvp/:id" component={RSVP} />
+                <Route path="/volunteer-rsvp/:id" component={volunteerRSVP} />
                 {/* Default is page not found */}
                 <Route component={() => <Redirect to="/page_not_found" />} />
               </Switch>
