@@ -154,25 +154,28 @@ class volunteerRSVP extends React.Component {
           />
           <CheckboxGroup
             name="orientationTimes"
-            label={(<div> In order to volunteer for nwHacks 2019, it is required that you attend one 
-                orientation session. Please check all the times you can attend:</div>)}>
+            label={(
+              <div> In order to volunteer for nwHacks 2019, it is required that you attend one
+                orientation session. Please check all the times you can attend:
+              </div>
+)}>
             <Checkbox
               label={(<div>January 16th 6-7pm</div>)}
               value="jan16orientation"
               checked={jan16orientation}
-              onChange={(e) => this.setState({jan16orientation: e.target.checked})}
+              onChange={e => this.setState({ jan16orientation: e.target.checked })}
             />
             <Checkbox
               label={(<div>January 17th 6-7pm</div>)}
               value="jan17orientation"
               checked={jan17orientation}
-              onChange={(e) => this.setState({jan17orientation: e.target.checked})}
+              onChange={e => this.setState({ jan17orientation: e.target.checked })}
             />
             <Checkbox
               label={(<div>Neither</div>)}
               value="neitherOrientation"
               checked={neitherOrientation}
-              onChange={(e) => this.setState({neitherOrientation: e.target.checked})}
+              onChange={e => this.setState({ neitherOrientation: e.target.checked })}
             />
           </CheckboxGroup>
           <TextInput
@@ -190,7 +193,7 @@ class volunteerRSVP extends React.Component {
               || emergencyContactNumber === ''
               || tShirtSize === ''
               || dietRestriction === ''
-              || (!jan16orientation && !jan17orientation && !neitherOrientation) }
+              || (!jan16orientation && !jan17orientation && !neitherOrientation)}
             text={isSubmitting ? 'Submitting...' : 'Confirm my attendance'}
             onClick={() => {
               this.setState({ isSubmitting: true });
