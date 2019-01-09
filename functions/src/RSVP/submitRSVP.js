@@ -45,7 +45,6 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
       jan17orientation,
       neitherOrientation,
     };
-
   } else if (applicantType === 'hacker') {
     collection = 'hacker_short_info';
   }
