@@ -164,18 +164,34 @@ class volunteerRSVP extends React.Component {
               value="jan16orientation"
               checked={jan16orientation}
               onChange={e => this.setState({ jan16orientation: e.target.checked })}
+              isControlled
+              disabled={neitherOrientation}
             />
             <Checkbox
               label={(<div>January 17th 6-7pm</div>)}
               value="jan17orientation"
               checked={jan17orientation}
               onChange={e => this.setState({ jan17orientation: e.target.checked })}
+              isControlled
+              disabled={neitherOrientation}
             />
             <Checkbox
               label={(<div>Neither</div>)}
               value="neitherOrientation"
               checked={neitherOrientation}
-              onChange={e => this.setState({ neitherOrientation: e.target.checked })}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  this.setState({
+                    neitherOrientation: e.target.checked,
+                    jan16orientation: false,
+                    jan17orientation: false,
+                  });
+                } else {
+                  this.setState({
+                    neitherOrientation: e.target.checked,
+                  });
+                }
+              }}
             />
           </CheckboxGroup>
           <TextInput
