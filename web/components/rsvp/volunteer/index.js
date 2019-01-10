@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { TextInput } from '../../input/text';
 import { Select } from '../../input/select';
 import { SecondaryButton, PrimaryButton } from '../../input/buttons';
+import { Checkbox, CheckboxGroup } from '../../input/buttons/CheckboxGroup';
 
 import { tShirtSizes } from '../tShirtSizes';
 import { dietRestrictions } from '../dietRestrictions';
@@ -30,6 +31,9 @@ class volunteerRSVP extends React.Component {
       emergencyContactNumber: '',
       tShirtSize: '',
       dietRestriction: '',
+      jan16orientation: false,
+      jan17orientation: false,
+      neitherOrientation: false,
       wouldLikeToSee: '',
     };
   }
@@ -93,6 +97,9 @@ class volunteerRSVP extends React.Component {
       emergencyContactNumber,
       tShirtSize,
       dietRestriction,
+      jan16orientation,
+      jan17orientation,
+      neitherOrientation,
       wouldLikeToSee,
     } = this.state;
 
@@ -138,17 +145,59 @@ class volunteerRSVP extends React.Component {
             name="dietRestrictions"
             label="Do you have any dietary restrictions or allergies?"
             placeholder="Enter an option or choose from the dropdown"
-            className="margin-top-mega margin-bottom-xxl"
+            className="margin-top-mega margin-bottom-giga"
             onChange={({ value: newDietRestriction }) => this.setState({
               dietRestriction: newDietRestriction })}
             value={dietRestriction}
             isSearchable
             allowNewOption
           />
+          <CheckboxGroup
+            name="orientationTimes"
+            label={(
+              <div> In order to volunteer for nwHacks 2019, it is required that you attend one
+                orientation session. Please check all the times you can attend:
+              </div>
+)}>
+            <Checkbox
+              label={(<div>January 16th 6-7pm</div>)}
+              value="jan16orientation"
+              checked={jan16orientation}
+              onChange={e => this.setState({ jan16orientation: e.target.checked })}
+              isControlled
+              disabled={neitherOrientation}
+            />
+            <Checkbox
+              label={(<div>January 17th 6-7pm</div>)}
+              value="jan17orientation"
+              checked={jan17orientation}
+              onChange={e => this.setState({ jan17orientation: e.target.checked })}
+              isControlled
+              disabled={neitherOrientation}
+            />
+            <Checkbox
+              label={(<div>Neither</div>)}
+              value="neitherOrientation"
+              checked={neitherOrientation}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  this.setState({
+                    neitherOrientation: e.target.checked,
+                    jan16orientation: false,
+                    jan17orientation: false,
+                  });
+                } else {
+                  this.setState({
+                    neitherOrientation: e.target.checked,
+                  });
+                }
+              }}
+            />
+          </CheckboxGroup>
           <TextInput
             label="Is there anything you would like to see at nwHacks? (optional)"
             name="ideas"
-            className="margin-top-mega margin-bottom-xxl margin-ends-giga"
+            className="margin-ends-giga"
             placeholder="Enter ideas here"
             onChange={newIdea => this.setState({ wouldLikeToSee: newIdea })}
             value={wouldLikeToSee}
@@ -159,7 +208,8 @@ class volunteerRSVP extends React.Component {
               || emergencyContactName === ''
               || emergencyContactNumber === ''
               || tShirtSize === ''
-              || dietRestriction === ''}
+              || dietRestriction === ''
+              || (!jan16orientation && !jan17orientation && !neitherOrientation)}
             text={isSubmitting ? 'Submitting...' : 'Confirm my attendance'}
             onClick={() => {
               this.setState({ isSubmitting: true });
@@ -172,6 +222,9 @@ class volunteerRSVP extends React.Component {
                     emergencyContactNumber,
                     tShirtSize,
                     dietRestriction,
+                    jan16orientation,
+                    jan17orientation,
+                    neitherOrientation,
                     wouldLikeToSee,
                   },
                 },

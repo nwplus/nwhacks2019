@@ -7,14 +7,6 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
   response.set('Access-Control-Allow-Headers', 'Content-Type, crossDomain');
 
   const { id, applicantType } = JSON.parse(request.body);
-  let collection = '';
-
-  if (applicantType === 'volunteer') {
-    collection = 'volunteer_short_info';
-  } else if (applicantType === 'hacker') {
-    collection = 'hacker_short_info';
-  }
-
   const {
     emergencyContactName,
     emergencyContactNumber,
@@ -35,6 +27,27 @@ exports.submitRSVP = functions.https.onRequest((request, response) => {
       going: true,
     },
   };
+
+  let collection = '';
+
+  if (applicantType === 'volunteer') {
+    collection = 'volunteer_short_info';
+
+    // additional fields for volunteer only
+    const {
+      jan16orientation,
+      jan17orientation,
+      neitherOrientation,
+    } = JSON.parse(request.body).data;
+
+    rsvpData.rsvp.orientationAvailability = {
+      jan16orientation,
+      jan17orientation,
+      neitherOrientation,
+    };
+  } else if (applicantType === 'hacker') {
+    collection = 'hacker_short_info';
+  }
 
   const errors = validate(rsvpData.rsvp, constraints.rsvp);
   if (errors) {
