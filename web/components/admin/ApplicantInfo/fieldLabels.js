@@ -36,6 +36,13 @@ const fieldLabels = {
         { name: 'resumeLink', label: 'Resume' },
         { name: 'source', label: 'How did you hear about nwHacks?' },
       ],
+      rsvpInfo: [
+        { name: 'rsvp_dietRestriction', label: 'RSVP: Dietary restrictions' },
+        { name: 'rsvp_tShirtSize', label: 'RSVP: T-shirt size' },
+        { name: 'rsvp_emergencyContactName', label: 'RSVP: Emergency contact name' },
+        { name: 'rsvp_emergencyContactNumber', label: 'RSVP: Emergency contact phone number' },
+        { name: 'rsvp_wouldLikeToSee', label: 'RSVP: What would you like to see at nwHacks?' },
+      ],
       longInfo: [
         { name: 'interestForNwHacks', label: 'What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited.' },
         { name: 'recentProject', label: 'Tell us about a recent project you\'ve worked on that you\'re proud of! (It doesn\'t have to be technical)' },
@@ -63,6 +70,16 @@ const fieldLabels = {
         { name: 'gradYear', label: 'Graduation year' },
         { name: 'city', label: 'City' },
         { name: 'source', label: 'How did you hear about nwHacks?' },
+      ],
+      rsvpInfo: [
+        { name: 'rsvp_orientationAvailability_jan16orientation', label: 'RSVP: Available for January 16th orientation?' },
+        { name: 'rsvp_orientationAvailability_jan17orientation', label: 'RSVP: Available for January 17th orientation?' },
+        { name: 'rsvp_orientationAvailability_neitherOrientation', label: 'RSVP: Not available for either orientation?' },
+        { name: 'rsvp_dietRestriction', label: 'RSVP: Dietary restrictions' },
+        { name: 'rsvp_tShirtSize', label: 'RSVP: T-shirt size' },
+        { name: 'rsvp_emergencyContactName', label: 'RSVP: Emergency contact name' },
+        { name: 'rsvp_emergencyContactNumber', label: 'RSVP: Emergency contact phone number' },
+        { name: 'rsvp_wouldLikeToSee', label: 'RSVP: What would you like to see at nwHacks?' },
       ],
       longInfo: [
         { name: 'interestForNwHacks', label: 'What are you interested in building at nwHacks? Tell us about an idea you have, and why it gets you excited.' },

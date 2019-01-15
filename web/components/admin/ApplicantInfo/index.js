@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { firebaseConnect, firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import flat from 'flat';
 import applicantCollections from '../../../util/applicantCollections';
 import { fieldLabels, travelLabels } from './fieldLabels';
 import ShortField from './ShortField';
@@ -52,13 +53,15 @@ class ApplicantInfo extends React.Component {
 
   render() {
     const { applicantType, className, showAssessmentFieldsOnly } = this.props;
-    const shortInfo = this.getApplicantShortInfo();
+    let shortInfo = this.getApplicantShortInfo();
     const longInfo = this.getApplicantLongInfo();
     if (applicantType === 'mentor'
       || (applicantType === 'volunteer' && showAssessmentFieldsOnly)) return null;
     const applicantFields = showAssessmentFieldsOnly
       ? this.getAssessmentFieldNamesOnly(applicantType)
       : this.getAllFieldNames(applicantType);
+    const rsvpInfoExists = shortInfo && shortInfo.rsvp && applicantFields.rsvpInfo;
+    shortInfo = shortInfo ? flat(shortInfo, { delimiter: '_' }) : {};
     return (
       <div className={`applicant-info ${className}`}>
         {applicantFields.shortInfo.map((field) => {
@@ -82,6 +85,18 @@ class ApplicantInfo extends React.Component {
               value={longInfo ? longInfo[name] : ''} />
           );
         })}
+        {rsvpInfoExists ? applicantFields.rsvpInfo.map((field) => {
+          const { name, label } = field;
+          let value = shortInfo ? shortInfo[name] : '';
+          if (name === 'travel') value = travelLabels[value];
+          if (name === 'timestamp') value = decodeUnixTimestamp(value);
+          return (
+            <ShortField
+              key={label}
+              label={label}
+              value={value}
+            />);
+        }) : null}
       </div>
     );
   }
