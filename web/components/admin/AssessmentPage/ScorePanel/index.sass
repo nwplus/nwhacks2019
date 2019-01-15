@@ -3,29 +3,8 @@
 .score-panel
   font-family: 'Apercu Pro'
   position: relative
-  .react-tabs
-    &__tab
-      padding-top: 14px
-      padding-bottom: 10px
-      font-size: 16px
-      color: $charcoal
-      font-weight: 500
-      &-list
-        margin-left: -1px
-        padding-bottom: 1px
-        margin-bottom: 0px
-        border-color: #E0E0E0
-      &--selected
-        border-top: 0
-        border-radius: 0
-        border-color: #E0E0E0  
-    &__tab-panel
-      height: 94%
   .score-buttons
     padding: 20px 17px 0px 17px
-    margin-bottom: auto
-  .score-history
-    margin-top: auto
   .score-panel-title
     margin-bottom: 11px
   &-primary-text
@@ -35,3 +14,6 @@
   &-secondary-text
     font-size: 16px
     color: $light-grey
+
+  @media (max-height: 1080px)
+    overflow-y: auto

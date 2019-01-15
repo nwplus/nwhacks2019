@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import applicantCollections from '../../../../util/applicantCollections';
 import ScoreHistory from '../../AssessmentPage/ScorePanel/ScoreHistory';
 import Tag from '../../Tag';
@@ -60,43 +58,22 @@ class ApplicantMetadata extends React.Component {
     const { tags } = applicantInfo || {};
     const applicantHasTags = tags && Object.keys(tags).length > 0;
     return (
-      <Tabs className={`applicant-metadata flex dir-col ${className}`} zoom="50%">
-        <TabList>
-          <Tab>Tags</Tab>
-        </TabList>
-        <TabPanel className="flex dir-col fill-height">
-          <div className="tags">
-            <div className="flex wrap">
-              {applicantHasTags ? Object.keys(tags).map(tagName => (
-                <Tag
-                  tagName={tagName}
-                  key={tagName}
-                  allowDelete
-                  deleteTag={this.removeTagFromApplicant}
-                />
-              )) : (<div className="secondary-text"> No tags found </div>)}
-            </div>
+      <div className={`applicant-metadata flex jc-between dir-col ${className}`} zoom="50%">
+        <div className="tags">
+          <div className="primary-text">Tags</div>
+          <div className="flex wrap">
+            {applicantHasTags ? Object.keys(tags).map(tagName => (
+              <Tag
+                tagName={tagName}
+                key={tagName}
+                allowDelete
+                deleteTag={this.removeTagFromApplicant}
+              />
+            )) : (<div className="secondary-text"> No tags found </div>)}
           </div>
-          <ScoreHistory {...this.props} />
-        </TabPanel>
-      </Tabs>
-      // );
-      // <div className={`applicant-metadata flex jc-between dir-col ${className}`} zoom="50%">
-      //   <div className="tags">
-      //     <div className="primary-text">Tags</div>
-      //     <div className="flex wrap">
-      //       {applicantHasTags ? Object.keys(tags).map(tagName => (
-      //         <Tag
-      //           tagName={tagName}
-      //           key={tagName}
-      //           allowDelete
-      //           deleteTag={this.removeTagFromApplicant}
-      //         />
-      //       )) : (<div className="secondary-text"> No tags found </div>)}
-      //     </div>
-      //   </div>
-      //   <ScoreHistory {...this.props} />
-      // </div>
+        </div>
+        <ScoreHistory {...this.props} />
+      </div>
     );
   }
 }
