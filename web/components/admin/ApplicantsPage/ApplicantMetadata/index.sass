@@ -1,18 +1,34 @@
 .applicant-metadata
   font-family: 'Apercu Pro'
   position: relative
+  .react-tabs
+    &__tab
+      padding-top: 14px
+      padding-bottom: 10px
+      font-size: 16px
+      color: $charcoal
+      font-weight: 500
+      &-list
+        margin-left: -1px
+        border-color: #E0E0E0
+        height: 45px
+      &--selected
+        border-top: 0
+        border-radius: 0
+        border-color: #E0E0E0
+    &__tab-panel--selected
+      overflow-y: scroll
+      height: -webkit-fill-available
   .tags
-    padding: 22px 17px 0px 17px
+    margin-bottom: auto
+    padding: 22px 17px 22px 17px
     .primary-text
       margin-bottom: 11px
     .tag-label
       margin-right: 8px
       margin-bottom: 5px
-  .primary-text
-    font-size: 16px
-    color: $charcoal
-    font-weight: 500
+  .score-history
+    margin-top: auto
   .secondary-text
     font-size: 16px
     color: $light-grey
-  

@@ -2,9 +2,27 @@
 @import ./LongField/index
 
 .applicant-info
-  padding: 20px 17px 0px 17px
-  min-height: 100%
-  overflow-y: scroll
+  .fields
+    padding: 0px 17px 0px 17px
+    overflow-y: scroll
+  .react-tabs
+    &__tab
+      padding-top: 14px
+      padding-bottom: 10px
+      font-size: 16px
+      color: $charcoal
+      font-weight: 500
+      &-list
+        margin-left: -1px
+        border-color: #E0E0E0
+        height: 45px
+      &--selected
+        border-top: 0
+        border-radius: 0
+        border-color: #E0E0E0
+    &__tab-panel--selected
+      overflow-y: scroll
+      height: -webkit-fill-available
 .applicant-info-label
   display: inline
   width: 208px

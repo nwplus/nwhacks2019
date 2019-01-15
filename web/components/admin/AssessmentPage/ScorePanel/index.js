@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import { ScoreButtonGroup } from './ScoreButtonGroup';
 import ScoreHistory from './ScoreHistory';
 import applicantCollections from '../../../../util/applicantCollections';
@@ -107,26 +109,32 @@ class ScorePanel extends React.Component {
     const { className, applicantType } = this.props;
 
     return (applicantType === 'hacker') ? (
-      <div className={`score-panel flex jc-between dir-col ${className}`} zoom="50%">
-        <div className="score-buttons">
-          <div className="score-panel-title">Scoring</div>
-          {criteria.map(c => (
-            <ScoreButtonGroup
-              numButtons={5}
-              getScore={this.getCriteriaScoreValue}
-              setScore={this.setCriteriaInfo}
-              criteriaName={c.name}
-              key={c.name}
-              title={c.title}
-            />
-          ))}
-        </div>
-        <ScoreHistory {...this.props} />
-      </div>
+      <Tabs className={`score-panel flex dir-col ${className}`} zoom="50%">
+        <TabList>
+          <Tab>Scoring</Tab>
+        </TabList>
+        <TabPanel>
+          <div className="flex dir-col fill-height overflow-y-auto">
+            <div className="score-buttons">
+              {criteria.map(c => (
+                <ScoreButtonGroup
+                  numButtons={5}
+                  getScore={this.getCriteriaScoreValue}
+                  setScore={this.setCriteriaInfo}
+                  criteriaName={c.name}
+                  key={c.name}
+                  title={c.title}
+                />
+              ))}
+            </div>
+            <ScoreHistory {...this.props} />
+          </div>
+        </TabPanel>
+      </Tabs>
     ) : (
       <div className="pad-top-xs pad-left-xs">
-        Assessment not enabled for {applicantType}.<br />
-        Please manually select and tag accepted {applicantType}s
+          Assessment not enabled for {applicantType}.<br />
+          Please manually select and tag accepted {applicantType}s
         through the <i>Applicants</i> page.
       </div>
     );
