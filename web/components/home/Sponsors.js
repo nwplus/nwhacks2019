@@ -28,10 +28,12 @@ import zoho from '../../assets/sponsors/in-kind/zoho.svg';
 import dottech from '../../assets/sponsors/in-kind/dottech.png';
 import teslaamazing from '../../assets/sponsors/in-kind/teslaamazing.png';
 import github from '../../assets/sponsors/in-kind/github.svg';
+import nextbillion from '../../assets/sponsors/in-kind/nextbillion.png';
 // partners
 import nwplus from '../../assets/partners/nwplus.png';
 import mlh from '../../assets/partners/mlh.svg';
 import bctech from '../../assets/partners/bctech.png';
+import leagueofinnovators from '../../assets/partners/leagueofinnovators.png';
 
 
 const getSponsor = (alt, src, href, className) => (
@@ -59,7 +61,7 @@ const Sponsors = () => (
     <br />
     {getSponsor('Royal Bank of Canada', rbc, 'https://www.rbcroyalbank.com/', 'mega')}
     <br />
-    {getSponsor('Telus', telus, 'https://www.telus.com/en/digital', 'mega')}
+    {getSponsor('Telus', telus, 'http://www.telus.com/gtlp', 'mega')}
     <br />
     {/* kilo */}
     {getSponsor('Google', google, 'https://www.google.com', 'kilo')}
@@ -84,6 +86,7 @@ const Sponsors = () => (
     {getSponsor('Grounds For Coffee', grounds, 'https://groundsforcoffee.ca/locations/', 'in-kind')}
     {getSponsor('Zoho', zoho, 'https://www.zoho.com/', 'in-kind')}
     {getSponsor('Sparkling Ice', sparkingice, 'https://www.sparklingice.ca/', 'in-kind')}
+    {getSponsor('Next Billion', nextbillion, 'https://www.nextbillion.org/', 'in-kind')}
   </div>
 );
 
@@ -93,6 +96,7 @@ const Partners = () => (
     {getSponsor('nwPlus', nwplus, 'http://facebook.com/nwplusubc', 'partner')}
     {getSponsor('MLH', mlh, 'https://mlh.io/', 'partner')}
     {getSponsor('BC Tech', bctech, 'https://wearebctech.com/', 'partner')}
+    {getSponsor('Leagues of Innovators', leagueofinnovators, 'https://www.theleagueofinnovators.com/', 'partner')}
   </div>
 );
 
