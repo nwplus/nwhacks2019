@@ -68,7 +68,13 @@ exports.importMentors = functions.https.onRequest((request, response) => {
           const mentor = {};
           row.forEach((column, index) => {
             const fieldName = fieldNamesOrdered[index];
-            mentor[fieldName] = column;
+            if (fieldName) {
+              if (fieldName === 'timestamp') {
+                mentor[fieldName] = Date.now();
+              } else {
+                mentor[fieldName] = column;
+              }
+            }
             return 0;
           });
           return batch.set(mentorRef, mentor);
