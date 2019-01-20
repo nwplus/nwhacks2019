@@ -460,8 +460,22 @@ class GenericApplicantContainer extends React.Component {
       }
     });
     const filteredApplicants = this.filterApplicants(checkedApplicants);
-    const fields = ['firstName', 'lastName', 'email', 'id', 'tags'];
+    let fields = ['firstName', 'lastName', 'email', 'id', 'tags.accepted', 'tags.abc'];
     // https://www.npmjs.com/package/json2csv
+    console.log('filtered applicants:', filteredApplicants);
+
+    for (let i = 0; i < filteredApplicants.length; i += 1) {
+      for (var k in filteredApplicants[i].tags) {
+        if (!fields.includes('tags.' + k)) {
+          fields.push('tags.' + k);
+        }
+      }
+    }
+    // console.log(' fixeddddddd:', filteredApplicants[0].tags);
+    console.log(' fixeddddddd:', fields);
+
+
+
     const json2csvParser = new Parser({ fields, quote: '' });
     const csv = json2csvParser.parse(filteredApplicants);
     const exportedFilename = 'applicants.csv';
