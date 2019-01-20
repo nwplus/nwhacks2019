@@ -1,5 +1,6 @@
-const { db, functions, admin } = require('../utils/firestore');
 const parse = require('csv-parse');
+const { XMLHttpRequest } = require('xmlhttprequest');
+const { db, functions, admin } = require('../utils/firestore');
 
 const fieldNamesOrdered = [
   'timestamp',
@@ -13,7 +14,7 @@ const fieldNamesOrdered = [
   'tShirtSize',
   'diet',
   'source',
-  'womenInTech'
+  'womenInTech',
 ];
 
 // cloud function for submitting hacker application
@@ -51,10 +52,9 @@ exports.importMentors = functions.https.onRequest((request, response) => {
 
     const { csvUrl } = data;
 
-    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.responseType = 'text';
-    xhr.onload = function(event) {
+    xhr.onload = function (event) {
       const { responseText } = xhr;
       parse(responseText, (err, output) => {
         if (err) {
@@ -69,15 +69,16 @@ exports.importMentors = functions.https.onRequest((request, response) => {
           row.forEach((column, index) => {
             const fieldName = fieldNamesOrdered[index];
             mentor[fieldName] = column;
+            return 0;
           });
-          batch.set(mentorRef, mentor);
+          return batch.set(mentorRef, mentor);
         });
 
         return batch.commit().then(() => response.status(200).send(output.length.toString()))
-          .catch((e) => response.status(500).send(e));
+          .catch(e => response.status(500).send(e));
       });
     };
     xhr.open('GET', csvUrl);
-    xhr.send();
+    return xhr.send();
   });
 });
