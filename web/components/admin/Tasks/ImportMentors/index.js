@@ -26,8 +26,8 @@ class ImportMentors extends React.Component {
         {
           headers: {
             'Content-Type': 'text/plain',
-            'Authorization': idToken
-          }
+            Authorization: idToken,
+          },
         }
       )).then((res) => {
         if (res.status === 200) {
