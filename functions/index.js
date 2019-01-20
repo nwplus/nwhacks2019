@@ -10,6 +10,8 @@ const { backfillLongInfo } = require('./src/tasks/backfill/backfillLongInfo');
 const { checkValidID } = require('./src/RSVP/checkValidID');
 const { submitRSVP } = require('./src/RSVP/submitRSVP');
 const { tagApplicants } = require('./src/tagApplicants/index');
+const { importMentors } = require('./src/importMentors/index');
+
 // export functions
 exports.exampleHelloWorld = exampleHelloWorld;
 exports.exampleGetData = exampleGetData;
@@ -20,3 +22,4 @@ exports.backfillLongInfo = backfillLongInfo;
 exports.checkValidID = checkValidID;
 exports.submitRSVP = submitRSVP;
 exports.tagApplicants = tagApplicants;
+exports.importMentors = importMentors;
