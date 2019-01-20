@@ -64,7 +64,7 @@ exports.importMentors = functions.https.onRequest((request, response) => {
         const batch = db.batch();
 
         output.forEach((row) => {
-          const mentorRef = db.collection('mentors').doc();
+          const mentorRef = db.collection('mentor_short_info').doc();
           const mentor = {};
           row.forEach((column, index) => {
             const fieldName = fieldNamesOrdered[index];
