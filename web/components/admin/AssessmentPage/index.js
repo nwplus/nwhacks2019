@@ -51,6 +51,8 @@ const AssessmentPage = ({
         selectedApplicantId={selectedApplicantId}
         onApplicantClick={onApplicantClick}
         className={`${!selectedApplicantId ? 'fill-min-width' : ''}`}
+        sortType={sortType}
+        sortDirection={sortDirection}
       />
       {/* SCORE PANEL */}
       <ScorePanel
