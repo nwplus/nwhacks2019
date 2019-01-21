@@ -462,20 +462,26 @@ class GenericApplicantContainer extends React.Component {
     const filteredApplicants = this.filterApplicants(checkedApplicants);
     let fields = ['firstName', 'lastName', 'email', 'id', 'tags.accepted', 'tags.abc'];
     // https://www.npmjs.com/package/json2csv
-    console.log('filtered applicants:', filteredApplicants);
 
+    // Flatten each applicant
+    let flattenedApplicants = [];
     for (let i = 0; i < filteredApplicants.length; i += 1) {
-      for (var k in filteredApplicants[i].tags) {
-        if (!fields.includes('tags.' + k)) {
-          fields.push('tags.' + k);
+      const applicant = flat(filteredApplicants[i], { delimiter: '.' });
+      flattenedApplicants.push(applicant);
+    }
+
+    // Export all the fields of each applicant
+    for (let j = 0; j < flattenedApplicants.length; j += 1) {
+      const applicantKeys = Object.keys(flattenedApplicants[j]);
+      for (let k = 0; k < applicantKeys.length; k += 1) {
+        const applicantField = applicantKeys[k];
+        if (!fields.includes(applicantField)) {
+          fields.push(applicantField);
         }
       }
     }
-    // console.log(' fixeddddddd:', filteredApplicants[0].tags);
-    console.log(' fixeddddddd:', fields);
 
-
-
+    // Export to CSV
     const json2csvParser = new Parser({ fields, quote: '' });
     const csv = json2csvParser.parse(filteredApplicants);
     const exportedFilename = 'applicants.csv';
