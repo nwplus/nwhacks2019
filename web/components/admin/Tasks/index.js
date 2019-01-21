@@ -1,6 +1,7 @@
 import React from 'react';
 import BackfillShortInfo from './BackfillShortInfo';
 import BackfillLongInfo from './BackfillLongInfo';
+import ImportMentors from './ImportMentors';
 
 const AdminTasks = () => (
   <div
@@ -8,6 +9,7 @@ const AdminTasks = () => (
     >
     <BackfillShortInfo />
     <BackfillLongInfo />
+    <ImportMentors />
   </div>
 );
 
