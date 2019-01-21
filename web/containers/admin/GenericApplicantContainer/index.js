@@ -460,7 +460,7 @@ class GenericApplicantContainer extends React.Component {
       }
     });
     const filteredApplicants = this.filterApplicants(checkedApplicants);
-    const fields = ['firstName', 'lastName', 'email', 'id', 'tags.accepted', 'tags.abc'];
+    const fields = ['firstName', 'lastName', 'email', 'id'];
     // https://www.npmjs.com/package/json2csv
 
     // Flatten each applicant
