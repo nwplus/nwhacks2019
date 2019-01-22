@@ -8,12 +8,11 @@ exports.getNFCdevices = functions.https.onRequest((request, response) => {
 
   NFCdevices = {};
 
-  docs = db.collection("nfc_devices").get().then(function(querySnapshot) {
+  docs = db.collection('nfc_devices').get().then( function(querySnapshot) {
     querySnapshot.forEach((doc) => {
-      model = doc.data().model;
-      email = doc.data().email;
+      const { model, email } = doc.data();
 
-      NFCdevices[model + "-" + email] = doc.data();
+      NFCdevices[model.concat('-', email)] = doc.data();
     });
     return NFCdevices;
   });
