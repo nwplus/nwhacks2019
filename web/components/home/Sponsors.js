@@ -17,6 +17,7 @@ import deloitte from '../../assets/sponsors/kilo/deloitte.png';
 import jumpstart from '../../assets/sponsors/kilo/jumpstart.png';
 // micro
 import copperleaf from '../../assets/sponsors/micro/copperleaf.png';
+import bestbuy from '../../assets/sponsors/micro/bestbuy.svg';
 // in-kind
 import wolfram from '../../assets/sponsors/in-kind/wolfram.png';
 import stickermule from '../../assets/sponsors/in-kind/stickermule.png';
@@ -73,6 +74,7 @@ const Sponsors = () => (
     <br />
     {/* micro */}
     {getSponsor('Copperleaf', copperleaf, 'https://www.copperleaf.com/', 'micro')}
+    {getSponsor('Best Buy', bestbuy, 'https://www.bestbuy.ca/', 'micro')}
     {/* in-kind */}
     {getSponsor('GitHub', github, 'https://github.com/', 'in-kind')}
     {getSponsor('Wolfram Research', wolfram, 'https://www.wolfram.com/', 'in-kind')}
