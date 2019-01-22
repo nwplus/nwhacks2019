@@ -34,6 +34,7 @@ class GenericApplicantContainer extends React.Component {
       // applicants with their checkbox checked
       checkedApplicantIds: {},
       isTagMenuOpen: false,
+      searchText: '',
     };
   }
 
@@ -136,6 +137,7 @@ class GenericApplicantContainer extends React.Component {
       applicantType,
       sortType,
       sortDirection,
+      searchText,
     } = this.state;
     const {
       firestore,
@@ -146,7 +148,17 @@ class GenericApplicantContainer extends React.Component {
       return undefined;
     }
     // this.setState({ applicantIndex: firestore.data[shortInfoCollectionName] });
-    const applicants = Object.values(firestore.data[shortInfoCollectionName]);
+    let applicants = Object.values(firestore.data[shortInfoCollectionName]);
+
+    if (searchText !== '') {
+      applicants = applicants.filter((applicant) => {
+        applicant = flat(applicant, { delimiter: '_' });
+        const fullName = applicant.firstName.toLowerCase() + ' ' + applicant.lastName.toLowerCase();
+        return (fullName.includes(searchText)
+          || applicant.email.toLowerCase().includes(searchText));
+      });
+    }
+
     const filteredApplicants = this.filterApplicants(applicants);
     let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
     if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
@@ -504,6 +516,10 @@ class GenericApplicantContainer extends React.Component {
     }
   }
 
+  searchApplicants = (newSearchText) => {
+    this.setState({ searchText: newSearchText });
+  }
+
   renderAssessmentPage = () => {
     const {
       applicantType,
@@ -538,6 +554,7 @@ class GenericApplicantContainer extends React.Component {
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
+          searchApplicants={this.searchApplicants}
         />
       </div>
     );
@@ -590,6 +607,7 @@ class GenericApplicantContainer extends React.Component {
           createNewTag={this.createNewTag}
           applyTags={this.applyTags}
           exportApplicants={this.exportApplicants}
+          searchApplicants={this.searchApplicants}
         />
       </div>
     );

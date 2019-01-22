@@ -8,6 +8,7 @@ import tagIcon from '../../../assets/internal/tag-icon.svg';
 import { Checkbox } from '../../input/buttons';
 import TagMenu from './TagMenu';
 import downloadIcon from '../../../assets/download-icon.svg';
+import { TextInput } from '../../input/text/TextInput';
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Toolbar extends React.Component {
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
+      switchSortType, sortType, switchSortDirection, sortDirection, searchApplicants } = this.props;
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -67,6 +68,14 @@ class Toolbar extends React.Component {
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
         </div>
+        <TextInput
+          name="search-applicants"
+          className="pad-left-xxl"
+          placeholder="test"
+          onChange={(searchText) => {
+            searchApplicants(searchText);
+          }}
+        />
       </div>
     );
   }
@@ -189,6 +198,8 @@ Toolbar.propTypes = {
   pageType: PropTypes.string,
   // Exports all applicants into a csv
   exportApplicants: PropTypes.func,
+  // fuzzy search on applicant name and email
+  searchApplicants: PropTypes.func,
 };
 
 export default Toolbar;

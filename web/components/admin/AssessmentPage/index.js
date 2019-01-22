@@ -22,6 +22,7 @@ const AssessmentPage = ({
   switchSortType,
   switchSortDirection,
   sortDirection,
+  searchApplicants,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -35,6 +36,7 @@ const AssessmentPage = ({
       switchSortType={switchSortType}
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
+      searchApplicants={searchApplicants}
     />
     <FilterModal
       isOpen={isSelectingFilters}
@@ -104,8 +106,8 @@ AssessmentPage.propTypes = {
   sortDirection: PropTypes.string,
   // Exports all applicants into a csv
   exportApplicants: PropTypes.func,
-
-
+  // Executes fuzzy search on applicants
+  searchApplicants: PropTypes.func,
 };
 
 export default AssessmentPage;
