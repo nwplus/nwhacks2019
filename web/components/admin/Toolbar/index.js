@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Axios from 'axios';
+import { withFirebase } from 'react-redux-firebase';
 import { Select } from '../../input/select';
 import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
@@ -25,6 +27,21 @@ class Toolbar extends React.Component {
       score: { value: 'score', label: 'Score' },
       timestamp: { value: 'timestamp', label: 'Timestamp' },
     };
+  }
+
+  componentDidMount() {
+    const { firebase } = this.props;
+
+    Axios.post(
+      firebase.nwUtils.getFunctionUrl('getNFCdevices'),
+      {},
+      { headers: { 'Content-Type': 'text/plain' } }
+    ).then((res) => {
+      if (res.status === 200) {
+        this.NFCdevices = res.data;
+        // console.log(typeof(Object.values(res.data)));
+      }
+    });
   }
 
   renderToolbar = () => {
@@ -71,11 +88,16 @@ class Toolbar extends React.Component {
         <TextInput
           name="search-applicants"
           className="pad-left-xxl"
-          placeholder="test"
+          placeholder="Search..."
           onChange={(searchText) => {
             searchApplicants(searchText);
-          }}
-        />
+          }} />
+        <Select
+          onChange={(option) => { console.log(option); console.log(this.NFCdevices); }}
+          label="NFC Devices:"
+          name="nfc-devices"
+          // value={this.collectionSelectLabels[applicantType]}
+          options={Object.values(this.sortSelectLabels)} />
       </div>
     );
   }
@@ -158,6 +180,7 @@ Toolbar.defaultProps = {
 };
 
 Toolbar.propTypes = {
+  firebase: PropTypes.object.isRequired,
   // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string,
   // handler for switching between applicant types
@@ -202,4 +225,4 @@ Toolbar.propTypes = {
   searchApplicants: PropTypes.func,
 };
 
-export default Toolbar;
+export default withFirebase(Toolbar);

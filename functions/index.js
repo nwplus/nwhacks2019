@@ -11,6 +11,7 @@ const { checkValidID } = require('./src/RSVP/checkValidID');
 const { submitRSVP } = require('./src/RSVP/submitRSVP');
 const { tagApplicants } = require('./src/tagApplicants/index');
 const { importMentors } = require('./src/importMentors/index');
+const { getNFCdevices } = require('./src/getNFCdevices/index');
 
 // export functions
 exports.exampleHelloWorld = exampleHelloWorld;
@@ -23,3 +24,4 @@ exports.checkValidID = checkValidID;
 exports.submitRSVP = submitRSVP;
 exports.tagApplicants = tagApplicants;
 exports.importMentors = importMentors;
+exports.getNFCdevices = getNFCdevices;
