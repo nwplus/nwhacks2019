@@ -31,6 +31,7 @@ import zoho from '../../assets/sponsors/in-kind/zoho.svg';
 import dottech from '../../assets/sponsors/in-kind/dottech.png';
 import teslaamazing from '../../assets/sponsors/in-kind/teslaamazing.png';
 import github from '../../assets/sponsors/in-kind/github.svg';
+import lebeau from '../../assets/sponsors/in-kind/lebeau.png';
 import nextbillion from '../../assets/sponsors/in-kind/nextbillion.png';
 // partners
 import nwplus from '../../assets/partners/nwplus.png';
@@ -92,6 +93,7 @@ const Sponsors = () => (
     {getSponsor('Grounds For Coffee', grounds, 'https://groundsforcoffee.ca/locations/', 'in-kind')}
     {getSponsor('Zoho', zoho, 'https://www.zoho.com/', 'in-kind')}
     {getSponsor('Sparkling Ice', sparkingice, 'https://www.sparklingice.ca/', 'in-kind')}
+    {getSponsor('Patisserie Lebeau', lebeau, 'https://www.grababetterwaffle.com/', 'in-kind')}
     {getSponsor('Next Billion', nextbillion, 'https://www.nextbillion.org/', 'in-kind')}
   </div>
 );
