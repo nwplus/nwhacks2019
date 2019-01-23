@@ -11,6 +11,7 @@ import telus from '../../assets/sponsors/mega/telus.svg';
 import rbc from '../../assets/sponsors/mega/rbc.svg';
 // kilo
 import google from '../../assets/sponsors/kilo/google.svg';
+import clearly from '../../assets/sponsors/kilo/clearly.svg';
 import realtor from '../../assets/sponsors/kilo/realtor.png';
 import sauder from '../../assets/sponsors/kilo/sauder.png';
 import deloitte from '../../assets/sponsors/kilo/deloitte.png';
@@ -60,14 +61,15 @@ const Sponsors = () => (
     {getSponsor('Hootsuite', hootsuite, 'https://hootsuite.com/', 'mega')}
     <br />
     {getSponsor('SAP Concur', sap, 'https://www.concur.ca/sap/', 'mega')}
-    <br />
+    {/* <br /> */}
     {getSponsor('Royal Bank of Canada', rbc, 'https://www.rbcroyalbank.com/', 'mega')}
-    <br />
+    {/* <br /> */}
     {getSponsor('Telus', telus, 'http://www.telus.com/gtlp', 'mega')}
     <br />
     {/* kilo */}
-    {getSponsor('Google', google, 'https://www.google.com', 'kilo')}
     {getSponsor('Deloitte', deloitte, 'https://www2.deloitte.com/ca/en.html', 'kilo')}
+    {getSponsor('Google', google, 'https://www.google.com', 'kilo')}
+    {getSponsor('Clearly', clearly, 'https://www.clearly.ca/ ', 'kilo')}
     <br />
     {getSponsor('Realtor', realtor, 'https://www.realtor.com/about/', 'kilo')}
     {getSponsor('Sauder School of Business - Master of Business Analytics Program', sauder, 'https://www.sauder.ubc.ca/Programs/Master_of_Business_Analytics', 'kilo')}
