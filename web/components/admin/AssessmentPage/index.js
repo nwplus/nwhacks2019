@@ -23,6 +23,7 @@ const AssessmentPage = ({
   switchSortDirection,
   sortDirection,
   searchApplicants,
+  switchNFCdevice,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -37,6 +38,7 @@ const AssessmentPage = ({
       switchSortDirection={switchSortDirection}
       sortDirection={sortDirection}
       searchApplicants={searchApplicants}
+      switchNFCdevice={switchNFCdevice}
     />
     <FilterModal
       isOpen={isSelectingFilters}
@@ -108,6 +110,8 @@ AssessmentPage.propTypes = {
   exportApplicants: PropTypes.func,
   // Executes fuzzy search on applicants
   searchApplicants: PropTypes.func,
+  // Switch between different NFC devices
+  switchNFCdevice: PropTypes.func,
 };
 
 export default AssessmentPage;

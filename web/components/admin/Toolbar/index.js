@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Axios from 'axios';
-import { withFirebase } from 'react-redux-firebase';
+
+import { compose } from 'redux';
+import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
 import { Select } from '../../input/select';
+import { Checkbox } from '../../input/buttons';
+import { TextInput } from '../../input/text/TextInput';
+
 import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
 import tagIcon from '../../../assets/internal/tag-icon.svg';
-import { Checkbox } from '../../input/buttons';
 import TagMenu from './TagMenu';
 import downloadIcon from '../../../assets/download-icon.svg';
-import { TextInput } from '../../input/text/TextInput';
+
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -27,30 +31,30 @@ class Toolbar extends React.Component {
       score: { value: 'score', label: 'Score' },
       timestamp: { value: 'timestamp', label: 'Timestamp' },
     };
-  }
-
-  componentDidMount() {
-    const { firebase } = this.props;
-
-    Axios.post(
-      firebase.nwUtils.getFunctionUrl('getNFCdevices'),
-      {},
-      { headers: { 'Content-Type': 'text/plain' } }
-    ).then((res) => {
-      if (res.status === 200) {
-        this.NFCdevices = res.data;
-        // console.log(typeof(Object.values(res.data)));
-      }
-    });
+    this.state = { device: null };
   }
 
   renderToolbar = () => {
-    const { applicantType,
+    const {
+      applicantType,
       switchApplicantType,
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection, searchApplicants } = this.props;
+      switchSortType,
+      sortType,
+      switchSortDirection,
+      sortDirection,
+      searchApplicants,
+      switchNFCdevice,
+    } = this.props;
+
+    let { firestore: { data: { nfc_devices: devices } } } = this.props;
+    if (!devices) devices = {};
+
+    let { device } = this.state;
+    if (!device) device = '';
+
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -59,8 +63,15 @@ class Toolbar extends React.Component {
           name="collection-input"
           value={this.collectionSelectLabels[applicantType]}
           options={Object.values(this.collectionSelectLabels)} />
+        <TextInput
+          name="search-applicants"
+          className="pad-left-s"
+          placeholder="Search applicants"
+          onChange={(searchText) => {
+            searchApplicants(searchText);
+          }} />
         <Select
-          className="margin-left-s"
+          className="margin-left-xxl"
           onChange={option => switchSortType(option.value)}
           label="Sort By:"
           name="sort-input"
@@ -85,19 +96,16 @@ class Toolbar extends React.Component {
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
         </div>
-        <TextInput
-          name="search-applicants"
-          className="pad-left-xxl"
-          placeholder="Search..."
-          onChange={(searchText) => {
-            searchApplicants(searchText);
-          }} />
         <Select
-          onChange={(option) => { console.log(option); console.log(this.NFCdevices); }}
+          className="pad-left-xxl"
+          onChange={(option) => {
+            switchNFCdevice(option.value);
+            this.setState({ device: option });
+          }}
           label="NFC Devices:"
           name="nfc-devices"
-          // value={this.collectionSelectLabels[applicantType]}
-          options={Object.values(this.sortSelectLabels)} />
+          value={device}
+          options={Object.keys(devices)} />
       </div>
     );
   }
@@ -180,7 +188,7 @@ Toolbar.defaultProps = {
 };
 
 Toolbar.propTypes = {
-  firebase: PropTypes.object.isRequired,
+  firestore: PropTypes.object,
   // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string,
   // handler for switching between applicant types
@@ -223,6 +231,16 @@ Toolbar.propTypes = {
   exportApplicants: PropTypes.func,
   // fuzzy search on applicant name and email
   searchApplicants: PropTypes.func,
+  // switch between different NFC devices
+  switchNFCdevice: PropTypes.func,
 };
 
-export default withFirebase(Toolbar);
+export default compose(
+  firebaseConnect(),
+  firestoreConnect(['nfc_devices']),
+  connect((state) => {
+    return {
+      firestore: state.firestore,
+    };
+  }),
+)(Toolbar);

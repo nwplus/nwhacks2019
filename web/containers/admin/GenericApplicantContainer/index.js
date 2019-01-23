@@ -35,6 +35,7 @@ class GenericApplicantContainer extends React.Component {
       checkedApplicantIds: {},
       isTagMenuOpen: false,
       searchText: '',
+      NFCdevice: '',
     };
   }
 
@@ -520,6 +521,11 @@ class GenericApplicantContainer extends React.Component {
     this.setState({ searchText: newSearchText });
   }
 
+  switchNFCdevice = (newNFCdevice) => {
+    this.setState({ NFCdevice: newNFCdevice });
+    console.log(newNFCdevice);
+  }
+
   renderAssessmentPage = () => {
     const {
       applicantType,
@@ -555,6 +561,7 @@ class GenericApplicantContainer extends React.Component {
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
           searchApplicants={this.searchApplicants}
+          switchNFCdevice={this.switchNFCdevice}
         />
       </div>
     );
@@ -608,6 +615,7 @@ class GenericApplicantContainer extends React.Component {
           applyTags={this.applyTags}
           exportApplicants={this.exportApplicants}
           searchApplicants={this.searchApplicants}
+          switchNFCdevice={this.switchNFCdevice}
         />
       </div>
     );
