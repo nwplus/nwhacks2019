@@ -19,12 +19,13 @@ import jumpstart from '../../assets/sponsors/kilo/jumpstart.png';
 import copperleaf from '../../assets/sponsors/micro/copperleaf.png';
 import bestbuy from '../../assets/sponsors/micro/bestbuy.svg';
 // in-kind
+import industrialpixel from '../../assets/sponsors/in-kind/industrialpixel.png';
 import wolfram from '../../assets/sponsors/in-kind/wolfram.png';
 import stickermule from '../../assets/sponsors/in-kind/stickermule.png';
 import stickeryou from '../../assets/sponsors/in-kind/stickeryou.png';
 import davidstea from '../../assets/sponsors/in-kind/davidstea.svg';
 import grounds from '../../assets/sponsors/in-kind/grounds.png';
-import sparkingice from '../../assets/sponsors/in-kind/sparkling-ice.svg';
+import sparkingice from '../../assets/sponsors/in-kind/sparklingice.svg';
 import zoho from '../../assets/sponsors/in-kind/zoho.svg';
 import dottech from '../../assets/sponsors/in-kind/dottech.png';
 import teslaamazing from '../../assets/sponsors/in-kind/teslaamazing.png';
@@ -84,6 +85,7 @@ const Sponsors = () => (
     {getSponsor('.TECH', dottech, 'https://get.tech/', 'in-kind')}
     {getSponsor('DAVIDsTEA', davidstea, 'https://www.davidstea.com/', 'in-kind')}
     {getSponsor('tesla amazing', teslaamazing, 'https://teslaamazing.com/', 'in-kind')}
+    {getSponsor('Industrial Pixel VFX', industrialpixel, 'https://industrialpixelvfx.com/', 'in-kind')}
     <br />
     {getSponsor('Grounds For Coffee', grounds, 'https://groundsforcoffee.ca/locations/', 'in-kind')}
     {getSponsor('Zoho', zoho, 'https://www.zoho.com/', 'in-kind')}
