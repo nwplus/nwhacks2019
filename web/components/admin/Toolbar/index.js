@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { compose } from 'redux';
 import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+
 import { Select } from '../../input/select';
 import { Checkbox } from '../../input/buttons';
 import { TextInput } from '../../input/text/TextInput';
@@ -53,7 +54,7 @@ class Toolbar extends React.Component {
     if (!devices) devices = {};
 
     let { device } = this.state;
-    if (!device) device = '';
+    if (!device) device = {};
 
     return (
       <div className={`toolbar flex fill-width ${className}`}>
@@ -102,7 +103,7 @@ class Toolbar extends React.Component {
             switchNFCdevice(option.value);
             this.setState({ device: option });
           }}
-          label="NFC Devices:"
+          label="NFC Device:"
           name="nfc-devices"
           value={device}
           options={Object.keys(devices)} />

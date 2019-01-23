@@ -167,8 +167,20 @@ class GenericApplicantContainer extends React.Component {
   }
 
   // handles selecting an applicant
-  selectApplicant = (applicantId) => {
+  selectApplicant = (applicantId, applicantName) => {
     this.setState({ selectedApplicantId: applicantId });
+
+    const { store: { firestore: db } } = this.context;
+    const { NFCdevice, applicantType } = this.state;
+
+    if (NFCdevice != null && NFCdevice !== '') {
+      const deviceRef = db.collection('nfc_devices').doc(NFCdevice);
+      deviceRef.update({
+        writeId: applicantId,
+        writeName: applicantName,
+        writeApplicantType: applicantType,
+      });
+    }
   }
 
   // Fills state.firestore.data.applicants by listening to <applicantType>_main_info collection
