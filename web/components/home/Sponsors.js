@@ -11,23 +11,27 @@ import telus from '../../assets/sponsors/mega/telus.svg';
 import rbc from '../../assets/sponsors/mega/rbc.svg';
 // kilo
 import google from '../../assets/sponsors/kilo/google.svg';
+import clearly from '../../assets/sponsors/kilo/clearly.svg';
 import realtor from '../../assets/sponsors/kilo/realtor.png';
 import sauder from '../../assets/sponsors/kilo/sauder.png';
 import deloitte from '../../assets/sponsors/kilo/deloitte.png';
 import jumpstart from '../../assets/sponsors/kilo/jumpstart.png';
 // micro
 import copperleaf from '../../assets/sponsors/micro/copperleaf.png';
+import bestbuy from '../../assets/sponsors/micro/bestbuy.svg';
 // in-kind
+import industrialpixel from '../../assets/sponsors/in-kind/industrialpixel.png';
 import wolfram from '../../assets/sponsors/in-kind/wolfram.png';
 import stickermule from '../../assets/sponsors/in-kind/stickermule.png';
 import stickeryou from '../../assets/sponsors/in-kind/stickeryou.png';
 import davidstea from '../../assets/sponsors/in-kind/davidstea.svg';
 import grounds from '../../assets/sponsors/in-kind/grounds.png';
-import sparkingice from '../../assets/sponsors/in-kind/sparkling-ice.svg';
+import sparkingice from '../../assets/sponsors/in-kind/sparklingice.svg';
 import zoho from '../../assets/sponsors/in-kind/zoho.svg';
 import dottech from '../../assets/sponsors/in-kind/dottech.png';
 import teslaamazing from '../../assets/sponsors/in-kind/teslaamazing.png';
 import github from '../../assets/sponsors/in-kind/github.svg';
+import lebeau from '../../assets/sponsors/in-kind/lebeau.png';
 import nextbillion from '../../assets/sponsors/in-kind/nextbillion.png';
 // partners
 import nwplus from '../../assets/partners/nwplus.png';
@@ -58,14 +62,15 @@ const Sponsors = () => (
     {getSponsor('Hootsuite', hootsuite, 'https://hootsuite.com/', 'mega')}
     <br />
     {getSponsor('SAP Concur', sap, 'https://www.concur.ca/sap/', 'mega')}
-    <br />
+    {/* <br /> */}
     {getSponsor('Royal Bank of Canada', rbc, 'https://www.rbcroyalbank.com/', 'mega')}
-    <br />
+    {/* <br /> */}
     {getSponsor('Telus', telus, 'http://www.telus.com/gtlp', 'mega')}
     <br />
     {/* kilo */}
-    {getSponsor('Google', google, 'https://www.google.com', 'kilo')}
     {getSponsor('Deloitte', deloitte, 'https://www2.deloitte.com/ca/en.html', 'kilo')}
+    {getSponsor('Google', google, 'https://www.google.com', 'kilo')}
+    {getSponsor('Clearly', clearly, 'https://www.clearly.ca/ ', 'kilo')}
     <br />
     {getSponsor('Realtor', realtor, 'https://www.realtor.com/about/', 'kilo')}
     {getSponsor('Sauder School of Business - Master of Business Analytics Program', sauder, 'https://www.sauder.ubc.ca/Programs/Master_of_Business_Analytics', 'kilo')}
@@ -73,6 +78,7 @@ const Sponsors = () => (
     <br />
     {/* micro */}
     {getSponsor('Copperleaf', copperleaf, 'https://www.copperleaf.com/', 'micro')}
+    {getSponsor('Best Buy', bestbuy, 'https://www.bestbuy.ca/', 'micro')}
     {/* in-kind */}
     {getSponsor('GitHub', github, 'https://github.com/', 'in-kind')}
     {getSponsor('Wolfram Research', wolfram, 'https://www.wolfram.com/', 'in-kind')}
@@ -82,10 +88,12 @@ const Sponsors = () => (
     {getSponsor('.TECH', dottech, 'https://get.tech/', 'in-kind')}
     {getSponsor('DAVIDsTEA', davidstea, 'https://www.davidstea.com/', 'in-kind')}
     {getSponsor('tesla amazing', teslaamazing, 'https://teslaamazing.com/', 'in-kind')}
+    {getSponsor('Industrial Pixel VFX', industrialpixel, 'https://industrialpixelvfx.com/', 'in-kind')}
     <br />
     {getSponsor('Grounds For Coffee', grounds, 'https://groundsforcoffee.ca/locations/', 'in-kind')}
     {getSponsor('Zoho', zoho, 'https://www.zoho.com/', 'in-kind')}
     {getSponsor('Sparkling Ice', sparkingice, 'https://www.sparklingice.ca/', 'in-kind')}
+    {getSponsor('Patisserie Lebeau', lebeau, 'https://www.grababetterwaffle.com/', 'in-kind')}
     {getSponsor('Next Billion', nextbillion, 'https://www.nextbillion.org/', 'in-kind')}
   </div>
 );
