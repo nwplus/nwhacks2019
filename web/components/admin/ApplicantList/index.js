@@ -54,7 +54,7 @@ class ApplicantList extends React.Component {
             <div
               className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
               key={id}
-              onClick={() => onApplicantClick(id)}
+              onClick={() => onApplicantClick(id, firstName.concat(' ', lastName))}
             >
               <div className="pad-left-s">
                 <div className="name">{firstName} {lastName}</div>
@@ -89,7 +89,7 @@ class ApplicantList extends React.Component {
             <div
               className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
               key={id}
-              onClick={() => onApplicantClick(id)}
+              onClick={() => onApplicantClick(id, firstName.concat(' ', lastName))}
             >
               <Checkbox
                 value={id}

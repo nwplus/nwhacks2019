@@ -158,7 +158,7 @@ class volunteerRSVP extends React.Component {
               <div> In order to volunteer for nwHacks 2019, it is required that you attend one
                 orientation session. Please check all the times you can attend:
               </div>
-)}>
+            )}>
             <Checkbox
               label={(<div>January 16th 6-7pm</div>)}
               value="jan16orientation"

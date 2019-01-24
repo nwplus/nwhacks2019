@@ -33,6 +33,8 @@ const ApplicantsPage = ({
   createNewTag,
   applyTags,
   exportApplicants,
+  searchApplicants,
+  switchNFCdevice,
 }) => (
   <div className="dashboard">
     {/* TODO: TOOLBAR */}
@@ -56,6 +58,8 @@ const ApplicantsPage = ({
       createNewTag={createNewTag}
       applyTags={applyTags}
       exportApplicants={exportApplicants}
+      searchApplicants={searchApplicants}
+      switchNFCdevice={switchNFCdevice}
       />
     <FilterModal
       isOpen={isSelectingFilters}
@@ -147,6 +151,10 @@ ApplicantsPage.propTypes = {
   applyTags: PropTypes.func,
   // Exports all applicants into a csv
   exportApplicants: PropTypes.func,
+  // executes a fuzzy search on applicant name and email
+  searchApplicants: PropTypes.func,
+  // switch between different NFC devices
+  switchNFCdevice: PropTypes.func,
 };
 
 export default ApplicantsPage;

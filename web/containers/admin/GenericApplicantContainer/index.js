@@ -34,6 +34,8 @@ class GenericApplicantContainer extends React.Component {
       // applicants with their checkbox checked
       checkedApplicantIds: {},
       isTagMenuOpen: false,
+      searchText: '',
+      NFCdevice: '',
     };
   }
 
@@ -43,7 +45,7 @@ class GenericApplicantContainer extends React.Component {
 
   // choose when to rerender component
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldcomponentupdate');
+    // console.log('shouldcomponentupdate');
     // rerender if state changes (default)
     if (!isEqual(nextState, this.state)) {
       return true;
@@ -136,6 +138,7 @@ class GenericApplicantContainer extends React.Component {
       applicantType,
       sortType,
       sortDirection,
+      searchText,
     } = this.state;
     const {
       firestore,
@@ -146,7 +149,17 @@ class GenericApplicantContainer extends React.Component {
       return undefined;
     }
     // this.setState({ applicantIndex: firestore.data[shortInfoCollectionName] });
-    const applicants = Object.values(firestore.data[shortInfoCollectionName]);
+    let applicants = Object.values(firestore.data[shortInfoCollectionName]);
+
+    if (searchText !== '') {
+      applicants = applicants.filter((applicant) => {
+        applicant = flat(applicant, { delimiter: '_' });
+        const fullName = applicant.firstName.toLowerCase() + ' ' + applicant.lastName.toLowerCase();
+        return (fullName.includes(searchText)
+          || applicant.email.toLowerCase().includes(searchText));
+      });
+    }
+
     const filteredApplicants = this.filterApplicants(applicants);
     let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
     if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
@@ -154,8 +167,20 @@ class GenericApplicantContainer extends React.Component {
   }
 
   // handles selecting an applicant
-  selectApplicant = (applicantId) => {
+  selectApplicant = (applicantId, applicantName) => {
     this.setState({ selectedApplicantId: applicantId });
+
+    const { store: { firestore: db } } = this.context;
+    const { NFCdevice, applicantType } = this.state;
+
+    if (NFCdevice != null && NFCdevice !== '') {
+      const deviceRef = db.collection('nfc_devices').doc(NFCdevice);
+      deviceRef.update({
+        writeId: applicantId,
+        writeName: applicantName,
+        writeApplicantType: applicantType,
+      });
+    }
   }
 
   // Fills state.firestore.data.applicants by listening to <applicantType>_main_info collection
@@ -504,6 +529,14 @@ class GenericApplicantContainer extends React.Component {
     }
   }
 
+  searchApplicants = (newSearchText) => {
+    this.setState({ searchText: newSearchText });
+  }
+
+  switchNFCdevice = (newNFCdevice) => {
+    this.setState({ NFCdevice: newNFCdevice });
+  }
+
   renderAssessmentPage = () => {
     const {
       applicantType,
@@ -538,6 +571,8 @@ class GenericApplicantContainer extends React.Component {
           switchSortType={this.switchSortType}
           switchSortDirection={this.switchSortDirection}
           sortDirection={sortDirection}
+          searchApplicants={this.searchApplicants}
+          switchNFCdevice={this.switchNFCdevice}
         />
       </div>
     );
@@ -590,6 +625,8 @@ class GenericApplicantContainer extends React.Component {
           createNewTag={this.createNewTag}
           applyTags={this.applyTags}
           exportApplicants={this.exportApplicants}
+          searchApplicants={this.searchApplicants}
+          switchNFCdevice={this.switchNFCdevice}
         />
       </div>
     );

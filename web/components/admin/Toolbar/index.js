@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { firebaseConnect, firestoreConnect } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
 import { Select } from '../../input/select';
+import { Checkbox } from '../../input/buttons';
+import { TextInput } from '../../input/text/TextInput';
+
 import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
 import tagIcon from '../../../assets/internal/tag-icon.svg';
-import { Checkbox } from '../../input/buttons';
 import TagMenu from './TagMenu';
 import downloadIcon from '../../../assets/download-icon.svg';
+
 
 class Toolbar extends React.Component {
   constructor(props) {
@@ -24,15 +32,42 @@ class Toolbar extends React.Component {
       score: { value: 'score', label: 'Score' },
       timestamp: { value: 'timestamp', label: 'Timestamp' },
     };
+    this.state = {
+      device: null,
+      checkInEnabled: false,
+    };
   }
 
   renderToolbar = () => {
-    const { applicantType,
+    const {
+      applicantType,
       switchApplicantType,
       className,
       areFiltersApplied,
       showFilterOptions,
-      switchSortType, sortType, switchSortDirection, sortDirection } = this.props;
+      switchSortType,
+      sortType,
+      switchSortDirection,
+      sortDirection,
+      searchApplicants,
+      switchNFCdevice,
+    } = this.props;
+
+    const { firestore: { data: { nfc_devices: devices } } } = this.props;
+    const NFCdevices = {};
+    if (devices) {
+      const deviceIDs = Object.keys(devices);
+      deviceIDs.forEach((deviceID) => {
+        console.log(deviceID);
+        const { model, email } = devices[deviceID];
+        NFCdevices[model + '\n' + email] = deviceID;
+      });
+    }
+
+    let { device } = this.state;
+    const { checkInEnabled } = this.state;
+    if (!device || !checkInEnabled) device = 'No device selected';
+
     return (
       <div className={`toolbar flex fill-width ${className}`}>
         <Select
@@ -41,15 +76,22 @@ class Toolbar extends React.Component {
           name="collection-input"
           value={this.collectionSelectLabels[applicantType]}
           options={Object.values(this.collectionSelectLabels)} />
+        <TextInput
+          name="search-applicants"
+          className="pad-left-s"
+          placeholder="Search applicants"
+          onChange={(searchText) => {
+            searchApplicants(searchText);
+          }} />
         <Select
-          className="margin-left-s"
+          className="margin-left-xxl"
           onChange={option => switchSortType(option.value)}
           label="Sort By:"
           name="sort-input"
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
         <div
-          className="pad-left-l toolbar-icon"
+          className="pad-left-m toolbar-icon"
           role="button"
           onClick={switchSortDirection}
           tabIndex={0}>
@@ -59,7 +101,7 @@ class Toolbar extends React.Component {
             className={`${sortDirection === 'asc' ? '' : 'flip-vertical'}`} />
         </div>
         <div
-          className="pad-left-l toolbar-icon"
+          className="pad-left-m toolbar-icon"
           role="button"
           onClick={showFilterOptions}
           tabIndex={0}>
@@ -67,6 +109,29 @@ class Toolbar extends React.Component {
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
         </div>
+        <Checkbox
+          className="pad-left-xxl"
+          label="Enable Check-In"
+          value="enableCheckIn"
+          onChange={(e) => {
+            this.setState({ checkInEnabled: e.target.checked });
+            switchNFCdevice('');
+          }}
+        />
+        {checkInEnabled
+          ? (
+            <Select
+              label=""
+              className="nfc-select"
+              onChange={(option) => {
+                switchNFCdevice(NFCdevices[option.value]);
+                this.setState({ device: option.value });
+              }}
+              name="nfc-devices"
+              value={device}
+              options={Object.keys(NFCdevices)}
+              isSearchable />
+          ) : null}
       </div>
     );
   }
@@ -149,6 +214,7 @@ Toolbar.defaultProps = {
 };
 
 Toolbar.propTypes = {
+  firestore: PropTypes.object,
   // 'hacker', 'mentor', 'volunteer'
   applicantType: PropTypes.string,
   // handler for switching between applicant types
@@ -189,6 +255,18 @@ Toolbar.propTypes = {
   pageType: PropTypes.string,
   // Exports all applicants into a csv
   exportApplicants: PropTypes.func,
+  // fuzzy search on applicant name and email
+  searchApplicants: PropTypes.func,
+  // switch between different NFC devices
+  switchNFCdevice: PropTypes.func,
 };
 
-export default Toolbar;
+export default compose(
+  firebaseConnect(),
+  firestoreConnect(['nfc_devices']),
+  connect((state) => {
+    return {
+      firestore: state.firestore,
+    };
+  }),
+)(Toolbar);
