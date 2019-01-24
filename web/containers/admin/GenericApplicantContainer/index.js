@@ -45,7 +45,7 @@ class GenericApplicantContainer extends React.Component {
 
   // choose when to rerender component
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldcomponentupdate');
+    // console.log('shouldcomponentupdate');
     // rerender if state changes (default)
     if (!isEqual(nextState, this.state)) {
       return true;
@@ -535,7 +535,6 @@ class GenericApplicantContainer extends React.Component {
 
   switchNFCdevice = (newNFCdevice) => {
     this.setState({ NFCdevice: newNFCdevice });
-    console.log(newNFCdevice);
   }
 
   renderAssessmentPage = () => {

@@ -32,7 +32,10 @@ class Toolbar extends React.Component {
       score: { value: 'score', label: 'Score' },
       timestamp: { value: 'timestamp', label: 'Timestamp' },
     };
-    this.state = { device: null };
+    this.state = {
+      device: null,
+      checkInEnabled: false,
+    };
   }
 
   renderToolbar = () => {
@@ -51,10 +54,18 @@ class Toolbar extends React.Component {
     } = this.props;
 
     let { firestore: { data: { nfc_devices: devices } } } = this.props;
-    if (!devices) devices = {};
+    const NFCdevices = {};
+    if (devices) {
+      for (var deviceID in devices) {
+        if (devices.hasOwnProperty(deviceID)) {
+          const { model, email } = devices[deviceID]
+          NFCdevices[model + '\n' + email] = deviceID;
+        }
+      }
+    }
 
-    let { device } = this.state;
-    if (!device) device = {};
+    let { device, checkInEnabled } = this.state;
+    if (!device) device = 'No device selected';
 
     return (
       <div className={`toolbar flex fill-width ${className}`}>
@@ -79,7 +90,7 @@ class Toolbar extends React.Component {
           value={this.sortSelectLabels[sortType]}
           options={Object.values(this.sortSelectLabels)} />
         <div
-          className="pad-left-l toolbar-icon"
+          className="pad-left-m toolbar-icon"
           role="button"
           onClick={switchSortDirection}
           tabIndex={0}>
@@ -89,7 +100,7 @@ class Toolbar extends React.Component {
             className={`${sortDirection === 'asc' ? '' : 'flip-vertical'}`} />
         </div>
         <div
-          className="pad-left-l toolbar-icon"
+          className="pad-left-m toolbar-icon"
           role="button"
           onClick={showFilterOptions}
           tabIndex={0}>
@@ -97,16 +108,27 @@ class Toolbar extends React.Component {
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
         </div>
-        <Select
+        <Checkbox
           className="pad-left-xxl"
-          onChange={(option) => {
-            switchNFCdevice(option.value);
-            this.setState({ device: option });
+          label="Enable Check-In"
+          value="enableCheckIn"
+          onChange={e => {
+            if (!e.target.checked) this.setState({ device: ''});
+            this.setState({ checkInEnabled: e.target.checked });
           }}
-          label="NFC Device:"
-          name="nfc-devices"
-          value={device}
-          options={Object.keys(devices)} />
+        />
+        {checkInEnabled ? 
+          <Select
+            label=""
+            className="nfc-select"
+            onChange={(option) => {
+              switchNFCdevice(NFCdevices[option.value]);
+              this.setState({ device: NFCdevices[option.value] });
+            }}
+            name="nfc-devices"
+            value={device}
+            options={Object.keys(NFCdevices)}
+            isSearchable /> : null}
       </div>
     );
   }
