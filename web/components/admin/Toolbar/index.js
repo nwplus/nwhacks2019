@@ -53,19 +53,20 @@ class Toolbar extends React.Component {
       switchNFCdevice,
     } = this.props;
 
-    let { firestore: { data: { nfc_devices: devices } } } = this.props;
+    const { firestore: { data: { nfc_devices: devices } } } = this.props;
     const NFCdevices = {};
     if (devices) {
-      for (var deviceID in devices) {
-        if (devices.hasOwnProperty(deviceID)) {
-          const { model, email } = devices[deviceID]
-          NFCdevices[model + '\n' + email] = deviceID;
-        }
-      }
+      const deviceIDs = Object.keys(devices);
+      deviceIDs.forEach((deviceID) => {
+        console.log(deviceID);
+        const { model, email } = devices[deviceID];
+        NFCdevices[model + '\n' + email] = deviceID;
+      });
     }
 
-    let { device, checkInEnabled } = this.state;
-    if (!device) device = 'No device selected';
+    let { device } = this.state;
+    const { checkInEnabled } = this.state;
+    if (!device || !checkInEnabled) device = 'No device selected';
 
     return (
       <div className={`toolbar flex fill-width ${className}`}>
@@ -112,23 +113,25 @@ class Toolbar extends React.Component {
           className="pad-left-xxl"
           label="Enable Check-In"
           value="enableCheckIn"
-          onChange={e => {
-            if (!e.target.checked) this.setState({ device: ''});
+          onChange={(e) => {
             this.setState({ checkInEnabled: e.target.checked });
+            switchNFCdevice('');
           }}
         />
-        {checkInEnabled ? 
-          <Select
-            label=""
-            className="nfc-select"
-            onChange={(option) => {
-              switchNFCdevice(NFCdevices[option.value]);
-              this.setState({ device: NFCdevices[option.value] });
-            }}
-            name="nfc-devices"
-            value={device}
-            options={Object.keys(NFCdevices)}
-            isSearchable /> : null}
+        {checkInEnabled
+          ? (
+            <Select
+              label=""
+              className="nfc-select"
+              onChange={(option) => {
+                switchNFCdevice(NFCdevices[option.value]);
+                this.setState({ device: option.value });
+              }}
+              name="nfc-devices"
+              value={device}
+              options={Object.keys(NFCdevices)}
+              isSearchable />
+          ) : null}
       </div>
     );
   }
