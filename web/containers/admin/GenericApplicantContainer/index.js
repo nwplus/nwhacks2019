@@ -507,7 +507,7 @@ class GenericApplicantContainer extends React.Component {
     }
 
     // Export to CSV
-    const json2csvParser = new Parser({ fields, quote: '' });
+    const json2csvParser = new Parser({ fields });
     const csv = json2csvParser.parse(filteredApplicants);
     const exportedFilename = 'applicants.csv';
     // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side/14966131#14966131

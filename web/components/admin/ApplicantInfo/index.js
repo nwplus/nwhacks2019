@@ -87,9 +87,7 @@ class ApplicantInfo extends React.Component {
         })}
         {rsvpInfoExists ? applicantFields.rsvpInfo.map((field) => {
           const { name, label } = field;
-          let value = shortInfo ? shortInfo[name] : '';
-          if (name === 'travel') value = travelLabels[value];
-          if (name === 'timestamp') value = decodeUnixTimestamp(value);
+          const value = shortInfo ? shortInfo[name] : '';
           return (
             <ShortField
               key={label}
