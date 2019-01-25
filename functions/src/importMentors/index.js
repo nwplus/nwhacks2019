@@ -66,6 +66,7 @@ exports.importMentors = functions.https.onRequest((request, response) => {
         output.forEach((row) => {
           const mentorRef = db.collection('mentor_short_info').doc();
           const mentor = {};
+          mentor.id = mentorRef.id;
           row.forEach((column, index) => {
             const fieldName = fieldNamesOrdered[index];
             if (fieldName) {
