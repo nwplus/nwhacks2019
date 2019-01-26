@@ -38,7 +38,7 @@ class ApplicantInfo extends React.Component {
       return null;
     }
     const longInfoCollectionName = applicantCollections[applicantType].longInfo;
-    const longInfoCollection = firestore.data[longInfoCollectionName];
+    const longInfoCollection = firestore.data[longInfoCollectionName] || {};
     if (isLoaded(longInfoCollection)) {
       return longInfoCollection[applicantId];
     }
