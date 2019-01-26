@@ -26,7 +26,6 @@ const AssessmentPage = ({
   switchNFCdevice,
 }) => (
   <div className="dashboard">
-    {/* TODO: TOOLBAR */}
     <Toolbar
       pageType="assessment"
       applicantType={applicantType}

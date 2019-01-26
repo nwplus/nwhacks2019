@@ -34,10 +34,10 @@ const ApplicantsPage = ({
   applyTags,
   exportApplicants,
   searchApplicants,
+  showCoatCheckPrompt,
   switchNFCdevice,
 }) => (
   <div className="dashboard">
-    {/* TODO: TOOLBAR */}
     <Toolbar
       pageType="applicants"
       applicantType={applicantType}
@@ -59,6 +59,7 @@ const ApplicantsPage = ({
       applyTags={applyTags}
       exportApplicants={exportApplicants}
       searchApplicants={searchApplicants}
+      showCoatCheckPrompt={showCoatCheckPrompt}
       switchNFCdevice={switchNFCdevice}
       />
     <FilterModal
@@ -153,6 +154,8 @@ ApplicantsPage.propTypes = {
   exportApplicants: PropTypes.func,
   // executes a fuzzy search on applicant name and email
   searchApplicants: PropTypes.func,
+  // shows an alert that allows the user enter a coat check number for selected applicant
+  showCoatCheckPrompt: PropTypes.func,
   // switch between different NFC devices
   switchNFCdevice: PropTypes.func,
 };

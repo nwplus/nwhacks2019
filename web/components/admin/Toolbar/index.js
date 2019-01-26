@@ -13,6 +13,7 @@ import sortIcon from '../../../assets/sort-arrow.svg';
 import filterIcon from '../../../assets/filter-icon.svg';
 import filterIconSelected from '../../../assets/filter-icon-selected.svg';
 import tagIcon from '../../../assets/internal/tag-icon.svg';
+import coatCheckIcon from '../../../assets/internal/coat-check-icon.svg';
 import TagMenu from './TagMenu';
 import downloadIcon from '../../../assets/download-icon.svg';
 
@@ -51,6 +52,7 @@ class Toolbar extends React.Component {
       sortDirection,
       searchApplicants,
       switchNFCdevice,
+      showCoatCheckPrompt,
     } = this.props;
 
     const { firestore: { data: { nfc_devices: devices } } } = this.props;
@@ -108,6 +110,15 @@ class Toolbar extends React.Component {
           <img
             src={areFiltersApplied ? filterIconSelected : filterIcon}
             alt="filter button" />
+        </div>
+        <div
+          className="pad-left-m toolbar-icon"
+          role="button"
+          onClick={showCoatCheckPrompt}
+          tabIndex={0}>
+          <img
+            src={coatCheckIcon}
+            alt="coat check button" />
         </div>
         <Checkbox
           className="pad-left-xxl"
@@ -257,6 +268,8 @@ Toolbar.propTypes = {
   exportApplicants: PropTypes.func,
   // fuzzy search on applicant name and email
   searchApplicants: PropTypes.func,
+  // shows an alert that allows the user enter a coat check number for selected applicant
+  showCoatCheckPrompt: PropTypes.func,
   // switch between different NFC devices
   switchNFCdevice: PropTypes.func,
 };

@@ -537,6 +537,30 @@ class GenericApplicantContainer extends React.Component {
     this.setState({ NFCdevice: newNFCdevice });
   }
 
+  showCoatCheckPrompt = () => {
+    const { store: { firestore: db } } = this.context;
+    const { selectedApplicantId, applicantType } = this.state;
+    if (selectedApplicantId == null || applicantType == null) {
+      // eslint-disable-next-line no-alert
+      alert('Please select an applicant first.');
+      return;
+    }
+    // eslint-disable-next-line no-alert
+    const number = prompt('Please enter a coat check number to assign to selected applicant (make sure it\'s unique).');
+    if (isNumeric(number)) {
+      const shortInfoCollectionName = applicantCollections[applicantType].shortInfo;
+      const applicantRef = db.collection(shortInfoCollectionName).doc(selectedApplicantId);
+      applicantRef.update({
+        coatCheckNumber: Number.parseInt(number, 10),
+      });
+      // eslint-disable-next-line no-alert
+      alert('Success! To read the coat check number, please use the NFC app.');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('You did not enter a valid number.');
+    }
+  }
+
   renderAssessmentPage = () => {
     const {
       applicantType,
@@ -626,6 +650,7 @@ class GenericApplicantContainer extends React.Component {
           applyTags={this.applyTags}
           exportApplicants={this.exportApplicants}
           searchApplicants={this.searchApplicants}
+          showCoatCheckPrompt={this.showCoatCheckPrompt}
           switchNFCdevice={this.switchNFCdevice}
         />
       </div>
