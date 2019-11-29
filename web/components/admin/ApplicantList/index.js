@@ -47,17 +47,17 @@ class ApplicantList extends React.Component {
     return (
       <div className={`applicant-list ${className}`}>
         {applicants.map((applicant) => {
-          const { id, firstName, lastName, email, score } = applicant;
+          const { id, firstname, lastname, email, score } = applicant;
           const finalScore = score ? score.finalScore : null;
           applicantNumber += 1;
           return (
             <div
               className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
-              key={id}
-              onClick={() => onApplicantClick(id, firstName.concat(' ', lastName))}
+              key={email}
+              onClick={() => onApplicantClick(email, firstname.concat(' ', lastname))}
             >
               <div className="pad-left-s">
-                <div className="name">{firstName} {lastName}</div>
+                <div className="name">{firstname} {lastname}</div>
                 <div className="email">{email}</div>
               </div>
               <div className="right margin-ends-s flex-no-shrink">
@@ -82,25 +82,25 @@ class ApplicantList extends React.Component {
     return (
       <div className={`applicant-list ${className}`}>
         {applicants.map((applicant) => {
-          const { id, firstName, lastName, email, score } = applicant;
+          const { id, firstname, lastname, email, score } = applicant;
           const finalScore = score ? score.finalScore : null;
           applicantNumber += 1;
           return (
             <div
               className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
               key={id}
-              onClick={() => onApplicantClick(id, firstName.concat(' ', lastName))}
+              onClick={() => onApplicantClick(email, firstname.concat(' ', lastname))}
             >
               <Checkbox
                 value={id}
                 checked={checkedApplicantIds[id] != null}
                 onChange={() => (
-                  checkedApplicantIds[id] ? uncheckApplicant(id) : checkApplicant(id)
+                  checkedApplicantIds[email] ? uncheckApplicant(email) : checkApplicant(email)
                 )}
                 isControlled
                 className="checkbox" />
               <div className="pad-left-m">
-                <div className="name">{firstName} {lastName}</div>
+                <div className="name">{firstname} {lastname}</div>
                 <div className="email">{email}</div>
               </div>
               <div className="right margin-ends-s flex-no-shrink">
