@@ -1,0 +1,13 @@
+button.primary
+  @include gradient-hover-animation($gradient-primary, $gradient-primary-highlight)
+  border: none
+  color: $white
+
+  border-radius: 4px
+  height: 40px
+
+  padding-left: 16px
+  padding-right: 16px
+
+  &:disabled
+    background: $gradient-primary-subdued

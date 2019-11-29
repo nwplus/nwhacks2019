@@ -1,0 +1,20 @@
+.checkbox
+  &:hover input:enabled ~ .checkmark
+    background-image: url('../assets/checkbox/hover.svg')
+    &.indeterminate
+      background-image: url('../assets/checkbox/indeterminate.svg')
+
+  input[type="checkbox"]
+    &:checked ~ .checkmark
+      background-image: url('../assets/checkbox/checked.svg')
+    &:disabled
+      @extend .unclickable
+      &~ .checkmark
+        @extend .unclickable, .opacity-40
+        &~ .label-text
+          @extend .unclickable, .opacity-40
+
+  .checkmark
+    background-image: url('../assets/checkbox/unchecked.svg')
+    &.indeterminate
+      background-image: url('../assets/checkbox/indeterminate.svg')
