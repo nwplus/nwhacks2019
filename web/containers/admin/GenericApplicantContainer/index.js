@@ -677,7 +677,7 @@ GenericApplicantContainer.propTypes = {
 
 export default compose(
   firebaseConnect(),
-  firestoreConnect(),
+  firestoreConnect([{ collection: 'hacker_info_2020' }]),
   connect((state) => {
     return {
       firestore: state.firestore,

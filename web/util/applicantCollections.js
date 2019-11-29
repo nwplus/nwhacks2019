@@ -1,7 +1,7 @@
 const applicantCollections = {
   hacker: {
-    shortInfo: 'hacker_short_info',
-    longInfo: 'hacker_long_info',
+    shortInfo: 'hacker_info_2020',
+    longInfo: 'hacker_info_2020',
   },
   mentor: {
     shortInfo: 'mentor_short_info',
