@@ -47,12 +47,12 @@ class ApplicantList extends React.Component {
     return (
       <div className={`applicant-list ${className}`}>
         {applicants.map((applicant) => {
-          const { id, firstname, lastname, email, score } = applicant;
+          const { firstname, lastname, email, score } = applicant;
           const finalScore = score ? score.finalScore : null;
           applicantNumber += 1;
           return (
             <div
-              className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
+              className={`applicant flex ${selectedApplicantId === email ? 'selected' : ''}`}
               key={email}
               onClick={() => onApplicantClick(email, firstname.concat(' ', lastname))}
             >
@@ -82,18 +82,18 @@ class ApplicantList extends React.Component {
     return (
       <div className={`applicant-list ${className}`}>
         {applicants.map((applicant) => {
-          const { id, firstname, lastname, email, score } = applicant;
+          const { firstname, lastname, email, score } = applicant;
           const finalScore = score ? score.finalScore : null;
           applicantNumber += 1;
           return (
             <div
-              className={`applicant flex ${selectedApplicantId === id ? 'selected' : ''}`}
-              key={id}
+              className={`applicant flex ${selectedApplicantId === email ? 'selected' : ''}`}
+              key={email}
               onClick={() => onApplicantClick(email, firstname.concat(' ', lastname))}
             >
               <Checkbox
-                value={id}
-                checked={checkedApplicantIds[id] != null}
+                value={email}
+                checked={checkedApplicantIds[email] != null}
                 onChange={() => (
                   checkedApplicantIds[email] ? uncheckApplicant(email) : checkApplicant(email)
                 )}
