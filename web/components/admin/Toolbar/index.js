@@ -60,7 +60,6 @@ class Toolbar extends React.Component {
     if (devices) {
       const deviceIDs = Object.keys(devices);
       deviceIDs.forEach((deviceID) => {
-        console.log(deviceID);
         const { model, email } = devices[deviceID];
         NFCdevices[model + '\n' + email] = deviceID;
       });
