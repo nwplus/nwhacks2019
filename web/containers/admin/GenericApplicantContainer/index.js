@@ -149,7 +149,8 @@ class GenericApplicantContainer extends React.Component {
       return undefined;
     }
     // this.setState({ applicantIndex: firestore.data[shortInfoCollectionName] });
-    let applicants = Object.values(firestore.data[shortInfoCollectionName]).filter(hacker => !!hacker.email);
+    let applicants = Object.values(firestore.data[shortInfoCollectionName])
+      .filter(hacker => !!hacker.email);
     if (searchText !== '') {
       applicants = applicants.filter((applicant) => {
         applicant = flat(applicant, { delimiter: '_' });
