@@ -24,11 +24,8 @@ class LoginContainer extends React.Component {
 
   login = (event) => {
     const { firebase } = this.props;
-    const { email, password } = this.state;
-
     event.preventDefault();
-    const credential = { email, password };
-    firebase.login(credential).then(() => {
+    firebase.login({ provider: 'google' }).then(() => {
       this.setState({
         error: {},
       });

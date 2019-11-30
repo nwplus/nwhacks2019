@@ -5,12 +5,7 @@ import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
 
 const Login = ({
-  onEmailChange,
-  onPasswordChange,
   login,
-  email,
-  password,
-  error,
 }) => (
   <div id="login" className="fill-height flex jc-center ai-center dir-col">
     <div>
@@ -21,26 +16,8 @@ const Login = ({
         <h3 className="pad-sides-xxl margin-bottom-m">Sign in</h3>
         <div className="card split flex">
           <div className="pad-ends-xxl pad-sides-xxl margin-vertical-text-inputs">
-            <TextInput
-              placeholder="Enter your email"
-              value={email}
-              onChange={onEmailChange}
-              error={error}
-              label="Email"
-              name="email"
-              />
-            <PasswordInput
-              placeholder="Enter your password"
-              value={password}
-              onChange={onPasswordChange}
-              error={error}
-              label="Password"
-              name="password"
-              showErrorMessage
-              showForgot
-              />
             <PrimaryButton
-              text="Submit"
+              text="Login"
               type="submit"
               className="fill-width"
               />
