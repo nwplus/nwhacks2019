@@ -8,30 +8,10 @@ import { connect } from 'react-redux';
 import { Login } from '../../components/auth';
 
 class LoginContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      password: '',
-      error: null,
-    };
-  }
-
-  onEmailChange = email => this.setState({ email });
-
-  onPasswordChange = password => this.setState({ password });
-
   login = (event) => {
     const { firebase } = this.props;
     event.preventDefault();
-    firebase.login({ provider: 'google' }).then(() => {
-      this.setState({
-        error: {},
-      });
-    }).catch((error) => {
-      this.setState({ error });
-    });
+    firebase.login({ provider: 'google', type: 'popup' });
   }
 
   render() {
@@ -43,23 +23,12 @@ class LoginContainer extends React.Component {
       redirectUrl,
     } = this.props;
 
-    const {
-      email,
-      password,
-      error,
-    } = this.state;
-
     if (!isAuthLoaded) return (<span>Loading...</span>);
 
     if (needLogin) {
       return (
         <Login
-          onEmailChange={this.onEmailChange}
-          onPasswordChange={this.onPasswordChange}
           login={this.login}
-          email={email}
-          password={password}
-          error={error}
         />
       );
     }

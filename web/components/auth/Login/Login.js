@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TextInput, PasswordInput } from '../../input/text';
 import { PrimaryButton } from '../../input/buttons';
 
 const Login = ({
@@ -30,12 +29,7 @@ const Login = ({
 );
 
 Login.propTypes = {
-  onEmailChange: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  error: PropTypes.object,
 };
 
 export default Login;
