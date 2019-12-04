@@ -1,7 +1,7 @@
 const { db, functions, admin } = require('../utils/firestore');
 
 const mapApplicantTypeToCollection = {
-  hacker: 'hacker_short_info',
+  hacker: 'hacker_info_2020',
   volunteer: 'volunteer_short_info',
   mentor: 'mentor_short_info',
 };
