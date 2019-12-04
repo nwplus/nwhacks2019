@@ -19,10 +19,9 @@ const fieldLabels = {
         { name: 'firstname', label: 'First name' },
         { name: 'lastname', label: 'Last name' },
         { name: 'email', label: 'Email' },
-        { name: 'phoneNumber', label: 'Phone number' },
+        { name: 'phonenumber', label: 'Phone number' },
         { name: 'gender', label: 'Gender' },
         { name: 'ethnicity', label: 'Race/ethnicity' },
-        { name: 'birthdate', label: 'Birthdate (YYYY-MM-DD)' },
         { name: 'education', label: 'Education level' },
         { name: 'school', label: 'School' },
         { name: 'major', label: 'Major' },
@@ -89,9 +88,9 @@ const fieldLabels = {
 };
 
 const travelLabels = {
-  0: 'No, I will not need a travel reimbursement.',
-  1: 'Yes, I would like to apply for a travel reimbursement.',
-  2: 'No, but I would like a seat on the bus from the Seattle/UW area.',
+  no: 'No, I will not need a travel reimbursement.',
+  'travel reimbursement': 'Yes, I would like to apply for a travel reimbursement.',
+  'shuttle bus': 'No, but I would like a seat on the bus from the Seattle/UW area.',
 };
 
 export { fieldLabels, travelLabels };
