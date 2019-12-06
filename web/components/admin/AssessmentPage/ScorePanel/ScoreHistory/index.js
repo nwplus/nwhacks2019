@@ -45,7 +45,7 @@ class ScoreHistory extends React.Component {
       const { firestore } = this.props;
       const admin = firestore.data.admins[uid];
       if (admin) {
-        return `${admin.firstName} ${admin.lastName}`;
+        return `${admin.name}`;
       }
     }
     return null;

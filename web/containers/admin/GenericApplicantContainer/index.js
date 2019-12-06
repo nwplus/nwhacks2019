@@ -149,12 +149,12 @@ class GenericApplicantContainer extends React.Component {
       return undefined;
     }
     // this.setState({ applicantIndex: firestore.data[shortInfoCollectionName] });
-    let applicants = Object.values(firestore.data[shortInfoCollectionName]);
-
+    let applicants = Object.values(firestore.data[shortInfoCollectionName])
+      .filter(hacker => !!hacker.email);
     if (searchText !== '') {
       applicants = applicants.filter((applicant) => {
         applicant = flat(applicant, { delimiter: '_' });
-        const fullName = applicant.firstName.toLowerCase() + ' ' + applicant.lastName.toLowerCase();
+        const fullName = applicant.firstname.toLowerCase() + ' ' + applicant.lastname.toLowerCase();
         return (fullName.includes(searchText)
           || applicant.email.toLowerCase().includes(searchText));
       });
@@ -163,13 +163,14 @@ class GenericApplicantContainer extends React.Component {
     const filteredApplicants = this.filterApplicants(applicants);
     let sortedApplicants = this.sortApplicants(sortType, filteredApplicants);
     if (sortDirection === 'desc') sortedApplicants = sortedApplicants.reverse();
+
+    // Hack fix
     return sortedApplicants;
   }
 
   // handles selecting an applicant
   selectApplicant = (applicantId, applicantName) => {
     this.setState({ selectedApplicantId: applicantId });
-
     const { store: { firestore: db } } = this.context;
     const { NFCdevice, applicantType } = this.state;
 
@@ -314,18 +315,18 @@ class GenericApplicantContainer extends React.Component {
     switch (sortType) {
       case 'firstName':
         return applicants.sort((a, b) => {
-          if (!a.firstName) return -1;
-          if (!b.firstName) return 1;
-          if (a.firstName.toUpperCase() > b.firstName.toUpperCase()) return 1;
-          if (a.firstName.toUpperCase() < b.firstName.toUpperCase()) return -1;
+          if (!a.firstname) return -1;
+          if (!b.firstname) return 1;
+          if (a.firstname.toUpperCase() > b.firstname.toUpperCase()) return 1;
+          if (a.firstname.toUpperCase() < b.firstname.toUpperCase()) return -1;
           return 0;
         });
       case 'lastName':
         return applicants.sort((a, b) => {
-          if (!a.lastName) return -1;
-          if (!b.lastName) return 1;
-          if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) return 1;
-          if (a.lastName.toUpperCase() < b.lastName.toUpperCase()) return -1;
+          if (!a.lastname) return -1;
+          if (!b.lastname) return 1;
+          if (a.lastname.toUpperCase() > b.lastname.toUpperCase()) return 1;
+          if (a.lastname.toUpperCase() < b.lastname.toUpperCase()) return -1;
           return 0;
         });
       case 'email':
@@ -677,7 +678,7 @@ GenericApplicantContainer.propTypes = {
 
 export default compose(
   firebaseConnect(),
-  firestoreConnect(),
+  firestoreConnect([{ collection: 'hacker_info_2020' }]),
   connect((state) => {
     return {
       firestore: state.firestore,

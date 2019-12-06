@@ -1,4 +1,8 @@
 {
+  "hosting": {
+    "site": "nw-admin",
+    "public": "docs"
+  },
   "functions": {
     "predeploy": [
       "npm --prefix ./functions run lint"
