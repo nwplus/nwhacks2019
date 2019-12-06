@@ -68,6 +68,11 @@ class ApplicantInfo extends React.Component {
           const { name, label } = field;
           let value = shortInfo ? shortInfo[name] : '';
           if (name === 'travel') value = travelLabels[value];
+          if (name === 'timestamp' && !value && shortInfo.timestamp_seconds) {
+            const t = new Date(1970, 0, 1);
+            t.setSeconds(shortInfo.timestamp_seconds);
+            value = t.toString();
+          }
           return (
             <ShortField
               key={label}

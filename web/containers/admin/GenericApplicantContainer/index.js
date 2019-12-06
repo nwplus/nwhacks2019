@@ -356,8 +356,24 @@ class GenericApplicantContainer extends React.Component {
         return applicants.sort((a, b) => {
           if (!a.timestamp) return -1;
           if (!b.timestamp) return 1;
-          if (a.timestamp > b.timestamp) return 1;
-          if (a.timestamp < b.timestamp) return -1;
+          let timestampB = b.timestamp;
+          let timestampA = a.timestamp;
+          if (timestampA.seconds) {
+            const t = new Date(1970, 0, 1);
+            t.setSeconds(timestampA.seconds);
+            timestampA = t;
+          } else {
+            timestampA = new Date(timestampA);
+          }
+          if (timestampB.seconds) {
+            const t = new Date(1970, 0, 1);
+            t.setSeconds(timestampB.seconds);
+            timestampB = t;
+          } else {
+            timestampB = new Date(timestampB);
+          }
+          if (timestampA > timestampB) return 1;
+          if (timestampA < timestampB) return -1;
           return 0;
         });
       default:
