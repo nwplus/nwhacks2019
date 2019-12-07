@@ -153,6 +153,9 @@ class GenericApplicantContainer extends React.Component {
       .filter(hacker => !!hacker.email);
     if (searchText !== '') {
       applicants = applicants.filter((applicant) => {
+        if (applicant.email.firstname) {
+          return false;
+        }
         applicant = flat(applicant, { delimiter: '_' });
         const fullName = applicant.firstname.toLowerCase() + ' ' + applicant.lastname.toLowerCase();
         return (fullName.includes(searchText)
