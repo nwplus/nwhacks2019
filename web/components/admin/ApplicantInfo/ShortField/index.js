@@ -9,14 +9,16 @@ class ShortField extends React.Component {
   };
 
   render() {
-    const { label, isUrl } = this.props;
+    const { label } = this.props;
     let { value } = this.props;
+    const expression = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
+    const regex = new RegExp(expression);
     value = typeof value === 'boolean' ? this.convertTruthy(value) : value;
     return (
       <div className="margin-bottom-m">
         <div className="applicant-info-label">{label}</div>
         <div className="applicant-short-info">
-          {isUrl ? (<div className="link"><a target="_blank" rel="noopener noreferrer" href={value && value.startsWith('http') ? value : '//' + value}> {value}</a></div>) : value}
+          {String(value).match(regex) ? (<div className="link"><a target="_blank" rel="noopener noreferrer" href={value && value.startsWith('http') ? value : '//' + value}> {value}</a></div>) : value}
         </div>
       </div>
     );
