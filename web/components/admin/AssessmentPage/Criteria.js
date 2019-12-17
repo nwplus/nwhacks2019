@@ -43,12 +43,27 @@ const weightRatio = {
 
 // calculates the final score given an map of criteria name to score value
 const calculateFinalScore = (scores) => {
-  const portfolioScore = scores.githubPersonalWebsite + scores.resumeLinkedin;
-  const longAnswersScore = scores.writtenResponse1 + scores.writtenResponse2;
-  const portfolioWeight = weightRatio[portfolioScore];
-  const longAnswersWeight = 1 - portfolioWeight;
-  const finalScore = portfolioWeight * portfolioScore + longAnswersWeight * longAnswersScore;
-  return Math.round(finalScore * 10) / 10; // round to one decimal place
+  const github = scores.githubPersonalWebsite
+  const resume = scores.resumeLinkedin
+  const portfolioScore = github === 1 ? resume + (resume / 2) : github + resume
+  const longAnswerScore = scores.writtenResponse1 + scores.writtenResponse2;
+  let finalScore = 0
+  if (portfolioScore <= 6){
+    finalScore = (portfolioScore * 0.7) + (longAnswerScore * 0.3)
+  }else if (portfolioScore >= 7 && portfolioScore <= 8){
+    finalScore = (portfolioScore * 0.8) + (longAnswerScore * 0.2)
+  }else {
+    finalScore = (portfolioScore * 0.9) + (longAnswerScore * 0.1)
+  }
+  return Math.round(finalScore * 10) / 10
+
+  // Last years scoring
+  // const portfolioScore = scores.githubPersonalWebsite + scores.resumeLinkedin;
+  // const longAnswersScore = scores.writtenResponse1 + scores.writtenResponse2;
+  // const portfolioWeight = weightRatio[portfolioScore];
+  // const longAnswersWeight = 1 - portfolioWeight;
+  // const finalScore = portfolioWeight * portfolioScore + longAnswersWeight * longAnswersScore;
+  // return Math.round(finalScore * 10) / 10; // round to one decimal place
 };
 
 export { criteria, calculateFinalScore };
